@@ -8,13 +8,15 @@ module.exports = {
     context: path.resolve(__dirname),
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "bundle.js",
-        publicPath: "dist/index.js"
+        filename: "index.js",
     },
     module: {
         rules: []
     },
     resolve: {},
     devtool: "source-map",
-    plugins: []
+    plugins: [],
+    watchOptions: {
+        poll: true
+    }
 };
