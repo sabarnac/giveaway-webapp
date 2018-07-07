@@ -1,0 +1,32 @@
+{
+    "name": "giveaway-webapp",
+    "version": "1.0.0",
+    "description": "A giveaway webapp that does the giveaway in a TOURNAMENT ARC style",
+    "main": "src/index.js",
+    "scripts": {
+        "build:dev": "webpack --config webpack.config.dev.js --watch --progress",
+        "build:prod": "webpack --config webpack.config.prod.js"
+    },
+    "bugs": {
+        "url": "https://github.com/sabarnac/giveaway-webapp/issues"
+    },
+    "homepage": "https://github.com/sabarnac/giveaway-webapp#readme",
+    "repository": "https://github.com/sabarnac/giveaway-webapp.git",
+    "keywords": [
+        "giveaway",
+        "web",
+        "app",
+        "tournament",
+        "arc"
+    ],
+    "author": "Sabarna Chakravarty",
+    "license": "MIT",
+    "devDependencies": {
+        "random-js": "^1.0.8",
+        "webpack": "^4.15.1",
+        "webpack-cli": "^3.0.8"
+    },
+    "engines": {
+        "node": ">=10.0"
+    }
+}
