@@ -33,11 +33,17 @@ export default class App {
             this._round[0].push(users[random_user_index]);
             users.splice(random_user_index, 1);
         }
+        this._original_messages = this._config.messages;
+        this._messages = [...this._original_messages];
 
         //Set method context bindings.
         this.start = this.start.bind(this);
         this.round_0 = this.round_0.bind(this);
+        this.show_participants = this.show_participants.bind(this);
         this.round_x = this.round_x.bind(this);
+        this.begin_round_matches = this.begin_round_matches.bind(this);
+        this.default_participant_match = this.default_participant_match.bind(this);
+        this.participant_match = this.participant_match.bind(this);
         this.determine_winner = this.determine_winner.bind(this);
         this.finish_round = this.finish_round.bind(this);
         this.fix_round_participants = this.fix_round_participants.bind(this);
@@ -69,35 +75,44 @@ export default class App {
         });
 
         requestTimeout(_ => {
-            scrollTo(0, 0);
-
-            //Reveal each user in order one by one.
-            let participant_div_index = 0;
-            const participant_div_list = group_div.querySelectorAll(".participant.hide");
-            participant_div_list.forEach(participant_div => {
-                const this_obj = this;
-                participant_div.addEventListener("transitionend", function hide_fn() {
-                    this.removeEventListener("transitionend", hide_fn);
-
-                    participant_div_index++;
-                    if (participant_div_index >= participant_div_list.length) {
-                        //All users in the initial group have been revealed, start round 1.
-                        this_obj.round_x(1);
-                        return;
-                    }
-
-                    this_obj.scroll_element_into_view(participant_div_list[participant_div_index]);
-                    participant_div_list[participant_div_index].classList.remove("hide");
-                });
-            });
-            participant_div_list[participant_div_index].classList.remove("hide");
+            this.show_participants(group_div);
         }, 50);
+    }
+
+    /**
+     * Shows each participant in the group one by one.
+     * 
+     * @param {HTMLElement} group_div The round group element.
+     */
+    show_participants(group_div) {
+        scrollTo(0, 0);
+
+        //Reveal each user in order one by one.
+        let participant_div_index = 0;
+        const participant_div_list = group_div.querySelectorAll(".participant.hide");
+        participant_div_list.forEach(participant_div => {
+            const this_obj = this;
+            participant_div.addEventListener("transitionend", function hide_fn() {
+                this.removeEventListener("transitionend", hide_fn);
+
+                participant_div_index++;
+                if (participant_div_index >= participant_div_list.length) {
+                    //All users in the initial group have been revealed, start round 1.
+                    this_obj.round_x(1);
+                    return;
+                }
+
+                this_obj.scroll_element_into_view(participant_div_list[participant_div_index]);
+                participant_div_list[participant_div_index].classList.remove("hide");
+            });
+        });
+        participant_div_list[participant_div_index].classList.remove("hide");
     }
 
     /**
      * Starts the round of the given index.
      * 
-     * @param {int} round_index The round number.
+     * @param {number} round_index The round number.
      */
     async round_x(round_index) {
         await this.round_begin_message(round_index);
@@ -118,93 +133,60 @@ export default class App {
         winner_group_div.classList.remove("hide");
 
         requestTimeout(_ => {
-            scrollTo(0, 0);
-
-            //Go through each contesting pair and select a winner for that round.
-            const initial_participant_div_list = initial_group_div.querySelectorAll(".participant");
-            const winner_participant_div_list = winner_group_div.querySelectorAll(".participant");
-            let participant_index = 0;
-            let winner_participant_div_index = 0;
-            winner_participant_div_list.forEach(winner_participant_div => {
-                const this_obj = this;
-                winner_participant_div.addEventListener("transitionend", function show_fn() {
-                    this.removeEventListener("transitionend", show_fn);
-
-                    initial_participant_div_list[participant_index].classList.add("active");
-                    initial_participant_div_list[participant_index + 1].classList.add("active");
-                    winner_participant_div_list[winner_participant_div_index].classList.add("unknown");
-                    this_obj.scroll_element_into_view(winner_participant_div_list[winner_participant_div_index]);
-
-                    if (initial_participants[participant_index + 1] === "---") {
-                        //If the second participant is a dummy one, just default to the first participant as a winner.
-                        winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index];
-                        this_obj._round[round_index].push(initial_participants[participant_index]);
-
-                        winner_participant_div_list[winner_participant_div_index].classList.add("winner");
-                        winner_participant_div_list[winner_participant_div_index].classList.remove("unknown");
-
-                        requestTimeout(_ => {
-                            winner_participant_div_list[winner_participant_div_index].classList.remove("winner");
-                            initial_participant_div_list[participant_index].classList.remove("active");
-                            initial_participant_div_list[participant_index + 1].classList.remove("active");
-
-                            participant_index += 2;
-                            if (participant_index >= initial_participants.length) {
-                                //Clean up the current round.
-                                this_obj.finish_round(round_index);
-                                return;
-                            }
-                        }, 1000);
-                        return;
-                    }
-
-                    //Setup a name switcher that continuously switches between showing each participant name in the winner participant div.
-                    let current_name_index_offset = 0;
-                    const name_switch_interval_handle = requestInterval(_ => {
-                        winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + current_name_index_offset];
-                        current_name_index_offset = (current_name_index_offset + 1) % 2;
-                    }, 100);
-
-                    requestTimeout(_ => {
-                        //Determine the winner.
-                        this_obj.determine_winner(initial_participants[participant_index], initial_participants[participant_index + 1]).then(random_index => {
-                            requestTimeout(_ => {
-                                //Stop name switching and set the name of the winner in the winner participant div.
-                                clearRequestInterval(name_switch_interval_handle);
-                                winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + random_index];
-                                this_obj._round[round_index].push(initial_participants[participant_index + random_index]);
-
-                                winner_participant_div_list[winner_participant_div_index].classList.add("winner");
-                                winner_participant_div_list[winner_participant_div_index].classList.remove("unknown");
-
-                                requestTimeout(_ => {
-                                    winner_participant_div_list[winner_participant_div_index].classList.remove("winner");
-                                    initial_participant_div_list[participant_index].classList.remove("active");
-                                    initial_participant_div_list[participant_index + 1].classList.remove("active");
-
-                                    participant_index += 2;
-                                    if (participant_index >= initial_participants.length) {
-                                        //Clean up the current round.
-                                        this_obj.finish_round(round_index);
-                                        return;
-                                    }
-
-                                    winner_participant_div_index++;
-                                    winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
-                                }, 500);
-                            }, 750);
-                        });
-                    }, 750);
-                });
-            });
-            winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
+            this.begin_round_matches(round_index, initial_group_div, winner_group_div, initial_participants);
         }, 50);
+    }
+
+    /**
+     * Start the matches in the round.
+     * 
+     * @param {HTMLElement} initial_group_div The initial participant round group element.
+     * @param {HTMLElement} winner_group_div The winner round group element.
+     */
+    async begin_round_matches(round_index, initial_group_div, winner_group_div, initial_participants) {
+        scrollTo(0, 0);
+
+        //Go through each contesting pair and select a winner for that round.
+        const initial_participant_div_list = initial_group_div.querySelectorAll(".participant");
+        const winner_participant_div_list = winner_group_div.querySelectorAll(".participant");
+        let participant_index = 0;
+        let winner_participant_div_index = 0;
+        winner_participant_div_list.forEach(winner_participant_div => {
+            const this_obj = this;
+            winner_participant_div.addEventListener("transitionend", async function show_fn() {
+                this.removeEventListener("transitionend", show_fn);
+
+                initial_participant_div_list[participant_index].classList.add("active");
+                initial_participant_div_list[participant_index + 1].classList.add("active");
+                winner_participant_div_list[winner_participant_div_index].classList.add("unknown");
+                this_obj.scroll_element_into_view(winner_participant_div_list[winner_participant_div_index]);
+
+                if (initial_participants[participant_index + 1] === "---") {
+                    //If the second participant is a dummy one, just default to the first participant as a winner.
+                    this_obj.default_participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index);
+                    return;
+                }
+
+                await this_obj.participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index);
+
+                participant_index += 2;
+                if (participant_index >= initial_participants.length) {
+                    //Clean up the current round.
+                    this.finish_round(round_index);
+                    return;
+                }
+
+                winner_participant_div_index++;
+                winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
+            });
+        });
+        winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
     }
 
     /**
      * Show a "round begin" message.
      * 
-     * @param {int} round_index The round number.
+     * @param {number} round_index The round number.
      */
     round_begin_message(round_index) {
         return new Promise((resolve, _) => {
@@ -230,6 +212,78 @@ export default class App {
                 resolve(true);
             }, 2100);
         });
+    }
+
+    /**
+     * Starts a match between two participants.
+     * 
+     * @param {number} round_index The round number.
+     * @param {HTMLElement[]} winner_participant_div_list The winner participant elements list.
+     * @param {number} winner_participant_div_index The current winner participant elements list index.
+     * @param {HTMLElement[]} initial_participant_div_list The initial participant elements list.
+     * @param {number} initial_participants The current initial participant elements list index.
+     * @param {number} participant_index The current participant index.
+     */
+    participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index) {
+        return new Promise((resolve, _) => {
+            //Setup a name switcher that continuously switches between showing each participant name in the winner participant div.
+            let current_name_index_offset = 0;
+            const name_switch_interval_handle = requestInterval(_ => {
+                winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + current_name_index_offset];
+                current_name_index_offset = (current_name_index_offset + 1) % 2;
+            }, 100);
+
+            requestTimeout(_ => {
+                //Determine the winner.
+                this.determine_winner(initial_participants[participant_index], initial_participants[participant_index + 1]).then(random_index => {
+                    requestTimeout(_ => {
+                        //Stop name switching and set the name of the winner in the winner participant div.
+                        clearRequestInterval(name_switch_interval_handle);
+                        winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + random_index];
+                        this._round[round_index].push(initial_participants[participant_index + random_index]);
+
+                        winner_participant_div_list[winner_participant_div_index].classList.add("winner");
+                        winner_participant_div_list[winner_participant_div_index].classList.remove("unknown");
+
+                        requestTimeout(_ => {
+                            winner_participant_div_list[winner_participant_div_index].classList.remove("winner");
+                            initial_participant_div_list[participant_index].classList.remove("active");
+                            initial_participant_div_list[participant_index + 1].classList.remove("active");
+
+                            resolve(true);
+                        }, 500);
+                    }, 750);
+                });
+            }, 750);
+        });
+    }
+
+    /**
+     * Starts a match with a default participant winner.
+     * 
+     * @param {number} round_index The round number.
+     * @param {HTMLElement[]} winner_participant_div_list The winner participant elements list.
+     * @param {number} winner_participant_div_index The current winner participant elements list index.
+     * @param {HTMLElement[]} initial_participant_div_list The initial participant elements list.
+     * @param {number} initial_participants The current initial participant elements list index.
+     * @param {number} participant_index The current participant index.
+     */
+    async default_participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index) {
+        //Set the participant as the default winner.
+        winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index];
+        this._round[round_index].push(initial_participants[participant_index]);
+
+        winner_participant_div_list[winner_participant_div_index].classList.add("winner");
+        winner_participant_div_list[winner_participant_div_index].classList.remove("unknown");
+
+        requestTimeout(_ => {
+            winner_participant_div_list[winner_participant_div_index].classList.remove("winner");
+            initial_participant_div_list[participant_index].classList.remove("active");
+            initial_participant_div_list[participant_index + 1].classList.remove("active");
+
+            //Clean up the current round.
+            this.finish_round(round_index);
+        }, 1000);
     }
 
     /**
@@ -271,14 +325,21 @@ export default class App {
             requestTimeout(_ => {
                 //Stop the loader, select a participant at random, and announce the winner.
                 clearRequestInterval(dot_loading_handle);
-                //State in the modal text message that a winner is selected.
-                modal_text.innerText = "Winner Selected!";
 
+                //Select the winner at random.
                 const random_index = this._random_generator.integer(0, 1);
                 let name_winner = name_2;
+                let name_loser = name_1
                 if (random_index % 2 === 0) {
                     name_winner = name_1;
+                    name_loser = name_2;
                 }
+                //Set a random winner-loser message and the title to the name of the winner.
+                if (this._messages.length === 0) {
+                    this._message = [...this._original_messages];
+                }
+                const random_message = this._random_generator.integer(0, this._messages.length - 1);
+                modal_text.innerHTML = this._messages.splice(random_message, 1)[0].replace(/\#winner/g, name_winner).replace(/\#loser/g, name_loser);
                 header_decided.innerText = `${name_winner} is the winner!`;
 
                 requestTimeout(_ => {
@@ -298,7 +359,7 @@ export default class App {
                             modal_text.innerText = "";
 
                             resolve(random_index);
-                        }, 2000);
+                        }, 3500);
                     });
                 }, 500);
             }, 3000);
@@ -310,7 +371,7 @@ export default class App {
     /**
      * Cleans up the current round.
      * 
-     * @param {int} round_index The round number.
+     * @param {number} round_index The round number.
      */
     async finish_round(round_index) {
         if (this._round[round_index].length <= 1) {
@@ -385,7 +446,7 @@ export default class App {
     /**
      * Add a dummy participant if odd number of participants are present.
      * 
-     * @param {int} round_index The round number.
+     * @param {number} round_index The round number.
      */
     fix_round_participants(round_index) {
         if (this._round[round_index].length % 2 === 1) {
