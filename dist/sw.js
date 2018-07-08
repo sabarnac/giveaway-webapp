@@ -1,7 +1,20 @@
 var __wpo = {
   "assets": {
     "main": [
-      "./index.js",
+      "./index.18afb0c79094dc76d2b9.js",
+      "./manifest.json",
+      "./icon_1024x1024.b77e38155a357427b65483a6d87dbcb8.png",
+      "./icon_512x512.57dcba958a28a38bcbfc35256eb58ee1.png",
+      "./icon_384x384.37053157127cea7ea9086dbd71df140a.png",
+      "./icon_256x256.07f517fe83f412758e14cb7d74420a47.png",
+      "./icon_192x192.de9144e45a4f44be86c6395d6eb10d5e.png",
+      "./icon_128x128.7e7643c4055fd25d684c4325b5779da8.png",
+      "./icon_180x180.348e51b86f4ff62280da8d1dbc79866e.png",
+      "./icon_167x167.4f33e095ea1a5b5e0ad1cb86f929d360.png",
+      "./icon_152x152.3b9c8966f99e75bb43dd05845939e139.png",
+      "./icon_120x120.f5a99a522358c818f894c33df26ed9b5.png",
+      "./icon_96x96.12f0f0d220aee1709c14f6d794b7171b.png",
+      "./",
       "./",
       "./config.json",
       "./users.json",
@@ -17,11 +30,24 @@ var __wpo = {
     "https://fonts.googleapis.com/css?family=Open+Sans:400,600"
   ],
   "hashesMap": {
-    "f1e6cd40c1eb0cf4d211a986cb56d780cb7a663e": "./index.js"
+    "6f824da46d291a8490da170eebfdb2213ba181b0": "./index.18afb0c79094dc76d2b9.js",
+    "0db0384fa6645fd30f1d705134d0adc06129a628": "./manifest.json",
+    "c0323adb916ecc2cc5dbe6386881db2cd65230ea": "./icon_1024x1024.b77e38155a357427b65483a6d87dbcb8.png",
+    "2d6750bb284011ee9579d13b6acd65a592b45c00": "./icon_512x512.57dcba958a28a38bcbfc35256eb58ee1.png",
+    "960b29dee2d8bd8570d1528bf1f859d07301d0d9": "./icon_384x384.37053157127cea7ea9086dbd71df140a.png",
+    "444ca584cddfc75cd6c2edeae657147ac62def0a": "./icon_256x256.07f517fe83f412758e14cb7d74420a47.png",
+    "2baf3d6705e861eaabe3cbb1bdd5d9db10b52924": "./icon_192x192.de9144e45a4f44be86c6395d6eb10d5e.png",
+    "d49593b4032cdea6570c39dd4649c856ea4c9c8b": "./icon_128x128.7e7643c4055fd25d684c4325b5779da8.png",
+    "7a1b01e85cb33a39ed488a586705c1ce445c6a6a": "./icon_180x180.348e51b86f4ff62280da8d1dbc79866e.png",
+    "f9d187236cce3e91e40a6f8a5bb796fb91733bb9": "./icon_167x167.4f33e095ea1a5b5e0ad1cb86f929d360.png",
+    "d23da1d8e2087a59c6c90f51609a0f3ff092055b": "./icon_152x152.3b9c8966f99e75bb43dd05845939e139.png",
+    "a36e8b1ec8573e9780c94739e414d06a05e160c1": "./icon_120x120.f5a99a522358c818f894c33df26ed9b5.png",
+    "884d8d174ce1d02fb1c7fc43ebeeeb2884fd0915": "./icon_96x96.12f0f0d220aee1709c14f6d794b7171b.png",
+    "74f9255517684d9ec150a63153829261c5cdc815": "./"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "2018-7-8 16:14:48",
+  "version": "2018-7-8 16:55:31",
   "name": "webpack-offline",
   "pluginVersion": "5.0.5",
   "relativePaths": true
