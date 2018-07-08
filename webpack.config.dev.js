@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path");
+const OfflinePlugin = require('offline-plugin');
 
 module.exports = {
     mode: "development",
@@ -15,7 +16,18 @@ module.exports = {
     },
     resolve: {},
     devtool: "source-map",
-    plugins: [],
+    plugins: [
+        new OfflinePlugin({
+            appShell: "./index.html",
+            externals: [
+                "./index.html",
+                "./config.json",
+                "./users.json",
+                "https://fonts.googleapis.com/css?family=Open+Sans:400,600"
+            ],
+            autoUpdate: true
+        })
+    ],
     watchOptions: {
         poll: true
     }

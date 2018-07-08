@@ -1,3 +1,5 @@
+"use strict";
+
 // requestAnimationFrame() shim by Paul Irish
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 export const requestAnimFrame = (function() {

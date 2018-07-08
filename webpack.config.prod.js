@@ -1,6 +1,7 @@
 "use strict";
 
 const path = require("path");
+const OfflinePlugin = require('offline-plugin');
 
 module.exports = {
     mode: "production",
@@ -8,6 +9,7 @@ module.exports = {
     context: path.resolve(__dirname),
     output: {
         path: path.resolve(__dirname, "dist"),
+        publicPath: "/giveaway-webapp/",
         filename: "index.js",
     },
     module: {
@@ -15,7 +17,18 @@ module.exports = {
     },
     resolve: {},
     devtool: "source-map",
-    plugins: [],
+    plugins: [
+        new OfflinePlugin({
+            appShell: "./index.html",
+            responseStrategy: "network-first",
+            externals: [
+                "./config.json",
+                "./users.json",
+                "https://fonts.googleapis.com/css?family=Open+Sans:400,600"
+            ],
+            autoUpdate: true
+        })
+    ],
     watchOptions: {
         poll: true
     }

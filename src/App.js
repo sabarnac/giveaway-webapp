@@ -1,3 +1,5 @@
+"use strict";
+
 import Random from "random-js";
 import { requestTimeout, requestInterval, clearRequestInterval } from "./custom.js";
 
@@ -10,20 +12,26 @@ export default class App {
      * Constructs the application by setting class properties, and properly binding class methods.
      * 
      * @param {object} config The application configuration.
-     * @param {array} users The list of users among which the TOURNAMENT ARC will occur.
+     * @param {array} users The list of users among which the tournament will occur.
      * @param {HTMLElement} div The HTML element to attach the application too.
      */
     constructor(config, users, div) {
+        console.log("Constructing application.");
+
         //Setup dependencues
+        console.log("Setting up dependencies.");
         this._config = config;
         this._div = div;
         this._wrapper = this._div.querySelector(".wrapper");
         this._random_engine = Random.engines.mt19937();
         //Seed the generator with the config value so that everything is repeatable.
+        console.log(`Seed: ${this._config.seed}`);
         this._random_engine.seed(this._config.seed);
         this._random_generator = new Random(this._random_engine);
+        console.log("Dependencies setup complete.");
 
         //Setup round user data.
+        console.log("Setting up data.");
         this._round = [
             []
         ];
@@ -33,10 +41,16 @@ export default class App {
             this._round[0].push(users[random_user_index]);
             users.splice(random_user_index, 1);
         }
+        console.log("Users: ");
+        console.table(this._round[0]);
         this._original_messages = this._config.messages;
+        console.log("Messages: ");
+        console.table(this._config.messages);
         this._messages = [...this._original_messages];
+        console.log("Data setup complete.");
 
         //Set method context bindings.
+        console.log("Setting up method context bindings.");
         this.start = this.start.bind(this);
         this.round_0 = this.round_0.bind(this);
         this.show_participants = this.show_participants.bind(this);
@@ -46,16 +60,18 @@ export default class App {
         this.participant_match = this.participant_match.bind(this);
         this.determine_winner = this.determine_winner.bind(this);
         this.finish_round = this.finish_round.bind(this);
-        this.fix_round_participants = this.fix_round_participants.bind(this);
+        this.fix_round_participants = this.pad_participants_list.bind(this);
         this.scroll_element_into_view = this.scroll_element_into_view.bind(this);
         this.create_group_div = this.create_group_div.bind(this);
         this.create_participant_div = this.create_participant_div.bind(this);
+        console.log("Method context bindings setup complete.");
     }
 
     /**
      * Start running the application.
      */
     async start() {
+        console.log("Starting the tournament!!!");
         this.round_0();
     }
 
@@ -63,16 +79,24 @@ export default class App {
      * Setup round 0 (the round before the tournament starts).
      */
     async round_0() {
-        this.fix_round_participants(0);
+        console.log("Starting Round 0");
+
+        console.log("Padding participants list.");
+        this.pad_participants_list(0);
+        console.log("Padded participants list.");
 
         //Setup the initial user group.
+        console.log("Creating initial participants group.");
         const group_div = this.create_group_div();
         group_div.classList.remove("hide");
         group_div.classList.remove("right");
         this._wrapper.insertAdjacentElement("beforeend", group_div);
         this._round[0].forEach(user => {
+            console.log(`Adding participant: ${user}`);
             group_div.insertAdjacentElement("beforeend", this.create_participant_div(user));
+            console.log("Added participant.");
         });
+        console.log("Created initial participants group.");
 
         requestTimeout(_ => {
             this.show_participants(group_div);
@@ -85,6 +109,7 @@ export default class App {
      * @param {HTMLElement} group_div The round group element.
      */
     show_participants(group_div) {
+        console.log("Showing initial participants group list.");
         scrollTo(0, 0);
 
         //Reveal each user in order one by one.
@@ -98,10 +123,12 @@ export default class App {
                 participant_div_index++;
                 if (participant_div_index >= participant_div_list.length) {
                     //All users in the initial group have been revealed, start round 1.
+                    console.log("All participants visible.");
                     this_obj.round_x(1);
                     return;
                 }
 
+                console.log(`Showing participant, (Index: ${participant_div_index})`);
                 this_obj.scroll_element_into_view(participant_div_list[participant_div_index]);
                 participant_div_list[participant_div_index].classList.remove("hide");
             });
@@ -115,22 +142,29 @@ export default class App {
      * @param {number} round_index The round number.
      */
     async round_x(round_index) {
+        console.log(`Starting Round ${round_index}.`);
         await this.round_begin_message(round_index);
 
         //Get the initial participant data and group element.
+        console.log(`Retrieving initial participants list from Round ${round_index - 1}.`);
         const initial_group_div = this._wrapper.querySelector(".group");
         const initial_participants = this._round[round_index - 1];
+        console.log(`Retrieved initial participants list from Round ${round_index - 1}.`);
 
         //Setup the group for the new round.
+        console.log(`Setting up for winners of Round ${round_index}.`);
         this._round[round_index] = [];
         const winner_group_div = this.create_group_div();
         this._wrapper.insertAdjacentElement("beforeend", winner_group_div);
         //This new round will have half of the remaining participants, so setup empty paritipant elements for the winners.
         for (let participant_index = 0; participant_index < (initial_participants.length / 2); participant_index++) {
+            console.log(`Setting up block for potential winner. (Index: ${participant_index})`);
             const participant_div = this.create_participant_div("?");
             winner_group_div.insertAdjacentElement("beforeend", participant_div);
+            console.log(`Setup block for potential winner complete.`);
         }
         winner_group_div.classList.remove("hide");
+        console.log(`Setup for winners of Round ${round_index} complete.`);
 
         requestTimeout(_ => {
             this.begin_round_matches(round_index, initial_group_div, winner_group_div, initial_participants);
@@ -144,15 +178,19 @@ export default class App {
      * @param {HTMLElement} winner_group_div The winner round group element.
      */
     async begin_round_matches(round_index, initial_group_div, winner_group_div, initial_participants) {
+        console.log(`Starting matches for Round ${round_index}.`);
+
         scrollTo(0, 0);
 
         //Go through each contesting pair and select a winner for that round.
+        console.log("Retrieving initial particpant and final participant div lists.");
         const initial_participant_div_list = initial_group_div.querySelectorAll(".participant");
         const winner_participant_div_list = winner_group_div.querySelectorAll(".participant");
         let participant_index = 0;
         let winner_participant_div_index = 0;
         winner_participant_div_list.forEach(winner_participant_div => {
             const this_obj = this;
+            console.log("When each winner participant div is being shown, start the selection of the random winner while playing some animations with the div.");
             winner_participant_div.addEventListener("transitionend", async function show_fn() {
                 this.removeEventListener("transitionend", show_fn);
 
@@ -163,23 +201,28 @@ export default class App {
 
                 if (initial_participants[participant_index + 1] === "---") {
                     //If the second participant is a dummy one, just default to the first participant as a winner.
+                    console.log("One of the participants is a dummy. Selecting the only actual participant as the default winner.");
                     this_obj.default_participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index);
                     return;
                 }
 
+                console.log("Start the match between the two participants.");
                 await this_obj.participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index);
 
                 participant_index += 2;
                 if (participant_index >= initial_participants.length) {
                     //Clean up the current round.
+                    console.log(`All matches in Round ${round_index} are complete.`);
                     this_obj.finish_round(round_index);
                     return;
                 }
 
                 winner_participant_div_index++;
+                console.log(`Showing the next participant div. (Index: ${winner_participant_div_index})`);
                 winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
             });
         });
+        console.log(`Showing the participant div. (Index: ${winner_participant_div_index})`);
         winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
     }
 
@@ -190,6 +233,8 @@ export default class App {
      */
     round_begin_message(round_index) {
         return new Promise((resolve, _) => {
+            console.log(`Show a message stating Round ${round_index} is gonna begin.`);
+
             const modal_wrapper = this._div.querySelector(".modal-wrapper");
             const modal_header = modal_wrapper.querySelector(".modal .header");
             const modal_text = modal_wrapper.querySelector(".modal .text");
@@ -209,8 +254,9 @@ export default class App {
                 modal_wrapper.classList.add("hide");
                 header.remove();
                 modal_text.innerText = "";
+                console.log("Begin round message is shown. We can now start the round.");
                 resolve(true);
-            }, 2100);
+            }, 2500);
         });
     }
 
@@ -226,8 +272,11 @@ export default class App {
      */
     participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index) {
         return new Promise((resolve, _) => {
+            console.log(`Starting participant match in Round ${round_index}. (Participant index: ${participant_index})`);
+
             //Setup a name switcher that continuously switches between showing each participant name in the winner participant div.
             let current_name_index_offset = 0;
+            console.log("Setting up a name switcher.");
             const name_switch_interval_handle = requestInterval(_ => {
                 winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + current_name_index_offset];
                 current_name_index_offset = (current_name_index_offset + 1) % 2;
@@ -235,12 +284,14 @@ export default class App {
 
             requestTimeout(_ => {
                 //Determine the winner.
-                this.determine_winner(initial_participants[participant_index], initial_participants[participant_index + 1]).then(random_index => {
+                console.log("Get a randomly selected winner.");
+                this.determine_winner(initial_participants[participant_index], initial_participants[participant_index + 1]).then(random_index_offset => {
                     requestTimeout(_ => {
+                        console.log(`Show the winner name in the winner participant div. (Participant index offset: ${random_index_offset})`);
                         //Stop name switching and set the name of the winner in the winner participant div.
                         clearRequestInterval(name_switch_interval_handle);
-                        winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + random_index];
-                        this._round[round_index].push(initial_participants[participant_index + random_index]);
+                        winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + random_index_offset];
+                        this._round[round_index].push(initial_participants[participant_index + random_index_offset]);
 
                         winner_participant_div_list[winner_participant_div_index].classList.add("winner");
                         winner_participant_div_list[winner_participant_div_index].classList.remove("unknown");
@@ -250,6 +301,7 @@ export default class App {
                             initial_participant_div_list[participant_index].classList.remove("active");
                             initial_participant_div_list[participant_index + 1].classList.remove("active");
 
+                            console.log(`Match is complete. The winner is: ${winner_participant_div_list[winner_participant_div_index].innerText}`);
                             resolve(true);
                         }, 500);
                     }, 750);
@@ -269,6 +321,8 @@ export default class App {
      * @param {number} participant_index The current participant index.
      */
     async default_participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index) {
+        console.log(`Only one actual participant in the list. Selecting that participant as the winner by default. (Index: ${participant_index})`);
+
         //Set the participant as the default winner.
         winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index];
         this._round[round_index].push(initial_participants[participant_index]);
@@ -282,6 +336,7 @@ export default class App {
             initial_participant_div_list[participant_index + 1].classList.remove("active");
 
             //Clean up the current round.
+            console.log(`Round ${round_index} is complete.`);
             this.finish_round(round_index);
         }, 1000);
     }
@@ -296,11 +351,14 @@ export default class App {
      */
     determine_winner(name_1, name_2) {
         return new Promise((resolve, _) => {
+            console.log(`Determine winner between: ${name_1} & ${name_2}`);
+
             const modal_wrapper = this._div.querySelector(".modal-wrapper");
             const modal_header = modal_wrapper.querySelector(".modal .header");
             const modal_text = modal_wrapper.querySelector(".modal .text");
 
             //Create two modal titles, one that says the fight is between which participants, one that will announce the winning participant.
+            console.log("Showing a modal stating that the winner is being selected and the match is between which participants.");
             const header_deciding = document.createElement("h2");
             header_deciding.classList.add("title");
             const header_decided = document.createElement("h2");
@@ -327,18 +385,23 @@ export default class App {
                 clearRequestInterval(dot_loading_handle);
 
                 //Select the winner at random.
-                const random_index = this._random_generator.integer(0, 1);
+                console.log("Selecting a random winner.");
+                const random_index_offset = this._random_generator.integer(0, 1);
                 let name_winner = name_2;
                 let name_loser = name_1
-                if (random_index % 2 === 0) {
+                if (random_index_offset % 2 === 0) {
                     name_winner = name_1;
                     name_loser = name_2;
                 }
+                console.log(`Selected winner: ${name_winner}`);
+                console.log(`Selected loser: ${name_loser}`);
                 //Set a random winner-loser message and the title to the name of the winner.
                 if (this._messages.length === 0) {
+                    console.log("Ran out of winner-loser messages. Refilling the list.");
                     this._message = [...this._original_messages];
                 }
                 const random_message = this._random_generator.integer(0, this._messages.length - 1);
+                console.log("Showing random winner-loser message and removing it from the messages list.");
                 modal_text.innerHTML = this._messages.splice(random_message, 1)[0].replace(/\#winner/g, name_winner).replace(/\#loser/g, name_loser);
                 header_decided.innerText = `${name_winner} is the winner!`;
 
@@ -358,7 +421,8 @@ export default class App {
                             header_decided.remove();
                             modal_text.innerText = "";
 
-                            resolve(random_index);
+                            console.log(`Returning the selected winner. (Index offset: ${random_index_offset})`);
+                            resolve(random_index_offset);
                         }, 3500);
                     });
                 }, 500);
@@ -374,8 +438,11 @@ export default class App {
      * @param {number} round_index The round number.
      */
     async finish_round(round_index) {
+        console.log(`Round ${round_index} is complete.`);
+
         if (this._round[round_index].length <= 1) {
             //If only one participant remained after the completion of the current round, end the application and announce the winner.
+            console.log("This was the final round.");
             this.end(this._round[round_index][0]);
             return;
         }
@@ -386,8 +453,10 @@ export default class App {
             //When the first group is hidden, delete it and then push the second group to the left.
             group_div_list[0].removeEventListener("transitionend", hide_fn);
 
+            console.log("Initial participants group is hidden. Delete it.");
             group_div_list[0].remove();
             requestTimeout(_ => {
+                console.log("Push the results participants group to the left, making it the new initial participants div.");
                 group_div_list[1].classList.remove("right");
             }, 50);
         });
@@ -398,11 +467,14 @@ export default class App {
             //When the second group has been pushed to the left, we can start the next round.
             group_div_list[1].removeEventListener("transitionend", move_fn);
 
+            console.log("Pushed the results participants group to the left.");
             const old_participant_size = this_obj._round[round_index].length;
-            this_obj.fix_round_participants(round_index);
+            console.log("Padding the new participants list.");
+            this_obj.pad_participants_list(round_index);
             const new_participant_size = this_obj._round[round_index].length;
             //If a dummy participant was added, then we should add a participant div for it in the group.
             if (new_participant_size > old_participant_size) {
+                console.log("Participants list was padded. Add the dummy participant(s) to the group participants list.");
                 for (let extra_participant_index = old_participant_size; extra_participant_index < new_participant_size; extra_participant_index++) {
                     const participant_div = this_obj.create_participant_div(this_obj._round[round_index][extra_participant_index]);
                     participant_div.classList.remove("hide");
@@ -412,11 +484,13 @@ export default class App {
 
             requestTimeout(_ => {
                 //Start the next round.
+                console.log("Start the next round.");
                 this_obj.round_x(round_index + 1);
             }, 1000);
         });
 
         //Hide the old group.
+        console.log("Hide the initial participants group.");
         group_div_list[0].classList.add("hide");
     }
 
@@ -426,6 +500,9 @@ export default class App {
      * @param {string} name The name of the winner.
      */
     async end(name) {
+        console.log(`Tournament complete! We have a winner: ${name}`);
+
+        console.log("Announce the winner in the modal.");
         const modal_wrapper = this._div.querySelector(".modal-wrapper");
         const modal_header = modal_wrapper.querySelector(".modal .header");
         const modal_text = modal_wrapper.querySelector(".modal .text");
@@ -441,6 +518,8 @@ export default class App {
 
         this._wrapper.classList.add("hide");
         modal_wrapper.classList.remove("hide");
+
+        console.log("The tournament ends here.");
     }
 
     /**
@@ -448,9 +527,11 @@ export default class App {
      * 
      * @param {number} round_index The round number.
      */
-    fix_round_participants(round_index) {
+    pad_participants_list(round_index) {
         if (this._round[round_index].length % 2 === 1) {
+            console.log(`Odd number of participants in Round ${round_index}. Pad the list with a dummy participant.`);
             this._round[round_index].push("---");
+            console.log("Padded participants list.");
         }
     }
 
@@ -460,7 +541,14 @@ export default class App {
      * @param {HTMLElement} el The element to scroll into view.
      */
     async scroll_element_into_view(el) {
-        el.scrollIntoView({ behavior: "smooth" });
+        console.log("Scrolling element into view: ");
+        console.log(el);
+        el.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "end"
+        });
+        console.log("Scrolled element into view.");
     }
 
     /**
@@ -469,10 +557,12 @@ export default class App {
      * @return The created element.
      */
     create_group_div() {
+        console.log("Creating new round group div element.");
         const group_div = document.createElement("div");
         group_div.classList.add("group");
         group_div.classList.add("right");
         group_div.classList.add("hide");
+        console.log("Created new round group div element.");
         return group_div;
     }
 
@@ -484,10 +574,12 @@ export default class App {
      * @return The created element.
      */
     create_participant_div(name) {
+        console.log(`Creating new round participant div element for participant: ${name}`);
         const participant_div = document.createElement("div");
         participant_div.classList.add("participant");
         participant_div.classList.add("hide");
         participant_div.innerText = name;
+        console.log("Created new round participant div element.");
         return participant_div;
     }
 }
