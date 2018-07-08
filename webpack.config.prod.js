@@ -20,8 +20,8 @@ module.exports = {
     plugins: [
         new OfflinePlugin({
             appShell: "./index.html",
-            responseStrategy: "network-first",
             externals: [
+                "./index.html",
                 "./config.json",
                 "./users.json",
                 "https://fonts.googleapis.com/css?family=Open+Sans:400,600"
