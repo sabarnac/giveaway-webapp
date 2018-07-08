@@ -410,7 +410,7 @@ export default class App {
                         //Set a random winner-loser message and the title to the name of the winner.
                         if (this_obj._messages.length === 0) {
                             console.log("Ran out of winner-loser messages. Refilling the list.");
-                            this_obj._message = [...this_obj._original_messages];
+                            this_obj._messages = [...this_obj._original_messages];
                         }
                         const random_message = this_obj._random_generator.integer(0, this_obj._messages.length - 1);
                         console.log("Showing random winner-loser message and removing it from the messages list.");
