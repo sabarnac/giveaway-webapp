@@ -1,2 +1,1739 @@
-!function(e){var n={};function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}t.m=e,t.c=n,t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{enumerable:!0,get:i})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,n){if(1&n&&(e=t(e)),8&n)return e;if(4&n&&"object"==typeof e&&e&&e.__esModule)return e;var i=Object.create(null);if(t.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:e}),2&n&&"string"!=typeof e)for(var r in e)t.d(i,r,function(n){return e[n]}.bind(null,r));return i},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="/giveaway-webapp/",t(t.s=2)}([function(e,n,t){var i;!function(r){"use strict";var o="function"!=typeof Math.imul||-5!==Math.imul(4294967295,5)?function(e,n){var t=65535&e,i=65535&n;return t*i+((e>>>16&65535)*i+t*(n>>>16&65535)<<16>>>0)|0}:Math.imul,a="function"==typeof String.prototype.repeat&&"xxx"==="x".repeat(3)?function(e,n){return e.repeat(n)}:function(e,n){for(var t="";n>0;)1&n&&(t+=e),n>>=1,e+=e;return t};function s(e){if(!(this instanceof s))return new s(e);if(null==e)e=s.engines.nativeMath;else if("function"!=typeof e)throw new TypeError("Expected engine to be a function, got "+typeof e);this.engine=e}var c=s.prototype;function l(e){return function(){return e}}function u(e,n){return 0===n?e:function(t){return e(t)+n}}function d(e){var n=+e;return n<0?Math.ceil(n):Math.floor(n)}function h(e,n){return e<0?Math.max(e+n,0):Math.min(e,n)}function p(){}s.engines={nativeMath:function(){return 4294967296*Math.random()|0},mt19937:function(e){function n(e){for(var n=0,t=0;(0|n)<227;n=n+1|0)t=2147483648&e[n]|2147483647&e[n+1|0],e[n]=e[n+397|0]^t>>>1^(1&t?2567483615:0);for(;(0|n)<623;n=n+1|0)t=2147483648&e[n]|2147483647&e[n+1|0],e[n]=e[n-227|0]^t>>>1^(1&t?2567483615:0);t=2147483648&e[623]|2147483647&e[0],e[623]=e[396]^t>>>1^(1&t?2567483615:0)}return function(){var t=new e(624),i=0,r=0;function a(){(0|i)>=624&&(n(t),i=0);var e=t[i];return i=i+1|0,r+=1,0|function(e){return e^=e>>>11,e^=e<<7&2636928640,(e^=e<<15&4022730752)^e>>>18}(e)}return a.getUseCount=function(){return r},a.discard=function(e){for(r+=e,(0|i)>=624&&(n(t),i=0);e-i>624;)e-=624-i,n(t),i=0;return i=i+e|0,a},a.seed=function(e){var n=0;t[0]=n=0|e;for(var s=1;s<624;s=s+1|0)t[s]=n=o(n^n>>>30,1812433253)+s|0;return i=624,r=0,a},a.seedWithArray=function(e){return a.seed(19650218),function(e,n){for(var t=1,i=0,r=n.length,a=0|Math.max(r,624),s=0|e[0];(0|a)>0;--a)e[t]=s=(e[t]^o(s^s>>>30,1664525))+(0|n[i])+(0|i)|0,++i,(0|(t=t+1|0))>623&&(e[0]=e[623],t=1),i>=r&&(i=0);for(a=623;(0|a)>0;--a)e[t]=s=(e[t]^o(s^s>>>30,1566083941))-t|0,(0|(t=t+1|0))>623&&(e[0]=e[623],t=1);e[0]=2147483648}(t,e),a},a.autoSeed=function(){return a.seedWithArray(s.generateEntropyArray())},a}}("function"==typeof Int32Array?Int32Array:Array),browserCrypto:"undefined"!=typeof crypto&&"function"==typeof crypto.getRandomValues&&"function"==typeof Int32Array?function(){var e=null,n=128;return function(){return n>=128&&(null===e&&(e=new Int32Array(128)),crypto.getRandomValues(e),n=0),0|e[n++]}}():null},s.generateEntropyArray=function(){for(var e=[],n=s.engines.nativeMath,t=0;t<16;++t)e[t]=0|n();return e.push(0|(new Date).getTime()),e},s.int32=function(e){return 0|e()},c.int32=function(){return s.int32(this.engine)},s.uint32=function(e){return e()>>>0},c.uint32=function(){return s.uint32(this.engine)},s.uint53=function(e){return 4294967296*(2097151&e())+(e()>>>0)},c.uint53=function(){return s.uint53(this.engine)},s.uint53Full=function(e){for(;;){var n=0|e();if(!(2097152&n))return 4294967296*(2097151&n)+(e()>>>0);if(2097152==(4194303&n)&&0==(0|e()))return 9007199254740992}},c.uint53Full=function(){return s.uint53Full(this.engine)},s.int53=function(e){var n=0|e();return 4294967296*(2097151&n)+(e()>>>0)+(2097152&n?-9007199254740992:0)},c.int53=function(){return s.int53(this.engine)},s.int53Full=function(e){for(;;){var n=0|e();if(!(4194304&n))return 4294967296*(2097151&n)+(e()>>>0)+(2097152&n?-9007199254740992:0);if(4194304==(8388607&n)&&0==(0|e()))return 9007199254740992}},c.int53Full=function(){return s.int53Full(this.engine)},s.integer=function(){function e(e){return 0==(e+1&e)}function n(n){return e(n)?function(e){return function(n){return n()&e}}(n):function(e){var n=e+1,t=n*Math.floor(4294967296/n);return function(e){var i=0;do{i=e()>>>0}while(i>=t);return i%n}}(n)}function t(n){var t=n+1;if(function(e){return 0==(0|e)}(t)){var i=(t/4294967296|0)-1;if(e(i))return function(e){return function(n){return 4294967296*(n()&e)+(n()>>>0)}}(i)}return function(e){var n=e*Math.floor(9007199254740992/e);return function(t){var i=0;do{i=4294967296*(2097151&t())+(t()>>>0)}while(i>=n);return i%e}}(t)}function i(e,n){return function(t){var i=0;do{var r=0|t();i=4294967296*(2097151&r)+(t()>>>0)+(2097152&r?-9007199254740992:0)}while(i<e||i>n);return i}}return function(e,r){if(e=Math.floor(e),r=Math.floor(r),e<-9007199254740992||!isFinite(e))throw new RangeError("Expected min to be at least -9007199254740992");if(r>9007199254740992||!isFinite(r))throw new RangeError("Expected max to be at most 9007199254740992");var o=r-e;return o<=0||!isFinite(o)?l(e):4294967295===o?0===e?s.uint32:u(s.int32,e+2147483648):o<4294967295?u(n(o),e):9007199254740991===o?u(s.uint53,e):o<9007199254740991?u(t(o),e):r-1-e==9007199254740991?u(s.uint53Full,e):-9007199254740992===e&&9007199254740992===r?s.int53Full:-9007199254740992===e&&9007199254740991===r?s.int53:-9007199254740991===e&&9007199254740992===r?u(s.int53,1):9007199254740992===r?u(i(e-1,r-1),1):i(e,r)}}(),c.integer=function(e,n){return s.integer(e,n)(this.engine)},s.realZeroToOneInclusive=function(e){return s.uint53Full(e)/9007199254740992},c.realZeroToOneInclusive=function(){return s.realZeroToOneInclusive(this.engine)},s.realZeroToOneExclusive=function(e){return s.uint53(e)/9007199254740992},c.realZeroToOneExclusive=function(){return s.realZeroToOneExclusive(this.engine)},s.real=function(){return function(e,n,t){if(!isFinite(e))throw new RangeError("Expected left to be a finite number");if(!isFinite(n))throw new RangeError("Expected right to be a finite number");return u(function(e,n){return 1===n?e:0===n?function(){return 0}:function(t){return e(t)*n}}(t?s.realZeroToOneInclusive:s.realZeroToOneExclusive,n-e),e)}}(),c.real=function(e,n,t){return s.real(e,n,t)(this.engine)},s.bool=function(){function e(e){return 1==(1&e())}function n(e,n){return function(t){return e(t)<n}}return function(t,i){return null==i?null==t?e:function(e){if(e<=0)return l(!1);if(e>=1)return l(!0);var t=4294967296*e;return t%1==0?n(s.int32,t-2147483648|0):n(s.uint53,Math.round(9007199254740992*e))}(t):t<=0?l(!1):t>=i?l(!0):n(s.integer(0,i-1),t)}}(),c.bool=function(e,n){return s.bool(e,n)(this.engine)},s.pick=function(e,n,t,i){var r=n.length,o=null==t?0:h(d(t),r),a=void 0===i?r:h(d(i),r);if(!(o>=a))return n[s.integer(o,a-1)(e)]},c.pick=function(e,n,t){return s.pick(this.engine,e,n,t)};var f=Array.prototype.slice;s.picker=function(e,n,t){var i=f.call(e,n,t);if(!i.length)return p;var r=s.integer(0,i.length-1);return function(e){return i[r(e)]}},s.shuffle=function(e,n,t){var i=n.length;if(i){null==t&&(t=0);for(var r=i-1>>>0;r>t;--r){var o=s.integer(0,r)(e);if(r!==o){var a=n[r];n[r]=n[o],n[o]=a}}}return n},c.shuffle=function(e){return s.shuffle(this.engine,e)},s.sample=function(e,n,t){if(t<0||t>n.length||!isFinite(t))throw new RangeError("Expected sampleSize to be within 0 and the length of the population");if(0===t)return[];var i=f.call(n),r=i.length;if(r===t)return s.shuffle(e,i,0);var o=r-t;return s.shuffle(e,i,o-1).slice(o)},c.sample=function(e,n){return s.sample(this.engine,e,n)},s.die=function(e){return s.integer(1,e)},c.die=function(e){return s.die(e)(this.engine)},s.dice=function(e,n){var t=s.die(e);return function(e){var i=[];i.length=n;for(var r=0;r<n;++r)i[r]=t(e);return i}},c.dice=function(e,n){return s.dice(e,n)(this.engine)},s.uuid4=function(){function e(e,n){return a("0",n-e.length)+e}return function(n){var t=n()>>>0,i=0|n(),r=0|n(),o=n()>>>0;return e(t.toString(16),8)+"-"+e((65535&i).toString(16),4)+"-"+e((i>>4&4095|16384).toString(16),4)+"-"+e((16383&r|32768).toString(16),4)+"-"+e((r>>4&65535).toString(16),4)+e(o.toString(16),8)}}(),c.uuid4=function(){return s.uuid4(this.engine)},s.string=function(e){null==e&&(e="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-");var n=e.length;if(!n)throw new Error("Expected pool not to be an empty string");var t=s.integer(0,n-1);return function(n,i){for(var r="",o=0;o<i;++o){var a=t(n);r+=e.charAt(a)}return r}},c.string=function(e,n){return s.string(n)(this.engine,e)},s.hex=function(){var e=s.string("0123456789abcdef"),n=s.string("0123456789abcdef".toUpperCase());return function(t){return t?n:e}}(),c.hex=function(e,n){return s.hex(n)(this.engine,e)},s.date=function(e,n){if(!(e instanceof Date))throw new TypeError("Expected start to be a Date, got "+typeof e);if(!(n instanceof Date))throw new TypeError("Expected end to be a Date, got "+typeof n);var t=s.integer(e.getTime(),n.getTime());return function(e){return new Date(t(e))}},c.date=function(e,n){return s.date(e,n)(this.engine)},void 0===(i=function(){return s}.call(n,t,n,e))||(e.exports=i)}()},function(e,n){function t(){return"serviceWorker"in navigator&&("https:"===window.location.protocol||"localhost"===window.location.hostname||0===window.location.hostname.indexOf("127."))}function i(){t()&&navigator.serviceWorker.getRegistration().then(function(e){if(e)return e.update()})}setInterval(i,36e5),n.install=function(e){e||(e={}),t()&&navigator.serviceWorker.register("/giveaway-webapp/sw.js",{})},n.applyUpdate=function(e,n){},n.update=i},function(e,n,t){"use strict";t.r(n);var i=t(0),r=t.n(i);const o=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(e,n){window.setTimeout(e,1e3/60)},a=function(e,n){if(!(window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame&&window.mozCancelRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame))return window.setTimeout(e,n);var t=performance.now(),i=new Object;return i.value=o(function r(){performance.now()-t>=n?e.call():i.value=o(r)}),i},s=function(e,n){if(!(window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame&&window.mozCancelRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame))return window.setInterval(e,n);var t=performance.now(),i=new Object;return i.value=o(function r(){performance.now()-t>=n&&(e.call(),t=performance.now()),i.value=o(r)}),i},c=function(e){window.cancelAnimationFrame?window.cancelAnimationFrame(e.value):window.webkitCancelAnimationFrame?window.webkitCancelAnimationFrame(e.value):window.webkitCancelRequestAnimationFrame?window.webkitCancelRequestAnimationFrame(e.value):window.mozCancelRequestAnimationFrame?window.mozCancelRequestAnimationFrame(e.value):window.oCancelRequestAnimationFrame?window.oCancelRequestAnimationFrame(e.value):window.msCancelRequestAnimationFrame?window.msCancelRequestAnimationFrame(e.value):clearInterval(e)};t(1).install();const l=e=>e.json();Promise.all([fetch("./config.json").then(l),fetch("./users.json").then(l)]).then(([e,n])=>{window.app=new class{constructor(e,n,t){for(console.log("Constructing application."),console.log("Setting up dependencies."),this._config=e,this._div=t,this._wrapper=this._div.querySelector(".wrapper"),this._random_engine=r.a.engines.mt19937(),console.log(`Seed: ${this._config.seed}`),this._random_engine.seed(this._config.seed),this._random_generator=new r.a(this._random_engine),console.log("Dependencies setup complete."),console.log("Setting up data."),this._round=[[]];n.length>0;){const e=this._random_generator.integer(0,n.length-1);this._round[0].push(n[e]),n.splice(e,1)}console.log("Users: "),console.table(this._round[0]),this._original_messages=this._config.messages,console.log("Messages: "),console.table(this._config.messages),this._messages=[...this._original_messages],console.log("Data setup complete."),console.log("Setting up method context bindings."),this.start=this.start.bind(this),this.round_0=this.round_0.bind(this),this.show_participants=this.show_participants.bind(this),this.round_x=this.round_x.bind(this),this.begin_round_matches=this.begin_round_matches.bind(this),this.default_participant_match=this.default_participant_match.bind(this),this.participant_match=this.participant_match.bind(this),this.determine_winner=this.determine_winner.bind(this),this.finish_round=this.finish_round.bind(this),this.fix_round_participants=this.pad_participants_list.bind(this),this.scroll_element_into_view=this.scroll_element_into_view.bind(this),this.create_group_div=this.create_group_div.bind(this),this.create_participant_div=this.create_participant_div.bind(this),console.log("Method context bindings setup complete.")}async start(){console.log("Starting the tournament!!!"),this.round_0()}async round_0(){console.log("Starting Round 0"),console.log("Padding participants list."),this.pad_participants_list(0),console.log("Padded participants list."),console.log("Creating initial participants group.");const e=this.create_group_div();e.classList.remove("hide"),e.classList.remove("right"),this._wrapper.insertAdjacentElement("beforeend",e),this._round[0].forEach(n=>{console.log(`Adding participant: ${n}`),e.insertAdjacentElement("beforeend",this.create_participant_div(n)),console.log("Added participant.")}),console.log("Created initial participants group."),a(n=>{this.show_participants(e)},50)}show_participants(e){console.log("Showing initial participants group list."),scrollTo(0,0);let n=0;const t=e.querySelectorAll(".participant.hide");t.forEach(e=>{const i=this;e.addEventListener("transitionend",function e(){if(this.removeEventListener("transitionend",e),++n>=t.length)return console.log("All participants visible."),void i.round_x(1);console.log(`Showing participant, (Index: ${n})`),i.scroll_element_into_view(t[n]),t[n].classList.remove("hide")})}),t[n].classList.remove("hide")}async round_x(e){console.log(`Starting Round ${e}.`),await this.round_begin_message(e),console.log(`Retrieving initial participants list from Round ${e-1}.`);const n=this._wrapper.querySelector(".group"),t=this._round[e-1];console.log(`Retrieved initial participants list from Round ${e-1}.`),console.log(`Setting up for winners of Round ${e}.`),this._round[e]=[];const i=this.create_group_div();this._wrapper.insertAdjacentElement("beforeend",i);for(let e=0;e<t.length/2;e++){console.log(`Setting up block for potential winner. (Index: ${e})`);const n=this.create_participant_div("?");i.insertAdjacentElement("beforeend",n),console.log("Setup block for potential winner complete.")}i.classList.remove("hide"),console.log(`Setup for winners of Round ${e} complete.`),a(r=>{this.begin_round_matches(e,n,i,t)},50)}async begin_round_matches(e,n,t,i){console.log(`Starting matches for Round ${e}.`),scrollTo(0,0),console.log("Retrieving initial particpant and final participant div lists.");const r=n.querySelectorAll(".participant"),o=t.querySelectorAll(".participant");let a=0,s=0;o.forEach(n=>{const t=this;console.log("When each winner participant div is being shown, start the selection of the random winner while playing some animations with the div."),n.addEventListener("transitionend",async function n(){return this.removeEventListener("transitionend",n),r[a].classList.add("active"),r[a+1].classList.add("active"),o[s].classList.add("unknown"),t.scroll_element_into_view(o[s]),"---"===i[a+1]?(console.log("One of the participants is a dummy. Selecting the only actual participant as the default winner."),void t.default_participant_match(e,o,s,r,i,a)):(console.log("Start the match between the two participants."),await t.participant_match(e,o,s,r,i,a),(a+=2)>=i.length?(console.log(`All matches in Round ${e} are complete.`),void t.finish_round(e)):(s++,console.log(`Showing the next participant div. (Index: ${s})`),void o[s].classList.remove("hide")))})}),console.log(`Showing the participant div. (Index: ${s})`),o[s].classList.remove("hide")}round_begin_message(e){return new Promise((n,t)=>{console.log(`Show a message stating Round ${e} is gonna begin.`);const i=this._div.querySelector(".modal-wrapper"),r=i.querySelector(".modal .header"),o=i.querySelector(".modal .text"),s=document.createElement("h2");s.classList.add("title"),s.innerText=`Round ${e} Begins!`,r.insertAdjacentElement("beforeend",s),o.innerText="Best of luck participants!",i.classList.remove("hide"),a(e=>{i.classList.add("hide"),s.remove(),o.innerText="",console.log("Begin round message is shown. We can now start the round."),n(!0)},2500)})}participant_match(e,n,t,i,r,o){return new Promise((l,u)=>{console.log(`Starting participant match in Round ${e}. (Participant index: ${o})`);let d=0;console.log("Setting up a name switcher.");const h=s(e=>{n[t].innerText=r[o+d],d=(d+1)%2},100);a(s=>{console.log("Get a randomly selected winner."),this.determine_winner(r[o],r[o+1]).then(s=>{a(u=>{console.log(`Show the winner name in the winner participant div. (Participant index offset: ${s})`),c(h),n[t].innerText=r[o+s],this._round[e].push(r[o+s]),n[t].classList.add("winner"),n[t].classList.remove("unknown"),a(e=>{n[t].classList.remove("winner"),i[o].classList.remove("active"),i[o+1].classList.remove("active"),console.log(`Match is complete. The winner is: ${n[t].innerText}`),l(!0)},500)},750)})},750)})}async default_participant_match(e,n,t,i,r,o){console.log(`Only one actual participant in the list. Selecting that participant as the winner by default. (Index: ${o})`),n[t].innerText=r[o],this._round[e].push(r[o]),n[t].classList.add("winner"),n[t].classList.remove("unknown"),a(r=>{n[t].classList.remove("winner"),i[o].classList.remove("active"),i[o+1].classList.remove("active"),console.log(`Round ${e} is complete.`),this.finish_round(e)},1e3)}determine_winner(e,n){return new Promise((t,i)=>{console.log(`Determine winner between: ${e} & ${n}`);const r=this._div.querySelector(".modal-wrapper"),o=r.querySelector(".modal .header"),l=r.querySelector(".modal .text");console.log("Showing a modal stating that the winner is being selected and the match is between which participants.");const u=document.createElement("h2");u.classList.add("title");const d=document.createElement("h2");d.classList.add("title"),d.classList.add("hide"),u.innerText=`${e} VS ${n}`,o.insertAdjacentElement("beforeend",u),o.insertAdjacentElement("beforeend",d);let h=1;l.innerText="Selecting winner.";const p=s(e=>{h=h%4+1,l.innerText=`Selecting Winner${new Array(h).join(".")}`},300);a(i=>{c(p),console.log("Selecting a random winner.");const s=this._random_generator.integer(0,1);let h=n,f=e;s%2==0&&(h=e,f=n),console.log(`Selected winner: ${h}`),console.log(`Selected loser: ${f}`),0===this._messages.length&&(console.log("Ran out of winner-loser messages. Refilling the list."),this._message=[...this._original_messages]);const g=this._random_generator.integer(0,this._messages.length-1);console.log("Showing random winner-loser message and removing it from the messages list."),l.innerHTML=this._messages.splice(g,1)[0].replace(/\#winner/g,h).replace(/\#loser/g,f),d.innerText=`${h} is the winner!`,a(e=>{o.classList.add("next"),u.classList.add("hide"),d.classList.remove("hide"),o.addEventListener("transitionend",function e(){o.removeEventListener("transitionend",e),a(e=>{r.classList.add("hide"),o.classList.remove("next"),u.remove(),d.remove(),l.innerText="",console.log(`Returning the selected winner. (Index offset: ${s})`),t(s)},3500)})},500)},3e3),r.classList.remove("hide")})}async finish_round(e){if(console.log(`Round ${e} is complete.`),this._round[e].length<=1)return console.log("This was the final round."),void this.end(this._round[e][0]);const n=this._wrapper.querySelectorAll(".group");n[0].addEventListener("transitionend",function e(){n[0].removeEventListener("transitionend",e),console.log("Initial participants group is hidden. Delete it."),n[0].remove(),a(e=>{console.log("Push the results participants group to the left, making it the new initial participants div."),n[1].classList.remove("right")},50)});const t=this;n[1].addEventListener("transitionend",function i(){n[1].removeEventListener("transitionend",i),console.log("Pushed the results participants group to the left.");const r=t._round[e].length;console.log("Padding the new participants list."),t.pad_participants_list(e);const o=t._round[e].length;if(o>r){console.log("Participants list was padded. Add the dummy participant(s) to the group participants list.");for(let i=r;i<o;i++){const r=t.create_participant_div(t._round[e][i]);r.classList.remove("hide"),n[1].insertAdjacentElement("beforeend",r)}}a(n=>{console.log("Start the next round."),t.round_x(e+1)},1e3)}),console.log("Hide the initial participants group."),n[0].classList.add("hide")}async end(e){console.log(`Tournament complete! We have a winner: ${e}`),console.log("Announce the winner in the modal.");const n=this._div.querySelector(".modal-wrapper"),t=n.querySelector(".modal .header"),i=n.querySelector(".modal .text"),r=document.createElement("h2");r.classList.add("title"),r.innerText=`${e} IS THE WINNER!!!`,t.insertAdjacentElement("beforeend",r),i.innerText="CONGRATULATIONS!",this._wrapper.classList.add("hide"),n.classList.remove("hide"),console.log("The tournament ends here.")}pad_participants_list(e){this._round[e].length%2==1&&(console.log(`Odd number of participants in Round ${e}. Pad the list with a dummy participant.`),this._round[e].push("---"),console.log("Padded participants list."))}async scroll_element_into_view(e){console.log("Scrolling element into view: "),console.log(e),e.scrollIntoView({behavior:"smooth",block:"center",inline:"end"}),console.log("Scrolled element into view.")}create_group_div(){console.log("Creating new round group div element.");const e=document.createElement("div");return e.classList.add("group"),e.classList.add("right"),e.classList.add("hide"),console.log("Created new round group div element."),e}create_participant_div(e){console.log(`Creating new round participant div element for participant: ${e}`);const n=document.createElement("div");return n.classList.add("participant"),n.classList.add("hide"),n.innerText=e,console.log("Created new round participant div element."),n}}(e,n,document.querySelector("#app")),setTimeout(e=>app.start(),500)})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/offline-plugin/runtime.js":
+/*!************************************************!*\
+  !*** ./node_modules/offline-plugin/runtime.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var appCacheIframe;
+
+function hasSW() {
+  
+    return 'serviceWorker' in navigator && (
+      window.location.protocol === 'https:' ||
+      window.location.hostname === 'localhost' ||
+      window.location.hostname.indexOf('127.') === 0
+    );
+  
+}
+
+function install(options) {
+  options || (options = {});
+
+  
+    if (hasSW()) {
+      var registration = navigator.serviceWorker
+        .register(
+          "sw.js", {
+            
+            
+          }
+        );
+
+      
+
+      return;
+    }
+  
+
+  
+}
+
+function applyUpdate(callback, errback) {
+  
+
+  
+}
+
+function update() {
+  
+    if (hasSW()) {
+      navigator.serviceWorker.getRegistration().then(function(registration) {
+        if (!registration) return;
+        return registration.update();
+      });
+    }
+  
+
+  
+}
+
+
+  setInterval(update, 3600000);
+
+
+exports.install = install;
+exports.applyUpdate = applyUpdate;
+exports.update = update;
+
+
+/***/ }),
+
+/***/ "./node_modules/random-js/lib/random.js":
+/*!**********************************************!*\
+  !*** ./node_modules/random-js/lib/random.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*jshint eqnull:true*/
+(function (root) {
+  "use strict";
+
+  var GLOBAL_KEY = "Random";
+
+  var imul = (typeof Math.imul !== "function" || Math.imul(0xffffffff, 5) !== -5 ?
+    function (a, b) {
+      var ah = (a >>> 16) & 0xffff;
+      var al = a & 0xffff;
+      var bh = (b >>> 16) & 0xffff;
+      var bl = b & 0xffff;
+      // the shift by 0 fixes the sign on the high part
+      // the final |0 converts the unsigned value into a signed value
+      return (al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0;
+    } :
+    Math.imul);
+
+  var stringRepeat = (typeof String.prototype.repeat === "function" && "x".repeat(3) === "xxx" ?
+    function (x, y) {
+      return x.repeat(y);
+    } : function (pattern, count) {
+      var result = "";
+      while (count > 0) {
+        if (count & 1) {
+          result += pattern;
+        }
+        count >>= 1;
+        pattern += pattern;
+      }
+      return result;
+    });
+
+  function Random(engine) {
+    if (!(this instanceof Random)) {
+      return new Random(engine);
+    }
+
+    if (engine == null) {
+      engine = Random.engines.nativeMath;
+    } else if (typeof engine !== "function") {
+      throw new TypeError("Expected engine to be a function, got " + typeof engine);
+    }
+    this.engine = engine;
+  }
+  var proto = Random.prototype;
+
+  Random.engines = {
+    nativeMath: function () {
+      return (Math.random() * 0x100000000) | 0;
+    },
+    mt19937: (function (Int32Array) {
+      // http://en.wikipedia.org/wiki/Mersenne_twister
+      function refreshData(data) {
+        var k = 0;
+        var tmp = 0;
+        for (;
+          (k | 0) < 227; k = (k + 1) | 0) {
+          tmp = (data[k] & 0x80000000) | (data[(k + 1) | 0] & 0x7fffffff);
+          data[k] = data[(k + 397) | 0] ^ (tmp >>> 1) ^ ((tmp & 0x1) ? 0x9908b0df : 0);
+        }
+
+        for (;
+          (k | 0) < 623; k = (k + 1) | 0) {
+          tmp = (data[k] & 0x80000000) | (data[(k + 1) | 0] & 0x7fffffff);
+          data[k] = data[(k - 227) | 0] ^ (tmp >>> 1) ^ ((tmp & 0x1) ? 0x9908b0df : 0);
+        }
+
+        tmp = (data[623] & 0x80000000) | (data[0] & 0x7fffffff);
+        data[623] = data[396] ^ (tmp >>> 1) ^ ((tmp & 0x1) ? 0x9908b0df : 0);
+      }
+
+      function temper(value) {
+        value ^= value >>> 11;
+        value ^= (value << 7) & 0x9d2c5680;
+        value ^= (value << 15) & 0xefc60000;
+        return value ^ (value >>> 18);
+      }
+
+      function seedWithArray(data, source) {
+        var i = 1;
+        var j = 0;
+        var sourceLength = source.length;
+        var k = Math.max(sourceLength, 624) | 0;
+        var previous = data[0] | 0;
+        for (;
+          (k | 0) > 0; --k) {
+          data[i] = previous = ((data[i] ^ imul((previous ^ (previous >>> 30)), 0x0019660d)) + (source[j] | 0) + (j | 0)) | 0;
+          i = (i + 1) | 0;
+          ++j;
+          if ((i | 0) > 623) {
+            data[0] = data[623];
+            i = 1;
+          }
+          if (j >= sourceLength) {
+            j = 0;
+          }
+        }
+        for (k = 623;
+          (k | 0) > 0; --k) {
+          data[i] = previous = ((data[i] ^ imul((previous ^ (previous >>> 30)), 0x5d588b65)) - i) | 0;
+          i = (i + 1) | 0;
+          if ((i | 0) > 623) {
+            data[0] = data[623];
+            i = 1;
+          }
+        }
+        data[0] = 0x80000000;
+      }
+
+      function mt19937() {
+        var data = new Int32Array(624);
+        var index = 0;
+        var uses = 0;
+
+        function next() {
+          if ((index | 0) >= 624) {
+            refreshData(data);
+            index = 0;
+          }
+
+          var value = data[index];
+          index = (index + 1) | 0;
+          uses += 1;
+          return temper(value) | 0;
+        }
+        next.getUseCount = function() {
+          return uses;
+        };
+        next.discard = function (count) {
+          uses += count;
+          if ((index | 0) >= 624) {
+            refreshData(data);
+            index = 0;
+          }
+          while ((count - index) > 624) {
+            count -= 624 - index;
+            refreshData(data);
+            index = 0;
+          }
+          index = (index + count) | 0;
+          return next;
+        };
+        next.seed = function (initial) {
+          var previous = 0;
+          data[0] = previous = initial | 0;
+
+          for (var i = 1; i < 624; i = (i + 1) | 0) {
+            data[i] = previous = (imul((previous ^ (previous >>> 30)), 0x6c078965) + i) | 0;
+          }
+          index = 624;
+          uses = 0;
+          return next;
+        };
+        next.seedWithArray = function (source) {
+          next.seed(0x012bd6aa);
+          seedWithArray(data, source);
+          return next;
+        };
+        next.autoSeed = function () {
+          return next.seedWithArray(Random.generateEntropyArray());
+        };
+        return next;
+      }
+
+      return mt19937;
+    }(typeof Int32Array === "function" ? Int32Array : Array)),
+    browserCrypto: (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function" && typeof Int32Array === "function") ? (function () {
+      var data = null;
+      var index = 128;
+
+      return function () {
+        if (index >= 128) {
+          if (data === null) {
+            data = new Int32Array(128);
+          }
+          crypto.getRandomValues(data);
+          index = 0;
+        }
+
+        return data[index++] | 0;
+      };
+    }()) : null
+  };
+
+  Random.generateEntropyArray = function () {
+    var array = [];
+    var engine = Random.engines.nativeMath;
+    for (var i = 0; i < 16; ++i) {
+      array[i] = engine() | 0;
+    }
+    array.push(new Date().getTime() | 0);
+    return array;
+  };
+
+  function returnValue(value) {
+    return function () {
+      return value;
+    };
+  }
+
+  // [-0x80000000, 0x7fffffff]
+  Random.int32 = function (engine) {
+    return engine() | 0;
+  };
+  proto.int32 = function () {
+    return Random.int32(this.engine);
+  };
+
+  // [0, 0xffffffff]
+  Random.uint32 = function (engine) {
+    return engine() >>> 0;
+  };
+  proto.uint32 = function () {
+    return Random.uint32(this.engine);
+  };
+
+  // [0, 0x1fffffffffffff]
+  Random.uint53 = function (engine) {
+    var high = engine() & 0x1fffff;
+    var low = engine() >>> 0;
+    return (high * 0x100000000) + low;
+  };
+  proto.uint53 = function () {
+    return Random.uint53(this.engine);
+  };
+
+  // [0, 0x20000000000000]
+  Random.uint53Full = function (engine) {
+    while (true) {
+      var high = engine() | 0;
+      if (high & 0x200000) {
+        if ((high & 0x3fffff) === 0x200000 && (engine() | 0) === 0) {
+          return 0x20000000000000;
+        }
+      } else {
+        var low = engine() >>> 0;
+        return ((high & 0x1fffff) * 0x100000000) + low;
+      }
+    }
+  };
+  proto.uint53Full = function () {
+    return Random.uint53Full(this.engine);
+  };
+
+  // [-0x20000000000000, 0x1fffffffffffff]
+  Random.int53 = function (engine) {
+    var high = engine() | 0;
+    var low = engine() >>> 0;
+    return ((high & 0x1fffff) * 0x100000000) + low + (high & 0x200000 ? -0x20000000000000 : 0);
+  };
+  proto.int53 = function () {
+    return Random.int53(this.engine);
+  };
+
+  // [-0x20000000000000, 0x20000000000000]
+  Random.int53Full = function (engine) {
+    while (true) {
+      var high = engine() | 0;
+      if (high & 0x400000) {
+        if ((high & 0x7fffff) === 0x400000 && (engine() | 0) === 0) {
+          return 0x20000000000000;
+        }
+      } else {
+        var low = engine() >>> 0;
+        return ((high & 0x1fffff) * 0x100000000) + low + (high & 0x200000 ? -0x20000000000000 : 0);
+      }
+    }
+  };
+  proto.int53Full = function () {
+    return Random.int53Full(this.engine);
+  };
+
+  function add(generate, addend) {
+    if (addend === 0) {
+      return generate;
+    } else {
+      return function (engine) {
+        return generate(engine) + addend;
+      };
+    }
+  }
+
+  Random.integer = (function () {
+    function isPowerOfTwoMinusOne(value) {
+      return ((value + 1) & value) === 0;
+    }
+
+    function bitmask(masking) {
+      return function (engine) {
+        return engine() & masking;
+      };
+    }
+
+    function downscaleToLoopCheckedRange(range) {
+      var extendedRange = range + 1;
+      var maximum = extendedRange * Math.floor(0x100000000 / extendedRange);
+      return function (engine) {
+        var value = 0;
+        do {
+          value = engine() >>> 0;
+        } while (value >= maximum);
+        return value % extendedRange;
+      };
+    }
+
+    function downscaleToRange(range) {
+      if (isPowerOfTwoMinusOne(range)) {
+        return bitmask(range);
+      } else {
+        return downscaleToLoopCheckedRange(range);
+      }
+    }
+
+    function isEvenlyDivisibleByMaxInt32(value) {
+      return (value | 0) === 0;
+    }
+
+    function upscaleWithHighMasking(masking) {
+      return function (engine) {
+        var high = engine() & masking;
+        var low = engine() >>> 0;
+        return (high * 0x100000000) + low;
+      };
+    }
+
+    function upscaleToLoopCheckedRange(extendedRange) {
+      var maximum = extendedRange * Math.floor(0x20000000000000 / extendedRange);
+      return function (engine) {
+        var ret = 0;
+        do {
+          var high = engine() & 0x1fffff;
+          var low = engine() >>> 0;
+          ret = (high * 0x100000000) + low;
+        } while (ret >= maximum);
+        return ret % extendedRange;
+      };
+    }
+
+    function upscaleWithinU53(range) {
+      var extendedRange = range + 1;
+      if (isEvenlyDivisibleByMaxInt32(extendedRange)) {
+        var highRange = ((extendedRange / 0x100000000) | 0) - 1;
+        if (isPowerOfTwoMinusOne(highRange)) {
+          return upscaleWithHighMasking(highRange);
+        }
+      }
+      return upscaleToLoopCheckedRange(extendedRange);
+    }
+
+    function upscaleWithinI53AndLoopCheck(min, max) {
+      return function (engine) {
+        var ret = 0;
+        do {
+          var high = engine() | 0;
+          var low = engine() >>> 0;
+          ret = ((high & 0x1fffff) * 0x100000000) + low + (high & 0x200000 ? -0x20000000000000 : 0);
+        } while (ret < min || ret > max);
+        return ret;
+      };
+    }
+
+    return function (min, max) {
+      min = Math.floor(min);
+      max = Math.floor(max);
+      if (min < -0x20000000000000 || !isFinite(min)) {
+        throw new RangeError("Expected min to be at least " + (-0x20000000000000));
+      } else if (max > 0x20000000000000 || !isFinite(max)) {
+        throw new RangeError("Expected max to be at most " + 0x20000000000000);
+      }
+
+      var range = max - min;
+      if (range <= 0 || !isFinite(range)) {
+        return returnValue(min);
+      } else if (range === 0xffffffff) {
+        if (min === 0) {
+          return Random.uint32;
+        } else {
+          return add(Random.int32, min + 0x80000000);
+        }
+      } else if (range < 0xffffffff) {
+        return add(downscaleToRange(range), min);
+      } else if (range === 0x1fffffffffffff) {
+        return add(Random.uint53, min);
+      } else if (range < 0x1fffffffffffff) {
+        return add(upscaleWithinU53(range), min);
+      } else if (max - 1 - min === 0x1fffffffffffff) {
+        return add(Random.uint53Full, min);
+      } else if (min === -0x20000000000000 && max === 0x20000000000000) {
+        return Random.int53Full;
+      } else if (min === -0x20000000000000 && max === 0x1fffffffffffff) {
+        return Random.int53;
+      } else if (min === -0x1fffffffffffff && max === 0x20000000000000) {
+        return add(Random.int53, 1);
+      } else if (max === 0x20000000000000) {
+        return add(upscaleWithinI53AndLoopCheck(min - 1, max - 1), 1);
+      } else {
+        return upscaleWithinI53AndLoopCheck(min, max);
+      }
+    };
+  }());
+  proto.integer = function (min, max) {
+    return Random.integer(min, max)(this.engine);
+  };
+
+  // [0, 1] (floating point)
+  Random.realZeroToOneInclusive = function (engine) {
+    return Random.uint53Full(engine) / 0x20000000000000;
+  };
+  proto.realZeroToOneInclusive = function () {
+    return Random.realZeroToOneInclusive(this.engine);
+  };
+
+  // [0, 1) (floating point)
+  Random.realZeroToOneExclusive = function (engine) {
+    return Random.uint53(engine) / 0x20000000000000;
+  };
+  proto.realZeroToOneExclusive = function () {
+    return Random.realZeroToOneExclusive(this.engine);
+  };
+
+  Random.real = (function () {
+    function multiply(generate, multiplier) {
+      if (multiplier === 1) {
+        return generate;
+      } else if (multiplier === 0) {
+        return function () {
+          return 0;
+        };
+      } else {
+        return function (engine) {
+          return generate(engine) * multiplier;
+        };
+      }
+    }
+
+    return function (left, right, inclusive) {
+      if (!isFinite(left)) {
+        throw new RangeError("Expected left to be a finite number");
+      } else if (!isFinite(right)) {
+        throw new RangeError("Expected right to be a finite number");
+      }
+      return add(
+        multiply(
+          inclusive ? Random.realZeroToOneInclusive : Random.realZeroToOneExclusive,
+          right - left),
+        left);
+    };
+  }());
+  proto.real = function (min, max, inclusive) {
+    return Random.real(min, max, inclusive)(this.engine);
+  };
+
+  Random.bool = (function () {
+    function isLeastBitTrue(engine) {
+      return (engine() & 1) === 1;
+    }
+
+    function lessThan(generate, value) {
+      return function (engine) {
+        return generate(engine) < value;
+      };
+    }
+
+    function probability(percentage) {
+      if (percentage <= 0) {
+        return returnValue(false);
+      } else if (percentage >= 1) {
+        return returnValue(true);
+      } else {
+        var scaled = percentage * 0x100000000;
+        if (scaled % 1 === 0) {
+          return lessThan(Random.int32, (scaled - 0x80000000) | 0);
+        } else {
+          return lessThan(Random.uint53, Math.round(percentage * 0x20000000000000));
+        }
+      }
+    }
+
+    return function (numerator, denominator) {
+      if (denominator == null) {
+        if (numerator == null) {
+          return isLeastBitTrue;
+        }
+        return probability(numerator);
+      } else {
+        if (numerator <= 0) {
+          return returnValue(false);
+        } else if (numerator >= denominator) {
+          return returnValue(true);
+        }
+        return lessThan(Random.integer(0, denominator - 1), numerator);
+      }
+    };
+  }());
+  proto.bool = function (numerator, denominator) {
+    return Random.bool(numerator, denominator)(this.engine);
+  };
+
+  function toInteger(value) {
+    var number = +value;
+    if (number < 0) {
+      return Math.ceil(number);
+    } else {
+      return Math.floor(number);
+    }
+  }
+
+  function convertSliceArgument(value, length) {
+    if (value < 0) {
+      return Math.max(value + length, 0);
+    } else {
+      return Math.min(value, length);
+    }
+  }
+  Random.pick = function (engine, array, begin, end) {
+    var length = array.length;
+    var start = begin == null ? 0 : convertSliceArgument(toInteger(begin), length);
+    var finish = end === void 0 ? length : convertSliceArgument(toInteger(end), length);
+    if (start >= finish) {
+      return void 0;
+    }
+    var distribution = Random.integer(start, finish - 1);
+    return array[distribution(engine)];
+  };
+  proto.pick = function (array, begin, end) {
+    return Random.pick(this.engine, array, begin, end);
+  };
+
+  function returnUndefined() {
+    return void 0;
+  }
+  var slice = Array.prototype.slice;
+  Random.picker = function (array, begin, end) {
+    var clone = slice.call(array, begin, end);
+    if (!clone.length) {
+      return returnUndefined;
+    }
+    var distribution = Random.integer(0, clone.length - 1);
+    return function (engine) {
+      return clone[distribution(engine)];
+    };
+  };
+
+  Random.shuffle = function (engine, array, downTo) {
+    var length = array.length;
+    if (length) {
+      if (downTo == null) {
+        downTo = 0;
+      }
+      for (var i = (length - 1) >>> 0; i > downTo; --i) {
+        var distribution = Random.integer(0, i);
+        var j = distribution(engine);
+        if (i !== j) {
+          var tmp = array[i];
+          array[i] = array[j];
+          array[j] = tmp;
+        }
+      }
+    }
+    return array;
+  };
+  proto.shuffle = function (array) {
+    return Random.shuffle(this.engine, array);
+  };
+
+  Random.sample = function (engine, population, sampleSize) {
+    if (sampleSize < 0 || sampleSize > population.length || !isFinite(sampleSize)) {
+      throw new RangeError("Expected sampleSize to be within 0 and the length of the population");
+    }
+
+    if (sampleSize === 0) {
+      return [];
+    }
+
+    var clone = slice.call(population);
+    var length = clone.length;
+    if (length === sampleSize) {
+      return Random.shuffle(engine, clone, 0);
+    }
+    var tailLength = length - sampleSize;
+    return Random.shuffle(engine, clone, tailLength - 1).slice(tailLength);
+  };
+  proto.sample = function (population, sampleSize) {
+    return Random.sample(this.engine, population, sampleSize);
+  };
+
+  Random.die = function (sideCount) {
+    return Random.integer(1, sideCount);
+  };
+  proto.die = function (sideCount) {
+    return Random.die(sideCount)(this.engine);
+  };
+
+  Random.dice = function (sideCount, dieCount) {
+    var distribution = Random.die(sideCount);
+    return function (engine) {
+      var result = [];
+      result.length = dieCount;
+      for (var i = 0; i < dieCount; ++i) {
+        result[i] = distribution(engine);
+      }
+      return result;
+    };
+  };
+  proto.dice = function (sideCount, dieCount) {
+    return Random.dice(sideCount, dieCount)(this.engine);
+  };
+
+  // http://en.wikipedia.org/wiki/Universally_unique_identifier
+  Random.uuid4 = (function () {
+    function zeroPad(string, zeroCount) {
+      return stringRepeat("0", zeroCount - string.length) + string;
+    }
+
+    return function (engine) {
+      var a = engine() >>> 0;
+      var b = engine() | 0;
+      var c = engine() | 0;
+      var d = engine() >>> 0;
+
+      return (
+        zeroPad(a.toString(16), 8) +
+        "-" +
+        zeroPad((b & 0xffff).toString(16), 4) +
+        "-" +
+        zeroPad((((b >> 4) & 0x0fff) | 0x4000).toString(16), 4) +
+        "-" +
+        zeroPad(((c & 0x3fff) | 0x8000).toString(16), 4) +
+        "-" +
+        zeroPad(((c >> 4) & 0xffff).toString(16), 4) +
+        zeroPad(d.toString(16), 8));
+    };
+  }());
+  proto.uuid4 = function () {
+    return Random.uuid4(this.engine);
+  };
+
+  Random.string = (function () {
+    // has 2**x chars, for faster uniform distribution
+    var DEFAULT_STRING_POOL = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
+
+    return function (pool) {
+      if (pool == null) {
+        pool = DEFAULT_STRING_POOL;
+      }
+
+      var length = pool.length;
+      if (!length) {
+        throw new Error("Expected pool not to be an empty string");
+      }
+
+      var distribution = Random.integer(0, length - 1);
+      return function (engine, length) {
+        var result = "";
+        for (var i = 0; i < length; ++i) {
+          var j = distribution(engine);
+          result += pool.charAt(j);
+        }
+        return result;
+      };
+    };
+  }());
+  proto.string = function (length, pool) {
+    return Random.string(pool)(this.engine, length);
+  };
+
+  Random.hex = (function () {
+    var LOWER_HEX_POOL = "0123456789abcdef";
+    var lowerHex = Random.string(LOWER_HEX_POOL);
+    var upperHex = Random.string(LOWER_HEX_POOL.toUpperCase());
+
+    return function (upper) {
+      if (upper) {
+        return upperHex;
+      } else {
+        return lowerHex;
+      }
+    };
+  }());
+  proto.hex = function (length, upper) {
+    return Random.hex(upper)(this.engine, length);
+  };
+
+  Random.date = function (start, end) {
+    if (!(start instanceof Date)) {
+      throw new TypeError("Expected start to be a Date, got " + typeof start);
+    } else if (!(end instanceof Date)) {
+      throw new TypeError("Expected end to be a Date, got " + typeof end);
+    }
+    var distribution = Random.integer(start.getTime(), end.getTime());
+    return function (engine) {
+      return new Date(distribution(engine));
+    };
+  };
+  proto.date = function (start, end) {
+    return Random.date(start, end)(this.engine);
+  };
+
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+      return Random;
+    }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+}(this));
+
+/***/ }),
+
+/***/ "./src/App.js":
+/*!********************!*\
+  !*** ./src/App.js ***!
+  \********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
+/* harmony import */ var random_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! random-js */ "./node_modules/random-js/lib/random.js");
+/* harmony import */ var random_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(random_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _custom_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./custom.js */ "./src/custom.js");
+
+
+
+
+
+/**
+ * Class that acts as our primary application.
+ */
+class App {
+
+    /**
+     * Constructs the application by setting class properties, and properly binding class methods.
+     * 
+     * @param {object} config The application configuration.
+     * @param {array} users The list of users among which the tournament will occur.
+     * @param {HTMLElement} div The HTML element to attach the application too.
+     */
+    constructor(config, users, div) {
+        console.log("Constructing application.");
+
+        //Setup dependencues
+        console.log("Setting up dependencies.");
+        this._config = config;
+        this._div = div;
+        this._wrapper = this._div.querySelector(".wrapper");
+        this._random_engine = random_js__WEBPACK_IMPORTED_MODULE_0___default.a.engines.mt19937();
+        //Seed the generator with the config value so that everything is repeatable.
+        console.log(`Seed: ${this._config.seed}`);
+        this._random_engine.seed(this._config.seed);
+        this._random_generator = new random_js__WEBPACK_IMPORTED_MODULE_0___default.a(this._random_engine);
+        console.log("Dependencies setup complete.");
+
+        //Setup round user data.
+        console.log("Setting up data.");
+        this._round = [
+            []
+        ];
+        //Randomize the order of the users.
+        while (users.length > 0) {
+            const random_user_index = this._random_generator.integer(0, users.length - 1);
+            this._round[0].push(users[random_user_index]);
+            users.splice(random_user_index, 1);
+        }
+        console.log("Users: ");
+        console.table(this._round[0]);
+        this._original_messages = this._config.messages;
+        console.log("Messages: ");
+        console.table(this._config.messages);
+        this._messages = [...this._original_messages];
+        console.log("Data setup complete.");
+
+        //Set method context bindings.
+        console.log("Setting up method context bindings.");
+        this.start = this.start.bind(this);
+        this.round_0 = this.round_0.bind(this);
+        this.show_participants = this.show_participants.bind(this);
+        this.round_x = this.round_x.bind(this);
+        this.round_begin_message = this.round_begin_message.bind(this);
+        this.begin_round_matches = this.begin_round_matches.bind(this);
+        this.participant_match = this.participant_match.bind(this);
+        this.default_participant_match = this.default_participant_match.bind(this);
+        this.determine_winner = this.determine_winner.bind(this);
+        this.finish_round = this.finish_round.bind(this);
+        this.round_end_message = this.round_end_message.bind(this);
+        this.show_losing_participant = this.show_losing_participant.bind(this);
+        this.end = this.end.bind(this);
+        this.pad_participants_list = this.pad_participants_list.bind(this);
+        this.unpad_participants_list = this.unpad_participants_list.bind(this);
+        this.scroll_element_into_view = this.scroll_element_into_view.bind(this);
+        this.create_group_div = this.create_group_div.bind(this);
+        this.create_participant_div = this.create_participant_div.bind(this);
+        console.log("Method context bindings setup complete.");
+    }
+
+    /**
+     * Start running the application.
+     */
+    async start() {
+        console.log("Starting the tournament!!!");
+        this.round_0();
+    }
+
+    /**
+     * Setup round 0 (the round before the tournament starts).
+     */
+    async round_0() {
+        console.log("Starting Round 0");
+
+        console.log("Padding participants list.");
+        this.pad_participants_list(0);
+        console.log("Padded participants list.");
+
+        //Setup the initial user group.
+        console.log("Creating initial participants group.");
+        const group_div = this.create_group_div();
+        group_div.classList.remove("hide");
+        group_div.classList.remove("right");
+        this._wrapper.insertAdjacentElement("beforeend", group_div);
+        this._round[0].forEach(user => {
+            console.log(`Adding participant: ${user}`);
+            group_div.insertAdjacentElement("beforeend", this.create_participant_div(user));
+            console.log("Added participant.");
+        });
+        console.log("Created initial participants group.");
+
+        Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+            this.show_participants(group_div);
+        }, 50);
+    }
+
+    /**
+     * Shows each participant in the group one by one.
+     * 
+     * @param {HTMLElement} group_div The round group element.
+     */
+    show_participants(group_div) {
+        console.log("Showing initial participants group list.");
+        scrollTo(0, 0);
+
+        //Reveal each user in order one by one.
+        let participant_div_index = 0;
+        const participant_div_list = group_div.querySelectorAll(".participant.hide");
+        participant_div_list.forEach(participant_div => {
+            const this_obj = this;
+            participant_div.addEventListener("transitionend", function hide_fn() {
+                this.removeEventListener("transitionend", hide_fn);
+
+                participant_div_index++;
+                if (participant_div_index >= participant_div_list.length) {
+                    //All users in the initial group have been revealed, start round 1.
+                    console.log("All participants visible.");
+                    this_obj.round_x(1);
+                    return;
+                }
+
+                console.log(`Showing participant, (Index: ${participant_div_index})`);
+                this_obj.scroll_element_into_view(participant_div_list[participant_div_index]);
+                participant_div_list[participant_div_index].classList.remove("hide");
+            });
+        });
+        participant_div_list[participant_div_index].classList.remove("hide");
+    }
+
+    /**
+     * Starts the round of the given index.
+     * 
+     * @param {number} round_index The round number.
+     */
+    async round_x(round_index) {
+        console.log(`Starting Round ${round_index}.`);
+        await this.round_begin_message(round_index);
+
+        //Get the initial participant data and group element.
+        console.log(`Retrieving initial participants list from Round ${round_index - 1}.`);
+        const initial_group_div = this._wrapper.querySelector(".group");
+        const initial_participants = this._round[round_index - 1];
+        console.log(`Retrieved initial participants list from Round ${round_index - 1}.`);
+
+        //Setup the group for the new round.
+        console.log(`Setting up for winners of Round ${round_index}.`);
+        this._round[round_index] = [];
+        const winner_group_div = this.create_group_div();
+        this._wrapper.insertAdjacentElement("beforeend", winner_group_div);
+        //This new round will have half of the remaining participants, so setup empty paritipant elements for the winners.
+        for (let participant_index = 0; participant_index < (initial_participants.length / 2); participant_index++) {
+            console.log(`Setting up block for potential winner. (Index: ${participant_index})`);
+            const participant_div = this.create_participant_div("?");
+            winner_group_div.insertAdjacentElement("beforeend", participant_div);
+            console.log(`Setup block for potential winner complete.`);
+        }
+        winner_group_div.classList.remove("hide");
+        console.log(`Setup for winners of Round ${round_index} complete.`);
+
+        Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+            this.begin_round_matches(round_index, initial_group_div, winner_group_div, initial_participants);
+        }, 50);
+    }
+
+    /**
+     * Show a message stating the round is about to begin.
+     * 
+     * @param {number} round_index The round number.
+     */
+    round_begin_message(round_index) {
+        return new Promise((resolve, _) => {
+            console.log(`Show a message stating Round ${round_index} is gonna begin.`);
+
+            const modal_wrapper = this._div.querySelector(".modal-wrapper");
+            const modal_header = modal_wrapper.querySelector(".modal .header");
+            const modal_text = modal_wrapper.querySelector(".modal .text");
+
+            //Create a modal title stating the beginning of the round.
+            const header = document.createElement("h2");
+            header.classList.add("title");
+            header.innerText = `Round ${round_index} Begins!`;
+            modal_header.insertAdjacentElement("beforeend", header);
+
+            //Set a modal text message wishing luck to the participants.
+            modal_text.innerText = "Best of luck participants!";
+
+            modal_wrapper.classList.remove("hide");
+
+            Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                modal_wrapper.classList.add("hide");
+                header.remove();
+                modal_text.innerText = "";
+                console.log("Begin round message is shown. We can now start the round.");
+                resolve(true);
+            }, 2500);
+        });
+    }
+
+    /**
+     * Start the matches in the round.
+     * 
+     * @param {HTMLElement} initial_group_div The initial participant round group element.
+     * @param {HTMLElement} winner_group_div The winner round group element.
+     */
+    async begin_round_matches(round_index, initial_group_div, winner_group_div, initial_participants) {
+        console.log(`Starting matches for Round ${round_index}.`);
+
+        scrollTo(0, 0);
+
+        //Go through each contesting pair and select a winner for that round.
+        console.log("Retrieving initial particpant and final participant div lists.");
+        const initial_participant_div_list = initial_group_div.querySelectorAll(".participant");
+        const winner_participant_div_list = winner_group_div.querySelectorAll(".participant");
+        let participant_index = 0;
+        let winner_participant_div_index = 0;
+        winner_participant_div_list.forEach(winner_participant_div => {
+            const this_obj = this;
+            winner_participant_div.addEventListener("transitionend", async function show_fn() {
+                this.removeEventListener("transitionend", show_fn);
+
+                initial_participant_div_list[participant_index].classList.add("active");
+                initial_participant_div_list[participant_index + 1].classList.add("active");
+                winner_participant_div_list[winner_participant_div_index].classList.add("unknown");
+                this_obj.scroll_element_into_view(winner_participant_div_list[winner_participant_div_index]);
+
+                if (initial_participants[participant_index + 1] === "---") {
+                    //If the second participant is a dummy one, just default to the first participant as a winner.
+                    console.log("One of the participants is a dummy. Selecting the only actual participant as the default winner.");
+                    this_obj.default_participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index);
+                    return;
+                }
+
+                console.log("Start the match between the two participants.");
+                await this_obj.participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index);
+
+                participant_index += 2;
+                if (participant_index >= initial_participants.length) {
+                    //Clean up the current round.
+                    console.log(`All matches in Round ${round_index} are complete.`);
+                    this_obj.finish_round(round_index);
+                    return;
+                }
+
+                winner_participant_div_index++;
+                console.log(`Showing the next participant div. (Index: ${winner_participant_div_index})`);
+                winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
+            });
+        });
+        console.log(`Showing the participant div. (Index: ${winner_participant_div_index})`);
+        winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
+    }
+
+    /**
+     * Starts a match between two participants.
+     * 
+     * @param {number} round_index The round number.
+     * @param {HTMLElement[]} winner_participant_div_list The winner participant elements list.
+     * @param {number} winner_participant_div_index The current winner participant elements list index.
+     * @param {HTMLElement[]} initial_participant_div_list The initial participant elements list.
+     * @param {number} initial_participants The current initial participant elements list index.
+     * @param {number} participant_index The current participant index.
+     */
+    participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index) {
+        return new Promise((resolve, _) => {
+            console.log(`Starting participant match in Round ${round_index}. (Participant index: ${participant_index})`);
+
+            //Setup a name switcher that continuously switches between showing each participant name in the winner participant div.
+            let current_name_index_offset = 0;
+            console.log("Setting up a name switcher.");
+            const name_switch_interval_handle = Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestInterval"])(_ => {
+                winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + current_name_index_offset];
+                current_name_index_offset = (current_name_index_offset + 1) % 2;
+            }, 100);
+
+            Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                //Determine the winner.
+                console.log("Get a randomly selected winner.");
+                this.determine_winner(initial_participants[participant_index], initial_participants[participant_index + 1]).then(random_index_offset => {
+                    Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                        console.log(`Show the winner name in the winner participant div. (Participant index offset: ${random_index_offset})`);
+                        //Stop name switching and set the name of the winner in the winner participant div.
+                        Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["clearRequestInterval"])(name_switch_interval_handle);
+                        winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + random_index_offset];
+                        this._round[round_index].push(initial_participants[participant_index + random_index_offset]);
+
+                        winner_participant_div_list[winner_participant_div_index].classList.add("winner");
+                        winner_participant_div_list[winner_participant_div_index].classList.remove("unknown");
+
+                        Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                            winner_participant_div_list[winner_participant_div_index].classList.remove("winner");
+                            initial_participant_div_list[participant_index].classList.remove("active");
+                            initial_participant_div_list[participant_index + 1].classList.remove("active");
+
+                            console.log(`Match is complete. The winner is: ${winner_participant_div_list[winner_participant_div_index].innerText}`);
+                            resolve(true);
+                        }, 500);
+                    }, 750);
+                });
+            }, 750);
+        });
+    }
+
+    /**
+     * Starts a match with a default participant winner.
+     * 
+     * @param {number} round_index The round number.
+     * @param {HTMLElement[]} winner_participant_div_list The winner participant elements list.
+     * @param {number} winner_participant_div_index The current winner participant elements list index.
+     * @param {HTMLElement[]} initial_participant_div_list The initial participant elements list.
+     * @param {number} initial_participants The current initial participant elements list index.
+     * @param {number} participant_index The current participant index.
+     */
+    async default_participant_match(round_index, winner_participant_div_list, winner_participant_div_index, initial_participant_div_list, initial_participants, participant_index) {
+        console.log(`Only one actual participant in the list. Selecting that participant as the winner by default. (Index: ${participant_index})`);
+
+        //Set the participant as the default winner.
+        winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index];
+        this._round[round_index].push(initial_participants[participant_index]);
+
+        winner_participant_div_list[winner_participant_div_index].classList.add("winner");
+        winner_participant_div_list[winner_participant_div_index].classList.remove("unknown");
+
+        Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+            winner_participant_div_list[winner_participant_div_index].classList.remove("winner");
+            initial_participant_div_list[participant_index].classList.remove("active");
+            initial_participant_div_list[participant_index + 1].classList.remove("active");
+
+            //Clean up the current round.
+            console.log(`Round ${round_index} is complete.`);
+            this.finish_round(round_index);
+        }, 1000);
+    }
+
+    /**
+     * Selects a random participant as the winner, while showing a modal box stating that a winner is being selected.
+     * 
+     * @param {string} name_1 The name of the first participant.
+     * @param {string} name_2 The name of the second participant.
+     * 
+     * @return A promise to return the selected winner.
+     */
+    determine_winner(name_1, name_2) {
+        return new Promise((resolve, _) => {
+            console.log(`Determine winner between: ${name_1} & ${name_2}`);
+
+            const modal_wrapper = this._div.querySelector(".modal-wrapper");
+            const modal_header = modal_wrapper.querySelector(".modal .header");
+            const modal_text = modal_wrapper.querySelector(".modal .text");
+
+            //Create two modal titles, one that says the fight is between which participants, one that will announce the winning participant.
+            console.log("Showing a modal stating that the winner is being selected and the match is between which participants.");
+            const header_deciding = document.createElement("h2");
+            header_deciding.classList.add("title");
+            const header_decided = document.createElement("h2");
+            header_decided.classList.add("title");
+            header_decided.classList.add("hide");
+
+            header_deciding.innerText = `${name_1} VS ${name_2}`;
+            modal_header.insertAdjacentElement("beforeend", header_deciding);
+            modal_header.insertAdjacentElement("beforeend", header_decided);
+
+            let dots_count = 1;
+            //Set a modal text message stating the winner is being selected.
+            modal_text.innerText = "Selecting Winner.";
+
+            //Have a dot style loader to show that the app is working to select a winner.
+            const dot_loading_handle = Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestInterval"])(_ => {
+                dots_count = (dots_count % 4) + 1;
+                //Update the modal text message.
+                modal_text.innerText = `Selecting Winner${new Array(dots_count).join(".")}`;
+            }, 300);
+
+            Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                //Stop the loader, select a participant at random, and announce the winner.
+                Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["clearRequestInterval"])(dot_loading_handle);
+                modal_text.innerText = "Winner Selected.";
+
+                //Select the winner at random.
+                console.log("Selecting a random winner.");
+                const random_index_offset = this._random_generator.integer(0, 1);
+                let name_winner = name_2;
+                let name_loser = name_1
+                if (random_index_offset % 2 === 0) {
+                    name_winner = name_1;
+                    name_loser = name_2;
+                }
+                console.log(`Selected winner: ${name_winner}`);
+                console.log(`Selected loser: ${name_loser}`);
+                header_decided.innerText = `${name_winner} is the winner!`;
+
+                const this_obj = this;
+                header_decided.addEventListener("transitionend", function move_fn() {
+                    header_decided.removeEventListener("transitionend", move_fn);
+
+                    Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                        //Set a random winner-loser message and the title to the name of the winner.
+                        if (this_obj._messages.length === 0) {
+                            console.log("Ran out of winner-loser messages. Refilling the list.");
+                            this_obj._message = [...this_obj._original_messages];
+                        }
+                        const random_message = this_obj._random_generator.integer(0, this_obj._messages.length - 1);
+                        console.log("Showing random winner-loser message and removing it from the messages list.");
+                        modal_text.innerHTML = this_obj._messages.splice(random_message, 1)[0].replace(/\#winner/g, name_winner).replace(/\#loser/g, name_loser);
+
+                        Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                            //Hide the modal and show the return the selected winner.
+                            modal_wrapper.classList.add("hide");
+                            modal_header.classList.remove("next");
+                            header_deciding.remove();
+                            header_decided.remove();
+                            modal_text.innerText = "";
+
+                            console.log(`Returning the selected winner. (Index offset: ${random_index_offset})`);
+                            resolve(random_index_offset);
+                        }, 2500);
+                    }, 500);
+                });
+
+                modal_header.classList.add("next");
+                header_deciding.classList.add("hide");
+                header_decided.classList.remove("hide");
+            }, 3000);
+
+            modal_wrapper.classList.remove("hide");
+        });
+    }
+
+    /**
+     * Cleans up the current round.
+     * 
+     * @param {number} round_index The round number.
+     */
+    async finish_round(round_index) {
+        console.log(`Round ${round_index} is complete.`);
+
+        this.unpad_participants_list(round_index - 1);
+
+        if (this._round[round_index].length <= 1) {
+            //If only one participant remained after the completion of the current round, end the application and announce the winner.
+            console.log("This was the final round.");
+            this.end(this._round[round_index][0]);
+            return;
+        }
+
+        await this.round_end_message(round_index);
+
+        const group_div_list = this._wrapper.querySelectorAll(".group");
+
+        group_div_list[0].addEventListener("transitionend", function hide_fn() {
+            //When the first group is hidden, delete it and then push the second group to the left.
+            group_div_list[0].removeEventListener("transitionend", hide_fn);
+
+            console.log("Initial participants group is hidden. Delete it.");
+            group_div_list[0].remove();
+            Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                console.log("Push the results participants group to the left, making it the new initial participants div.");
+                group_div_list[1].classList.remove("right");
+            }, 50);
+        });
+
+        const this_obj = this;
+
+        group_div_list[1].addEventListener("transitionend", function move_fn() {
+            //When the second group has been pushed to the left, we can start the next round.
+            group_div_list[1].removeEventListener("transitionend", move_fn);
+
+            console.log("Pushed the results participants group to the left.");
+            const old_participant_size = this_obj._round[round_index].length;
+            console.log("Padding the new participants list.");
+            this_obj.pad_participants_list(round_index);
+            const new_participant_size = this_obj._round[round_index].length;
+            //If a dummy participant was added, then we should add a participant div for it in the group.
+            if (new_participant_size > old_participant_size) {
+                console.log("Participants list was padded. Add the dummy participant(s) to the group participants list.");
+                for (let extra_participant_index = old_participant_size; extra_participant_index < new_participant_size; extra_participant_index++) {
+                    const participant_div = this_obj.create_participant_div(this_obj._round[round_index][extra_participant_index]);
+                    participant_div.classList.remove("hide");
+                    group_div_list[1].insertAdjacentElement("beforeend", participant_div);
+                }
+            }
+
+            Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                //Start the next round.
+                console.log("Start the next round.");
+                this_obj.round_x(round_index + 1);
+            }, 1000);
+        });
+
+        //Hide the old group.
+        console.log("Hide the initial participants group.");
+        group_div_list[0].classList.add("hide");
+    }
+
+    /**
+     * Show a message stating the round has ended, and noting the lost participants.
+     * 
+     * @param {number} round_index The round number.
+     */
+    round_end_message(round_index) {
+        return new Promise((resolve, _) => {
+            console.log(`Show a message stating Round ${round_index} has ended.`);
+
+            const modal_wrapper = this._div.querySelector(".modal-wrapper");
+            const modal_header = modal_wrapper.querySelector(".modal .header");
+            const modal_text = modal_wrapper.querySelector(".modal .text");
+            const modal_text_2 = modal_wrapper.querySelector(".modal .name");
+
+            //Create a modal title stating the beginning of the round.
+            const header = document.createElement("h2");
+            header.classList.add("title");
+            header.innerText = `Round ${round_index} Ends!`;
+            modal_header.insertAdjacentElement("beforeend", header);
+
+            //Set a modal text message wishing luck to the participants.
+            modal_text.innerText = "Casualties";
+
+            const this_obj = this;
+            modal_wrapper.addEventListener("transitionend", async function show_fn() {
+                modal_wrapper.removeEventListener("transitionend", show_fn);
+
+                //Modal is visible, start scrolling through the casualties.
+                const old_participants = this_obj._round[round_index - 1];
+                const new_participants = this_obj._round[round_index];
+
+                for (let participant_index = 0; participant_index < old_participants.length; participant_index++) {
+                    if (new_participants.indexOf(old_participants[participant_index]) == -1) {
+                        await this_obj.show_losing_participant(modal_text_2, old_participants[participant_index]);
+                    }
+                }
+
+                Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                    //Hide the message and go back.
+                    console.log("Hiding modal box.");
+                    modal_wrapper.classList.add("hide");
+                    header.remove();
+                    modal_text.innerText = "";
+                    console.log("Begin round message is shown. We can now start the round.");
+                    resolve(true);
+                }, 500);
+            });
+
+            modal_wrapper.classList.remove("hide");
+        });
+    }
+
+    /**
+     * Shows the and hides the given name in the given modal text div,
+     * 
+     * @param {HTMLElement} modal_text_2 The div to show the name in.
+     * @param {HTMLElement} name The name to show.
+     */
+    show_losing_participant(modal_text_2, name) {
+        return new Promise((resolve, _) => {
+            modal_text_2.innerText = name;
+
+            modal_text_2.addEventListener("transitionend", function show_fn() {
+                modal_text_2.removeEventListener("transitionend", show_fn);
+
+                modal_text_2.addEventListener("transitionend", function hide_fn() {
+                    modal_text_2.removeEventListener("transitionend", hide_fn);
+
+                    //Done showing the name. Go back.
+                    console.log("Losing participant name shown");
+                    resolve(true);
+                });
+
+                Object(_custom_js__WEBPACK_IMPORTED_MODULE_1__["requestTimeout"])(_ => {
+                    //Hide the name,
+                    console.log("Hide the losing participant name.");
+                    modal_text_2.classList.add("hide");
+                }, 500);
+            });
+
+            //Show the name.
+            console.log(`Show the losing participant name. (Name: ${name})`);
+            modal_text_2.classList.remove("hide");
+        });
+    }
+
+    /**
+     * End the application with a modal message stating the winner.
+     * 
+     * @param {string} name The name of the winner.
+     */
+    async end(name) {
+        console.log(`Tournament complete! We have a winner: ${name}`);
+
+        console.log("Announce the winner in the modal.");
+        const modal_wrapper = this._div.querySelector(".modal-wrapper");
+        const modal_header = modal_wrapper.querySelector(".modal .header");
+        const modal_text = modal_wrapper.querySelector(".modal .text");
+
+        //Create a modal title announcing the winner
+        const header = document.createElement("h2");
+        header.classList.add("title");
+        header.innerText = `${name} IS THE WINNER!!!`;
+        modal_header.insertAdjacentElement("beforeend", header);
+
+        //Set a modal text message congratulating the winner.
+        modal_text.innerText = "CONGRATULATIONS!";
+
+        this._wrapper.classList.add("hide");
+        modal_wrapper.classList.remove("hide");
+
+        console.log("The tournament ends here.");
+    }
+
+    /**
+     * Add a dummy participant if odd number of participants are present.
+     * 
+     * @param {number} round_index The round number.
+     */
+    pad_participants_list(round_index) {
+        if (this._round[round_index].length % 2 === 1) {
+            console.log(`Odd number of participants in Round ${round_index}. Pad the list with a dummy participant.`);
+            this._round[round_index].push("---");
+            console.log("Padded participants list.");
+        }
+    }
+
+    /**
+     * Add a dummy participant if odd number of participants are present.
+     * 
+     * @param {number} round_index The round number.
+     */
+    unpad_participants_list(round_index) {
+        const total_participants = this._round[round_index].length;
+        if (this._round[round_index][total_participants - 1] === "---") {
+            console.log(`Removing dummy participant in participants list.`);
+            this._round[round_index].splice(total_participants - 1, 1);
+            console.log(`Removed dummy participant in participants list.`);
+        }
+    }
+
+    /**
+     * Smooth scrolls the given element into view.
+     * 
+     * @param {HTMLElement} el The element to scroll into view.
+     */
+    async scroll_element_into_view(el) {
+        console.log("Scrolling element into view: ");
+        console.log(el);
+        el.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "end"
+        });
+        console.log("Scrolled element into view.");
+    }
+
+    /**
+     * Creates a group div element,
+     * 
+     * @return The created element.
+     */
+    create_group_div() {
+        console.log("Creating new round group div element.");
+        const group_div = document.createElement("div");
+        group_div.classList.add("group");
+        group_div.classList.add("right");
+        group_div.classList.add("hide");
+        console.log("Created new round group div element.");
+        return group_div;
+    }
+
+    /**
+     * Creates a participant div element with the given participant name.
+     * 
+     * @param {string} name The participant name.
+     * 
+     * @return The created element.
+     */
+    create_participant_div(name) {
+        console.log(`Creating new round participant div element for participant: ${name}`);
+        const participant_div = document.createElement("div");
+        participant_div.classList.add("participant");
+        participant_div.classList.add("hide");
+        participant_div.innerText = name;
+        console.log("Created new round participant div element.");
+        return participant_div;
+    }
+}
+
+/***/ }),
+
+/***/ "./src/custom.js":
+/*!***********************!*\
+  !*** ./src/custom.js ***!
+  \***********************/
+/*! exports provided: requestAnimFrame, requestTimeout, clearRequestTimeout, requestInterval, clearRequestInterval */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestAnimFrame", function() { return requestAnimFrame; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestTimeout", function() { return requestTimeout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearRequestTimeout", function() { return clearRequestTimeout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestInterval", function() { return requestInterval; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearRequestInterval", function() { return clearRequestInterval; });
+
+
+// requestAnimationFrame() shim by Paul Irish
+// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+const requestAnimFrame = (function() {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function( /* function */ callback, /* DOMElement */ element) {
+            window.setTimeout(callback, 1000 / 60);
+        };
+})();
+
+/**
+ * Behaves the same as setTimeout except uses requestAnimationFrame() where possible for better performance
+ * @param {function} fn The callback function
+ * @param {int} delay The delay in milliseconds
+ */
+
+const requestTimeout = function(fn, delay) {
+    if (!window.requestAnimationFrame &&
+        !window.webkitRequestAnimationFrame &&
+        !(window.mozRequestAnimationFrame && window.mozCancelRequestAnimationFrame) && // Firefox 5 ships without cancel support
+        !window.oRequestAnimationFrame &&
+        !window.msRequestAnimationFrame)
+        return window.setTimeout(fn, delay);
+
+    var start = performance.now(),
+        handle = new Object();
+
+    function loop() {
+        var current = performance.now(),
+            delta = current - start;
+
+        delta >= delay ? fn.call() : handle.value = requestAnimFrame(loop);
+    };
+
+    handle.value = requestAnimFrame(loop);
+    return handle;
+};
+
+/**
+ * Behaves the same as clearTimeout except uses cancelRequestAnimationFrame() where possible for better performance
+ * @param {int|object} fn The callback function
+ */
+const clearRequestTimeout = function(handle) {
+    window.cancelAnimationFrame ? window.cancelAnimationFrame(handle.value) :
+        window.webkitCancelAnimationFrame ? window.webkitCancelAnimationFrame(handle.value) :
+        window.webkitCancelRequestAnimationFrame ? window.webkitCancelRequestAnimationFrame(handle.value) : /* Support for legacy API */
+        window.mozCancelRequestAnimationFrame ? window.mozCancelRequestAnimationFrame(handle.value) :
+        window.oCancelRequestAnimationFrame ? window.oCancelRequestAnimationFrame(handle.value) :
+        window.msCancelRequestAnimationFrame ? window.msCancelRequestAnimationFrame(handle.value) :
+        clearTimeout(handle);
+};
+
+/**
+ * Behaves the same as setInterval except uses requestAnimationFrame() where possible for better performance
+ * @param {function} fn The callback function
+ * @param {int} delay The delay in milliseconds
+ */
+const requestInterval = function(fn, delay) {
+    if (!window.requestAnimationFrame &&
+        !window.webkitRequestAnimationFrame &&
+        !(window.mozRequestAnimationFrame && window.mozCancelRequestAnimationFrame) && // Firefox 5 ships without cancel support
+        !window.oRequestAnimationFrame &&
+        !window.msRequestAnimationFrame)
+        return window.setInterval(fn, delay);
+
+    var start = performance.now(),
+        handle = new Object();
+
+    function loop() {
+        var current = performance.now(),
+            delta = current - start;
+
+        if (delta >= delay) {
+            fn.call();
+            start = performance.now();
+        }
+
+        handle.value = requestAnimFrame(loop);
+    };
+
+    handle.value = requestAnimFrame(loop);
+    return handle;
+}
+
+/**
+ * Behaves the same as clearInterval except uses cancelRequestAnimationFrame() where possible for better performance
+ * @param {int|object} fn The callback function
+ */
+const clearRequestInterval = function(handle) {
+    window.cancelAnimationFrame ? window.cancelAnimationFrame(handle.value) :
+        window.webkitCancelAnimationFrame ? window.webkitCancelAnimationFrame(handle.value) :
+        window.webkitCancelRequestAnimationFrame ? window.webkitCancelRequestAnimationFrame(handle.value) : /* Support for legacy API */
+        window.mozCancelRequestAnimationFrame ? window.mozCancelRequestAnimationFrame(handle.value) :
+        window.oCancelRequestAnimationFrame ? window.oCancelRequestAnimationFrame(handle.value) :
+        window.msCancelRequestAnimationFrame ? window.msCancelRequestAnimationFrame(handle.value) :
+        clearInterval(handle);
+};
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ "./src/App.js");
+/* harmony import */ var offline_plugin_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! offline-plugin/runtime */ "./node_modules/offline-plugin/runtime.js");
+/* harmony import */ var offline_plugin_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(offline_plugin_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+
+offline_plugin_runtime__WEBPACK_IMPORTED_MODULE_1__["install"]();
+
+const handle_json_response = response => response.json();
+
+Promise.all([
+    fetch("./config.json").then(handle_json_response),
+    fetch("./users.json").then(handle_json_response)
+]).then(([config, users]) => {
+    window.app = new _App__WEBPACK_IMPORTED_MODULE_0__["default"](config, users, document.querySelector("#app"));
+    setTimeout(_ => app.start(), 500);
+});
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=index.js.map

@@ -52,7 +52,7 @@
             padding: 20px 15px;
             display: flex;
             overflow-x: hidden;
-            transition: opacity 300ms ease-in-out;
+            transition: opacity 200ms ease-in-out;
         }
         
         #app .wrapper.hide {
@@ -63,7 +63,7 @@
             min-width: 50%;
             max-width: 50%;
             display: flex;
-            transition: opacity 300ms ease-in-out, transform 1s ease-in-out;
+            transition: opacity 200ms ease-in-out, transform 500ms ease-in-out;
             flex-direction: column;
             justify-content: space-around;
             transform: translateX(0%);
@@ -72,12 +72,12 @@
         
         #app .wrapper .group.right {
             transform: translateX(100%);
-            transition: opacity 300ms ease-in-out;
+            transition: opacity 200ms ease-in-out;
         }
         
         #app .wrapper .group:nth-child(2).right {
             transform: translateX(0%);
-            transition: opacity 300ms ease-in-out;
+            transition: opacity 200ms ease-in-out;
         }
         
         #app .wrapper .group.hide {
@@ -94,7 +94,7 @@
             border-bottom-width: 2px;
             border-bottom-style: solid;
             border-color: #333;
-            transition: opacity 300ms ease-in-out, background-color 300ms ease-in-out, border-color 300ms ease-in-out;
+            transition: opacity 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out;
             opacity: 0.99999;
         }
         
@@ -142,7 +142,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1;
-            transition: opacity 300ms ease-in-out;
+            transition: opacity 200ms ease-in-out;
         }
         
         #app .modal-wrapper.hide {
@@ -182,7 +182,7 @@
             width: 50%;
             font-size: 1.8rem;
             text-align: center;
-            transition: opacity 750ms ease-in-out;
+            transition: opacity 500ms ease-in-out;
             opacity: 0.99999;
         }
         
@@ -196,6 +196,17 @@
         
         #app .modal-wrapper .modal .text {
             font-style: italic;
+            transition: opacity 500ms ease-in-out;
+            opacity: 0.99999;
+        }
+        
+        #app .modal-wrapper .modal .name {
+            transition: opacity 500ms ease-in-out;
+            opacity: 0.99999;
+        }
+        
+        #app .modal-wrapper .modal .name.hide {
+            opacity: 0.00001;
         }
     </style>
 </head>
@@ -209,6 +220,7 @@
             <div class="modal">
                 <header class="header"></header>
                 <div class="text"></div>
+                <div class="name hide"></div>
             </div>
         </div>
         <div class="wrapper"></div>

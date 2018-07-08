@@ -55,12 +55,17 @@ export default class App {
         this.round_0 = this.round_0.bind(this);
         this.show_participants = this.show_participants.bind(this);
         this.round_x = this.round_x.bind(this);
+        this.round_begin_message = this.round_begin_message.bind(this);
         this.begin_round_matches = this.begin_round_matches.bind(this);
-        this.default_participant_match = this.default_participant_match.bind(this);
         this.participant_match = this.participant_match.bind(this);
+        this.default_participant_match = this.default_participant_match.bind(this);
         this.determine_winner = this.determine_winner.bind(this);
         this.finish_round = this.finish_round.bind(this);
-        this.fix_round_participants = this.pad_participants_list.bind(this);
+        this.round_end_message = this.round_end_message.bind(this);
+        this.show_losing_participant = this.show_losing_participant.bind(this);
+        this.end = this.end.bind(this);
+        this.pad_participants_list = this.pad_participants_list.bind(this);
+        this.unpad_participants_list = this.unpad_participants_list.bind(this);
         this.scroll_element_into_view = this.scroll_element_into_view.bind(this);
         this.create_group_div = this.create_group_div.bind(this);
         this.create_participant_div = this.create_participant_div.bind(this);
@@ -172,6 +177,40 @@ export default class App {
     }
 
     /**
+     * Show a message stating the round is about to begin.
+     * 
+     * @param {number} round_index The round number.
+     */
+    round_begin_message(round_index) {
+        return new Promise((resolve, _) => {
+            console.log(`Show a message stating Round ${round_index} is gonna begin.`);
+
+            const modal_wrapper = this._div.querySelector(".modal-wrapper");
+            const modal_header = modal_wrapper.querySelector(".modal .header");
+            const modal_text = modal_wrapper.querySelector(".modal .text");
+
+            //Create a modal title stating the beginning of the round.
+            const header = document.createElement("h2");
+            header.classList.add("title");
+            header.innerText = `Round ${round_index} Begins!`;
+            modal_header.insertAdjacentElement("beforeend", header);
+
+            //Set a modal text message wishing luck to the participants.
+            modal_text.innerText = "Best of luck participants!";
+
+            modal_wrapper.classList.remove("hide");
+
+            requestTimeout(_ => {
+                modal_wrapper.classList.add("hide");
+                header.remove();
+                modal_text.innerText = "";
+                console.log("Begin round message is shown. We can now start the round.");
+                resolve(true);
+            }, 2500);
+        });
+    }
+
+    /**
      * Start the matches in the round.
      * 
      * @param {HTMLElement} initial_group_div The initial participant round group element.
@@ -190,7 +229,6 @@ export default class App {
         let winner_participant_div_index = 0;
         winner_participant_div_list.forEach(winner_participant_div => {
             const this_obj = this;
-            console.log("When each winner participant div is being shown, start the selection of the random winner while playing some animations with the div.");
             winner_participant_div.addEventListener("transitionend", async function show_fn() {
                 this.removeEventListener("transitionend", show_fn);
 
@@ -224,40 +262,6 @@ export default class App {
         });
         console.log(`Showing the participant div. (Index: ${winner_participant_div_index})`);
         winner_participant_div_list[winner_participant_div_index].classList.remove("hide");
-    }
-
-    /**
-     * Show a "round begin" message.
-     * 
-     * @param {number} round_index The round number.
-     */
-    round_begin_message(round_index) {
-        return new Promise((resolve, _) => {
-            console.log(`Show a message stating Round ${round_index} is gonna begin.`);
-
-            const modal_wrapper = this._div.querySelector(".modal-wrapper");
-            const modal_header = modal_wrapper.querySelector(".modal .header");
-            const modal_text = modal_wrapper.querySelector(".modal .text");
-
-            //Create a modal title stating the beginning of the round.
-            const header = document.createElement("h2");
-            header.classList.add("title");
-            header.innerText = `Round ${round_index} Begins!`;
-            modal_header.insertAdjacentElement("beforeend", header);
-
-            //Set a modal text message wishing luck to the participants.
-            modal_text.innerText = "Best of luck participants!";
-
-            modal_wrapper.classList.remove("hide");
-
-            requestTimeout(_ => {
-                modal_wrapper.classList.add("hide");
-                header.remove();
-                modal_text.innerText = "";
-                console.log("Begin round message is shown. We can now start the round.");
-                resolve(true);
-            }, 2500);
-        });
     }
 
     /**
@@ -371,7 +375,7 @@ export default class App {
 
             let dots_count = 1;
             //Set a modal text message stating the winner is being selected.
-            modal_text.innerText = "Selecting winner.";
+            modal_text.innerText = "Selecting Winner.";
 
             //Have a dot style loader to show that the app is working to select a winner.
             const dot_loading_handle = requestInterval(_ => {
@@ -383,6 +387,7 @@ export default class App {
             requestTimeout(_ => {
                 //Stop the loader, select a participant at random, and announce the winner.
                 clearRequestInterval(dot_loading_handle);
+                modal_text.innerText = "Winner Selected.";
 
                 //Select the winner at random.
                 console.log("Selecting a random winner.");
@@ -395,23 +400,21 @@ export default class App {
                 }
                 console.log(`Selected winner: ${name_winner}`);
                 console.log(`Selected loser: ${name_loser}`);
-                //Set a random winner-loser message and the title to the name of the winner.
-                if (this._messages.length === 0) {
-                    console.log("Ran out of winner-loser messages. Refilling the list.");
-                    this._message = [...this._original_messages];
-                }
-                const random_message = this._random_generator.integer(0, this._messages.length - 1);
-                console.log("Showing random winner-loser message and removing it from the messages list.");
-                modal_text.innerHTML = this._messages.splice(random_message, 1)[0].replace(/\#winner/g, name_winner).replace(/\#loser/g, name_loser);
                 header_decided.innerText = `${name_winner} is the winner!`;
 
-                requestTimeout(_ => {
-                    modal_header.classList.add("next");
-                    header_deciding.classList.add("hide");
-                    header_decided.classList.remove("hide");
+                const this_obj = this;
+                header_decided.addEventListener("transitionend", function move_fn() {
+                    header_decided.removeEventListener("transitionend", move_fn);
 
-                    modal_header.addEventListener("transitionend", function move_fn() {
-                        modal_header.removeEventListener("transitionend", move_fn);
+                    requestTimeout(_ => {
+                        //Set a random winner-loser message and the title to the name of the winner.
+                        if (this_obj._messages.length === 0) {
+                            console.log("Ran out of winner-loser messages. Refilling the list.");
+                            this_obj._message = [...this_obj._original_messages];
+                        }
+                        const random_message = this_obj._random_generator.integer(0, this_obj._messages.length - 1);
+                        console.log("Showing random winner-loser message and removing it from the messages list.");
+                        modal_text.innerHTML = this_obj._messages.splice(random_message, 1)[0].replace(/\#winner/g, name_winner).replace(/\#loser/g, name_loser);
 
                         requestTimeout(_ => {
                             //Hide the modal and show the return the selected winner.
@@ -423,9 +426,13 @@ export default class App {
 
                             console.log(`Returning the selected winner. (Index offset: ${random_index_offset})`);
                             resolve(random_index_offset);
-                        }, 3500);
-                    });
-                }, 500);
+                        }, 2500);
+                    }, 500);
+                });
+
+                modal_header.classList.add("next");
+                header_deciding.classList.add("hide");
+                header_decided.classList.remove("hide");
             }, 3000);
 
             modal_wrapper.classList.remove("hide");
@@ -440,12 +447,16 @@ export default class App {
     async finish_round(round_index) {
         console.log(`Round ${round_index} is complete.`);
 
+        this.unpad_participants_list(round_index - 1);
+
         if (this._round[round_index].length <= 1) {
             //If only one participant remained after the completion of the current round, end the application and announce the winner.
             console.log("This was the final round.");
             this.end(this._round[round_index][0]);
             return;
         }
+
+        await this.round_end_message(round_index);
 
         const group_div_list = this._wrapper.querySelectorAll(".group");
 
@@ -495,6 +506,92 @@ export default class App {
     }
 
     /**
+     * Show a message stating the round has ended, and noting the lost participants.
+     * 
+     * @param {number} round_index The round number.
+     */
+    round_end_message(round_index) {
+        return new Promise((resolve, _) => {
+            console.log(`Show a message stating Round ${round_index} has ended.`);
+
+            const modal_wrapper = this._div.querySelector(".modal-wrapper");
+            const modal_header = modal_wrapper.querySelector(".modal .header");
+            const modal_text = modal_wrapper.querySelector(".modal .text");
+            const modal_text_2 = modal_wrapper.querySelector(".modal .name");
+
+            //Create a modal title stating the beginning of the round.
+            const header = document.createElement("h2");
+            header.classList.add("title");
+            header.innerText = `Round ${round_index} Ends!`;
+            modal_header.insertAdjacentElement("beforeend", header);
+
+            //Set a modal text message wishing luck to the participants.
+            modal_text.innerText = "Casualties";
+
+            const this_obj = this;
+            modal_wrapper.addEventListener("transitionend", async function show_fn() {
+                modal_wrapper.removeEventListener("transitionend", show_fn);
+
+                //Modal is visible, start scrolling through the casualties.
+                const old_participants = this_obj._round[round_index - 1];
+                const new_participants = this_obj._round[round_index];
+
+                for (let participant_index = 0; participant_index < old_participants.length; participant_index++) {
+                    if (new_participants.indexOf(old_participants[participant_index]) == -1) {
+                        await this_obj.show_losing_participant(modal_text_2, old_participants[participant_index]);
+                    }
+                }
+
+                requestTimeout(_ => {
+                    //Hide the message and go back.
+                    console.log("Hiding modal box.");
+                    modal_wrapper.classList.add("hide");
+                    header.remove();
+                    modal_text.innerText = "";
+                    console.log("Begin round message is shown. We can now start the round.");
+                    resolve(true);
+                }, 500);
+            });
+
+            modal_wrapper.classList.remove("hide");
+        });
+    }
+
+    /**
+     * Shows the and hides the given name in the given modal text div,
+     * 
+     * @param {HTMLElement} modal_text_2 The div to show the name in.
+     * @param {HTMLElement} name The name to show.
+     */
+    show_losing_participant(modal_text_2, name) {
+        return new Promise((resolve, _) => {
+            modal_text_2.innerText = name;
+
+            modal_text_2.addEventListener("transitionend", function show_fn() {
+                modal_text_2.removeEventListener("transitionend", show_fn);
+
+                modal_text_2.addEventListener("transitionend", function hide_fn() {
+                    modal_text_2.removeEventListener("transitionend", hide_fn);
+
+                    //Done showing the name. Go back.
+                    console.log("Losing participant name shown");
+                    resolve(true);
+                });
+
+                requestTimeout(_ => {
+                    //Hide the name,
+                    console.log("Hide the losing participant name.");
+                    modal_text_2.classList.add("hide");
+                }, 500);
+            });
+
+            //Show the name.
+            console.log(`Show the losing participant name. (Name: ${name})`);
+            modal_text_2.classList.remove("hide");
+        });
+    }
+
+    /**
      * End the application with a modal message stating the winner.
      * 
      * @param {string} name The name of the winner.
@@ -532,6 +629,20 @@ export default class App {
             console.log(`Odd number of participants in Round ${round_index}. Pad the list with a dummy participant.`);
             this._round[round_index].push("---");
             console.log("Padded participants list.");
+        }
+    }
+
+    /**
+     * Add a dummy participant if odd number of participants are present.
+     * 
+     * @param {number} round_index The round number.
+     */
+    unpad_participants_list(round_index) {
+        const total_participants = this._round[round_index].length;
+        if (this._round[round_index][total_participants - 1] === "---") {
+            console.log(`Removing dummy participant in participants list.`);
+            this._round[round_index].splice(total_participants - 1, 1);
+            console.log(`Removed dummy participant in participants list.`);
         }
     }
 

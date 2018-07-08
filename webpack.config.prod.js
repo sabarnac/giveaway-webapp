@@ -9,7 +9,6 @@ module.exports = {
     context: path.resolve(__dirname),
     output: {
         path: path.resolve(__dirname, "dist"),
-        publicPath: "/giveaway-webapp/",
         filename: "index.js",
     },
     module: {
