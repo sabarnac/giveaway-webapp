@@ -2357,7 +2357,7 @@ const clearRequestInterval = function(handle) {
 /*! exports provided: seed, messages, default */
 /***/ (function(module) {
 
-module.exports = {"seed":1,"messages":["#winner likes to kick gum and chew ass, and they're all out of gum.","#loser lost to #winner? How disappointing.","#winner bribed the tournament creator. It was extermely effective.","#loser browses 9GAG. That's an automatic loss.","Womble is a faggot, and so is #loser.","#loser liked The Emoji Movie.","#loser be dead. Looks like the work of an enemy 「ＳＴＡＮＤ」！！.","#loser seems to be the protagonist of School Days.","\"Don't lewd the lolis\" - #winner","Has #winner achieved Ultra Instinct???","#loser doesn't have enough badges to tame #winner.","#loser thinks Pokemon is better than Digimon.","#loser thinks One Piece is the best anime.","#loser doesn't realize Dark Souls is a Berserk reference.","#loser needs to GIT GUD.","#winner donated to Wikipedia.","#loser thinks Communism doesn't work.","#loser is blind to the concerns of the working class.","#loser is a member of the Axis cult. This is an Eris-sanctioned tournament.","#loser says Eris pads her chest.","#loser isn't a regular on Discord. Probably.","#loser though he won, but it was #winner!","This was a mistake.","#loser lost because of server failure.","#loser thinks if she breathes, she a thot.","#winner be THICC.","#winner streams on Chaturbate. That's a win in my eyes.","#winner shared their premium Brazzers account.","#loser plays Fortnite, and not even the Battle Royale mode.","#winner won, but the princess is in the other castle.","#loser thinks Evanglion had an original ending.","HAL 9000 chose #winner.","#winner can't Hasta la Vista.","#loser lost because he thought he could win the tournament.","#loser isn't a harem MC.","|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||<br /><br />||&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_","#loser thinks K-Pop is real music.","\"And now this dialogue box will say that I've won.\" - #winner","#winner's knees hurt, but it was all worth it.","#winner actually bough WinRAR."]};
+module.exports = {"seed":1,"messages":["#winner won against #loser."]};
 
 /***/ }),
 
@@ -2408,4 +2408,4 @@ setTimeout(_ => app.start(), 500);
 /***/ })
 
 /******/ });
-//# sourceMappingURL=index.18afb0c79094dc76d2b9.js.map
+//# sourceMappingURL=index.c2ffda6abe83af3ba2a3.js.map

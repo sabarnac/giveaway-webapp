@@ -1,7 +1,7 @@
 var __wpo = {
   "assets": {
     "main": [
-      "./index.18afb0c79094dc76d2b9.js",
+      "./index.c2ffda6abe83af3ba2a3.js",
       "./manifest.json",
       "./icon_1024x1024.b77e38155a357427b65483a6d87dbcb8.png",
       "./icon_512x512.57dcba958a28a38bcbfc35256eb58ee1.png",
@@ -30,7 +30,7 @@ var __wpo = {
     "https://fonts.googleapis.com/css?family=Open+Sans:400,600"
   ],
   "hashesMap": {
-    "6f824da46d291a8490da170eebfdb2213ba181b0": "./index.18afb0c79094dc76d2b9.js",
+    "bf2a92d5177dc308f723647e1441f86f2b6ab957": "./index.c2ffda6abe83af3ba2a3.js",
     "0db0384fa6645fd30f1d705134d0adc06129a628": "./manifest.json",
     "c0323adb916ecc2cc5dbe6386881db2cd65230ea": "./icon_1024x1024.b77e38155a357427b65483a6d87dbcb8.png",
     "2d6750bb284011ee9579d13b6acd65a592b45c00": "./icon_512x512.57dcba958a28a38bcbfc35256eb58ee1.png",
@@ -43,11 +43,11 @@ var __wpo = {
     "d23da1d8e2087a59c6c90f51609a0f3ff092055b": "./icon_152x152.3b9c8966f99e75bb43dd05845939e139.png",
     "a36e8b1ec8573e9780c94739e414d06a05e160c1": "./icon_120x120.f5a99a522358c818f894c33df26ed9b5.png",
     "884d8d174ce1d02fb1c7fc43ebeeeb2884fd0915": "./icon_96x96.12f0f0d220aee1709c14f6d794b7171b.png",
-    "74f9255517684d9ec150a63153829261c5cdc815": "./"
+    "bec61dd7595efcd576f598d9e69bc570f6b6f795": "./"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "2018-7-8 16:55:31",
+  "version": "2018-7-8 17:09:22",
   "name": "webpack-offline",
   "pluginVersion": "5.0.5",
   "relativePaths": true
