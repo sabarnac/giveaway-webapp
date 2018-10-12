@@ -4,8 +4,8 @@
     "description": "A giveaway webapp that does the giveaway in a TOURNAMENT ARC style",
     "main": "src/index.js",
     "scripts": {
-        "build:dev": "npm run clean && webpack --config webpack.config.dev.js --watch --progress",
-        "build:prod": "npm run clean && webpack --config webpack.config.prod.js",
+        "build:dev": "webpack --config webpack.config.dev.js --watch --progress",
+        "build:prod": "webpack --config webpack.config.prod.js",
         "clean": "rm -f ./dist/*"
     },
     "bugs": {

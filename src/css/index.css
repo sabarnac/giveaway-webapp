@@ -39,7 +39,6 @@ body {
     padding: 20px 15px;
     display: flex;
     overflow-x: hidden;
-    transition: opacity 200ms ease-in-out;
 }
 
 #app .wrapper.hide {
@@ -50,7 +49,6 @@ body {
     min-width: 50%;
     max-width: 50%;
     display: flex;
-    transition: opacity 200ms ease-in-out, transform 500ms ease-in-out;
     flex-direction: column;
     justify-content: space-around;
     transform: translateX(0%);
@@ -59,12 +57,10 @@ body {
 
 #app .wrapper .group.right {
     transform: translateX(100%);
-    transition: opacity 200ms ease-in-out;
 }
 
 #app .wrapper .group:nth-child(2).right {
     transform: translateX(0%);
-    transition: opacity 200ms ease-in-out;
 }
 
 #app .wrapper .group.hide {
@@ -81,7 +77,6 @@ body {
     border-bottom-width: 2px;
     border-bottom-style: solid;
     border-color: #333;
-    transition: opacity 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out;
     opacity: 0.99999;
 }
 
@@ -117,6 +112,21 @@ body {
     border-top-style: solid;
 }
 
+#app .speed-wrapper {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 5;
+}
+
+#app .speed-wrapper button {
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    border-radius: 0;
+    padding: 7px 12px;
+}
+
 #app .modal-wrapper {
     position: fixed;
     top: 0;
@@ -129,7 +139,6 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 1;
-    transition: opacity 200ms ease-in-out;
 }
 
 #app .modal-wrapper.hide {
@@ -157,7 +166,6 @@ body {
     width: 200%;
     text-align: left;
     transform: translateX(25%);
-    transition: transform 500ms ease-in-out;
 }
 
 #app .modal-wrapper .modal .header.next {
@@ -169,7 +177,6 @@ body {
     width: 50%;
     font-size: 1.8rem;
     text-align: center;
-    transition: opacity 500ms ease-in-out;
     opacity: 0.99999;
 }
 
@@ -183,15 +190,233 @@ body {
 
 #app .modal-wrapper .modal .text {
     font-style: italic;
-    transition: opacity 500ms ease-in-out;
     opacity: 0.99999;
 }
 
 #app .modal-wrapper .modal .name {
-    transition: opacity 500ms ease-in-out;
     opacity: 0.99999;
 }
 
 #app .modal-wrapper .modal .name.hide {
     opacity: 0.00001;
+}
+
+/**
+ * Transition Speed: 0.5x
+ */
+
+#app.x0_5 .wrapper {
+    transition: opacity 400ms ease-in-out;
+}
+
+#app.x0_5 .wrapper .group {
+    transition: opacity 400ms ease-in-out, transform 1000ms ease-in-out;
+}
+
+#app.x0_5 .wrapper .group.right {
+    transition: opacity 400ms ease-in-out;
+}
+
+#app.x0_5 .wrapper .group:nth-child(2).right {
+    transition: opacity 400ms ease-in-out;
+}
+
+#app.x0_5 .wrapper .group .participant {
+    transition: opacity 400ms ease-in-out, background-color 400ms ease-in-out, border-color 400ms ease-in-out;
+}
+
+#app.x0_5 .modal-wrapper {
+    transition: opacity 400ms ease-in-out;
+}
+
+#app.x0_5 .modal-wrapper .modal .header {
+    transition: transform 1000ms ease-in-out;
+}
+
+#app.x0_5 .modal-wrapper .modal .header .title {
+    transition: opacity 1000ms ease-in-out;
+}
+
+#app.x0_5 .modal-wrapper .modal .text {
+    transition: opacity 1000ms ease-in-out;
+}
+
+#app.x0_5 .modal-wrapper .modal .name {
+    transition: opacity 1000ms ease-in-out;
+}
+
+/**
+ * Transition Speed: 1x
+ */
+
+#app.x1 .wrapper {
+    transition: opacity 200ms ease-in-out;
+}
+
+#app.x1 .wrapper .group {
+    transition: opacity 200ms ease-in-out, transform 500ms ease-in-out;
+}
+
+#app.x1 .wrapper .group.right {
+    transition: opacity 200ms ease-in-out;
+}
+
+#app.x1 .wrapper .group:nth-child(2).right {
+    transition: opacity 200ms ease-in-out;
+}
+
+#app.x1 .wrapper .group .participant {
+    transition: opacity 200ms ease-in-out, background-color 200ms ease-in-out, border-color 200ms ease-in-out;
+}
+
+#app.x1 .modal-wrapper {
+    transition: opacity 200ms ease-in-out;
+}
+
+#app.x1 .modal-wrapper .modal .header {
+    transition: transform 500ms ease-in-out;
+}
+
+#app.x1 .modal-wrapper .modal .header .title {
+    transition: opacity 500ms ease-in-out;
+}
+
+#app.x1 .modal-wrapper .modal .text {
+    transition: opacity 500ms ease-in-out;
+}
+
+#app.x1 .modal-wrapper .modal .name {
+    transition: opacity 500ms ease-in-out;
+}
+
+/**
+ * Transition Speed: 1.5x
+ */
+
+#app.x1_5 .wrapper {
+    transition: opacity 133ms ease-in-out;
+}
+
+#app.x1_5 .wrapper .group {
+    transition: opacity 133ms ease-in-out, transform 333ms ease-in-out;
+}
+
+#app.x1_5 .wrapper .group.right {
+    transition: opacity 133ms ease-in-out;
+}
+
+#app.x1_5 .wrapper .group:nth-child(2).right {
+    transition: opacity 133ms ease-in-out;
+}
+
+#app.x1_5 .wrapper .group .participant {
+    transition: opacity 133ms ease-in-out, background-color 133ms ease-in-out, border-color 133ms ease-in-out;
+}
+
+#app.x1_5 .modal-wrapper {
+    transition: opacity 133ms ease-in-out;
+}
+
+#app.x1_5 .modal-wrapper .modal .header {
+    transition: transform 333ms ease-in-out;
+}
+
+#app.x1_5 .modal-wrapper .modal .header .title {
+    transition: opacity 333ms ease-in-out;
+}
+
+#app.x1_5 .modal-wrapper .modal .text {
+    transition: opacity 333ms ease-in-out;
+}
+
+#app.x1_5 .modal-wrapper .modal .name {
+    transition: opacity 333ms ease-in-out;
+}
+
+/**
+ * Transition Speed: 2x
+ */
+
+#app.x2 .wrapper {
+    transition: opacity 100ms ease-in-out;
+}
+
+#app.x2 .wrapper .group {
+    transition: opacity 100ms ease-in-out, transform 250ms ease-in-out;
+}
+
+#app.x2 .wrapper .group.right {
+    transition: opacity 100ms ease-in-out;
+}
+
+#app.x2 .wrapper .group:nth-child(2).right {
+    transition: opacity 100ms ease-in-out;
+}
+
+#app.x2 .wrapper .group .participant {
+    transition: opacity 100ms ease-in-out, background-color 100ms ease-in-out, border-color 100ms ease-in-out;
+}
+
+#app.x2 .modal-wrapper {
+    transition: opacity 100ms ease-in-out;
+}
+
+#app.x2 .modal-wrapper .modal .header {
+    transition: transform 250ms ease-in-out;
+}
+
+#app.x2 .modal-wrapper .modal .header .title {
+    transition: opacity 250ms ease-in-out;
+}
+
+#app.x2 .modal-wrapper .modal .text {
+    transition: opacity 250ms ease-in-out;
+}
+
+#app.x2 .modal-wrapper .modal .name {
+    transition: opacity 250ms ease-in-out;
+}
+
+/**
+ * Transition Speed: 5x
+ */
+
+#app.x5 .wrapper {
+    transition: opacity 40ms ease-in-out;
+}
+
+#app.x5 .wrapper .group {
+    transition: opacity 40ms ease-in-out, transform 100ms ease-in-out;
+}
+
+#app.x5 .wrapper .group.right {
+    transition: opacity 40ms ease-in-out;
+}
+
+#app.x5 .wrapper .group:nth-child(2).right {
+    transition: opacity 40ms ease-in-out;
+}
+
+#app.x5 .wrapper .group .participant {
+    transition: opacity 40ms ease-in-out, background-color 40ms ease-in-out, border-color 40ms ease-in-out;
+}
+
+#app.x5 .modal-wrapper {
+    transition: opacity 40ms ease-in-out;
+}
+
+#app.x5 .modal-wrapper .modal .header {
+    transition: transform 100ms ease-in-out;
+}
+
+#app.x5 .modal-wrapper .modal .header .title {
+    transition: opacity 100ms ease-in-out;
+}
+
+#app.x5 .modal-wrapper .modal .text {
+    transition: opacity 100ms ease-in-out;
+}
+
+#app.x5 .modal-wrapper .modal .name {
+    transition: opacity 100ms ease-in-out;
 }

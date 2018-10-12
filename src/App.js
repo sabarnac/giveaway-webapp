@@ -3,6 +3,14 @@
 import Random from "random-js";
 import { requestTimeout, requestInterval, clearRequestInterval } from "./custom.js";
 
+const SpeedBooster = {
+    HALF: 0.5,
+    ONE: 1,
+    ONE_POINT_FIVE: 1.5,
+    TWO: 2,
+    FIVE: 5
+};
+
 /**
  * Class that acts as our primary application.
  */
@@ -29,6 +37,11 @@ export default class App {
         this._random_engine.seed(this._config.seed);
         this._random_generator = new Random(this._random_engine);
         console.log("Dependencies setup complete.");
+        //Setting up the speed of animations.
+        this._current_speed = SpeedBooster.ONE;
+        this.remove_all_classes_from_element(this._div);
+        this._div.classList.add("x1");
+        console.log(`Animation speed set to ${this._current_speed}.`);
 
         //Setup round user data.
         console.log("Setting up data.");
@@ -70,6 +83,43 @@ export default class App {
         this.create_group_div = this.create_group_div.bind(this);
         this.create_participant_div = this.create_participant_div.bind(this);
         console.log("Method context bindings setup complete.");
+
+        //Set up speed button click listeners.
+        this._div.querySelector("#speed-0-5x").addEventListener("click", ev => {
+            ev.preventDefault();
+            this._current_speed = SpeedBooster.HALF;
+            this.remove_all_classes_from_element(this._div);
+            this._div.classList.add("x0_5");
+            console.log(`Animation speed updated to ${this._current_speed}.`);
+        });
+        this._div.querySelector("#speed-1x").addEventListener("click", ev => {
+            ev.preventDefault();
+            this._current_speed = SpeedBooster.ONE;
+            this.remove_all_classes_from_element(this._div);
+            this._div.classList.add("x1");
+            console.log(`Animation speed updated to ${this._current_speed}.`);
+        });
+        this._div.querySelector("#speed-1-5x").addEventListener("click", ev => {
+            ev.preventDefault();
+            this._current_speed = SpeedBooster.ONE_POINT_FIVE;
+            this.remove_all_classes_from_element(this._div);
+            this._div.classList.add("x1_5");
+            console.log(`Animation speed updated to ${this._current_speed}.`);
+        });
+        this._div.querySelector("#speed-2x").addEventListener("click", ev => {
+            ev.preventDefault();
+            this._current_speed = SpeedBooster.TWO;
+            this.remove_all_classes_from_element(this._div);
+            this._div.classList.add("x2");
+            console.log(`Animation speed updated to ${this._current_speed}.`);
+        });
+        this._div.querySelector("#speed-5x").addEventListener("click", ev => {
+            ev.preventDefault();
+            this._current_speed = SpeedBooster.FIVE;
+            this.remove_all_classes_from_element(this._div);
+            this._div.classList.add("x5");
+            console.log(`Animation speed updated to ${this._current_speed}.`);
+        });
     }
 
     /**
@@ -105,7 +155,7 @@ export default class App {
 
         requestTimeout(_ => {
             this.show_participants(group_div);
-        }, 50);
+        }, 50 / this._current_speed);
     }
 
     /**
@@ -173,7 +223,7 @@ export default class App {
 
         requestTimeout(_ => {
             this.begin_round_matches(round_index, initial_group_div, winner_group_div, initial_participants);
-        }, 50);
+        }, 50 / this._current_speed);
     }
 
     /**
@@ -206,7 +256,7 @@ export default class App {
                 modal_text.innerText = "";
                 console.log("Begin round message is shown. We can now start the round.");
                 resolve(true);
-            }, 2500);
+            }, 2500 / this._current_speed);
         });
     }
 
@@ -284,7 +334,7 @@ export default class App {
             const name_switch_interval_handle = requestInterval(_ => {
                 winner_participant_div_list[winner_participant_div_index].innerText = initial_participants[participant_index + current_name_index_offset];
                 current_name_index_offset = (current_name_index_offset + 1) % 2;
-            }, 100);
+            }, 100 / this._current_speed);
 
             requestTimeout(_ => {
                 //Determine the winner.
@@ -307,10 +357,10 @@ export default class App {
 
                             console.log(`Match is complete. The winner is: ${winner_participant_div_list[winner_participant_div_index].innerText}`);
                             resolve(true);
-                        }, 500);
-                    }, 750);
+                        }, 500 / this._current_speed);
+                    }, 750 / this._current_speed);
                 });
-            }, 750);
+            }, 750 / this._current_speed);
         });
     }
 
@@ -342,7 +392,7 @@ export default class App {
             //Clean up the current round.
             console.log(`Round ${round_index} is complete.`);
             this.finish_round(round_index);
-        }, 1000);
+        }, 1000 / this._current_speed);
     }
 
     /**
@@ -382,7 +432,7 @@ export default class App {
                 dots_count = (dots_count % 4) + 1;
                 //Update the modal text message.
                 modal_text.innerText = `Selecting Winner${new Array(dots_count).join(".")}`;
-            }, 300);
+            }, 300 / this._current_speed);
 
             requestTimeout(_ => {
                 //Stop the loader, select a participant at random, and announce the winner.
@@ -426,14 +476,14 @@ export default class App {
 
                             console.log(`Returning the selected winner. (Index offset: ${random_index_offset})`);
                             resolve(random_index_offset);
-                        }, 2500);
-                    }, 500);
+                        }, 2500 / this_obj._current_speed);
+                    }, 500 / this_obj._current_speed);
                 });
 
                 modal_header.classList.add("next");
                 header_deciding.classList.add("hide");
                 header_decided.classList.remove("hide");
-            }, 3000);
+            }, 3000 / this._current_speed);
 
             modal_wrapper.classList.remove("hide");
         });
@@ -460,6 +510,7 @@ export default class App {
 
         const group_div_list = this._wrapper.querySelectorAll(".group");
 
+        const this_obj = this;
         group_div_list[0].addEventListener("transitionend", function hide_fn() {
             //When the first group is hidden, delete it and then push the second group to the left.
             group_div_list[0].removeEventListener("transitionend", hide_fn);
@@ -469,10 +520,8 @@ export default class App {
             requestTimeout(_ => {
                 console.log("Push the results participants group to the left, making it the new initial participants div.");
                 group_div_list[1].classList.remove("right");
-            }, 50);
+            }, 50 / this_obj._current_speed);
         });
-
-        const this_obj = this;
 
         group_div_list[1].addEventListener("transitionend", function move_fn() {
             //When the second group has been pushed to the left, we can start the next round.
@@ -497,7 +546,7 @@ export default class App {
                 //Start the next round.
                 console.log("Start the next round.");
                 this_obj.round_x(round_index + 1);
-            }, 1000);
+            }, 1000 / this_obj._current_speed);
         });
 
         //Hide the old group.
@@ -550,7 +599,7 @@ export default class App {
                     modal_text.innerText = "";
                     console.log("Begin round message is shown. We can now start the round.");
                     resolve(true);
-                }, 500);
+                }, 500 / this_obj._current_speed);
             });
 
             modal_wrapper.classList.remove("hide");
@@ -567,6 +616,8 @@ export default class App {
         return new Promise((resolve, _) => {
             modal_text_2.innerText = name;
 
+
+            const this_obj = this;
             modal_text_2.addEventListener("transitionend", function show_fn() {
                 modal_text_2.removeEventListener("transitionend", show_fn);
 
@@ -582,7 +633,7 @@ export default class App {
                     //Hide the name,
                     console.log("Hide the losing participant name.");
                     modal_text_2.classList.add("hide");
-                }, 500);
+                }, 500 / this_obj._current_speed);
             });
 
             //Show the name.
@@ -692,5 +743,11 @@ export default class App {
         participant_div.innerText = name;
         console.log("Created new round participant div element.");
         return participant_div;
+    }
+
+    remove_all_classes_from_element(div) {
+        while (this._div.classList.length > 0) {
+            this._div.classList.remove(this._div.classList.item(0));
+        }
     }
 }
