@@ -49,11 +49,7 @@ export default class App {
             []
         ];
         //Randomize the order of the users.
-        while (users.length > 0) {
-            const random_user_index = this._random_generator.integer(0, users.length - 1);
-            this._round[0].push(users[random_user_index]);
-            users.splice(random_user_index, 1);
-        }
+        this._round[0] = [...this._random_generator.shuffle(users)];
         console.log("Users: ");
         console.table(this._round[0]);
         this._original_messages = this._config.messages;
