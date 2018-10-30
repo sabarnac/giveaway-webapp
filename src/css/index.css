@@ -162,7 +162,6 @@ body {
 }
 
 #app .modal-wrapper .modal .header {
-    white-space: nowrap;
     width: 200%;
     text-align: left;
     transform: translateX(25%);
