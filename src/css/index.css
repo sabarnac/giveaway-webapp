@@ -419,3 +419,91 @@ body {
 #app.x5 .modal-wrapper .modal .name {
     transition: opacity 100ms ease-in-out;
 }
+
+/**
+ * Transition Speed: 10x
+ */
+
+#app.x10 .wrapper {
+    transition: opacity 20ms ease-in-out;
+}
+
+#app.x10 .wrapper .group {
+    transition: opacity 20ms ease-in-out, transform 50ms ease-in-out;
+}
+
+#app.x10 .wrapper .group.right {
+    transition: opacity 20ms ease-in-out;
+}
+
+#app.x10 .wrapper .group:nth-child(2).right {
+    transition: opacity 20ms ease-in-out;
+}
+
+#app.x10 .wrapper .group .participant {
+    transition: opacity 20ms ease-in-out, background-color 20ms ease-in-out, border-color 20ms ease-in-out;
+}
+
+#app.x10 .modal-wrapper {
+    transition: opacity 20ms ease-in-out;
+}
+
+#app.x10 .modal-wrapper .modal .header {
+    transition: transform 50ms ease-in-out;
+}
+
+#app.x10 .modal-wrapper .modal .header .title {
+    transition: opacity 50ms ease-in-out;
+}
+
+#app.x10 .modal-wrapper .modal .text {
+    transition: opacity 50ms ease-in-out;
+}
+
+#app.x10 .modal-wrapper .modal .name {
+    transition: opacity 50ms ease-in-out;
+}
+
+/**
+ * Transition Speed: 20x
+ */
+
+#app.x20 .wrapper {
+    transition: opacity 10ms ease-in-out;
+}
+
+#app.x20 .wrapper .group {
+    transition: opacity 10ms ease-in-out, transform 25ms ease-in-out;
+}
+
+#app.x20 .wrapper .group.right {
+    transition: opacity 10ms ease-in-out;
+}
+
+#app.x20 .wrapper .group:nth-child(2).right {
+    transition: opacity 10ms ease-in-out;
+}
+
+#app.x20 .wrapper .group .participant {
+    transition: opacity 10ms ease-in-out, background-color 10ms ease-in-out, border-color 10ms ease-in-out;
+}
+
+#app.x20 .modal-wrapper {
+    transition: opacity 10ms ease-in-out;
+}
+
+#app.x20 .modal-wrapper .modal .header {
+    transition: transform 25ms ease-in-out;
+}
+
+#app.x20 .modal-wrapper .modal .header .title {
+    transition: opacity 25ms ease-in-out;
+}
+
+#app.x20 .modal-wrapper .modal .text {
+    transition: opacity 25ms ease-in-out;
+}
+
+#app.x20 .modal-wrapper .modal .name {
+    transition: opacity 25ms ease-in-out;
+}

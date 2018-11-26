@@ -8,7 +8,9 @@ const SpeedBooster = {
     ONE: 1,
     ONE_POINT_FIVE: 1.5,
     TWO: 2,
-    FIVE: 5
+    FIVE: 5,
+    TEN: 10,
+    TWENTY: 20
 };
 
 /**
@@ -114,6 +116,20 @@ export default class App {
             this._current_speed = SpeedBooster.FIVE;
             this.remove_all_classes_from_element(this._div);
             this._div.classList.add("x5");
+            console.log(`Animation speed updated to ${this._current_speed}.`);
+        });
+        this._div.querySelector("#speed-10x").addEventListener("click", ev => {
+            ev.preventDefault();
+            this._current_speed = SpeedBooster.TEN;
+            this.remove_all_classes_from_element(this._div);
+            this._div.classList.add("x10");
+            console.log(`Animation speed updated to ${this._current_speed}.`);
+        });
+        this._div.querySelector("#speed-20x").addEventListener("click", ev => {
+            ev.preventDefault();
+            this._current_speed = SpeedBooster.TWENTY;
+            this.remove_all_classes_from_element(this._div);
+            this._div.classList.add("x20");
             console.log(`Animation speed updated to ${this._current_speed}.`);
         });
     }
