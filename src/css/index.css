@@ -147,7 +147,7 @@ body {
 }
 
 #app .modal-wrapper .modal {
-    padding: 20px 15px;
+    padding: 20px 15px 60px 15px;
     background: #fff;
     min-width: 50%;
     max-width: 85%;
