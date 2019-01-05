@@ -78,6 +78,7 @@ body {
     border-bottom-style: solid;
     border-color: #333;
     opacity: 0.99999;
+    word-break: break-all;
 }
 
 #app .wrapper .group .participant.hide {
@@ -150,15 +151,16 @@ body {
     background: #fff;
     min-width: 50%;
     max-width: 85%;
-    height: 45%;
+    min-height: 45%;
+    max-height: 80%;
     display: flex;
-    justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
     font-size: 1rem;
     border-radius: 10px;
     text-align: center;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #app .modal-wrapper .modal .header {
@@ -177,6 +179,11 @@ body {
     font-size: 1.8rem;
     text-align: center;
     opacity: 0.99999;
+    word-break: break-all;
+}
+
+#app .modal-wrapper .modal .header .title.final {
+    word-break: normal;
 }
 
 #app .modal-wrapper .modal .header .title.hide {
@@ -199,6 +206,7 @@ body {
 #app .modal-wrapper .modal .name.hide {
     opacity: 0.00001;
 }
+
 
 /**
  * Transition Speed: 0.5x
@@ -244,6 +252,7 @@ body {
     transition: opacity 1000ms ease-in-out;
 }
 
+
 /**
  * Transition Speed: 1x
  */
@@ -287,6 +296,7 @@ body {
 #app.x1 .modal-wrapper .modal .name {
     transition: opacity 500ms ease-in-out;
 }
+
 
 /**
  * Transition Speed: 1.5x
@@ -332,6 +342,7 @@ body {
     transition: opacity 333ms ease-in-out;
 }
 
+
 /**
  * Transition Speed: 2x
  */
@@ -375,6 +386,7 @@ body {
 #app.x2 .modal-wrapper .modal .name {
     transition: opacity 250ms ease-in-out;
 }
+
 
 /**
  * Transition Speed: 5x
@@ -420,6 +432,7 @@ body {
     transition: opacity 100ms ease-in-out;
 }
 
+
 /**
  * Transition Speed: 10x
  */
@@ -463,6 +476,7 @@ body {
 #app.x10 .modal-wrapper .modal .name {
     transition: opacity 50ms ease-in-out;
 }
+
 
 /**
  * Transition Speed: 20x

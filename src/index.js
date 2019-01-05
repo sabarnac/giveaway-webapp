@@ -8,7 +8,5 @@ import "./css/index.css";
 
 OfflinePluginRuntime.install();
 
-const handle_json_response = response => response.json();
-
 window.app = new App(config, users, document.querySelector("#app"));
 setTimeout(_ => app.start(), 500);
