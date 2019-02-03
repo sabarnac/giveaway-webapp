@@ -11,15 +11,15 @@ export default class Match {
   @observable private _winner: Participant;
   private static _RANDOM_GENERATOR: Random = Config.randomGenerator;
 
-  private getWinner = (): Participant =>
+  private _getWinner = (): Participant =>
     Match._RANDOM_GENERATOR.pick(this._participants);
 
   public constructor(participants: Participant[]) {
     this._participants = participants;
-    this._winner = this.getWinner();
+    this._winner = this._getWinner();
   }
 
-  private isNotWinner = (participant: Participant): boolean =>
+  private _isNotWinner = (participant: Participant): boolean =>
     !participant.equals(this._winner);
 
   /**
@@ -27,7 +27,7 @@ export default class Match {
    * @returns {Participant[]} The list of losers.
    */
   @computed public get losers(): Participant[] {
-    return this._participants.filter(this.isNotWinner);
+    return this._participants.filter(this._isNotWinner);
   }
 
   /**

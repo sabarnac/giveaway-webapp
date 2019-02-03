@@ -28,9 +28,9 @@ export class Avatar {
     return this._altText;
   }
 
-  private isSameUrl = (url1: string, url2: string): boolean => url1 === url2;
+  private _isSameUrl = (url1: string, url2: string): boolean => url1 === url2;
 
-  private isSameAltText = (altText1: string, altText2: string): boolean =>
+  private _isSameAltText = (altText1: string, altText2: string): boolean =>
     altText1 === altText2;
 
   /**
@@ -39,8 +39,8 @@ export class Avatar {
    * @returns {boolean} Whether the other avatar is equal to the current one.
    */
   public equals = (otherAvatar: Avatar): boolean =>
-    this.isSameUrl(this._url, otherAvatar._url) &&
-    this.isSameAltText(this._altText, otherAvatar._altText);
+    this._isSameUrl(this._url, otherAvatar._url) &&
+    this._isSameAltText(this._altText, otherAvatar._altText);
 }
 
 /**
@@ -89,10 +89,10 @@ export default class Participant {
     });
   }
 
-  private isSameName = (name1: string, name2: string): boolean =>
+  private _isSameName = (name1: string, name2: string): boolean =>
     name1 === name2;
 
-  private isSameAvatar = (avatar1?: Avatar, avatar2?: Avatar): boolean =>
+  private _isSameAvatar = (avatar1?: Avatar, avatar2?: Avatar): boolean =>
     avatar1 && avatar2
       ? avatar1.equals(avatar2)
       : !avatar1 && !avatar2
@@ -105,6 +105,6 @@ export default class Participant {
    * @returns {boolean} Whether the other participant is equal to the current one.
    */
   public equals = (otherParticipant: Participant): boolean =>
-    this.isSameName(this._name, otherParticipant._name) &&
-    this.isSameAvatar(this._avatar, otherParticipant._avatar);
+    this._isSameName(this._name, otherParticipant._name) &&
+    this._isSameAvatar(this._avatar, otherParticipant._avatar);
 }

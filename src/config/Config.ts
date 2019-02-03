@@ -41,38 +41,38 @@ class Config {
   private _speed: AnimationSpeed;
   private _participantsPerMatch: AnimationSpeed;
 
-  private getRandomGenerator = (): Random => {
+  private _getRandomGenerator = (): Random => {
     const randomEngine: Engine = Random.engines.mt19937();
     return new Random(randomEngine);
   };
 
-  private getMessage = (): string[] => ConfigJson.messages;
+  private _getMessage = (): string[] => ConfigJson.messages;
 
-  private createParticipant = (user: string | ParticipantJson): Participant =>
+  private _createParticipant = (user: string | ParticipantJson): Participant =>
     typeof user === "string"
       ? new Participant(user)
       : new Participant(
           (<ParticipantJson>user).name,
-          this.createAvatar((<ParticipantJson>user).avatar),
+          this._createAvatar((<ParticipantJson>user).avatar),
         );
 
-  private createAvatar = (avatar?: AvatarJson): Avatar | undefined =>
+  private _createAvatar = (avatar?: AvatarJson): Avatar | undefined =>
     avatar ? new Avatar(avatar.url, avatar.altText) : undefined;
 
-  private getParticipants = (): Participant[] =>
-    ConfigJson.users.map(this.createParticipant);
+  private _getParticipants = (): Participant[] =>
+    ConfigJson.users.map(this._createParticipant);
 
-  private getSpeed = (): AnimationSpeed => AnimationSpeed.ONE;
+  private _getSpeed = (): AnimationSpeed => AnimationSpeed.ONE;
 
-  private getParticipantsPerMatch = (): number =>
+  private _getParticipantsPerMatch = (): number =>
     ConfigJson.participantsPerMatch;
 
   constructor() {
-    this._randomGenerator = this.getRandomGenerator();
-    this._messages = this.getMessage();
-    this._allParticipants = this.getParticipants();
-    this._speed = this.getSpeed();
-    this._participantsPerMatch = this.getParticipantsPerMatch();
+    this._randomGenerator = this._getRandomGenerator();
+    this._messages = this._getMessage();
+    this._allParticipants = this._getParticipants();
+    this._speed = this._getSpeed();
+    this._participantsPerMatch = this._getParticipantsPerMatch();
   }
 
   /**
