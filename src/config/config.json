@@ -1,5 +1,6 @@
 {
   "seed": 1234567890,
+  "participantsPerMatch": 2,
   "messages": [
     "#loser was killed by their childhood friend.",
     "#loser committed sudoku.",
@@ -15,5 +16,6 @@
     "#winner winner winner, fuck your dinner.",
     "#loser ur mum also gay.",
     "#winner wins better than a harem protagonist wins women."
-  ]
+  ],
+  "users": ["FOO", "BAR", "FAZ", "BAZ", "FOX"]
 }
