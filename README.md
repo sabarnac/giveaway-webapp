@@ -1,3 +1,7 @@
+# Note:- This branch is specific to refactoring the application in React using MobX for state management. Be careful when making changes here as nothing is fixed. Also note anything may be outdated, including this README!
+
+## YOU HAVE BEEN WARNED
+
 # The Giveaway Tournament App
 
 Ever wanted to have a giveaway but didn't want to just randomly select a winner? Then just compile this app with a seed, a list of random messages to display for each match, and a list of users, and then just compile and host the generated files on a web server for everyone to see! The fixed seed ensures everyone sees the same results, while the Mersenne Twister engine ensures the random distribution of results is uniform!
@@ -10,8 +14,8 @@ Ever wanted to have a giveaway but didn't want to just randomly select a winner?
 1. Clone this repository.
 2. Execute `npm i`.
 3. Modify `src/config.json` with a seed value and a list of messages to show when a match is concluded.
-    - `#winner` in the message gets replaced with the name of the winner.
-    - `#loser` in the message gets replaced with the name of the loser.
+   - `#winner` in the message gets replaced with the name of the winner.
+   - `#loser` in the message gets replaced with the name of the loser.
 4. Modify `src/users.json` with the list of names of the participants in the tournament.
 5. Execute `npm run build:prod`.
 6. Host the contents of the generated `dist` folder on your website's web server.
