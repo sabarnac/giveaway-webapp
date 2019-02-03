@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import logo from "./logo.png";
-import "./App.css";
+import { observer } from "mobx-react";
+import "./TournamentApp.css";
+import Tournament from "./store/Tournament";
 
-class App extends Component {
+interface TournamentProps {
+  tournament: Tournament;
+}
+
+@observer
+class TournamentApp extends Component<TournamentProps> {
   render() {
     return (
       <div className="App">
@@ -25,4 +32,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default TournamentApp;
