@@ -21,7 +21,7 @@ interface ParticipantJson {
 /**
  * Enumeration of possible animation speeds.
  */
-export const enum AnimationSpeed {
+export enum AnimationSpeed {
   HALF = 0.5,
   ONE = 1,
   ONE_POINT_FIVE = 1.5,

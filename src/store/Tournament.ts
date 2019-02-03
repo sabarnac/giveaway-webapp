@@ -15,11 +15,11 @@ export default class Tournament {
     new Round(participants);
 
   private _getRounds = (): Round[] => {
-    const rounds: Round[] = [this._createRound(Tournament._PARTICIPANTS)];
-    while (!this.hasWinner) {
-      rounds.push(this._createRound(this._latestRound.winners));
+    this._rounds = [this._createRound(Tournament._PARTICIPANTS)];
+    while (!this._hasWinner) {
+      this._rounds.push(this._createRound(this._latestRound.winners));
     }
-    return rounds;
+    return this._rounds;
   };
 
   public constructor() {
@@ -30,7 +30,7 @@ export default class Tournament {
     return <Round>last(this._rounds);
   }
 
-  @computed private get hasWinner(): boolean {
+  @computed private get _hasWinner(): boolean {
     return this._latestRound.winners.length === 1;
   }
 
@@ -44,9 +44,9 @@ export default class Tournament {
 
   /**
    * Gets the final winner of the tournament.
-   * @returns {Participant} The final winner.
+   * @returns {Participant} The final winner, or null if there is none.
    */
-  @computed public get winner(): Participant {
+  @computed public get winner(): Participant | null {
     return <Participant>this._latestRound.winners[0];
   }
 }

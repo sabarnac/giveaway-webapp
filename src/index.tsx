@@ -4,6 +4,7 @@ import "./index.css";
 import TournamentApp from "./TournamentApp";
 import * as serviceWorker from "./serviceWorker";
 import Tournament from "./store/Tournament";
+import { autorun } from "mobx";
 
 const store = new Tournament();
 
