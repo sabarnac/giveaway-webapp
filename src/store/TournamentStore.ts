@@ -1,4 +1,4 @@
-import { observable, computed, action } from "mobx";
+import { observable, computed } from "mobx";
 import Participant from "./Participant";
 import last from "lodash.last";
 import Config from "../config/Config";
@@ -7,7 +7,7 @@ import Round from "./Round";
 /**
  * Class containing the details of a tournament.
  */
-export default class Tournament {
+export default class TournamentStore {
   @observable private _rounds: Round[];
   private static _PARTICIPANTS: Participant[] = Config.allParticipants;
 
@@ -15,7 +15,7 @@ export default class Tournament {
     new Round(participants);
 
   private _getRounds = (): Round[] => {
-    const rounds: Round[] = [this._createRound(Tournament._PARTICIPANTS)];
+    const rounds: Round[] = [this._createRound(TournamentStore._PARTICIPANTS)];
     while (!this.hasWinner) {
       rounds.push(this._createRound(this._latestRound.winners));
     }

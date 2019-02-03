@@ -1,4 +1,4 @@
-import { observable, computed, action } from "mobx";
+import { observable, computed } from "mobx";
 import Participant from "./Participant";
 import Random from "random-js";
 import Config from "../config/Config";
