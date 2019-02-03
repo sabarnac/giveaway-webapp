@@ -5,11 +5,13 @@
   "dependencies": {
     "@types/jest": "23.3.13",
     "@types/lodash.chunk": "^4.2.4",
+    "@types/lodash.last": "^3.0.4",
     "@types/node": "10.12.21",
     "@types/random-js": "^1.0.31",
     "@types/react": "^16.8.1",
     "@types/react-dom": "16.0.11",
     "lodash.chunk": "^4.2.0",
+    "lodash.last": "^3.0.0",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
     "random-js": "^1.0.8",
