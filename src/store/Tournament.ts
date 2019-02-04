@@ -38,7 +38,7 @@ export default class Tournament {
    * Gets the list of rounds in the tournament.
    * @returns {Round[]} The rounds in the tournament.
    */
-  public get rounds(): Round[] {
+  @computed public get rounds(): Round[] {
     return this._rounds;
   }
 

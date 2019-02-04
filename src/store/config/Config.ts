@@ -1,7 +1,7 @@
 import Participant, { Avatar } from "../Participant";
 import ConfigJson from "./config.json";
 import Random, { Engine } from "random-js";
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 
 /**
  * Interface for JSON object representing avatar details.
@@ -80,7 +80,7 @@ class Config {
    * Get the random generator.
    * @return {Random}
    */
-  public get randomGenerator(): Random {
+  @computed public get randomGenerator(): Random {
     return this._randomGenerator;
   }
 
@@ -88,7 +88,7 @@ class Config {
    * Get the list of winner/loser messages.
    * @return {string[]}
    */
-  public get messages(): string[] {
+  @computed public get messages(): string[] {
     return this._messages;
   }
 
@@ -96,7 +96,7 @@ class Config {
    * Get the list of all participants in the giveaway.
    * @return {Participant[]}
    */
-  public get allParticipants(): Participant[] {
+  @computed public get allParticipants(): Participant[] {
     return this._allParticipants;
   }
 
@@ -104,7 +104,7 @@ class Config {
    * Get the number of participants per match.
    * @return {AnimationSpeed}
    */
-  public get participantsPerMatch(): AnimationSpeed {
+  @computed public get participantsPerMatch(): AnimationSpeed {
     return this._participantsPerMatch;
   }
 
@@ -112,7 +112,7 @@ class Config {
    * Get the speed multiplier for animations.
    * @return {AnimationSpeed}
    */
-  public get speed(): AnimationSpeed {
+  @computed public get speed(): AnimationSpeed {
     return this._speed;
   }
 
@@ -121,8 +121,9 @@ class Config {
    * @param {AnimationSpeed} value The new speed multiplier value.
    * @returns {AnimationSpeed} The set speed multiplier value.
    */
-  @action public setSpeed = (value: AnimationSpeed): AnimationSpeed =>
-    (this._speed = value);
+  public set speed(value: AnimationSpeed) {
+    this._speed = value;
+  }
 }
 
 export default new Config();

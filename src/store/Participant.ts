@@ -16,7 +16,7 @@ export class Avatar {
    * Gets the avatar URL.
    * @return {string} The avatar URL.
    */
-  public get url(): string {
+  @computed public get url(): string {
     return this._url;
   }
 
@@ -24,7 +24,7 @@ export class Avatar {
    * Gets the avatar image alternate text.
    * @return {string} The avatar image alternate text.
    */
-  public get altText(): string {
+  @computed public get altText(): string {
     return this._altText;
   }
 
@@ -59,24 +59,8 @@ export default class Participant {
    * Gets the participant name.
    * @return {string} The participant name.
    */
-  public get name(): string {
+  @computed public get name(): string {
     return this._name;
-  }
-
-  /**
-   * Gets the participant avatar, if it exists.
-   * @return {string | null} The participant avatar, or null if there isn't one.
-   */
-  public get avatar(): Avatar | null {
-    return this._avatar || null;
-  }
-
-  /**
-   * Gets whether the participant has an avatar or not.
-   * @returns {boolean} Whether the participant has an avatar or not.
-   */
-  @computed public get hasAvatar(): boolean {
-    return !!this._avatar;
   }
 
   /**
@@ -87,6 +71,22 @@ export default class Participant {
     return this._name.replace(/\w\S*/g, (subText: string) => {
       return subText.charAt(0).toUpperCase() + subText.substr(1).toLowerCase();
     });
+  }
+
+  /**
+   * Gets the participant avatar, if it exists.
+   * @return {string | null} The participant avatar, or null if there isn't one.
+   */
+  @computed public get avatar(): Avatar | null {
+    return this._avatar || null;
+  }
+
+  /**
+   * Gets whether the participant has an avatar or not.
+   * @returns {boolean} Whether the participant has an avatar or not.
+   */
+  @computed public get hasAvatar(): boolean {
+    return !!this._avatar;
   }
 
   private _isSameName = (name1: string, name2: string): boolean =>

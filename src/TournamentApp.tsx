@@ -16,7 +16,6 @@ class TournamentApp extends Component<TournamentProps> {
     isDevEnvironment() ? <DevTools /> : null;
 
   public render = (): JSX.Element => {
-    console.log(this.props);
     return (
       <Fragment>
         <div className="App">

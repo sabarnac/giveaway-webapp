@@ -35,7 +35,7 @@ export default class Match {
    * Get the list of participants in the match.
    * @return {Participant[]} The list of participants.
    */
-  public get participants(): Participant[] {
+  @computed public get participants(): Participant[] {
     return this._participants;
   }
 
@@ -43,7 +43,7 @@ export default class Match {
    * Get the winner of the match.
    * @return {Participant} The winner.
    */
-  public get winner(): Participant {
+  @computed public get winner(): Participant {
     return this._winner;
   }
 }
