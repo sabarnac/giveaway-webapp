@@ -1,7 +1,7 @@
 import { observable, computed } from "mobx";
 import Participant from "./Participant";
 import last from "lodash.last";
-import Config from "../config/Config";
+import Config from "./config/Config";
 import Round from "./Round";
 
 /**
@@ -9,13 +9,13 @@ import Round from "./Round";
  */
 export default class Tournament {
   @observable private _rounds: Round[];
-  private static _PARTICIPANTS: Participant[] = Config.allParticipants;
+  private _allParticipants: Participant[] = Config.allParticipants;
 
   private _createRound = (participants: Participant[]): Round =>
     new Round(participants);
 
   private _getRounds = (): Round[] => {
-    this._rounds = [this._createRound(Tournament._PARTICIPANTS)];
+    this._rounds = [this._createRound(this._allParticipants)];
     while (!this._hasWinner) {
       this._rounds.push(this._createRound(this._latestRound.winners));
     }

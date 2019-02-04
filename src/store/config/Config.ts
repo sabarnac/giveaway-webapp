@@ -1,6 +1,7 @@
-import Participant, { Avatar } from "../store/Participant";
+import Participant, { Avatar } from "../Participant";
 import ConfigJson from "./config.json";
 import Random, { Engine } from "random-js";
+import { observable, action } from "mobx";
 
 /**
  * Interface for JSON object representing avatar details.
@@ -35,11 +36,11 @@ export enum AnimationSpeed {
  * Class representing the basic configuration of the application.
  */
 class Config {
-  private _randomGenerator: Random;
-  private _messages: string[];
-  private _allParticipants: Participant[];
-  private _speed: AnimationSpeed;
-  private _participantsPerMatch: AnimationSpeed;
+  @observable private _randomGenerator: Random;
+  @observable private _messages: string[];
+  @observable private _allParticipants: Participant[];
+  @observable private _participantsPerMatch: number;
+  @observable private _speed: AnimationSpeed;
 
   private _getRandomGenerator = (): Random => {
     const randomEngine: Engine = Random.engines.mt19937();
@@ -62,17 +63,17 @@ class Config {
   private _getParticipants = (): Participant[] =>
     ConfigJson.users.map(this._createParticipant);
 
-  private _getSpeed = (): AnimationSpeed => AnimationSpeed.ONE;
-
   private _getParticipantsPerMatch = (): number =>
     ConfigJson.participantsPerMatch;
+
+  private _getSpeed = (): AnimationSpeed => AnimationSpeed.ONE;
 
   constructor() {
     this._randomGenerator = this._getRandomGenerator();
     this._messages = this._getMessage();
     this._allParticipants = this._getParticipants();
-    this._speed = this._getSpeed();
     this._participantsPerMatch = this._getParticipantsPerMatch();
+    this._speed = this._getSpeed();
   }
 
   /**
@@ -100,6 +101,14 @@ class Config {
   }
 
   /**
+   * Get the number of participants per match.
+   * @return {AnimationSpeed}
+   */
+  public get participantsPerMatch(): AnimationSpeed {
+    return this._participantsPerMatch;
+  }
+
+  /**
    * Get the speed multiplier for animations.
    * @return {AnimationSpeed}
    */
@@ -110,18 +119,10 @@ class Config {
   /**
    * Set the speed multiplier for animations.
    * @param {AnimationSpeed} value The new speed multiplier value.
+   * @returns {AnimationSpeed} The set speed multiplier value.
    */
-  public set speed(value: AnimationSpeed) {
-    this._speed = value;
-  }
-
-  /**
-   * Get the number of participants per match.
-   * @return {AnimationSpeed}
-   */
-  public get participantsPerMatch(): AnimationSpeed {
-    return this._participantsPerMatch;
-  }
+  @action public setSpeed = (value: AnimationSpeed): AnimationSpeed =>
+    (this._speed = value);
 }
 
 export default new Config();
