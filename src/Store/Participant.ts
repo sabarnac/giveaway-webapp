@@ -1,4 +1,5 @@
 import { observable, computed } from "mobx";
+import { createAvatarImage } from "../util";
 
 /**
  * Class containing the details of a participants' avatar.
@@ -48,11 +49,15 @@ export class Avatar {
  */
 export default class Participant {
   @observable private _name: string;
-  @observable private _avatar?: Avatar;
+  @observable private _avatar: Avatar;
+
+  private _getOrCreateAvatar = (name: string, avatar?: Avatar): Avatar => {
+    return avatar || new Avatar(createAvatarImage(name), name);
+  };
 
   public constructor(name: string, avatar?: Avatar) {
     this._name = name;
-    this._avatar = avatar;
+    this._avatar = this._getOrCreateAvatar(name, avatar);
   }
 
   /**
@@ -75,29 +80,17 @@ export default class Participant {
 
   /**
    * Gets the participant avatar, if it exists.
-   * @return {string | null} The participant avatar, or null if there isn't one.
+   * @return {string} The participant avatar.
    */
-  @computed public get avatar(): Avatar | null {
-    return this._avatar || null;
-  }
-
-  /**
-   * Gets whether the participant has an avatar or not.
-   * @returns {boolean} Whether the participant has an avatar or not.
-   */
-  @computed public get hasAvatar(): boolean {
-    return !!this._avatar;
+  @computed public get avatar(): Avatar {
+    return this._avatar;
   }
 
   private _isSameName = (name1: string, name2: string): boolean =>
     name1 === name2;
 
-  private _isSameAvatar = (avatar1?: Avatar, avatar2?: Avatar): boolean =>
-    avatar1 && avatar2
-      ? avatar1.equals(avatar2)
-      : !avatar1 && !avatar2
-      ? true
-      : false;
+  private _isSameAvatar = (avatar1: Avatar, avatar2: Avatar): boolean =>
+    avatar1.equals(avatar2);
 
   /**
    * Determines whether another participant is identical to the current one.

@@ -1,7 +1,6 @@
 import { observable, computed } from "mobx";
 import Participant from "./Participant";
-import Random from "random-js";
-import Config from "./config/Config";
+import Config from "./Config/Config";
 import chunk from "lodash.chunk";
 import Match from "./Match";
 
@@ -10,22 +9,24 @@ import Match from "./Match";
  */
 export default class Round {
   @observable public matches: Match[];
-  private _randomGenerator: Random = Config.randomGenerator;
-  private _participantsPerMatch: number = Config.participantsPerMatch;
+
+  private _config: Config;
 
   private _shuffleParticipants = (participants: Participant[]): Participant[] =>
-    this._randomGenerator.shuffle(participants);
+    this._config.randomGenerator.shuffle(participants);
 
   private _createMatch = (participants: Participant[]): Match =>
-    new Match(participants);
+    new Match(this._config, participants);
 
   private _getMatches = (participants: Participant[]): Match[] =>
     chunk(
       this._shuffleParticipants(participants),
-      this._participantsPerMatch,
+      this._config.participantsPerMatch,
     ).map(this._createMatch);
 
-  public constructor(participants: Participant[]) {
+  public constructor(config: Config, participants: Participant[]) {
+    this._config = config;
+
     this.matches = this._getMatches(participants);
   }
 

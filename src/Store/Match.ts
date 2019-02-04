@@ -1,7 +1,6 @@
 import { observable, computed } from "mobx";
 import Participant from "./Participant";
-import Random from "random-js";
-import Config from "./config/Config";
+import Config from "./Config/Config";
 
 /**
  * Class containing details of a match.
@@ -10,12 +9,14 @@ export default class Match {
   @observable private _participants: Participant[];
   @observable private _winner: Participant;
 
-  private _randomGenerator: Random = Config.randomGenerator;
+  private _config: Config;
 
   private _getWinner = (): Participant =>
-    this._randomGenerator.pick(this._participants);
+    this._config.randomGenerator.pick(this._participants);
 
-  public constructor(participants: Participant[]) {
+  public constructor(config: Config, participants: Participant[]) {
+    this._config = config;
+
     this._participants = participants;
     this._winner = this._getWinner();
   }

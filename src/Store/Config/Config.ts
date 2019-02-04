@@ -1,7 +1,7 @@
 import Participant, { Avatar } from "../Participant";
 import ConfigJson from "./config.json";
 import Random, { Engine } from "random-js";
-import { observable, action, computed } from "mobx";
+import { observable, computed } from "mobx";
 
 /**
  * Interface for JSON object representing avatar details.
@@ -35,12 +35,14 @@ export enum AnimationSpeed {
 /**
  * Class representing the basic configuration of the application.
  */
-class Config {
+export default class Config {
   @observable private _randomGenerator: Random;
   @observable private _messages: string[];
   @observable private _allParticipants: Participant[];
   @observable private _participantsPerMatch: number;
   @observable private _speed: AnimationSpeed;
+
+  private static _instance: Config | null = null;
 
   private _getRandomGenerator = (): Random => {
     const randomEngine: Engine = Random.engines.mt19937();
@@ -68,12 +70,18 @@ class Config {
 
   private _getSpeed = (): AnimationSpeed => AnimationSpeed.ONE;
 
-  constructor() {
+  private constructor() {
     this._randomGenerator = this._getRandomGenerator();
     this._messages = this._getMessage();
     this._allParticipants = this._getParticipants();
     this._participantsPerMatch = this._getParticipantsPerMatch();
     this._speed = this._getSpeed();
+  }
+
+  @computed public static get instance(): Config {
+    return Config._instance
+      ? Config._instance
+      : (Config._instance = new Config());
   }
 
   /**
@@ -125,5 +133,3 @@ class Config {
     this._speed = value;
   }
 }
-
-export default new Config();
