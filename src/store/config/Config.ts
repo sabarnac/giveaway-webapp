@@ -1,4 +1,4 @@
-import Participant, { Avatar } from "../Participant";
+import Participant, { Avatar } from "../round/match/participant/Participant";
 import ConfigJson from "./config.json";
 import Random, { Engine } from "random-js";
 import { observable, computed } from "mobx";
@@ -29,7 +29,7 @@ export enum AnimationSpeed {
   TWO = 2,
   FIVE = 5,
   TEN = 10,
-  TWENTY = 20,
+  TWENTY = 20
 }
 
 /**
@@ -56,7 +56,7 @@ export default class Config {
       ? new Participant(user)
       : new Participant(
           (<ParticipantJson>user).name,
-          this._createAvatar((<ParticipantJson>user).avatar),
+          this._createAvatar((<ParticipantJson>user).avatar)
         );
 
   private _createAvatar = (avatar?: AvatarJson): Avatar | undefined =>

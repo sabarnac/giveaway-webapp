@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.scss";
 import TournamentApp from "./TournamentView";
 import * as serviceWorker from "./serviceWorker";
-import Tournament from "./Store/Tournament";
-import Config from "./Store/Config/Config";
+import Tournament from "./store/Tournament";
+import Config from "./store/config/Config";
 
 const store = new Tournament(Config.instance);
 
 ReactDOM.render(
   <TournamentApp tournament={store} />,
-  document.getElementById("root"),
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

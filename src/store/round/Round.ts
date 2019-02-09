@@ -1,8 +1,8 @@
 import { observable, computed } from "mobx";
-import Participant from "./Participant";
-import Config from "./Config/Config";
+import Participant from "./match/participant/Participant";
+import Config from "../config/Config";
 import chunk from "lodash.chunk";
-import Match from "./Match";
+import Match from "./match/Match";
 
 /**
  * Class containing the details of a round of the tournament.
@@ -21,7 +21,7 @@ export default class Round {
   private _getMatches = (participants: Participant[]): Match[] =>
     chunk(
       this._shuffleParticipants(participants),
-      this._config.participantsPerMatch,
+      this._config.participantsPerMatch
     ).map(this._createMatch);
 
   public constructor(config: Config, participants: Participant[]) {

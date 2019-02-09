@@ -1,8 +1,8 @@
 import { observable, computed } from "mobx";
-import Participant from "./Participant";
+import Participant from "./round/match/participant/Participant";
 import last from "lodash.last";
-import Config from "./Config/Config";
-import Round from "./Round";
+import Config from "./config/Config";
+import Round from "./round/Round";
 
 /**
  * Class containing the details of a tournament.

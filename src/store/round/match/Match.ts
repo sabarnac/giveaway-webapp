@@ -1,6 +1,6 @@
 import { observable, computed } from "mobx";
-import Participant from "./Participant";
-import Config from "./Config/Config";
+import Participant from "./participant/Participant";
+import Config from "../../config/Config";
 
 /**
  * Class containing details of a match.

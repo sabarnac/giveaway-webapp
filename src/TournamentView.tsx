@@ -2,10 +2,10 @@ import React, { Component, Fragment } from "react";
 import { observer } from "mobx-react";
 import "./TournamentView.scss";
 import classNames from "classnames";
-import Tournament from "./Store/Tournament";
+import Tournament from "./store/Tournament";
 import DevTools from "mobx-react-devtools";
 import { isDevEnvironment } from "./util";
-import ParticipantEntry from "./Participant/Entry/ParticipantEntry";
+import ParticipantEntry from "./participant/entry/ParticipantEntry";
 
 interface TournamentViewProps {
   tournament: Tournament;

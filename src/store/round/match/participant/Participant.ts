@@ -1,5 +1,5 @@
 import { observable, computed } from "mobx";
-import { createAvatarImage } from "../util";
+import { createAvatarImage } from "../../../../util";
 
 /**
  * Class containing the details of a participants' avatar.
