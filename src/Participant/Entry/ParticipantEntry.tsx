@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import "./ParticipantEntry.scss";
 import classNames from "classnames";
-import Participant from "../Store/Participant";
+import Participant from "../../Store/Participant";
 
 interface ParticipantEntryProps {
   participant: Participant;

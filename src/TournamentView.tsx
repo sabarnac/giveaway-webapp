@@ -5,7 +5,7 @@ import classNames from "classnames";
 import Tournament from "./Store/Tournament";
 import DevTools from "mobx-react-devtools";
 import { isDevEnvironment } from "./util";
-import ParticipantEntry from "./Participant/ParticipantEntry";
+import ParticipantEntry from "./Participant/Entry/ParticipantEntry";
 
 interface TournamentViewProps {
   tournament: Tournament;
