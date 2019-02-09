@@ -8,15 +8,15 @@ exports[`ParticipantEntry Component. Matches snapshot. 1`] = `
     className="participant-entry__avatar"
   >
     <img
-      alt="barfoo"
-      src="foobar"
+      alt="barfoo-1"
+      src="foobar-1"
     />
   </div>
   <div
     className="participant-entry__name"
   >
     <strong>
-      fozbaz
+      fozbaz-1
     </strong>
   </div>
 </div>

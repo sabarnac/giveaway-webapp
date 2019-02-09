@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchView Component. Matches snapshot. 1`] = `
+<div
+  className="match"
+>
+  <div
+    className="match__list"
+  >
+    <div
+      className="participant-entry"
+    >
+      <div
+        className="participant-entry__avatar"
+      >
+        <img
+          alt="barfoo-1"
+          src="foobar-1"
+        />
+      </div>
+      <div
+        className="participant-entry__name"
+      >
+        <strong>
+          fozbaz-1
+        </strong>
+      </div>
+    </div>
+    <div
+      className="participant-entry"
+    >
+      <div
+        className="participant-entry__avatar"
+      >
+        <img
+          alt="barfoo-2"
+          src="foobar-2"
+        />
+      </div>
+      <div
+        className="participant-entry__name"
+      >
+        <strong>
+          fozbaz-2
+        </strong>
+      </div>
+    </div>
+  </div>
+  <div
+    className="match__winner"
+  >
+    <div
+      className="participant-entry"
+    >
+      <div
+        className="participant-entry__avatar"
+      >
+        <img
+          alt="barfoo-1"
+          src="foobar-1"
+        />
+      </div>
+      <div
+        className="participant-entry__name"
+      >
+        <strong>
+          fozbaz-1
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>
+`;

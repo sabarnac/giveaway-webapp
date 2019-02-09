@@ -1,0 +1,16 @@
+.match {
+    width: 100%;
+    display: flex;
+    .match__list {
+        width: 50%;
+    }
+    .match__winner {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        .participant-entry {
+            background: #00ff00;
+            border-left: none;
+        }
+    }
+}

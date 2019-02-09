@@ -3,7 +3,7 @@ node_js:
   - 10
 script:
   - npm run build
-  - npm test
+  - npm test --coverage
 
 # blocklist
 branches:

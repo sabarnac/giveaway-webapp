@@ -5,7 +5,7 @@ import classNames from "classnames";
 import Tournament from "./store/Tournament";
 import DevTools from "mobx-react-devtools";
 import { isDevEnvironment } from "./util";
-import ParticipantEntry from "./participant/entry/ParticipantEntry";
+import MatchView from "./match/MatchView";
 
 interface TournamentViewProps {
   tournament: Tournament;
@@ -20,7 +20,7 @@ class TournamentView extends Component<TournamentViewProps> {
     return (
       <Fragment>
         <div className={classNames("tournament")}>
-          <ParticipantEntry participant={this.props.tournament.winner} />
+          <MatchView match={this.props.tournament.rounds[0].matches[0]} />
         </div>
         {this.getMobxDevTools()}
       </Fragment>

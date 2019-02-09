@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import "./ParticipantEntry.scss";
+import "./ParticipantCard.scss";
 import classNames from "classnames";
-import Participant from "../../store/round/match/participant/Participant";
+import Participant from "../../../store/round/match/participant/Participant";
 
-interface ParticipantEntryProps {
+interface ParticipantCardProps {
   participant: Participant;
 }
 
 @observer
-class ParticipantEntry extends Component<ParticipantEntryProps> {
+class ParticipantCard extends Component<ParticipantCardProps> {
   private getNameView = (): JSX.Element => (
-    <div className={classNames("participant-entry__name")}>
+    <div className={classNames("participant-card__name")}>
       <strong>{this.props.participant.name}</strong>
     </div>
   );
@@ -24,14 +24,14 @@ class ParticipantEntry extends Component<ParticipantEntryProps> {
   );
 
   private getAvatarView = (): JSX.Element => (
-    <div className={classNames("participant-entry__avatar")}>
+    <div className={classNames("participant-card__avatar")}>
       {this.getAvatarImage()}
     </div>
   );
 
   public render = (): JSX.Element => {
     return (
-      <div className={classNames("participant-entry")}>
+      <div className={classNames("participant-card")}>
         {this.getAvatarView()}
         {this.getNameView()}
       </div>
@@ -39,4 +39,4 @@ class ParticipantEntry extends Component<ParticipantEntryProps> {
   };
 }
 
-export default ParticipantEntry;
+export default ParticipantCard;
