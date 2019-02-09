@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ParticipantEntry Component. Matches snapshot. 1`] = `
+<div
+  className="participant-entry"
+>
+  <div
+    className="participant-entry__avatar"
+  >
+    <img
+      alt="barfoo"
+      src="foobar"
+    />
+  </div>
+  <div
+    className="participant-entry__name"
+  >
+    <strong>
+      fozbaz
+    </strong>
+  </div>
+</div>
+`;
