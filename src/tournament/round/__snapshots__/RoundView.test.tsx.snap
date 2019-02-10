@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RoundView Component. Roundes snapshot. 1`] = `
+<div
+  className="round"
+>
+  <div
+    className="round__list"
+  >
+    <div
+      className="match"
+    >
+      <div
+        className="match__list"
+      >
+        <div
+          className="participant participant-entry"
+        >
+          <div
+            className="participant-entry__avatar"
+          >
+            <img
+              alt="barfoo-2"
+              src="foobar-2"
+            />
+          </div>
+          <div
+            className="participant-entry__name"
+          >
+            <strong>
+              fozbaz-2
+            </strong>
+          </div>
+        </div>
+        <div
+          className="participant participant-entry"
+        >
+          <div
+            className="participant-entry__avatar"
+          >
+            <img
+              alt="barfoo-3"
+              src="foobar-3"
+            />
+          </div>
+          <div
+            className="participant-entry__name"
+          >
+            <strong>
+              fozbaz-3
+            </strong>
+          </div>
+        </div>
+      </div>
+      <div
+        className="match__winner match__winner--deciding"
+      >
+        <div
+          className="participant participant-entry"
+        >
+          <div
+            className="participant-entry__avatar"
+          >
+            <img
+              alt="barfoo-2"
+              src="foobar-2"
+            />
+          </div>
+          <div
+            className="participant-entry__name"
+          >
+            <strong>
+              fozbaz-2
+            </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

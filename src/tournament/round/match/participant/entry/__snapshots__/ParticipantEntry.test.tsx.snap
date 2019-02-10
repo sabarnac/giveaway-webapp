@@ -2,7 +2,7 @@
 
 exports[`ParticipantEntry Component. Matches snapshot. 1`] = `
 <div
-  className="participant-entry"
+  className="participant participant-entry"
 >
   <div
     className="participant-entry__avatar"
