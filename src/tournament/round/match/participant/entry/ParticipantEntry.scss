@@ -5,9 +5,10 @@
     align-items: center;
     padding: 2rem;
     width: 100%;
-    border-bottom: 1px solid #000000;
+    border: 1px solid #ffffff;
+    border-bottom: none;
     &:last-child {
-        border-bottom: none;
+        border-bottom: 1px solid #ffffff;
     }
     &__avatar {
         text-align: center;

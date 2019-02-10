@@ -2,8 +2,8 @@
     width: 100%;
     display: flex;
     padding: 2rem 0;
-    border: 1px dashed #ffffff;
-    background: #90d3ff;
+    border-top: 1px dashed #ffffff;
+    border-bottom: 1px dashed #ffffff;
     &__list {
         width: 50%;
     }
@@ -16,12 +16,12 @@
         }
         &#{&}--deciding {
             &>.participant {
-                background: #ff8888;
+                background: #880000;
             }
         }
         &#{&}--final {
             &>.participant {
-                background: #73ff73;
+                background: #008800;
             }
         }
     }
