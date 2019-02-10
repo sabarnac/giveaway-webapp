@@ -1,15 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
-import TournamentApp from "./TournamentView";
 import * as serviceWorker from "./serviceWorker";
 import Tournament from "./store/Tournament";
 import Config from "./store/config/Config";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 
 const store = new Tournament(Config.instance);
 
 ReactDOM.render(
-  <TournamentApp tournament={store} />,
+  <BrowserRouter>
+    <App tournament={store} />
+  </BrowserRouter>,
   document.getElementById("root")
 );
 

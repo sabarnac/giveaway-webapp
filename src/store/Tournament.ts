@@ -18,7 +18,7 @@ export default class Tournament {
   private _getRounds = (): Round[] => {
     this._rounds = [this._createRound(this._config.allParticipants)];
     while (!this._hasWinner) {
-      this._rounds.push(this._createRound(this._latestRound.winners));
+      this._rounds.push(this._createRound(this.lastRound.winners));
     }
     return this._rounds;
   };
@@ -29,12 +29,24 @@ export default class Tournament {
     this._rounds = this._getRounds();
   }
 
-  @computed private get _latestRound(): Round {
-    return <Round>last(this._rounds);
+  @computed private get _hasWinner(): boolean {
+    return this.lastRound.winners.length === 1;
   }
 
-  @computed private get _hasWinner(): boolean {
-    return this._latestRound.winners.length === 1;
+  /**
+   * Get the first round of the tournament.
+   * @returns {Round} The first round.
+   */
+  @computed public get firstRound(): Round {
+    return <Round>this._rounds[0];
+  }
+
+  /**
+   * Get the last round of the tournament.
+   * @returns {Round} The last round.
+   */
+  @computed public get lastRound(): Round {
+    return <Round>last(this._rounds);
   }
 
   /**
@@ -50,6 +62,6 @@ export default class Tournament {
    * @returns {Participant} The final winner, or null if there is none.
    */
   @computed public get winner(): Participant {
-    return <Participant>this._latestRound.winners[0];
+    return <Participant>this.lastRound.winners[0];
   }
 }

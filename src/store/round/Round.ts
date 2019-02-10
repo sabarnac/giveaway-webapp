@@ -3,12 +3,16 @@ import Participant from "./match/participant/Participant";
 import Config from "../config/Config";
 import chunk from "lodash.chunk";
 import Match from "./match/Match";
+import last from "lodash.last";
 
 /**
  * Class containing the details of a round of the tournament.
  */
 export default class Round {
-  @observable public matches: Match[];
+  @observable private _id: string;
+  @observable private _matches: Match[];
+
+  private static counter: number = 1;
 
   private _config: Config;
 
@@ -27,7 +31,8 @@ export default class Round {
   public constructor(config: Config, participants: Participant[]) {
     this._config = config;
 
-    this.matches = this._getMatches(participants);
+    this._id = `round-${Round.counter++}`;
+    this._matches = this._getMatches(participants);
   }
 
   private _getMatchParticipants = (match: Match): Participant[] =>
@@ -38,11 +43,43 @@ export default class Round {
   private _getMatchLosers = (match: Match): Participant[] => match.losers;
 
   /**
+   * Get the match ID.
+   * @returns {string} The unique ID of the match.
+   */
+  @computed public get id(): string {
+    return this._id;
+  }
+
+  /**
+   * Get the list of matches in the round.
+   * @returns {Match[]} The list of matches.
+   */
+  @computed public get matches(): Match[] {
+    return this._matches;
+  }
+
+  /**
+   * Get the first match of the round.
+   * @returns {Match} The first match.
+   */
+  @computed public get firstMatch(): Match {
+    return this._matches[0];
+  }
+
+  /**
+   * Get the last match of the round.
+   * @returns {Match} The last match.
+   */
+  @computed public get lastMatch(): Match {
+    return <Match>last(this._matches);
+  }
+
+  /**
    * Get the list of participants in the round.
    * @returns {Participant[]} The list of participants.
    */
   @computed public get participants(): Participant[] {
-    return this.matches.map(this._getMatchParticipants).flat();
+    return this._matches.map(this._getMatchParticipants).flat();
   }
 
   /**
@@ -50,7 +87,7 @@ export default class Round {
    * @returns {Participant[]} The list of winners.
    */
   @computed public get winners(): Participant[] {
-    return this.matches.map(this._getMatchWinner);
+    return this._matches.map(this._getMatchWinner);
   }
 
   /**
@@ -58,6 +95,6 @@ export default class Round {
    * @returns {Participant[]} The list of losers.
    */
   @computed public get losers(): Participant[] {
-    return this.matches.map(this._getMatchLosers).flat();
+    return this._matches.map(this._getMatchLosers).flat();
   }
 }

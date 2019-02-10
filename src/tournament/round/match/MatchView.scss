@@ -1,0 +1,28 @@
+.match {
+    width: 100%;
+    display: flex;
+    padding: 2rem 0;
+    border: 1px dashed #ffffff;
+    background: #90d3ff;
+    &__list {
+        width: 50%;
+    }
+    &__winner {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        &>.participant-entry {
+            border-left: none;
+        }
+        &#{&}--deciding {
+            &>.participant {
+                background: #ff8888;
+            }
+        }
+        &#{&}--final {
+            &>.participant {
+                background: #73ff73;
+            }
+        }
+    }
+}

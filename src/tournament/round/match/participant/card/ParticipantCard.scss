@@ -1,18 +1,19 @@
+@import '../Participant';
 .participant-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 2rem 2rem 1rem 2rem;
-    border: 1px solid #aaa;
+    border: 1px solid #aaaaaa;
     width: 100%;
-    .participant-card__avatar {
+    &__avatar {
         text-align: center;
         height: 5rem;
         img {
             height: 5rem;
         }
     }
-    .participant-card__name {
+    &__name {
         text-align: center;
         font-size: 3rem;
         word-break: break-all;
