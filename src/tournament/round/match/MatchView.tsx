@@ -43,11 +43,14 @@ class MatchView extends Component<MatchViewProps> {
     );
   };
 
+  private getParticipantOrWinner = (): JSX.Element =>
+    this.props.isCurrentMatch ? this.getParticipant(0) : this.getWinner();
+
   public render = (): JSX.Element => {
     return (
       <div className={classNames("match")}>
         {this.getParticipantList()}
-        {this.props.isCurrentMatch ? this.getParticipant(0) : this.getWinner()}
+        {this.getParticipantOrWinner()}
       </div>
     );
   };

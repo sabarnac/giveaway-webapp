@@ -5,6 +5,7 @@ import classNames from "classnames";
 import Round from "../../store/round/Round";
 import Match from "../../store/round/match/Match";
 import MatchView from "./match/MatchView";
+import { Redirect } from "react-router";
 
 interface RoundViewProps {
   matchId: string;
@@ -17,32 +18,38 @@ class RoundView extends Component<RoundViewProps> {
     return <div className={classNames("round__list")}>{this.getMatches()}</div>;
   };
 
+  private isCurrentMatch = (match: Match): boolean =>
+    match.id === this.props.matchId;
+
   private getCurrentMatchIndex = (): number =>
-    this.props.round.matches.findIndex(
-      (match: Match): boolean => match.id === this.props.matchId
+    this.props.round.matches.findIndex(this.isCurrentMatch);
+
+  private isNotFutureMatch = (_: Match, index: number): boolean =>
+    index <= this.getCurrentMatchIndex();
+
+  private getMatchView = (match: Match): JSX.Element => (
+    <MatchView
+      key={match.id}
+      match={match}
+      isCurrentMatch={this.isCurrentMatch(match)}
+    />
+  );
+
+  private getMatches = (): JSX.Element[] =>
+    this.props.round.matches
+      .filter(this.isNotFutureMatch)
+      .map(this.getMatchView);
+
+  public render = (): JSX.Element =>
+    this.getCurrentMatchIndex() !== -1 ? (
+      <div className={classNames("round")}>{this.getMatchList()}</div>
+    ) : (
+      <Redirect
+        to={`/round/${this.props.round.id}/match/${
+          this.props.round.firstMatch.id
+        }`}
+      />
     );
-
-  private getMatches = (): JSX.Element[] => {
-    const currentMatchIndex: number = this.getCurrentMatchIndex();
-
-    return this.props.round.matches
-      .filter(
-        (match: Match, index: number): boolean => index <= currentMatchIndex
-      )
-      .map(
-        (match: Match): JSX.Element => (
-          <MatchView
-            key={match.id}
-            match={match}
-            isCurrentMatch={match.id === this.props.matchId}
-          />
-        )
-      );
-  };
-
-  public render = (): JSX.Element => {
-    return <div className={classNames("round")}>{this.getMatchList()}</div>;
-  };
 }
 
 export default RoundView;

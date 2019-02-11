@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Switch, Route, RouteComponentProps, Redirect } from "react-router";
+import {
+  Switch,
+  Route,
+  RouteComponentProps,
+  Redirect,
+  withRouter
+} from "react-router";
 import { observer } from "mobx-react";
 import Tournament from "./store/Tournament";
 import Round from "./store/round/Round";
@@ -9,67 +15,112 @@ interface AppProps {
   tournament: Tournament;
 }
 
-interface AppRouterState {
-  redirected: boolean;
+interface AppRouteProps {
+  roundId?: string;
+  matchId?: string;
+  firstRoundId?: string;
+  firstMatchId: string;
 }
 
-@observer
-class App extends Component<AppProps, AppRouterState> {
-  private getRoute = (): JSX.Element => (
-    <Route exact path="/" render={this.getApplication} />
-  );
-
-  private getApplication = (props: RouteComponentProps<any>): JSX.Element => {
-    const params: URLSearchParams = new URLSearchParams(props.location.search);
-    return params.has("roundId") && params.has("matchId")
-      ? this.getApplicationComponent(params)
-      : params.has("roundId")
-      ? this.getPartialRouteRedirect(params)
-      : this.getUnknownRouteRedirect();
-  };
-
-  private getApplicationComponent = (params: URLSearchParams): JSX.Element => (
-    <TournamentView
-      roundId={params.get("roundId") as string}
-      matchId={params.get("matchId") as string}
-      tournament={this.props.tournament}
-    />
-  );
-
-  private getPartialRouteRedirect = (params: URLSearchParams): JSX.Element => {
-    this.setState({ redirected: true });
+class AppRedirect extends Component<AppRouteProps> {
+  private getPartialRouteRedirect = (): JSX.Element => {
     return (
       <Redirect
-        to={`/?roundId=${params.get(
-          "roundId"
-        )}&matchId=${this.getFirstMatchIdOfCurrentRound(params.get(
-          "roundId"
-        ) as string)}`}
+        to={`/round/${this.props.roundId}/match/${this.props.firstMatchId}`}
       />
     );
   };
 
   private getUnknownRouteRedirect = (): JSX.Element => {
-    this.setState({ redirected: true });
     return (
       <Redirect
-        to={`/?roundId=${this.getFirstRoundId()}&matchId=${this.getFirstMatchIdOfCurrentRound(
-          this.getFirstRoundId()
-        )}`}
+        to={`/round/${this.props.firstRoundId}/match/${
+          this.props.firstMatchId
+        }`}
       />
     );
   };
 
-  private getFirstRoundId = (): string => this.props.tournament.firstRound.id;
-
-  private getFirstMatchIdOfCurrentRound = (roundId: string): string =>
-    (this.props.tournament.rounds.find(
-      (round: Round): boolean => round.id === roundId
-    ) as Round).firstMatch.id;
-
-  public componentWillMount = (): void => this.setState({ redirected: false });
-
-  public render = (): JSX.Element => <Switch>{this.getRoute()}</Switch>;
+  public render = (): JSX.Element =>
+    this.props.roundId
+      ? this.getPartialRouteRedirect()
+      : this.getUnknownRouteRedirect();
 }
 
-export default App;
+@observer
+class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
+  private getParams = (
+    routeProps: RouteComponentProps<AppRouteProps>
+  ): AppRouteProps => routeProps.match.params;
+
+  private getApplicationRoute = (): JSX.Element => (
+    <Route
+      exact
+      path="/round/:roundId/match/:matchId"
+      render={this.getApplication}
+    />
+  );
+
+  private getApplication = (
+    props: RouteComponentProps<AppRouteProps>
+  ): JSX.Element => (
+    <TournamentView
+      tournament={this.props.tournament}
+      roundId={this.getParams(props).roundId as string}
+      matchId={this.getParams(props).matchId as string}
+    />
+  );
+
+  private getPartialRoute = (): JSX.Element => (
+    <Route exact path="/round/:roundId" render={this.getPartialAppRedirect} />
+  );
+
+  private getPartialAppRedirect = (
+    props: RouteComponentProps<AppRouteProps>
+  ): JSX.Element =>
+    this.getCurrentRoundDetails(this.getParams(props).roundId as string) ? (
+      <AppRedirect
+        roundId={this.getParams(props).roundId as string}
+        firstMatchId={this.getFirstMatchIdOfCurrentRound(this.getParams(props)
+          .roundId as string)}
+      />
+    ) : (
+      this.getUnknownAppRedirect()
+    );
+
+  private getUnknownRoute = (): JSX.Element => (
+    <Route exact path="*" render={this.getUnknownAppRedirect} />
+  );
+
+  private getUnknownAppRedirect = (): JSX.Element => (
+    <AppRedirect
+      roundId={this.getFirstRoundId()}
+      firstMatchId={this.getFirstMatchIdOfCurrentRound(this.getFirstRoundId())}
+    />
+  );
+
+  private getFirstRoundId = (): string => this.props.tournament.firstRound.id;
+
+  private getIsCurrentRoundFilter = (
+    roundId: string
+  ): ((round: Round) => boolean) => (round: Round): boolean =>
+    round.id === roundId;
+
+  private getCurrentRoundDetails = (roundId: string): Round =>
+    this.props.tournament.rounds.find(
+      this.getIsCurrentRoundFilter(roundId)
+    ) as Round;
+
+  private getFirstMatchIdOfCurrentRound = (roundId: string): string =>
+    this.getCurrentRoundDetails(roundId).firstMatch.id;
+
+  public render = (): JSX.Element => (
+    <Switch>
+      {this.getApplicationRoute()}
+      {this.getPartialRoute()}
+      {this.getUnknownRoute()}
+    </Switch>
+  );
+}
+
+export default withRouter(App);

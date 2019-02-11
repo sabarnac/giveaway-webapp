@@ -4,15 +4,15 @@ import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
 import Tournament from "./store/Tournament";
 import Config from "./store/config/Config";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import App from "./App";
 
 const store = new Tournament(Config.instance);
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <App tournament={store} />
-  </BrowserRouter>,
+  </HashRouter>,
   document.getElementById("root")
 );
 

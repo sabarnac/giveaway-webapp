@@ -23,15 +23,15 @@ exports[`TournamentView Component. Full Path. Matches snapshot. 1`] = `
               className="participant-entry__avatar"
             >
               <img
-                alt="BAX"
-                src="https://api.adorable.io/avatars/480/BAX"
+                alt="BOZ"
+                src="https://api.adorable.io/avatars/480/BOZ"
               />
             </div>
             <div
               className="participant-entry__name"
             >
               <strong>
-                BAX
+                BOZ
               </strong>
             </div>
           </div>
@@ -42,15 +42,15 @@ exports[`TournamentView Component. Full Path. Matches snapshot. 1`] = `
               className="participant-entry__avatar"
             >
               <img
-                alt="BOO"
-                src="https://api.adorable.io/avatars/480/BOO"
+                alt="FOO"
+                src="https://api.adorable.io/avatars/480/FOO"
               />
             </div>
             <div
               className="participant-entry__name"
             >
               <strong>
-                BOO
+                FOO
               </strong>
             </div>
           </div>
@@ -65,15 +65,183 @@ exports[`TournamentView Component. Full Path. Matches snapshot. 1`] = `
               className="participant-entry__avatar"
             >
               <img
-                alt="BAX"
-                src="https://api.adorable.io/avatars/480/BAX"
+                alt="BOZ"
+                src="https://api.adorable.io/avatars/480/BOZ"
               />
             </div>
             <div
               className="participant-entry__name"
             >
               <strong>
-                BAX
+                BOZ
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TournamentView Component. Incorrect Full Path. Matches snapshot. 1`] = `
+<div
+  className="tournament"
+>
+  <div
+    className="round"
+  >
+    <div
+      className="round__list"
+    >
+      <div
+        className="match"
+      >
+        <div
+          className="match__list"
+        >
+          <div
+            className="participant participant-entry"
+          >
+            <div
+              className="participant-entry__avatar"
+            >
+              <img
+                alt="FAZ"
+                src="https://api.adorable.io/avatars/480/FAZ"
+              />
+            </div>
+            <div
+              className="participant-entry__name"
+            >
+              <strong>
+                FAZ
+              </strong>
+            </div>
+          </div>
+          <div
+            className="participant participant-entry"
+          >
+            <div
+              className="participant-entry__avatar"
+            >
+              <img
+                alt="BAR"
+                src="https://api.adorable.io/avatars/480/BAR"
+              />
+            </div>
+            <div
+              className="participant-entry__name"
+            >
+              <strong>
+                BAR
+              </strong>
+            </div>
+          </div>
+        </div>
+        <div
+          className="match__winner match__winner--deciding"
+        >
+          <div
+            className="participant participant-entry"
+          >
+            <div
+              className="participant-entry__avatar"
+            >
+              <img
+                alt="FAZ"
+                src="https://api.adorable.io/avatars/480/FAZ"
+              />
+            </div>
+            <div
+              className="participant-entry__name"
+            >
+              <strong>
+                FAZ
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TournamentView Component. Incorrect Partial Path. Matches snapshot. 1`] = `
+<div
+  className="tournament"
+>
+  <div
+    className="round"
+  >
+    <div
+      className="round__list"
+    >
+      <div
+        className="match"
+      >
+        <div
+          className="match__list"
+        >
+          <div
+            className="participant participant-entry"
+          >
+            <div
+              className="participant-entry__avatar"
+            >
+              <img
+                alt="BAZ"
+                src="https://api.adorable.io/avatars/480/BAZ"
+              />
+            </div>
+            <div
+              className="participant-entry__name"
+            >
+              <strong>
+                BAZ
+              </strong>
+            </div>
+          </div>
+          <div
+            className="participant participant-entry"
+          >
+            <div
+              className="participant-entry__avatar"
+            >
+              <img
+                alt="FOX"
+                src="https://api.adorable.io/avatars/480/FOX"
+              />
+            </div>
+            <div
+              className="participant-entry__name"
+            >
+              <strong>
+                FOX
+              </strong>
+            </div>
+          </div>
+        </div>
+        <div
+          className="match__winner match__winner--deciding"
+        >
+          <div
+            className="participant participant-entry"
+          >
+            <div
+              className="participant-entry__avatar"
+            >
+              <img
+                alt="BAZ"
+                src="https://api.adorable.io/avatars/480/BAZ"
+              />
+            </div>
+            <div
+              className="participant-entry__name"
+            >
+              <strong>
+                BAZ
               </strong>
             </div>
           </div>
