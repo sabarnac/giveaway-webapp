@@ -5,10 +5,9 @@
     align-items: center;
     padding: 2rem;
     width: 100%;
-    border: 1px solid #ffffff;
-    border-bottom: none;
-    &:last-child {
-        border-bottom: 1px solid #ffffff;
+    border: 1px solid #000000;
+    &--invert {
+        border: 1px solid #ffffff;
     }
     &__avatar {
         text-align: center;

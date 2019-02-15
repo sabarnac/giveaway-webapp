@@ -4,3 +4,6 @@ export const isDevEnvironment = (): boolean =>
 export const createAvatarImage = (identifier: string): string => {
   return `https://api.adorable.io/avatars/480/${identifier}`;
 };
+
+export const isInRange = (num: number, start: number, end: number): boolean =>
+  num >= start && num <= end;

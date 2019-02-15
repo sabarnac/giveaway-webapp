@@ -1,0 +1,75 @@
+.match-overlay-wrapper {
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.35);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.000001;
+    transition: opacity 500ms ease-in-out;
+    will-change: transition;
+    &--exiting,
+    &--exited {
+        opacity: 0.000001;
+    }
+    &--entered,
+    &--entering {
+        opacity: 0.99999;
+    }
+    .match-overlay {
+        border: 1px dashed #000000;
+        position: relative;
+        background: #ffffff;
+        &__list {
+            padding: 4rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 80vw;
+            color: #ffffff;
+            background: #000000;
+        }
+        &__interim {
+            padding: 4rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            opacity: 0.999999;
+            transition: opacity 500ms ease-in-out;
+            &--exiting,
+            &--exited {
+                opacity: 0.000001;
+            }
+            &--exiting,
+            &--entering,
+            &--entered {
+                opacity: 0.999999;
+            }
+        }
+        &__winner {
+            padding: 4rem 4rem 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.000001;
+            transition: opacity 500ms ease-in-out;
+            &--entering,
+            &--entered {
+                opacity: 0.000001;
+            }
+            &--entering,
+            &--entered {
+                opacity: 0.999999;
+            }
+            &>.participant-entry {
+                margin-bottom: 3rem;
+            }
+        }
+    }
+}

@@ -6,6 +6,7 @@ import Participant from "../../../../../store/round/match/participant/Participan
 
 interface ParticipantEntryProps {
   participant: Participant;
+  invert?: boolean;
 }
 
 @observer
@@ -29,14 +30,17 @@ class ParticipantEntry extends Component<ParticipantEntryProps> {
     </div>
   );
 
-  public render = (): JSX.Element => {
-    return (
-      <div className={classNames("participant", "participant-entry")}>
-        {this.getAvatarView()}
-        {this.getNameView()}
-      </div>
-    );
-  };
+  public render = (): JSX.Element => (
+    <div
+      className={classNames("participant", "participant-entry", {
+        "participant--invert": this.props.invert,
+        "participant-entry--invert": this.props.invert
+      })}
+    >
+      {this.getAvatarView()}
+      {this.getNameView()}
+    </div>
+  );
 }
 
 export default ParticipantEntry;

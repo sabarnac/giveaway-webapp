@@ -6,6 +6,7 @@ import Participant from "../../../../../store/round/match/participant/Participan
 
 interface ParticipantCardProps {
   participant: Participant;
+  invert?: boolean;
 }
 
 @observer
@@ -29,14 +30,17 @@ class ParticipantCard extends Component<ParticipantCardProps> {
     </div>
   );
 
-  public render = (): JSX.Element => {
-    return (
-      <div className={classNames("participant", "participant-card")}>
-        {this.getAvatarView()}
-        {this.getNameView()}
-      </div>
-    );
-  };
+  public render = (): JSX.Element => (
+    <div
+      className={classNames("participant", "participant-card", {
+        "participant--invert": this.props.invert,
+        "participant-card--invert": this.props.invert
+      })}
+    >
+      {this.getAvatarView()}
+      {this.getNameView()}
+    </div>
+  );
 }
 
 export default ParticipantCard;

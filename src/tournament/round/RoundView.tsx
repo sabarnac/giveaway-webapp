@@ -32,6 +32,7 @@ class RoundView extends Component<RoundViewProps> {
       key={match.id}
       match={match}
       isCurrentMatch={this.isCurrentMatch(match)}
+      onMatchComplete={() => console.log("Completed!")}
     />
   );
 
