@@ -24,9 +24,10 @@
         border: 1px dashed #000000;
         position: relative;
         background: #ffffff;
-        width: 80vw;
+        max-width: 80vw;
+        min-width: 50vw;
         &__list {
-            padding: 4rem 4rem 2rem 4rem;
+            padding: 4rem;
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -35,6 +36,9 @@
             background: #000000;
             &>.participant-card {
                 margin-bottom: 2rem;
+            }
+            &>.versus-text {
+                padding: 2rem 4rem;
             }
         }
         &__interim {

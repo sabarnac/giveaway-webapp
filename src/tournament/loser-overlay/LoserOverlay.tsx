@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { observer } from "mobx-react";
 import "./LoserOverlay.scss";
 import classNames from "classnames";
@@ -31,7 +31,7 @@ export const createLoserOverlayComponent = (config: Config) =>
         setTimeout(this.goToNextState, 1000 / config.speed);
 
       private getParticipantList = (): JSX.Element => (
-        <div>{this.getParticipants()}</div>
+        <Fragment>{this.getParticipants()}</Fragment>
       );
 
       private shouldShowLoser = (index: number) =>

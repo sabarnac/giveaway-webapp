@@ -1,6 +1,6 @@
 {
     "seed": 1234567890,
-    "participantsPerMatch": 2,
+    "participantsPerMatch": 3,
     "messages": [
         "#loser was killed by their childhood friend.",
         "#loser committed sudoku.",

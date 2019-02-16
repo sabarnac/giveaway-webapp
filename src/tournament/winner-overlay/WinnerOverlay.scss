@@ -24,7 +24,8 @@
         border: 1px dashed #000000;
         position: relative;
         background: #ffffff;
-        width: 80vw;
+        max-width: 80vw;
+        min-width: 50vw;
         &__winner {
             padding: 4rem 4rem 2rem 4rem;
             display: flex;

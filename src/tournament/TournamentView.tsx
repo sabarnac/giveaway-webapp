@@ -177,6 +177,12 @@ class TournamentView extends Component<
         ...this.state,
         currentState: this.getCurrentRoundIndex() * 2 + 1
       });
+    } else if (this.props.matchId !== prevProps.matchId) {
+      this.setState({
+        ...this.state,
+        currentState: this.getCurrentRoundIndex() * 2 + 1,
+        loserOverlayShown: false
+      });
     }
   };
 

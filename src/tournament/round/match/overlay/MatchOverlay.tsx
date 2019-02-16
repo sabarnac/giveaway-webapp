@@ -54,12 +54,19 @@ export const createMatchOverlayComponent = (config: Config) =>
       private getParticipantAndVersusPair = (
         participant: Participant
       ): JSX.Element[] => [
-        <ParticipantCard
-          invert={true}
-          key={participant.name}
-          participant={participant}
-        />,
-        <h2 key={`${participant.name} versus`}>VS</h2>
+        <div>
+          <ParticipantCard
+            invert={true}
+            key={participant.name}
+            participant={participant}
+          />
+        </div>,
+        <h2
+          className={classNames("versus-text")}
+          key={`${participant.name} versus`}
+        >
+          VS
+        </h2>
       ];
 
       private getParticipants = (): JSX.Element[] =>
