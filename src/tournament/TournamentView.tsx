@@ -11,6 +11,7 @@ import { Redirect } from "react-router";
 import { isInRange } from "../util/index";
 import { CSSTransition } from "react-transition-group";
 import WinnerOverlay from "./winner-overlay/WinnerOverlay";
+import LoserOverlay from "./loser-overlay/LoserOverlay";
 
 interface TournamentViewProps {
   roundId: string;
@@ -20,6 +21,7 @@ interface TournamentViewProps {
 
 interface TournamentViewState {
   currentState: number;
+  loserOverlayShown: boolean;
 }
 
 @observer
@@ -31,7 +33,18 @@ class TournamentView extends Component<
 
   private goToNextState = (): void =>
     this._isMounted
-      ? this.setState({ currentState: this.state.currentState + 1 })
+      ? this.setState({
+          ...this.state,
+          currentState: this.state.currentState + 1
+        })
+      : undefined;
+
+  private toggleLoserOverlayShown = (): void =>
+    this._isMounted
+      ? this.setState({
+          ...this.state,
+          loserOverlayShown: !this.state.loserOverlayShown
+        })
       : undefined;
 
   private getMobxDevTools = (): JSX.Element | null =>
@@ -46,6 +59,9 @@ class TournamentView extends Component<
   private getCurrentRoundIndex = (): number =>
     this.props.tournament.rounds.findIndex(this.isCurrentRound);
 
+  private isLastRound = (): boolean =>
+    this.props.tournament.lastRound.id === this.props.roundId;
+
   private getCurrentRound = (): JSX.Element => (
     <RoundView
       key={this.props.roundId}
@@ -54,13 +70,6 @@ class TournamentView extends Component<
       onMatchComplete={this.goToNextState}
     />
   );
-
-  public componentWillMount = (): void => {
-    this.setState({
-      currentState:
-        this.getCurrentRoundIndex() === -1 ? 0 : this.getCurrentRoundIndex() * 2
-    });
-  };
 
   private getTournamentDetails = (): JSX.Element => (
     <CSSTransition
@@ -92,6 +101,7 @@ class TournamentView extends Component<
       0,
       (this.props.tournament.rounds.length - 1) * 2 + 1
     ) &&
+    this.state.loserOverlayShown &&
     this.state.currentState % 2 === 0 &&
     this.props.tournament.rounds[this.state.currentState / 2].id !==
       this.props.roundId;
@@ -105,9 +115,13 @@ class TournamentView extends Component<
       />
     ) : null;
 
+  private shouldShowWinnerOverlay = (): boolean =>
+    this.state.currentState >= (this.getCurrentRoundIndex() + 1) * 2 &&
+    this.isLastRound();
+
   private getWinnerOverlay = (): JSX.Element => (
     <CSSTransition
-      in={this.state.currentState >= (this.getCurrentRoundIndex() + 1) * 2}
+      in={this.shouldShowWinnerOverlay()}
       timeout={500}
       classNames={{
         enter: "",
@@ -124,6 +138,34 @@ class TournamentView extends Component<
     </CSSTransition>
   );
 
+  private shouldShowLoserOverlay = (): boolean =>
+    isInRange(
+      this.state.currentState,
+      0,
+      (this.props.tournament.rounds.length - 1) * 2 + 1
+    ) &&
+    !this.state.loserOverlayShown &&
+    this.state.currentState % 2 === 0 &&
+    this.props.tournament.rounds[this.state.currentState / 2].id !==
+      this.props.roundId &&
+    !this.isLastRound();
+
+  private getLoserOverlay = (): JSX.Element | null =>
+    this.shouldShowLoserOverlay() && this.getCurrentRoundIndex() !== -1 ? (
+      <LoserOverlay
+        losers={this.getCurrentRoundDetails().losers}
+        onOverlayComplete={() => this.toggleLoserOverlayShown()}
+      />
+    ) : null;
+
+  public componentWillMount = (): void => {
+    this.setState({
+      loserOverlayShown: false,
+      currentState:
+        this.getCurrentRoundIndex() === -1 ? 0 : this.getCurrentRoundIndex() * 2
+    });
+  };
+
   public componentDidMount = (): void => {
     this._isMounted = true;
     this.goToNextState();
@@ -131,7 +173,10 @@ class TournamentView extends Component<
 
   public componentDidUpdate = (prevProps: TournamentViewProps): void => {
     if (this.props.roundId !== prevProps.roundId) {
-      this.setState({ currentState: this.getCurrentRoundIndex() * 2 + 1 });
+      this.setState({
+        ...this.state,
+        currentState: this.getCurrentRoundIndex() * 2 + 1
+      });
     }
   };
 
@@ -141,13 +186,14 @@ class TournamentView extends Component<
 
   public render = (): JSX.Element => {
     return (
-      <React.Fragment key={`round-${this.getCurrentRoundIndex()}`}>
+      <Fragment key={`round-${this.getCurrentRoundIndex()}`}>
         {this.getTournamentDetails()}
         {this.getFirstRoundRedirect()}
         {this.getNextRoundRedirect()}
+        {this.getLoserOverlay()}
         {this.getWinnerOverlay()}
         {this.getMobxDevTools()}
-      </React.Fragment>
+      </Fragment>
     );
   };
 }

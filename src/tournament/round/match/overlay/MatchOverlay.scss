@@ -11,7 +11,6 @@
     align-items: center;
     justify-content: center;
     opacity: 0.000001;
-    transition: opacity 500ms ease-in-out;
     will-change: transition;
     &--exiting,
     &--exited {
@@ -25,13 +24,13 @@
         border: 1px dashed #000000;
         position: relative;
         background: #ffffff;
+        width: 80vw;
         &__list {
             padding: 4rem 4rem 2rem 4rem;
             display: flex;
             justify-content: space-around;
             align-items: center;
             flex-wrap: wrap;
-            width: 80vw;
             color: #ffffff;
             background: #000000;
             &>.participant-card {
@@ -44,7 +43,6 @@
             justify-content: space-around;
             align-items: center;
             opacity: 0.999999;
-            transition: opacity 500ms ease-in-out;
             &--exiting,
             &--exited {
                 opacity: 0.000001;
@@ -61,7 +59,6 @@
             flex-direction: column;
             align-items: center;
             opacity: 0.000001;
-            transition: opacity 500ms ease-in-out;
             &--entering,
             &--entered {
                 opacity: 0.000001;

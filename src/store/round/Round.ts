@@ -4,6 +4,7 @@ import Config from "../config/Config";
 import chunk from "lodash.chunk";
 import Match from "./match/Match";
 import last from "lodash.last";
+import RandomGenerator from "../config/RandomGenerator";
 
 /**
  * Class containing the details of a round of the tournament.
@@ -17,10 +18,10 @@ export default class Round {
   private _config: Config;
 
   private _shuffleParticipants = (participants: Participant[]): Participant[] =>
-    this._config.randomGenerator.shuffle(participants);
+    RandomGenerator.shuffle(participants);
 
   private _createMatch = (participants: Participant[]): Match =>
-    new Match(this._config, participants);
+    new Match(participants);
 
   private _getMatches = (participants: Participant[]): Match[] =>
     chunk(

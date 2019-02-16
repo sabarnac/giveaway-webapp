@@ -1,6 +1,5 @@
 import Participant, { Avatar } from "../round/match/participant/Participant";
 import ConfigJson from "./config.json";
-import Random, { Engine } from "random-js";
 import { observable, computed } from "mobx";
 
 /**
@@ -36,7 +35,6 @@ export enum AnimationSpeed {
  * Class representing the basic configuration of the application.
  */
 export default class Config {
-  @observable private _randomGenerator: Random;
   @observable private _messages: string[];
   @observable private _allParticipants: Participant[];
   @observable private _participantsPerMatch: number;
@@ -44,12 +42,7 @@ export default class Config {
 
   private static _instance: Config | null = null;
 
-  private _getRandomGenerator = (): Random => {
-    const randomEngine: Engine = Random.engines.mt19937();
-    return new Random(randomEngine);
-  };
-
-  private _getMessage = (): string[] => ConfigJson.messages;
+  private _getMessages = (): string[] => ConfigJson.messages;
 
   private _createParticipant = (user: string | ParticipantJson): Participant =>
     typeof user === "string"
@@ -71,8 +64,7 @@ export default class Config {
   private _getSpeed = (): AnimationSpeed => AnimationSpeed.ONE;
 
   private constructor() {
-    this._randomGenerator = this._getRandomGenerator();
-    this._messages = this._getMessage();
+    this._messages = this._getMessages();
     this._allParticipants = this._getParticipants();
     this._participantsPerMatch = this._getParticipantsPerMatch();
     this._speed = this._getSpeed();
@@ -85,19 +77,11 @@ export default class Config {
   }
 
   /**
-   * Get the random generator.
-   * @return {Random}
-   */
-  @computed public get randomGenerator(): Random {
-    return this._randomGenerator;
-  }
-
-  /**
    * Get the list of winner/loser messages.
    * @return {string[]}
    */
   @computed public get messages(): string[] {
-    return this._messages;
+    return [...this._messages];
   }
 
   /**

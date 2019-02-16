@@ -7,19 +7,19 @@ import ParticipantCard from "../round/match/participant/card/ParticipantCard";
 import Config from "../../store/config/Config";
 import { CSSTransition } from "react-transition-group";
 
-interface MatchOverlayProps {
+interface WinnerOverlayProps {
   winner: Participant;
 }
 
-interface MatchOverlayState {
+interface WinnerOverlayState {
   currentState: number;
 }
 
 export const createWinnerOverlayComponent = (config: Config) =>
   observer(
     class WinnerOverlay extends Component<
-      MatchOverlayProps,
-      MatchOverlayState
+      WinnerOverlayProps,
+      WinnerOverlayState
     > {
       private _isMounted: boolean = false;
 
@@ -31,7 +31,7 @@ export const createWinnerOverlayComponent = (config: Config) =>
       private getWinner = (): JSX.Element => (
         <div className={classNames("winner-overlay__winner")}>
           <ParticipantCard participant={this.props.winner} />
-          <h3>IS THE GIVEAWAY WINNER!</h3>
+          <h3>Won The Giveaway!</h3>
         </div>
       );
 
@@ -51,7 +51,7 @@ export const createWinnerOverlayComponent = (config: Config) =>
       public render = (): JSX.Element => (
         <CSSTransition
           in={this.state.currentState > 0}
-          timeout={500}
+          timeout={500 / config.speed}
           classNames={{
             enter: "",
             enterActive: "winner-overlay-wrapper--entering",
@@ -63,7 +63,12 @@ export const createWinnerOverlayComponent = (config: Config) =>
           mountOnEnter={true}
           unmountOnExit={true}
         >
-          <div className={classNames("winner-overlay-wrapper")}>
+          <div
+            className={classNames("winner-overlay-wrapper")}
+            style={{
+              transition: `opacity ${500 / config.speed}ms ease-in-out`
+            }}
+          >
             <div className={classNames("winner-overlay")}>
               {this.getWinner()}
             </div>

@@ -10,34 +10,46 @@ import Config from "../../../../store/config/Config";
 import { CSSTransition } from "react-transition-group";
 import { isInRange } from "../../../../util/index";
 import { ClipLoader } from "react-spinners";
+import RandomGenerator from "../../../../store/config/RandomGenerator";
+import { RouteComponentProps, withRouter } from "react-router";
 
 interface MatchOverlayProps {
-  match: Match;
+  currentMatch: Match;
   onMatchComplete: () => void;
 }
 
 interface MatchOverlayState {
+  message: string;
   currentState: number;
 }
 
 export const createMatchOverlayComponent = (config: Config) =>
   observer(
-    class MatchOverlay extends Component<MatchOverlayProps, MatchOverlayState> {
+    class MatchOverlay extends Component<
+      MatchOverlayProps & RouteComponentProps,
+      MatchOverlayState
+    > {
       private _isMounted: boolean = false;
 
       private goToNextState = (): void =>
         this._isMounted
-          ? this.setState({ currentState: this.state.currentState + 1 })
+          ? this.setState({
+              ...this.state,
+              currentState: this.state.currentState + 1
+            })
           : undefined;
 
       private goToNextStateWithDelay = (): unknown =>
-        setTimeout(this.goToNextState, 4000);
+        setTimeout(this.goToNextState, 4000 / config.speed);
 
       private getParticipantList = (): JSX.Element => (
         <div className={classNames("match-overlay__list")}>
           {this.getParticipants()}
         </div>
       );
+
+      private hasQueryParam = (name: string): boolean =>
+        new URLSearchParams(this.props.location.search).has(name);
 
       private getParticipantAndVersusPair = (
         participant: Participant
@@ -51,15 +63,45 @@ export const createMatchOverlayComponent = (config: Config) =>
       ];
 
       private getParticipants = (): JSX.Element[] =>
-        this.props.match.participants
+        this.props.currentMatch.participants
           .map(this.getParticipantAndVersusPair)
           .flat()
           .slice(0, -1);
 
+      private getParticipantName = (participant: Participant): string =>
+        participant.name;
+
+      private shouldAppend = (
+        index: number,
+        participantSize: number
+      ): boolean => index === participantSize - 1 && participantSize > 1;
+
+      private appendToLastParticipant = (
+        participantSize: number,
+        stringToAppend: string
+      ): ((name: string, index: number) => string) => (
+        name: string,
+        index: number
+      ): string =>
+        this.shouldAppend(index, participantSize)
+          ? `${stringToAppend} ${name}`
+          : name;
+
+      private formatLosers = (participants: Participant[]): string =>
+        participants
+          .map(this.getParticipantName)
+          .map(this.appendToLastParticipant(participants.length, "and"))
+          .join(", ");
+
+      private getMessage = (): string =>
+        RandomGenerator.pick(config.messages)
+          .replace("#winner", this.props.currentMatch.winner.name)
+          .replace("#loser", this.formatLosers(this.props.currentMatch.losers));
+
       private getWinner = (): JSX.Element => (
         <CSSTransition
           in={this.state.currentState === 3}
-          timeout={500}
+          timeout={500 / config.speed}
           classNames={{
             enter: "",
             enterActive: "match-overlay__winner--entering",
@@ -70,11 +112,25 @@ export const createMatchOverlayComponent = (config: Config) =>
           }}
           mountOnEnter={true}
           unmountOnExit={true}
-          onEntered={this.goToNextStateWithDelay}
+          onEntered={
+            !this.hasQueryParam("stop")
+              ? this.goToNextStateWithDelay
+              : undefined
+          }
         >
-          <div className={classNames("match-overlay__winner")}>
-            <ParticipantEntry participant={this.props.match.winner} />
-            <h3>Is The Winner!</h3>
+          <div
+            className={classNames("match-overlay__winner")}
+            style={{
+              transition: `opacity ${500 / config.speed}ms ease-in-out`
+            }}
+          >
+            <ParticipantEntry participant={this.props.currentMatch.winner} />
+            <h3>Won The Match!</h3>
+            <h5>
+              <strong>
+                <em>{this.state.message}</em>
+              </strong>
+            </h5>
           </div>
         </CSSTransition>
       );
@@ -82,7 +138,7 @@ export const createMatchOverlayComponent = (config: Config) =>
       private getInterimText = (): JSX.Element => (
         <CSSTransition
           in={this.state.currentState === 1}
-          timeout={500}
+          timeout={500 / config.speed}
           classNames={{
             enter: "",
             enterActive: "match-overlay__interim--entering",
@@ -95,15 +151,20 @@ export const createMatchOverlayComponent = (config: Config) =>
           unmountOnExit={true}
           onExited={this.goToNextState}
         >
-          <div className={classNames("match-overlay__interim")}>
-            <h3>Selecting winner</h3>
+          <div
+            className={classNames("match-overlay__interim")}
+            style={{
+              transition: `opacity ${500 / config.speed}ms ease-in-out`
+            }}
+          >
+            <h3>Selecting Winner</h3>
             <ClipLoader sizeUnit={"rem"} size={3} />
           </div>
         </CSSTransition>
       );
 
       public componentWillMount = (): void => {
-        this.setState({ currentState: 0 });
+        this.setState({ message: this.getMessage(), currentState: 0 });
       };
 
       public componentDidMount = (): void => {
@@ -119,7 +180,7 @@ export const createMatchOverlayComponent = (config: Config) =>
       public render = (): JSX.Element => (
         <CSSTransition
           in={isInRange(this.state.currentState, 1, 3)}
-          timeout={500}
+          timeout={500 / config.speed}
           classNames={{
             enter: "",
             enterActive: "match-overlay-wrapper--entering",
@@ -132,7 +193,12 @@ export const createMatchOverlayComponent = (config: Config) =>
           unmountOnExit={true}
           onExited={this.props.onMatchComplete}
         >
-          <div className={classNames("match-overlay-wrapper")}>
+          <div
+            className={classNames("match-overlay-wrapper")}
+            style={{
+              transition: `opacity ${500 / config.speed}ms ease-in-out`
+            }}
+          >
             <div className={classNames("match-overlay")}>
               {this.getParticipantList()}
               {this.getInterimText()}
@@ -144,4 +210,4 @@ export const createMatchOverlayComponent = (config: Config) =>
     }
   );
 
-export default createMatchOverlayComponent(Config.instance);
+export default withRouter(createMatchOverlayComponent(Config.instance));

@@ -14,10 +14,7 @@ export const createDummyParticipant = function(id: number = 1): Participant {
 };
 
 export const createDummyMatch = (): Match => {
-  return new Match(Config.instance, [
-    createDummyParticipant(1),
-    createDummyParticipant(2)
-  ]);
+  return new Match([createDummyParticipant(1), createDummyParticipant(2)]);
 };
 
 export const createDummyRound = (): Round => {

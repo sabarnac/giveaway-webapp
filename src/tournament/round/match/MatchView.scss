@@ -5,8 +5,7 @@
     border-top: 1px dashed #ffffff;
     border-bottom: 1px dashed #ffffff;
     opacity: 0.000001;
-    transition: opacity 500ms ease-in-out;
-    will-change: transition;
+    will-change: opacity;
     &--exiting,
     &--exited {
         opacity: 0.000001;
@@ -34,8 +33,7 @@
             border-left: none;
         }
         opacity: 0.000001;
-        transition: opacity 200ms ease-in-out;
-        will-change: transition;
+        will-change: opacity;
         &--exiting,
         &--exited {
             opacity: 0.000001;

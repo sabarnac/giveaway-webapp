@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment, RefObject } from "react";
 import { observer } from "mobx-react";
 import "./MatchView.scss";
 import classNames from "classnames";
@@ -26,6 +26,7 @@ export const createMatchViewComponent = (config: Config) =>
   observer(
     class MatchView extends Component<MatchViewProps, MatchViewState> {
       private _isMounted: boolean = false;
+      private _matchRef: RefObject<any> = React.createRef();
 
       private goToNextState = (): void =>
         this._isMounted
@@ -57,17 +58,17 @@ export const createMatchViewComponent = (config: Config) =>
                   oldParticipant: this.state.currentParticipant
                 })
               : null,
-          200
+          200 / config.speed
         );
 
       private goToNextRandomParticipantWithDelay = (): unknown =>
-        setTimeout(this.goToNextRandomParticipant, 200);
+        setTimeout(this.goToNextRandomParticipant, 200 / config.speed);
 
       private goToNextStateWithDelay = (): unknown =>
-        setTimeout(this.goToNextState, 2500);
+        setTimeout(this.goToNextState, 2500 / config.speed);
 
       private onMatchCompleteWithDelay = (): unknown =>
-        setTimeout(this.props.onMatchComplete, 1000);
+        setTimeout(this.props.onMatchComplete, 1000 / config.speed);
 
       private getParticipantList = (): JSX.Element => (
         <div className={classNames("match__list")}>
@@ -85,7 +86,7 @@ export const createMatchViewComponent = (config: Config) =>
       private getWinner = (): JSX.Element => (
         <CSSTransition
           in={this.state.currentParticipant === -2}
-          timeout={200}
+          timeout={200 / config.speed}
           classNames={{
             enter: "",
             enterActive: "match__winner--entering",
@@ -103,6 +104,9 @@ export const createMatchViewComponent = (config: Config) =>
               "match__winner--completed":
                 !this.props.isCurrentMatch || !this.isAnActualMatch()
             })}
+            style={{
+              transition: `opacity ${200 / config.speed}ms ease-in-out`
+            }}
           >
             <ParticipantEntry participant={this.props.match.winner} />
           </div>
@@ -119,7 +123,7 @@ export const createMatchViewComponent = (config: Config) =>
             isInRange(this.state.currentState, 1, 2) &&
             this.state.currentParticipant === index
           }
-          timeout={200}
+          timeout={200 / config.speed}
           classNames={{
             enter: "",
             enterActive: "match__interim--entering",
@@ -133,23 +137,28 @@ export const createMatchViewComponent = (config: Config) =>
           onEntered={this.goToNoParticipantWithDelay}
           onExited={this.goToNextRandomParticipant}
         >
-          <div className={classNames("match__interim")}>
+          <div
+            className={classNames("match__interim")}
+            style={{
+              transition: `opacity ${200 / config.speed}ms ease-in-out`
+            }}
+          >
             <ParticipantEntry participant={participant} />
           </div>
         </CSSTransition>
       );
 
       private getFinalEntry = (): JSX.Element => (
-        <React.Fragment>
+        <Fragment>
           {this.props.match.participants.map(this.getParticipantFinalEntry)}
           {this.getWinner()}
-        </React.Fragment>
+        </Fragment>
       );
 
       private getMatchOverlay = (): JSX.Element | null =>
         this.state.currentState === 2 ? (
           <MatchOverlay
-            match={this.props.match}
+            currentMatch={this.props.match}
             onMatchComplete={this.goToNextState}
           />
         ) : null;
@@ -197,7 +206,7 @@ export const createMatchViewComponent = (config: Config) =>
         return (
           <CSSTransition
             in={isInRange(this.state.currentState, 1, 5)}
-            timeout={500}
+            timeout={500 / config.speed}
             classNames={{
               enter: "",
               enterActive: "match--entering",
@@ -208,12 +217,23 @@ export const createMatchViewComponent = (config: Config) =>
             }}
             mountOnEnter={true}
             unmountOnExit={true}
+            onEntering={() =>
+              this._matchRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center"
+              })
+            }
             onExited={this.props.onMatchComplete}
           >
             <div
+              ref={this._matchRef}
               className={classNames("match", {
                 "match--completed": !this.props.isCurrentMatch
               })}
+              style={{
+                transition: `opacity ${500 / config.speed}ms ease-in-out`
+              }}
             >
               {this.getParticipantList()}
               {this.getFinalEntry()}

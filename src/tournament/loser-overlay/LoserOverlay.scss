@@ -1,4 +1,4 @@
-.winner-overlay-wrapper {
+.loser-overlay-wrapper {
     z-index: 1;
     background: rgba(0, 0, 0, 0.35);
     position: fixed;
@@ -20,16 +20,28 @@
     &--entering {
         opacity: 0.99999;
     }
-    .winner-overlay {
+    .loser-overlay {
         border: 1px dashed #000000;
         position: relative;
         background: #ffffff;
         width: 80vw;
-        &__winner {
-            padding: 4rem 4rem 2rem 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 4rem 4rem 2rem 4rem;
+        &__loser {
             display: flex;
             flex-direction: column;
             align-items: center;
+            opacity: 0.000001;
+            &--entering,
+            &--entered {
+                opacity: 0.000001;
+            }
+            &--entering,
+            &--entered {
+                opacity: 0.999999;
+            }
             &>.participant-card {
                 margin-bottom: 3rem;
             }
