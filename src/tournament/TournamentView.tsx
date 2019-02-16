@@ -12,6 +12,7 @@ import { isInRange } from "../util/index";
 import { CSSTransition } from "react-transition-group";
 import WinnerOverlay from "./winner-overlay/WinnerOverlay";
 import LoserOverlay from "./loser-overlay/LoserOverlay";
+import SpeedControl from "./speed/SpeedControl";
 
 interface TournamentViewProps {
   roundId: string;
@@ -49,6 +50,8 @@ class TournamentView extends Component<
 
   private getMobxDevTools = (): JSX.Element | null =>
     isDevEnvironment() ? <DevTools /> : null;
+
+  private getSpeedControl = (): JSX.Element => <SpeedControl />;
 
   private isCurrentRound = (round: Round): boolean =>
     round.id === this.props.roundId;
@@ -198,6 +201,7 @@ class TournamentView extends Component<
         {this.getNextRoundRedirect()}
         {this.getLoserOverlay()}
         {this.getWinnerOverlay()}
+        {this.getSpeedControl()}
         {this.getMobxDevTools()}
       </Fragment>
     );

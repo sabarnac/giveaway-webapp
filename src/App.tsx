@@ -23,23 +23,17 @@ interface AppRouteProps {
 }
 
 class AppRedirect extends Component<AppRouteProps> {
-  private getPartialRouteRedirect = (): JSX.Element => {
-    return (
-      <Redirect
-        to={`/round/${this.props.roundId}/match/${this.props.firstMatchId}`}
-      />
-    );
-  };
+  private getPartialRouteRedirect = (): JSX.Element => (
+    <Redirect
+      to={`/round/${this.props.roundId}/match/${this.props.firstMatchId}`}
+    />
+  );
 
-  private getUnknownRouteRedirect = (): JSX.Element => {
-    return (
-      <Redirect
-        to={`/round/${this.props.firstRoundId}/match/${
-          this.props.firstMatchId
-        }`}
-      />
-    );
-  };
+  private getUnknownRouteRedirect = (): JSX.Element => (
+    <Redirect
+      to={`/round/${this.props.firstRoundId}/match/${this.props.firstMatchId}`}
+    />
+  );
 
   public render = (): JSX.Element =>
     this.props.roundId

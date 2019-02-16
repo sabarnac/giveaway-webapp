@@ -6,12 +6,15 @@ import Tournament from "./store/Tournament";
 import Config from "./store/config/Config";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
+import { Provider } from "mobx-react";
 
 const store = new Tournament(Config.instance);
 
 ReactDOM.render(
   <HashRouter>
-    <App tournament={store} />
+    <Provider config={Config.instance}>
+      <App tournament={store} />
+    </Provider>
   </HashRouter>,
   document.getElementById("root")
 );
