@@ -26,7 +26,7 @@
         position: relative;
         background: #ffffff;
         &__list {
-            padding: 4rem;
+            padding: 4rem 4rem 2rem 4rem;
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -34,6 +34,9 @@
             width: 80vw;
             color: #ffffff;
             background: #000000;
+            &>.participant-card {
+                margin-bottom: 2rem;
+            }
         }
         &__interim {
             padding: 4rem;

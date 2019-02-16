@@ -23,8 +23,12 @@ interface MatchOverlayState {
 export const createMatchOverlayComponent = (config: Config) =>
   observer(
     class MatchOverlay extends Component<MatchOverlayProps, MatchOverlayState> {
+      private _isMounted: boolean = false;
+
       private goToNextState = (): void =>
-        this.setState({ currentState: this.state.currentState + 1 });
+        this._isMounted
+          ? this.setState({ currentState: this.state.currentState + 1 })
+          : undefined;
 
       private goToNextStateWithDelay = (): unknown =>
         setTimeout(this.goToNextState, 4000);
@@ -35,18 +39,20 @@ export const createMatchOverlayComponent = (config: Config) =>
         </div>
       );
 
+      private getParticipantAndVersusPair = (
+        participant: Participant
+      ): JSX.Element[] => [
+        <ParticipantCard
+          invert={true}
+          key={participant.name}
+          participant={participant}
+        />,
+        <h2 key={`${participant.name} versus`}>VS</h2>
+      ];
+
       private getParticipants = (): JSX.Element[] =>
         this.props.match.participants
-          .map(
-            (participant: Participant): JSX.Element[] => [
-              <ParticipantCard
-                invert={true}
-                key={participant.name}
-                participant={participant}
-              />,
-              <h2 key={`${participant.name} versus`}>VS</h2>
-            ]
-          )
+          .map(this.getParticipantAndVersusPair)
           .flat()
           .slice(0, -1);
 
@@ -101,8 +107,13 @@ export const createMatchOverlayComponent = (config: Config) =>
       };
 
       public componentDidMount = (): void => {
+        this._isMounted = true;
         this.goToNextState();
         this.goToNextStateWithDelay();
+      };
+
+      public componentWillUnmount = (): void => {
+        this._isMounted = false;
       };
 
       public render = (): JSX.Element => (
