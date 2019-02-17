@@ -66,11 +66,12 @@ export default inject("config")(
           </h2>
         ];
 
-        private getParticipants = (): JSX.Element[] =>
-          this.props.currentMatch.participants
+        private getParticipants = (): JSX.Element[] => {
+          return this.props.currentMatch.participants
             .map(this.getParticipantAndVersusPair)
             .flat()
             .slice(0, -1);
+        };
 
         private getParticipantName = (participant: Participant): string =>
           participant.name;

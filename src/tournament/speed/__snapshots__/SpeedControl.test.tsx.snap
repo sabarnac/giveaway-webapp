@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SpeedControl Component. Matches snapshot. 1`] = `
+<div
+  className="speed-control"
+>
+  <button
+    className="speed-control__option button-primary"
+    onClick={[Function]}
+  >
+    1X
+  </button>
+  <button
+    className="speed-control__option"
+    onClick={[Function]}
+  >
+    2X
+  </button>
+  <button
+    className="speed-control__option"
+    onClick={[Function]}
+  >
+    3X
+  </button>
+  <button
+    className="speed-control__option"
+    onClick={[Function]}
+  >
+    4X
+  </button>
+  <button
+    className="speed-control__option"
+    onClick={[Function]}
+  >
+    5X
+  </button>
+</div>
+`;

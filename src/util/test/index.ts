@@ -23,7 +23,8 @@ export const createDummyConfig = (): Config => {
       createDummyParticipant(4)
     ],
     participantsPerMatch: 2,
-    speed: 1
+    speed: 1,
+    getRandomMessage: () => "foobar message"
   };
   mockConfig.getInstance = () => mockConfig;
   return mockConfig;
