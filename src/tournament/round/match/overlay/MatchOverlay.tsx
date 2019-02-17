@@ -10,7 +10,6 @@ import Config from "../../../../store/config/Config";
 import { CSSTransition } from "react-transition-group";
 import { isInRange } from "../../../../util/index";
 import { ClipLoader } from "react-spinners";
-import RandomGenerator from "../../../../store/config/RandomGenerator";
 import { RouteComponentProps, withRouter } from "react-router";
 
 interface MatchOverlayProps {
@@ -75,36 +74,6 @@ export default inject("config")(
 
         private getParticipantName = (participant: Participant): string =>
           participant.name;
-
-        private shouldAppend = (
-          index: number,
-          participantSize: number
-        ): boolean => index === participantSize - 1 && participantSize > 1;
-
-        private appendToLastParticipant = (
-          participantSize: number,
-          stringToAppend: string
-        ): ((name: string, index: number) => string) => (
-          name: string,
-          index: number
-        ): string =>
-          this.shouldAppend(index, participantSize)
-            ? `${stringToAppend} ${name}`
-            : name;
-
-        private formatLosers = (participants: Participant[]): string =>
-          participants
-            .map(this.getParticipantName)
-            .map(this.appendToLastParticipant(participants.length, "and"))
-            .join(", ");
-
-        private getMessage = (): string =>
-          RandomGenerator.pick(this.props.config!.messages)
-            .replace("#winner", this.props.currentMatch.winner.name)
-            .replace(
-              "#loser",
-              this.formatLosers(this.props.currentMatch.losers)
-            );
 
         private getWinner = (): JSX.Element => (
           <CSSTransition
@@ -173,8 +142,20 @@ export default inject("config")(
           </CSSTransition>
         );
 
+        private getWinnerName = (): string =>
+          this.props.currentMatch.winner.name;
+
+        private getLoserNames = (): string[] =>
+          this.props.currentMatch.losers.map(this.getParticipantName);
+
         public componentWillMount = (): void => {
-          this.setState({ message: this.getMessage(), currentState: 0 });
+          this.setState({
+            message: this.props.config!.getRandomMessage(
+              this.getWinnerName(),
+              this.getLoserNames()
+            ),
+            currentState: 0
+          });
         };
 
         public componentDidMount = (): void => {
@@ -187,6 +168,10 @@ export default inject("config")(
           this._isMounted = false;
         };
 
+        /**
+         * Renders the component.
+         * @returns {JSX.Element} The rendered component.
+         */
         public render = (): JSX.Element => (
           <CSSTransition
             in={isInRange(this.state.currentState, 1, 3)}

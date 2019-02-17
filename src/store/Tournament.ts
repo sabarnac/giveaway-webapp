@@ -8,13 +8,28 @@ import Round from "./round/Round";
  * Class containing the details of a tournament.
  */
 export default class Tournament {
+  /**
+   * @type {Participant[]} The list of rounds of the tournament.
+   */
   @observable private _rounds: Round[];
 
+  /**
+   * @type {Config} The config of the application.
+   */
   private _config: Config;
 
+  /**
+   * Creates a round with the given list of participants
+   * @param  {Participant[]} participants The list of participants to create the round with.
+   * @returns {Round} The created round.
+   */
   private _createRound = (participants: Participant[]): Round =>
     new Round(this._config, participants);
 
+  /**
+   * Returns a list of rounds with all the participants of the tournament.
+   * @returns {Round[]} The list of created rounds.
+   */
   private _getRounds = (): Round[] => {
     this._rounds = [this._createRound(this._config.allParticipants)];
     while (!this._hasWinner) {
@@ -29,6 +44,10 @@ export default class Tournament {
     this._rounds = this._getRounds();
   }
 
+  /**
+   * Returns whether the tournament has a final winner or not.
+   * @returns {boolean} Whether the tournament has a final winner or not.
+   */
   @computed private get _hasWinner(): boolean {
     return this.lastRound.winners.length === 1;
   }

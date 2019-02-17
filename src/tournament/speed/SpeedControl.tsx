@@ -37,6 +37,10 @@ export default class SpeedControl extends Component<SpeedControlProps> {
   private getOptions = (): JSX.Element[] =>
     AnimationSpeed.getValues().map(this.getOption);
 
+  /**
+   * Renders the component.
+   * @returns {JSX.Element} The rendered component.
+   */
   public render = (): JSX.Element => (
     <div className={classNames("speed-control")}>{this.getOptions()}</div>
   );

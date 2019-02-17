@@ -1,7 +1,6 @@
 import React from "react";
 import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Config from "./store/config/Config";
 
 configure({ adapter: new Adapter() });
 export default undefined;
@@ -13,14 +12,14 @@ jest.mock(
     inject: (storeName: string): Function => {
       const { createDummyConfig } = require("./util/test");
       const store: any = storeName === "config" ? createDummyConfig() : {};
-      return (ClassType: any): Function => (props: any): JSX.Element => (
+      return (ClassType: any): Function => (props: any): any => (
         <ClassType {...{ [storeName]: store }} {...props} />
       );
     },
-    observer: (ClassType: any): Function => (props: any): JSX.Element => (
+    observer: (ClassType: any): Function => (props: any): any => (
       <ClassType {...props} />
     ),
-    Observer: (props: any): JSX.Element => props.render()
+    Observer: (props: any): any => props.render()
   })
 );
 
@@ -62,7 +61,7 @@ jest.mock(
       return Foo;
     })(),
     default: jest.fn().mockImplementation(
-      (): Config => {
+      (): any => {
         const { createDummyConfig } = require("./util/test");
         return createDummyConfig();
       }

@@ -6,12 +6,28 @@ import RandomGenerator from "../../config/RandomGenerator";
  * Class containing details of a match.
  */
 export default class Match {
+  /**
+   * @type {string} The ID of the match.
+   */
   @observable private _id: string;
+  /**
+   * @type {Participant[]} The list of participants of the match.
+   */
   @observable private _participants: Participant[];
+  /**
+   * @type {Participant} The winner of the match.
+   */
   @observable private _winner: Participant;
 
+  /**
+   * @type {number} A counter for generating a unique ID for the match.
+   */
   private static counter: number = 1;
 
+  /**
+   * Picks and returns a winner of the match from the list of participants at random.
+   * @returns {Participant} The participant selected as the winner.
+   */
   private _getWinner = (): Participant =>
     RandomGenerator.pick(this._participants);
 
@@ -21,6 +37,11 @@ export default class Match {
     this._winner = this._getWinner();
   }
 
+  /**
+   * Returns whether the participant is the winner of the match or not.
+   * @param  {Participant} participant The participant to check.
+   * @returns {boolean} Whether the participant is the winner of the match or not.
+   */
   private _isNotWinner = (participant: Participant): boolean =>
     !participant.equals(this._winner);
 
@@ -42,7 +63,7 @@ export default class Match {
 
   /**
    * Get the list of participants in the match.
-   * @return {Participant[]} The list of participants.
+   * @returns {Participant[]} The list of participants.
    */
   @computed public get participants(): Participant[] {
     return this._participants;
@@ -50,7 +71,7 @@ export default class Match {
 
   /**
    * Get the winner of the match.
-   * @return {Participant} The winner.
+   * @returns {Participant} The winner.
    */
   @computed public get winner(): Participant {
     return this._winner;

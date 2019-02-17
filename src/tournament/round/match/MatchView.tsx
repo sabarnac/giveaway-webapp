@@ -204,6 +204,10 @@ export default class MatchView extends Component<
     this._isMounted = false;
   };
 
+  /**
+   * Renders the component.
+   * @returns {JSX.Element} The rendered component.
+   */
   public render = (): JSX.Element => (
     <CSSTransition
       in={isInRange(this.state.currentState, 1, 5)}

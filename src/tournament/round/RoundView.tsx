@@ -147,6 +147,10 @@ export default class RoundView extends Component<
     this._isMounted = false;
   };
 
+  /**
+   * Renders the component.
+   * @returns {JSX.Element} The rendered component.
+   */
   public render = (): JSX.Element => (
     <Fragment
       key={`round-${this.props.round.id}-match-${this.getCurrentMatchIndex()}`}

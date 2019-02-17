@@ -193,6 +193,10 @@ class TournamentView extends Component<
     this._isMounted = false;
   };
 
+  /**
+   * Renders the component.
+   * @returns {JSX.Element} The rendered component.
+   */
   public render = (): JSX.Element => {
     return (
       <Fragment key={`round-${this.getCurrentRoundIndex()}`}>

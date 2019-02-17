@@ -30,6 +30,10 @@ class ParticipantCard extends Component<ParticipantCardProps> {
     </div>
   );
 
+  /**
+   * Renders the component.
+   * @returns {JSX.Element} The rendered component.
+   */
   public render = (): JSX.Element => (
     <div
       className={classNames("participant", "participant-card", {

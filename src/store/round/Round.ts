@@ -10,19 +10,46 @@ import RandomGenerator from "../config/RandomGenerator";
  * Class containing the details of a round of the tournament.
  */
 export default class Round {
+  /**
+   * @type {string} The ID of the round.
+   */
   @observable private _id: string;
+  /**
+   * @type {Match[]} The list of matches of the round.
+   */
   @observable private _matches: Match[];
 
+  /**
+   * @type {number} A counter for generating a unique ID for the match.
+   */
   private static counter: number = 1;
 
+  /**
+   * @type {Config} The config of the application.
+   */
   private _config: Config;
 
+  /**
+   * Returns a shuffled list of the given participants.
+   * @param  {Participant[]} participants The list of participants to shuffle.
+   * @returns {Participant[]} The shuffled list.
+   */
   private _shuffleParticipants = (participants: Participant[]): Participant[] =>
     RandomGenerator.shuffle(participants);
 
+  /**
+   * Creates a match with the given list of participants
+   * @param  {Participant[]} participants The list of participants to create the match with.
+   * @returns {Match} The created match.
+   */
   private _createMatch = (participants: Participant[]): Match =>
     new Match(participants);
 
+  /**
+   * Returns a list of matches with all the participants of the round.
+   * @param  {Participant[]} participants The list of participants to create the matches with.
+   * @returns {Match[]} The list of created matches.
+   */
   private _getMatches = (participants: Participant[]): Match[] =>
     chunk(
       this._shuffleParticipants(participants),
@@ -36,11 +63,26 @@ export default class Round {
     this._matches = this._getMatches(participants);
   }
 
+  /**
+   * Returns the list of participants of a given match.
+   * @param  {Match} match The match whose participants to get.
+   * @returns {Participant[]} The list of participants of the match.
+   */
   private _getMatchParticipants = (match: Match): Participant[] =>
     match.participants;
 
+  /**
+   * Returns the winner of a given match.
+   * @param  {Match} match The match whose winner to get.
+   * @returns {Participant[]} The winner of the match.
+   */
   private _getMatchWinner = (match: Match): Participant => match.winner;
 
+  /**
+   * Returns the list of losers of a given match.
+   * @param  {Match} match The match whose losers to get.
+   * @returns {Participant[]} The list of losers of the match.
+   */
   private _getMatchLosers = (match: Match): Participant[] => match.losers;
 
   /**

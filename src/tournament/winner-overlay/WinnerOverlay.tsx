@@ -49,6 +49,10 @@ export default class WinnerOverlay extends Component<
     this._isMounted = false;
   };
 
+  /**
+   * Renders the component.
+   * @returns {JSX.Element} The rendered component.
+   */
   public render = (): JSX.Element => (
     <CSSTransition
       in={this.state.currentState > 0}

@@ -30,6 +30,10 @@ class ParticipantEntry extends Component<ParticipantEntryProps> {
     </div>
   );
 
+  /**
+   * Renders the component.
+   * @returns {JSX.Element} The rendered component.
+   */
   public render = (): JSX.Element => (
     <div
       className={classNames("participant", "participant-entry", {
