@@ -55,4 +55,11 @@ export default class Match {
   @computed public get winner(): Participant {
     return this._winner;
   }
+
+  /**
+   * Determines whether another match is identical to the current one.
+   * @param  {Match} otherMatch The other match to compare against.
+   * @returns {boolean} Whether the other match is equal to the current one.
+   */
+  public equals = (otherMatch: Match): boolean => this._id === otherMatch._id;
 }

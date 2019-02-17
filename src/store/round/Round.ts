@@ -98,4 +98,11 @@ export default class Round {
   @computed public get losers(): Participant[] {
     return this._matches.map(this._getMatchLosers).flat();
   }
+
+  /**
+   * Determines whether another round is identical to the current one.
+   * @param  {Round} otherRound The other round to compare against.
+   * @returns {boolean} Whether the other round is equal to the current one.
+   */
+  public equals = (otherRound: Round): boolean => this._id === otherRound._id;
 }

@@ -6,9 +6,9 @@ import { createDummyTournament } from "./util/test";
 import { Router } from "react-router-dom";
 import { History, createBrowserHistory } from "history";
 
-describe("TournamentView Component.", () => {
-  describe("No Path.", () => {
-    it("Matches snapshot.", () => {
+describe("TournamentView Component.", (): void => {
+  describe("No Path.", (): void => {
+    it("Matches snapshot.", (): void => {
       const tournament: Tournament = createDummyTournament();
       const history: History = createBrowserHistory();
       history.push("");
@@ -22,8 +22,8 @@ describe("TournamentView Component.", () => {
     });
   });
 
-  describe("Partial Path.", () => {
-    it("Matches snapshot.", () => {
+  describe("Partial Path.", (): void => {
+    it("Matches snapshot.", (): void => {
       const tournament: Tournament = createDummyTournament();
       const history: History = createBrowserHistory();
       history.push(`/round/${tournament.lastRound.id}`);
@@ -37,8 +37,8 @@ describe("TournamentView Component.", () => {
     });
   });
 
-  describe("Incorrect Partial Path.", () => {
-    it("Matches snapshot.", () => {
+  describe("Incorrect Partial Path.", (): void => {
+    it("Matches snapshot.", (): void => {
       const tournament: Tournament = createDummyTournament();
       const history: History = createBrowserHistory();
       history.push(`/round/${tournament.lastRound.id}-foo`);
@@ -52,8 +52,8 @@ describe("TournamentView Component.", () => {
     });
   });
 
-  describe("Full Path.", () => {
-    it("Matches snapshot.", () => {
+  describe("Full Path.", (): void => {
+    it("Matches snapshot.", (): void => {
       const tournament: Tournament = createDummyTournament();
       const history: History = createBrowserHistory();
       history.push(
@@ -71,8 +71,8 @@ describe("TournamentView Component.", () => {
     });
   });
 
-  describe("Incorrect Full Path.", () => {
-    it("Matches snapshot.", () => {
+  describe("Incorrect Full Path.", (): void => {
+    it("Matches snapshot.", (): void => {
       const tournament: Tournament = createDummyTournament();
       const history: History = createBrowserHistory();
       history.push(
