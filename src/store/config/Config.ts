@@ -1,6 +1,6 @@
 import Participant, { Avatar } from "../round/match/participant/Participant";
 import ConfigJson from "./config.json";
-import { observable, computed } from "mobx";
+import { observable, computed, action } from "mobx";
 
 /**
  * Interface for JSON object representing avatar details.
@@ -21,14 +21,34 @@ interface ParticipantJson {
 /**
  * Enumeration of possible animation speeds.
  */
-export enum AnimationSpeed {
-  HALF = 0.5,
-  ONE = 1,
-  ONE_POINT_FIVE = 1.5,
-  TWO = 2,
-  FIVE = 5,
-  TEN = 10,
-  TWENTY = 20
+export class AnimationSpeed {
+  private static _SPEED_MAP: Map<string, number> = new Map([
+    ["HALF", 0.5],
+    ["ONE", 1],
+    ["ONE_POINT_FIVE", 1.5],
+    ["TWO", 2],
+    ["FIVE", 5],
+    ["TEN", 10],
+    ["TWENTY", 20]
+  ]);
+
+  public static get = (key: string): number | undefined =>
+    AnimationSpeed._SPEED_MAP.get(key);
+
+  public static getValues = (): number[] =>
+    Array.from(AnimationSpeed._SPEED_MAP.values());
+
+  public static getKeys = (): string[] =>
+    Array.from(AnimationSpeed._SPEED_MAP.keys());
+
+  public static hasKey = (key: string): boolean =>
+    AnimationSpeed._SPEED_MAP.has(key);
+
+  public static hasValue = (value: number): boolean =>
+    AnimationSpeed.getValues().indexOf(value) !== -1;
+
+  public static getEntries = (): [string, number][] =>
+    Array.from(AnimationSpeed._SPEED_MAP.entries());
 }
 
 /**
@@ -38,7 +58,7 @@ export default class Config {
   @observable private _messages: string[];
   @observable private _allParticipants: Participant[];
   @observable private _participantsPerMatch: number;
-  @observable private _speed: AnimationSpeed;
+  @observable private _speed: number;
 
   private static _instance: Config | null = null;
 
@@ -61,7 +81,7 @@ export default class Config {
   private _getParticipantsPerMatch = (): number =>
     ConfigJson.participantsPerMatch;
 
-  private _getSpeed = (): AnimationSpeed => AnimationSpeed.ONE;
+  private _getSpeed = (): number => AnimationSpeed.get("ONE") as number;
 
   private constructor() {
     this._messages = this._getMessages();
@@ -70,7 +90,7 @@ export default class Config {
     this._speed = this._getSpeed();
   }
 
-  @computed public static get instance(): Config {
+  public static getInstance(): Config {
     return Config._instance
       ? Config._instance
       : (Config._instance = new Config());
@@ -94,26 +114,29 @@ export default class Config {
 
   /**
    * Get the number of participants per match.
-   * @return {AnimationSpeed}
+   * @return {number}
    */
-  @computed public get participantsPerMatch(): AnimationSpeed {
+  @computed public get participantsPerMatch(): number {
     return this._participantsPerMatch;
   }
 
   /**
    * Get the speed multiplier for animations.
-   * @return {AnimationSpeed}
+   * @return {number}
    */
-  @computed public get speed(): AnimationSpeed {
+  @computed public get speed(): number {
     return this._speed;
   }
 
   /**
    * Set the speed multiplier for animations.
-   * @param {AnimationSpeed} value The new speed multiplier value.
-   * @returns {AnimationSpeed} The set speed multiplier value.
+   * @param {number} value The new speed multiplier value.
    */
-  public set speed(value: AnimationSpeed) {
-    this._speed = value;
+  @action public setSpeed(value: number): void {
+    if (AnimationSpeed.hasValue(value)) {
+      this._speed = value;
+    } else {
+      console.error(`Illegal value '${value}' for speed`);
+    }
   }
 }

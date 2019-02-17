@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TournamentView Component. Full Path. Matches snapshot. 1`] = `
+<div>
+  <div
+    exact={true}
+    path="/round/:roundId/match/:matchId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="/round/:roundId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="*"
+    render={[Function]}
+  />
+</div>
+`;
+
+exports[`TournamentView Component. Incorrect Full Path. Matches snapshot. 1`] = `
+<div>
+  <div
+    exact={true}
+    path="/round/:roundId/match/:matchId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="/round/:roundId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="*"
+    render={[Function]}
+  />
+</div>
+`;
+
+exports[`TournamentView Component. Incorrect Partial Path. Matches snapshot. 1`] = `
+<div>
+  <div
+    exact={true}
+    path="/round/:roundId/match/:matchId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="/round/:roundId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="*"
+    render={[Function]}
+  />
+</div>
+`;
+
+exports[`TournamentView Component. No Path. Matches snapshot. 1`] = `
+<div>
+  <div
+    exact={true}
+    path="/round/:roundId/match/:matchId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="/round/:roundId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="*"
+    render={[Function]}
+  />
+</div>
+`;
+
+exports[`TournamentView Component. Partial Path. Matches snapshot. 1`] = `
+<div>
+  <div
+    exact={true}
+    path="/round/:roundId/match/:matchId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="/round/:roundId"
+    render={[Function]}
+  />
+  <div
+    exact={true}
+    path="*"
+    render={[Function]}
+  />
+</div>
+`;

@@ -8,11 +8,11 @@ import { HashRouter } from "react-router-dom";
 import App from "./App";
 import { Provider } from "mobx-react";
 
-const store = new Tournament(Config.instance);
+const store = new Tournament(Config.getInstance());
 
 ReactDOM.render(
   <HashRouter>
-    <Provider config={Config.instance}>
+    <Provider config={Config.getInstance()}>
       <App tournament={store} />
     </Provider>
   </HashRouter>,

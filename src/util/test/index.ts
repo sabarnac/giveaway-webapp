@@ -13,12 +13,28 @@ export const createDummyParticipant = function(id: number = 1): Participant {
   );
 };
 
+export const createDummyConfig = (): Config => {
+  const mockConfig: any = {
+    message: ["foobar1", "foobar2", "foobar3", "foobar4"],
+    allParticipants: [
+      createDummyParticipant(1),
+      createDummyParticipant(2),
+      createDummyParticipant(3),
+      createDummyParticipant(4)
+    ],
+    participantsPerMatch: 2,
+    speed: 1
+  };
+  mockConfig.getInstance = () => mockConfig;
+  return mockConfig;
+};
+
 export const createDummyMatch = (): Match => {
   return new Match([createDummyParticipant(1), createDummyParticipant(2)]);
 };
 
 export const createDummyRound = (): Round => {
-  return new Round(Config.instance, [
+  return new Round(createDummyConfig(), [
     createDummyParticipant(1),
     createDummyParticipant(2),
     createDummyParticipant(3),
@@ -29,5 +45,5 @@ export const createDummyRound = (): Round => {
 };
 
 export const createDummyTournament = (): Tournament => {
-  return new Tournament(Config.instance);
+  return new Tournament(createDummyConfig());
 };
