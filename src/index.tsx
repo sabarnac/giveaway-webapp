@@ -16,13 +16,13 @@ import "skeleton-css/css/skeleton.css";
 serviceWorker.register({
   onSuccess: () =>
     swal({
-      title: "Offline Available!",
+      title: "Use Offline",
       text: "This web application can now be used offline!",
       icon: "success"
     }),
   onUpdate: () =>
     swal({
-      title: "App Updated!",
+      title: "App Updated",
       text:
         "This web application has been updated. Please close all tabs/instances of it and open it again to see the update.",
       icon: "warning"
