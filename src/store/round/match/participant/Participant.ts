@@ -26,7 +26,7 @@ export class Avatar {
 
   /**
    * Gets the avatar URL.
-   * @returns {string} The avatar URL.
+   * @return {string} The avatar URL.
    */
   @computed public get url(): string {
     return this._url;
@@ -34,7 +34,7 @@ export class Avatar {
 
   /**
    * Gets the avatar image alternate text.
-   * @returns {string} The avatar image alternate text.
+   * @return {string} The avatar image alternate text.
    */
   @computed public get altText(): string {
     return this._altText;
@@ -44,7 +44,7 @@ export class Avatar {
    * Returns whether the two given URLs are equal.
    * @param {string} url1 The first URL to compare.
    * @param {string} url2 The second URL to compare.
-   * @returns {boolean} Whether the two URLs are equal.
+   * @return {boolean} Whether the two URLs are equal.
    */
   private _isSameUrl = (url1: string, url2: string): boolean => url1 === url2;
 
@@ -52,7 +52,7 @@ export class Avatar {
    * Returns whether the two alternate texts are equal.
    * @param {string} altText1 The first alternate text to compare.
    * @param {string} altText2 The second alternate text to compare.
-   * @returns {boolean} Whether the two alternate texts are equal.
+   * @return {boolean} Whether the two alternate texts are equal.
    */
   private _isSameAltText = (altText1: string, altText2: string): boolean =>
     altText1 === altText2;
@@ -60,7 +60,7 @@ export class Avatar {
   /**
    * Determines whether another avatar is identical to the current one.
    * @param  {Avatar} otherAvatar The other avatar to compare against.
-   * @returns {boolean} Whether the other avatar is equal to the current one.
+   * @return {boolean} Whether the other avatar is equal to the current one.
    */
   public equals = (otherAvatar: Avatar): boolean =>
     this._isSameUrl(this._url, otherAvatar._url) &&
@@ -84,7 +84,7 @@ export default class Participant {
    * Gets the avatar of the participant if present, or creates a random one,
    * @param  {string} name The name of the participant.
    * @param  {AvatarJson} avatar The avatar details of the participant, if available.
-   * @returns {Avatar} The generated avatar of the participant.
+   * @return {Avatar} The generated avatar of the participant.
    */
   private _getOrCreateAvatar = (name: string, avatar?: AvatarJson): Avatar => {
     return avatar
@@ -99,7 +99,7 @@ export default class Participant {
 
   /**
    * Gets the participant name.
-   * @returns {string} The participant name.
+   * @return {string} The participant name.
    */
   @computed public get name(): string {
     return this._name;
@@ -107,7 +107,7 @@ export default class Participant {
 
   /**
    * Gets the capitalized name of the participant.
-   * @returns {string} The capitalized name.
+   * @return {string} The capitalized name.
    */
   @computed public get properName(): string {
     return this._name.replace(/\w\S*/g, (subText: string) => {
@@ -117,7 +117,7 @@ export default class Participant {
 
   /**
    * Gets the participant avatar, if it exists.
-   * @returns {string} The participant avatar.
+   * @return {string} The participant avatar.
    */
   @computed public get avatar(): Avatar {
     return this._avatar;
@@ -127,7 +127,7 @@ export default class Participant {
    * Returns whether the two names are equal.
    * @param {string} name1 The first name to compare.
    * @param {string} name2 The second name to compare.
-   * @returns {boolean} Whether the two names are equal.
+   * @return {boolean} Whether the two names are equal.
    */
   private _isSameName = (name1: string, name2: string): boolean =>
     name1 === name2;
@@ -136,7 +136,7 @@ export default class Participant {
    * Returns whether the two avatars are equal.
    * @param {Avatar} avatar1 The first avatar to compare.
    * @param {Avatar} avatar2 The second avatar to compare.
-   * @returns {boolean} Whether the two avatars are equal.
+   * @return {boolean} Whether the two avatars are equal.
    */
   private _isSameAvatar = (avatar1: Avatar, avatar2: Avatar): boolean =>
     avatar1.equals(avatar2);
@@ -144,7 +144,7 @@ export default class Participant {
   /**
    * Determines whether another participant is identical to the current one.
    * @param  {Participant} otherParticipant The other participant to compare against.
-   * @returns {boolean} Whether the other participant is equal to the current one.
+   * @return {boolean} Whether the other participant is equal to the current one.
    */
   public equals = (otherParticipant: Participant): boolean =>
     this._isSameName(this._name, otherParticipant._name) &&

@@ -7,28 +7,56 @@ import ParticipantCard from "../round/match/participant/card/ParticipantCard";
 import Config from "../../store/config/Config";
 import { CSSTransition } from "react-transition-group";
 
+/**
+ * Properties of the winner overlay React component.
+ */
 interface WinnerOverlayProps {
+  /**
+   * @type {Config} The application config.
+   */
   config?: Config;
+  /**
+   * @type {Participant} The tournament winner.
+   */
   winner: Participant;
 }
 
+/**
+ * State of the winner overlay React component.
+ */
 interface WinnerOverlayState {
+  /**
+   * @type {number} The current state of the winner overlay component (for animations).
+   */
   currentState: number;
 }
 
+/**
+ * React component for the winner overlay.
+ */
 @inject("config")
 @observer
 export default class WinnerOverlay extends Component<
   WinnerOverlayProps,
   WinnerOverlayState
 > {
+  /**
+   * @type {boolean} Whether the component is mounted or not.
+   */
   private _isMounted: boolean = false;
 
+  /**
+   * Moves the component to the next animation state.
+   */
   private goToNextState = (): void =>
     this._isMounted
       ? this.setState({ currentState: this.state.currentState + 1 })
       : undefined;
 
+  /**
+   * Returns the card view for the winner participant.
+   * @return {JSX.Element} The winner participant card view.
+   */
   private getWinner = (): JSX.Element => (
     <div className={classNames("winner-overlay__winner")}>
       <ParticipantCard participant={this.props.winner} />
@@ -36,22 +64,31 @@ export default class WinnerOverlay extends Component<
     </div>
   );
 
+  /**
+   * Lifecycle method that runs before component mount.
+   */
   public componentWillMount = (): void => {
     this.setState({ currentState: 0 });
   };
 
+  /**
+   * Lifecycle method that runs after component mount.
+   */
   public componentDidMount = (): void => {
     this._isMounted = true;
     this.goToNextState();
   };
 
+  /**
+   * Lifecycle method that runs before component unmount.
+   */
   public componentWillUnmount = (): void => {
     this._isMounted = false;
   };
 
   /**
-   * Renders the component.
-   * @returns {JSX.Element} The rendered component.
+   * Renders the component, wrapped in an animation transition component.
+   * @return {JSX.Element} The rendered component.
    */
   public render = (): JSX.Element => (
     <CSSTransition

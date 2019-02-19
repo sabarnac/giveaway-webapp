@@ -26,7 +26,7 @@ export default class Match {
 
   /**
    * Picks and returns a winner of the match from the list of participants at random.
-   * @returns {Participant} The participant selected as the winner.
+   * @return {Participant} The participant selected as the winner.
    */
   private _getWinner = (): Participant =>
     RandomGenerator.pick(this._participants);
@@ -40,14 +40,14 @@ export default class Match {
   /**
    * Returns whether the participant is the winner of the match or not.
    * @param  {Participant} participant The participant to check.
-   * @returns {boolean} Whether the participant is the winner of the match or not.
+   * @return {boolean} Whether the participant is the winner of the match or not.
    */
   private _isNotWinner = (participant: Participant): boolean =>
     !participant.equals(this._winner);
 
   /**
    * Get the match ID.
-   * @returns {string} The unique ID of the match.
+   * @return {string} The unique ID of the match.
    */
   @computed public get id(): string {
     return this._id;
@@ -55,7 +55,7 @@ export default class Match {
 
   /**
    * Get the list of losers of the match.
-   * @returns {Participant[]} The list of losers.
+   * @return {Participant[]} The list of losers.
    */
   @computed public get losers(): Participant[] {
     return this._participants.filter(this._isNotWinner);
@@ -63,7 +63,7 @@ export default class Match {
 
   /**
    * Get the list of participants in the match.
-   * @returns {Participant[]} The list of participants.
+   * @return {Participant[]} The list of participants.
    */
   @computed public get participants(): Participant[] {
     return this._participants;
@@ -71,7 +71,7 @@ export default class Match {
 
   /**
    * Get the winner of the match.
-   * @returns {Participant} The winner.
+   * @return {Participant} The winner.
    */
   @computed public get winner(): Participant {
     return this._winner;
@@ -80,7 +80,7 @@ export default class Match {
   /**
    * Determines whether another match is identical to the current one.
    * @param  {Match} otherMatch The other match to compare against.
-   * @returns {boolean} Whether the other match is equal to the current one.
+   * @return {boolean} Whether the other match is equal to the current one.
    */
   public equals = (otherMatch: Match): boolean => this._id === otherMatch._id;
 }

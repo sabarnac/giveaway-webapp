@@ -15,6 +15,9 @@ import TournamentView from "./tournament/TournamentView";
  * Properties of the Application React component.
  */
 interface AppProps {
+  /**
+   * @type {Tournamnent} The details of the tournament.
+   */
   tournament: Tournament;
 }
 
@@ -22,9 +25,21 @@ interface AppProps {
  * Route related properties of the Application React component.
  */
 interface AppRouteProps {
+  /**
+   * @type {string} The ID of the current round.
+   */
   roundId?: string;
+  /**
+   * @type {string} The ID of the current match.
+   */
   matchId?: string;
+  /**
+   * @type {string} The ID of the first round of the tournament.
+   */
   firstRoundId?: string;
+  /**
+   * @type {string} The ID of the first match of the tournament.
+   */
   firstMatchId: string;
 }
 
@@ -34,7 +49,7 @@ interface AppRouteProps {
 class AppRedirect extends Component<AppRouteProps> {
   /**
    * Returns the redirect when only a partial route is provided.
-   * @returns {JSX.Element} The partial route redirect.
+   * @return {JSX.Element} The partial route redirect.
    */
   private getPartialRouteRedirect = (): JSX.Element => (
     <Redirect
@@ -44,7 +59,7 @@ class AppRedirect extends Component<AppRouteProps> {
 
   /**
    * Returns the redirect when only a unknown route is provided.
-   * @returns {JSX.Element} The unknown route redirect.
+   * @return {JSX.Element} The unknown route redirect.
    */
   private getUnknownRouteRedirect = (): JSX.Element => (
     <Redirect
@@ -54,7 +69,7 @@ class AppRedirect extends Component<AppRouteProps> {
 
   /**
    * Renders the component.
-   * @returns {JSX.Element} The rendered component.
+   * @return {JSX.Element} The rendered component.
    */
   public render = (): JSX.Element =>
     this.props.roundId
@@ -69,7 +84,7 @@ class AppRedirect extends Component<AppRouteProps> {
 class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
   /**
    * Returns the route params.
-   * @returns {AppRouteProps} The route params.
+   * @return {AppRouteProps} The route params.
    */
   private getParams = (
     routeProps: RouteComponentProps<AppRouteProps>
@@ -77,7 +92,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
 
   /**
    * Returns the route for the application.
-   * @returns {JSX.Element} The application route.
+   * @return {JSX.Element} The application route.
    */
   private getApplicationRoute = (): JSX.Element => (
     <Route
@@ -89,7 +104,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
 
   /**
    * Returns the main tournament.
-   * @returns {JSX.Element} The main tournament.
+   * @return {JSX.Element} The main tournament.
    */
   private getApplication = (
     props: RouteComponentProps<AppRouteProps>
@@ -103,7 +118,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
 
   /**
    * Returns the route for a partial redirect.
-   * @returns {JSX.Element} The partial redirect route.
+   * @return {JSX.Element} The partial redirect route.
    */
   private getPartialRoute = (): JSX.Element => (
     <Route exact path="/round/:roundId" render={this.getPartialAppRedirect} />
@@ -111,7 +126,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
 
   /**
    * Returns the application redirect for the partial redirect.
-   * @returns {JSX.Element} The application redirect.
+   * @return {JSX.Element} The application redirect.
    */
   private getPartialAppRedirect = (
     props: RouteComponentProps<AppRouteProps>
@@ -128,7 +143,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
 
   /**
    * Returns the route for an unknown redirect.
-   * @returns {JSX.Element} The unknown redirect route.
+   * @return {JSX.Element} The unknown redirect route.
    */
   private getUnknownRoute = (): JSX.Element => (
     <Route exact path="*" render={this.getUnknownAppRedirect} />
@@ -136,7 +151,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
 
   /**
    * Returns the application redirect for the unknown redirect.
-   * @returns {JSX.Element} The application redirect.
+   * @return {JSX.Element} The application redirect.
    */
   private getUnknownAppRedirect = (): JSX.Element => (
     <AppRedirect
@@ -147,14 +162,14 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
 
   /**
    * Returns the ID of the first round.
-   * @returns {string} The first round ID.
+   * @return {string} The first round ID.
    */
   private getFirstRoundId = (): string => this.props.tournament.firstRound.id;
 
   /**
    * Returns a filter for finding the current round.
    * @param {string} roundId The ID of the current round.
-   * @returns {(round: Round) => boolean} The filter function.
+   * @return {(round: Round) => boolean} The filter function.
    */
   private getIsCurrentRoundFilter = (
     roundId: string
@@ -164,7 +179,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
   /**
    * Returns the details of the round of the given ID.
    * @param {string} roundId The ID of the round.
-   * @returns {Round} The round details.
+   * @return {Round} The round details.
    */
   private getCurrentRoundDetails = (roundId: string): Round =>
     this.props.tournament.rounds.find(
@@ -174,14 +189,14 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
   /**
    * Returns the ID of the first match of the given round.
    * @param {string} roundId The ID of the round.
-   * @returns {string} The first match ID.
+   * @return {string} The first match ID.
    */
   private getFirstMatchIdOfCurrentRound = (roundId: string): string =>
     this.getCurrentRoundDetails(roundId).firstMatch.id;
 
   /**
    * Renders the component.
-   * @returns {JSX.Element} The rendered component.
+   * @return {JSX.Element} The rendered component.
    */
   public render = (): JSX.Element => (
     <Switch>

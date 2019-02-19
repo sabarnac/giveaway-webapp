@@ -21,14 +21,14 @@ export default class Tournament {
   /**
    * Creates a round with the given list of participants
    * @param  {Participant[]} participants The list of participants to create the round with.
-   * @returns {Round} The created round.
+   * @return {Round} The created round.
    */
   private _createRound = (participants: Participant[]): Round =>
     new Round(this._config, participants);
 
   /**
    * Returns a list of rounds with all the participants of the tournament.
-   * @returns {Round[]} The list of created rounds.
+   * @return {Round[]} The list of created rounds.
    */
   private _getRounds = (): Round[] => {
     this._rounds = [this._createRound(this._config.allParticipants)];
@@ -46,7 +46,7 @@ export default class Tournament {
 
   /**
    * Returns whether the tournament has a final winner or not.
-   * @returns {boolean} Whether the tournament has a final winner or not.
+   * @return {boolean} Whether the tournament has a final winner or not.
    */
   @computed private get _hasWinner(): boolean {
     return this.lastRound.winners.length === 1;
@@ -54,7 +54,7 @@ export default class Tournament {
 
   /**
    * Get the first round of the tournament.
-   * @returns {Round} The first round.
+   * @return {Round} The first round.
    */
   @computed public get firstRound(): Round {
     return <Round>this._rounds[0];
@@ -62,7 +62,7 @@ export default class Tournament {
 
   /**
    * Get the last round of the tournament.
-   * @returns {Round} The last round.
+   * @return {Round} The last round.
    */
   @computed public get lastRound(): Round {
     return <Round>last(this._rounds);
@@ -70,7 +70,7 @@ export default class Tournament {
 
   /**
    * Gets the list of rounds in the tournament.
-   * @returns {Round[]} The rounds in the tournament.
+   * @return {Round[]} The rounds in the tournament.
    */
   @computed public get rounds(): Round[] {
     return this._rounds;
@@ -78,7 +78,7 @@ export default class Tournament {
 
   /**
    * Gets the final winner of the tournament.
-   * @returns {Participant} The final winner, or null if there is none.
+   * @return {Participant} The final winner, or null if there is none.
    */
   @computed public get winner(): Participant {
     return <Participant>this.lastRound.winners[0];

@@ -32,7 +32,7 @@ export default class Round {
   /**
    * Returns a shuffled list of the given participants.
    * @param  {Participant[]} participants The list of participants to shuffle.
-   * @returns {Participant[]} The shuffled list.
+   * @return {Participant[]} The shuffled list.
    */
   private _shuffleParticipants = (participants: Participant[]): Participant[] =>
     RandomGenerator.shuffle(participants);
@@ -40,7 +40,7 @@ export default class Round {
   /**
    * Creates a match with the given list of participants
    * @param  {Participant[]} participants The list of participants to create the match with.
-   * @returns {Match} The created match.
+   * @return {Match} The created match.
    */
   private _createMatch = (participants: Participant[]): Match =>
     new Match(participants);
@@ -48,7 +48,7 @@ export default class Round {
   /**
    * Returns a list of matches with all the participants of the round.
    * @param  {Participant[]} participants The list of participants to create the matches with.
-   * @returns {Match[]} The list of created matches.
+   * @return {Match[]} The list of created matches.
    */
   private _getMatches = (participants: Participant[]): Match[] =>
     chunk(
@@ -66,7 +66,7 @@ export default class Round {
   /**
    * Returns the list of participants of a given match.
    * @param  {Match} match The match whose participants to get.
-   * @returns {Participant[]} The list of participants of the match.
+   * @return {Participant[]} The list of participants of the match.
    */
   private _getMatchParticipants = (match: Match): Participant[] =>
     match.participants;
@@ -74,20 +74,20 @@ export default class Round {
   /**
    * Returns the winner of a given match.
    * @param  {Match} match The match whose winner to get.
-   * @returns {Participant[]} The winner of the match.
+   * @return {Participant[]} The winner of the match.
    */
   private _getMatchWinner = (match: Match): Participant => match.winner;
 
   /**
    * Returns the list of losers of a given match.
    * @param  {Match} match The match whose losers to get.
-   * @returns {Participant[]} The list of losers of the match.
+   * @return {Participant[]} The list of losers of the match.
    */
   private _getMatchLosers = (match: Match): Participant[] => match.losers;
 
   /**
    * Get the match ID.
-   * @returns {string} The unique ID of the match.
+   * @return {string} The unique ID of the match.
    */
   @computed public get id(): string {
     return this._id;
@@ -95,7 +95,7 @@ export default class Round {
 
   /**
    * Get the list of matches in the round.
-   * @returns {Match[]} The list of matches.
+   * @return {Match[]} The list of matches.
    */
   @computed public get matches(): Match[] {
     return this._matches;
@@ -103,7 +103,7 @@ export default class Round {
 
   /**
    * Get the first match of the round.
-   * @returns {Match} The first match.
+   * @return {Match} The first match.
    */
   @computed public get firstMatch(): Match {
     return this._matches[0];
@@ -111,7 +111,7 @@ export default class Round {
 
   /**
    * Get the last match of the round.
-   * @returns {Match} The last match.
+   * @return {Match} The last match.
    */
   @computed public get lastMatch(): Match {
     return <Match>last(this._matches);
@@ -119,7 +119,7 @@ export default class Round {
 
   /**
    * Get the list of participants in the round.
-   * @returns {Participant[]} The list of participants.
+   * @return {Participant[]} The list of participants.
    */
   @computed public get participants(): Participant[] {
     return this._matches.map(this._getMatchParticipants).flat();
@@ -127,7 +127,7 @@ export default class Round {
 
   /**
    * Get the list of winners in the round.
-   * @returns {Participant[]} The list of winners.
+   * @return {Participant[]} The list of winners.
    */
   @computed public get winners(): Participant[] {
     return this._matches.map(this._getMatchWinner);
@@ -135,7 +135,7 @@ export default class Round {
 
   /**
    * Get the list of losers in the round.
-   * @returns {Participant[]} The list of losers.
+   * @return {Participant[]} The list of losers.
    */
   @computed public get losers(): Participant[] {
     return this._matches.map(this._getMatchLosers).flat();
@@ -144,7 +144,7 @@ export default class Round {
   /**
    * Determines whether another round is identical to the current one.
    * @param  {Round} otherRound The other round to compare against.
-   * @returns {boolean} Whether the other round is equal to the current one.
+   * @return {boolean} Whether the other round is equal to the current one.
    */
   public equals = (otherRound: Round): boolean => this._id === otherRound._id;
 }

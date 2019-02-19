@@ -39,21 +39,21 @@ export class AnimationSpeed {
   /**
    * Returns the speed multiplier of the given key.
    * @param  {string} key The key whose speed multiplier to return.
-   * @returns {number | undefined} The speed multiplier, or undefined if it doesn't exist.
+   * @return {number | undefined} The speed multiplier, or undefined if it doesn't exist.
    */
   public static get = (key: string): number | undefined =>
     AnimationSpeed._SPEED_MAP.get(key);
 
   /**
    * Returns the list of possible speed multiplier values.
-   * @returns {number[]} The list of speed multiplier values.
+   * @return {number[]} The list of speed multiplier values.
    */
   public static getValues = (): number[] =>
     Array.from(AnimationSpeed._SPEED_MAP.values());
 
   /**
    * Returns the list of possible speed multiplier keys.
-   * @returns {string[]} The list of speed multiplier keys.
+   * @return {string[]} The list of speed multiplier keys.
    */
   public static getKeys = (): string[] =>
     Array.from(AnimationSpeed._SPEED_MAP.keys());
@@ -61,7 +61,7 @@ export class AnimationSpeed {
   /**
    * Returns whether the speed multiplier key exists.
    * @param  {string} key The key to check.
-   * @returns {boolean} Whether the speed multiplier key exists or not.
+   * @return {boolean} Whether the speed multiplier key exists or not.
    */
   public static hasKey = (key: string): boolean =>
     AnimationSpeed._SPEED_MAP.has(key);
@@ -69,14 +69,14 @@ export class AnimationSpeed {
   /**
    * Returns whether the speed multiplier value exists.
    * @param  {number} value The value to check.
-   * @returns {boolean} Whether the speed multiplier value exists or not.
+   * @return {boolean} Whether the speed multiplier value exists or not.
    */
   public static hasValue = (value: number): boolean =>
     AnimationSpeed.getValues().indexOf(value) !== -1;
 
   /**
    * Returns the list of possible speed multiplier keys and values.
-   * @returns {[string, number][]} Returns the list of speed multiplier keys and values.
+   * @return {[string, number][]} Returns the list of speed multiplier keys and values.
    */
   public static getEntries = (): [string, number][] =>
     Array.from(AnimationSpeed._SPEED_MAP.entries());
@@ -147,7 +147,7 @@ export default class Config {
 
   /**
    * Get an instance of the config, which is a singleton.
-   * @returns {Config} The instance of a config.
+   * @return {Config} The instance of a config.
    */
   public static getInstance(): Config {
     return Config._instance
@@ -157,7 +157,7 @@ export default class Config {
 
   /**
    * Get the list of winner/loser messages.
-   * @returns {string[]} The list of mesasges.
+   * @return {string[]} The list of mesasges.
    */
   @computed public get messages(): string[] {
     return [...this._messages];
@@ -167,7 +167,7 @@ export default class Config {
    * Gets a random message with the winner and loser.
    * @param {string} winnerName The name of the winner.
    * @param {string[]} loserNames The names of the losers.
-   * @returns {string} The formatted message.
+   * @return {string} The formatted message.
    */
   public getRandomMessage(winnerName: string, loserNames: string[]): string {
     if (this._unusedMessages.length === 0) {
@@ -184,7 +184,7 @@ export default class Config {
 
   /**
    * Get the list of all participants in the tournament.
-   * @returns {Participant[]} The list of all participants.
+   * @return {Participant[]} The list of all participants.
    */
   @computed public get allParticipants(): Participant[] {
     return this._allParticipants;
@@ -192,7 +192,7 @@ export default class Config {
 
   /**
    * Get the number of participants per match.
-   * @returns {number} The number of participants per match.
+   * @return {number} The number of participants per match.
    */
   @computed public get participantsPerMatch(): number {
     return this._participantsPerMatch;
@@ -200,7 +200,7 @@ export default class Config {
 
   /**
    * Get the speed multiplier for animations.
-   * @returns {number} The speed multiplier value.
+   * @return {number} The speed multiplier value.
    */
   @computed public get speed(): number {
     return this._speed;
