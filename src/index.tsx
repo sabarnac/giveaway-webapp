@@ -7,6 +7,7 @@ import Config from "./store/config/Config";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
 import { Provider } from "mobx-react";
+import "skeleton-css/css/skeleton.css";
 
 // Create the tournament store
 const store: Tournament = new Tournament(Config.getInstance());
