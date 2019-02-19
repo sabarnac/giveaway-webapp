@@ -1,5 +1,3 @@
-import swal from "sweetalert";
-
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
@@ -51,12 +49,10 @@ export function register(config?: Config) {
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
-          swal({
-            title: "Service Worker Running!",
-            text:
-              "This web app is being served cache-first by a service worker. To learn more, visit http://bit.ly/CRA-PWA",
-            icon: "warning"
-          });
+          console.log(
+            "This web app is being served cache-first by a service " +
+              "worker. To learn more, visit http://bit.ly/CRA-PWA"
+          );
         });
       } else {
         // Is not localhost. Just register service worker
@@ -81,12 +77,10 @@ function registerValidSW(swUrl: string, config?: Config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
-              swal({
-                title: "App Updated!",
-                text:
-                  "This web application has been updated. Please close all tabs/instances of it and open it again to see the update.",
-                icon: "warning"
-              });
+              console.log(
+                "New content is available and will be used when all " +
+                  "tabs for this page are closed. See http://bit.ly/CRA-PWA."
+              );
 
               // Execute callback
               if (config && config.onUpdate) {
@@ -96,11 +90,7 @@ function registerValidSW(swUrl: string, config?: Config) {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
-              swal({
-                title: "Offline Available!",
-                text: "This web application can now be used offline!",
-                icon: "success"
-              });
+              console.log("Content is cached for offline use.");
 
               // Execute callback
               if (config && config.onSuccess) {
