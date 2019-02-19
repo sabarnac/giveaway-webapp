@@ -170,7 +170,7 @@ export default class Config {
    * @returns {string} The formatted message.
    */
   public getRandomMessage(winnerName: string, loserNames: string[]): string {
-    if (this._usedMessages.length === 0) {
+    if (this._unusedMessages.length === 0) {
       this._unusedMessages = RandomGenerator.shuffle([...this._messages]);
       this._usedMessages = [];
     }
