@@ -67,7 +67,8 @@ function registerValidSW(swUrl: string, config?: Config) {
     .register(swUrl)
     .then(registration => {
       registration.onupdatefound = () => {
-        const installingWorker = registration.installing;
+        const installingWorker =
+          registration.installing || registration.waiting;
         if (installingWorker == null) {
           return;
         }
@@ -99,7 +100,13 @@ function registerValidSW(swUrl: string, config?: Config) {
             }
           }
         };
+        if (installingWorker.state === "installed") {
+          installingWorker.onstatechange(new Event("unknown"));
+        }
       };
+      if (registration.waiting || registration.installing) {
+        registration.onupdatefound(new Event("unknown"));
+      }
     })
     .catch(error => {
       console.error("Error during service worker registration:", error);

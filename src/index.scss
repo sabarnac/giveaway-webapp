@@ -19,5 +19,10 @@ div#root {
 }
 
 .swal-overlay {
-    @import '~skeleton-css/css/normalize.css';
+    div.swal-text {
+        text-align: center;
+    }
+    button.swal-button {
+        padding: 0 30px;
+    }
 }
