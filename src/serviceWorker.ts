@@ -20,6 +20,8 @@ const isLocalhost = Boolean(
     )
 );
 
+let status = 0;
+
 type Config = {
   onSuccess?: (registration: ServiceWorkerRegistration) => void;
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
@@ -67,12 +69,23 @@ function registerValidSW(swUrl: string, config?: Config) {
     .register(swUrl)
     .then(registration => {
       registration.onupdatefound = () => {
+        if (status > 0) {
+          return;
+        }
+        ++status;
+
         const installingWorker =
           registration.installing || registration.waiting;
         if (installingWorker == null) {
           return;
         }
+
         installingWorker.onstatechange = () => {
+          if (status > 1) {
+            return;
+          }
+          ++status;
+
           if (installingWorker.state === "installed") {
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
