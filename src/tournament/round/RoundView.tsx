@@ -9,6 +9,7 @@ import { Redirect } from "react-router";
 import { CSSTransition } from "react-transition-group";
 import { isInRange } from "../../util/index";
 import Config from "../../store/config/Config";
+const inflect = require("i")();
 
 /**
  * Properties of the round view React component.
@@ -196,6 +197,7 @@ export default class RoundView extends Component<
           transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`
         }}
       >
+        <h2>{inflect.titleize(this.props.round.id)}</h2>
         {this.getMatchList()}
       </div>
     </CSSTransition>

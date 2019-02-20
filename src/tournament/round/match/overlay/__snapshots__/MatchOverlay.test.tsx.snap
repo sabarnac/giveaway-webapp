@@ -53,11 +53,11 @@ exports[`MatchOverlay Component. Matches snapshot. 1`] = `
             </div>
           </div>
         </div>
-        <h2
+        <h3
           className="versus-text"
         >
           VS
-        </h2>
+        </h3>
         <div>
           <div
             className="participant participant-card participant--invert participant-card--invert"

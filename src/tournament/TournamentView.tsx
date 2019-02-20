@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { observer } from "mobx-react";
+import React, { Component } from "react";
+import { observer, inject } from "mobx-react";
 import "./TournamentView.scss";
 import classNames from "classnames";
 import Tournament from "../store/Tournament";
@@ -13,11 +13,16 @@ import { CSSTransition } from "react-transition-group";
 import WinnerOverlay from "./winner-overlay/WinnerOverlay";
 import LoserOverlay from "./loser-overlay/LoserOverlay";
 import SpeedControl from "./speed/SpeedControl";
+import Config from "../store/config/Config";
 
 /**
  * Properties of the tournament view React component.
  */
 interface TournamentViewProps {
+  /**
+   * @type {Config} The application config.
+   */
+  config?: Config;
   /**
    * @type {string} The ID of the current round.
    */
@@ -49,6 +54,7 @@ interface TournamentViewState {
 /**
  * React component for the tournament view.
  */
+@inject("config")
 @observer
 export default class TournamentView extends Component<
   TournamentViewProps,
@@ -155,7 +161,7 @@ export default class TournamentView extends Component<
       mountOnEnter={true}
       unmountOnExit={true}
     >
-      <div className={classNames("tournament")}>{this.getCurrentRound()}</div>
+      {this.getCurrentRound()}
     </CSSTransition>
   );
 
@@ -305,7 +311,11 @@ export default class TournamentView extends Component<
    */
   public render = (): JSX.Element => {
     return (
-      <Fragment key={`round-${this.getCurrentRoundIndex()}`}>
+      <div
+        key={`round-${this.getCurrentRoundIndex()}`}
+        className={classNames("tournament")}
+      >
+        <h1>{this.props.config!.name} Tournament</h1>
         {this.getCurrentRoundView()}
         {this.getFirstRoundRedirect()}
         {this.getNextRoundRedirect()}
@@ -313,7 +323,7 @@ export default class TournamentView extends Component<
         {this.getWinnerOverlay()}
         {this.getSpeedControl()}
         {this.getMobxDevTools()}
-      </Fragment>
+      </div>
     );
   };
 }

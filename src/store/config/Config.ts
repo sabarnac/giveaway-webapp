@@ -87,16 +87,40 @@ export class AnimationSpeed {
  */
 export default class Config {
   /**
-   * @type {Map<string, number>} A map of possible speeds, and their multiplier values.
+   * @type {string} The name of the tournament
+   */
+  @observable private _name: string;
+  /**
+   * @type {string[]} A list of all messages.
    */
   @observable private _messages: string[];
+  /**
+   * @type {Participant[]} The list of participants in the tournament.
+   */
   @observable private _allParticipants: Participant[];
+  /**
+   * @type {number} The number of participants per match.
+   */
   @observable private _participantsPerMatch: number;
+  /**
+   * @type {number} The animation speed multiplier.
+   */
   @observable private _speed: number;
+  /**
+   * @type {string} The list of unused messages.
+   */
   private _unusedMessages: string[];
+  /**
+   * @type {string} The list of used messages.
+   */
   private _usedMessages: string[];
 
+  /**
+   * @type {Config | null} The singleton instance of the class, or null if not yet created.
+   */
   private static _instance: Config | null = null;
+
+  private _getName = (): string => ConfigJson.name;
 
   private _getMessages = (): string[] => ConfigJson.messages;
 
@@ -137,6 +161,7 @@ export default class Config {
     names.map(this._appendToLastParticipant(names.length, "and")).join(", ");
 
   private constructor() {
+    this._name = this._getName();
     this._messages = this._getMessages();
     this._unusedMessages = RandomGenerator.shuffle([...this._messages]);
     this._usedMessages = [];
@@ -153,6 +178,14 @@ export default class Config {
     return Config._instance
       ? Config._instance
       : (Config._instance = new Config());
+  }
+
+  /**
+   * Get the name of the tournament.
+   * @return {string} The tournament name.
+   */
+  @computed public get name(): string {
+    return this._name;
   }
 
   /**

@@ -105,12 +105,12 @@ export default inject("config")(
           <div key={participant.name}>
             <ParticipantCard invert={true} participant={participant} />
           </div>,
-          <h2
+          <h3
             className={classNames("versus-text")}
             key={`${participant.name} versus`}
           >
             VS
-          </h2>
+          </h3>
         ];
 
         /**

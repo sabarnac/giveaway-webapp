@@ -1,4 +1,5 @@
 {
+    "name": "Foobar Giveaway",
     "seed": 1234567890,
     "participantsPerMatch": 2,
     "messages": [

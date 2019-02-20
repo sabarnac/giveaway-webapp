@@ -1,7 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TournamentView Component. Matches snapshot. 1`] = `
-Array [
+<div
+  className="tournament"
+>
+  <h1>
+     Tournament
+  </h1>
   <div
     classNames={
       Object {
@@ -19,64 +24,129 @@ Array [
     unmountOnExit={true}
   >
     <div
-      className="tournament"
+      classNames={
+        Object {
+          "enter": "",
+          "enterActive": "round--entering",
+          "enterDone": "round--entered",
+          "exit": "",
+          "exitActive": "round--exiting",
+          "exitDone": "round--exited",
+        }
+      }
+      in={true}
+      mountOnEnter={true}
+      onExited={[Function]}
+      timeout={500}
+      unmountOnExit={true}
     >
       <div
-        classNames={
+        className="round"
+        style={
           Object {
-            "enter": "",
-            "enterActive": "round--entering",
-            "enterDone": "round--entered",
-            "exit": "",
-            "exitActive": "round--exiting",
-            "exitDone": "round--exited",
+            "transition": "opacity 500ms ease-in-out",
           }
         }
-        in={true}
-        mountOnEnter={true}
-        onExited={[Function]}
-        timeout={500}
-        unmountOnExit={true}
       >
+        <h2>
+          Round 1
+        </h2>
         <div
-          className="round"
-          style={
-            Object {
-              "transition": "opacity 500ms ease-in-out",
-            }
-          }
+          className="round__list"
         >
           <div
-            className="round__list"
+            classNames={
+              Object {
+                "enter": "",
+                "enterActive": "match--entering",
+                "enterDone": "match--entered",
+                "exit": "",
+                "exitActive": "match--exiting",
+                "exitDone": "match--exited",
+              }
+            }
+            in={true}
+            mountOnEnter={true}
+            onEntering={[Function]}
+            onExited={[Function]}
+            timeout={500}
+            unmountOnExit={true}
           >
             <div
-              classNames={
+              className="match"
+              style={
                 Object {
-                  "enter": "",
-                  "enterActive": "match--entering",
-                  "enterDone": "match--entered",
-                  "exit": "",
-                  "exitActive": "match--exiting",
-                  "exitDone": "match--exited",
+                  "transition": "opacity 500ms ease-in-out",
                 }
               }
-              in={true}
-              mountOnEnter={true}
-              onEntering={[Function]}
-              onExited={[Function]}
-              timeout={500}
-              unmountOnExit={true}
             >
               <div
-                className="match"
-                style={
-                  Object {
-                    "transition": "opacity 500ms ease-in-out",
-                  }
-                }
+                className="match__list"
               >
                 <div
-                  className="match__list"
+                  className="participant participant-entry"
+                >
+                  <div
+                    className="participant-entry__avatar"
+                  >
+                    <img
+                      alt="barfoo-2"
+                      src="foobar-2"
+                    />
+                  </div>
+                  <div
+                    className="participant-entry__name"
+                  >
+                    <strong>
+                      fozbaz-2
+                    </strong>
+                  </div>
+                </div>
+                <div
+                  className="participant participant-entry"
+                >
+                  <div
+                    className="participant-entry__avatar"
+                  >
+                    <img
+                      alt="barfoo-1"
+                      src="foobar-1"
+                    />
+                  </div>
+                  <div
+                    className="participant-entry__name"
+                  >
+                    <strong>
+                      fozbaz-1
+                    </strong>
+                  </div>
+                </div>
+              </div>
+              <div
+                classNames={
+                  Object {
+                    "enter": "",
+                    "enterActive": "match__interim--entering",
+                    "enterDone": "match__interim--entered",
+                    "exit": "",
+                    "exitActive": "match__interim--exiting",
+                    "exitDone": "match__interim--exited",
+                  }
+                }
+                in={false}
+                mountOnEnter={true}
+                onEntered={[Function]}
+                onExited={[Function]}
+                timeout={200}
+                unmountOnExit={true}
+              >
+                <div
+                  className="match__interim"
+                  style={
+                    Object {
+                      "transition": "opacity 200ms ease-in-out",
+                    }
+                  }
                 >
                   <div
                     className="participant participant-entry"
@@ -97,6 +167,34 @@ Array [
                       </strong>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div
+                classNames={
+                  Object {
+                    "enter": "",
+                    "enterActive": "match__interim--entering",
+                    "enterDone": "match__interim--entered",
+                    "exit": "",
+                    "exitActive": "match__interim--exiting",
+                    "exitDone": "match__interim--exited",
+                  }
+                }
+                in={false}
+                mountOnEnter={true}
+                onEntered={[Function]}
+                onExited={[Function]}
+                timeout={200}
+                unmountOnExit={true}
+              >
+                <div
+                  className="match__interim"
+                  style={
+                    Object {
+                      "transition": "opacity 200ms ease-in-out",
+                    }
+                  }
+                >
                   <div
                     className="participant participant-entry"
                   >
@@ -117,143 +215,49 @@ Array [
                     </div>
                   </div>
                 </div>
+              </div>
+              <div
+                classNames={
+                  Object {
+                    "enter": "",
+                    "enterActive": "match__winner--entering",
+                    "enterDone": "match__winner--entered",
+                    "exit": "",
+                    "exitActive": "match__winner--exiting",
+                    "exitDone": "match__winner--exited",
+                  }
+                }
+                in={false}
+                mountOnEnter={true}
+                onEntered={[Function]}
+                timeout={200}
+                unmountOnExit={true}
+              >
                 <div
-                  classNames={
+                  className="match__winner"
+                  style={
                     Object {
-                      "enter": "",
-                      "enterActive": "match__interim--entering",
-                      "enterDone": "match__interim--entered",
-                      "exit": "",
-                      "exitActive": "match__interim--exiting",
-                      "exitDone": "match__interim--exited",
+                      "transition": "opacity 200ms ease-in-out",
                     }
                   }
-                  in={false}
-                  mountOnEnter={true}
-                  onEntered={[Function]}
-                  onExited={[Function]}
-                  timeout={200}
-                  unmountOnExit={true}
                 >
                   <div
-                    className="match__interim"
-                    style={
-                      Object {
-                        "transition": "opacity 200ms ease-in-out",
-                      }
-                    }
+                    className="participant participant-entry"
                   >
                     <div
-                      className="participant participant-entry"
+                      className="participant-entry__avatar"
                     >
-                      <div
-                        className="participant-entry__avatar"
-                      >
-                        <img
-                          alt="barfoo-2"
-                          src="foobar-2"
-                        />
-                      </div>
-                      <div
-                        className="participant-entry__name"
-                      >
-                        <strong>
-                          fozbaz-2
-                        </strong>
-                      </div>
+                      <img
+                        alt="barfoo-1"
+                        src="foobar-1"
+                      />
                     </div>
-                  </div>
-                </div>
-                <div
-                  classNames={
-                    Object {
-                      "enter": "",
-                      "enterActive": "match__interim--entering",
-                      "enterDone": "match__interim--entered",
-                      "exit": "",
-                      "exitActive": "match__interim--exiting",
-                      "exitDone": "match__interim--exited",
-                    }
-                  }
-                  in={false}
-                  mountOnEnter={true}
-                  onEntered={[Function]}
-                  onExited={[Function]}
-                  timeout={200}
-                  unmountOnExit={true}
-                >
-                  <div
-                    className="match__interim"
-                    style={
-                      Object {
-                        "transition": "opacity 200ms ease-in-out",
-                      }
-                    }
-                  >
                     <div
-                      className="participant participant-entry"
+                      className="participant-entry__name"
                     >
-                      <div
-                        className="participant-entry__avatar"
-                      >
-                        <img
-                          alt="barfoo-1"
-                          src="foobar-1"
-                        />
-                      </div>
-                      <div
-                        className="participant-entry__name"
-                      >
-                        <strong>
-                          fozbaz-1
-                        </strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  classNames={
-                    Object {
-                      "enter": "",
-                      "enterActive": "match__winner--entering",
-                      "enterDone": "match__winner--entered",
-                      "exit": "",
-                      "exitActive": "match__winner--exiting",
-                      "exitDone": "match__winner--exited",
-                    }
-                  }
-                  in={false}
-                  mountOnEnter={true}
-                  onEntered={[Function]}
-                  timeout={200}
-                  unmountOnExit={true}
-                >
-                  <div
-                    className="match__winner"
-                    style={
-                      Object {
-                        "transition": "opacity 200ms ease-in-out",
-                      }
-                    }
-                  >
-                    <div
-                      className="participant participant-entry"
-                    >
-                      <div
-                        className="participant-entry__avatar"
-                      >
-                        <img
-                          alt="barfoo-1"
-                          src="foobar-1"
-                        />
-                      </div>
-                      <div
-                        className="participant-entry__name"
-                      >
-                        <strong>
-                          fozbaz-1
-                        </strong>
-                      </div>
+                      <strong>
+                        fozbaz-1
+                      </strong>
                     </div>
                   </div>
                 </div>
@@ -263,7 +267,7 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
     classNames={
       Object {
@@ -336,7 +340,7 @@ Array [
         </div>
       </div>
     </div>
-  </div>,
+  </div>
   <div
     className="speed-control"
   >
@@ -370,6 +374,6 @@ Array [
     >
       5X
     </button>
-  </div>,
-]
+  </div>
+</div>
 `;
