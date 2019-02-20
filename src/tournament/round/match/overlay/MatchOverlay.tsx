@@ -16,17 +16,11 @@ import { RouteComponentProps, withRouter } from "react-router";
  * Properties of the match overlay React component.
  */
 interface MatchOverlayProps {
-  /**
-   * @type {Config} The application config.
-   */
+  /** @ignore The application config. */
   config?: Config;
-  /**
-   * @type {Match} The match details.
-   */
+  /** The match details. */
   currentMatch: Match;
-  /**
-   * @type {() => void} Action to call when the view has finished showing the match.
-   */
+  /** Action to call when the view has finished showing the match. */
   onMatchComplete: () => void;
 }
 
@@ -34,13 +28,9 @@ interface MatchOverlayProps {
  * State of the match overlay React component.
  */
 interface MatchOverlayState {
-  /**
-   * @type {number} The current state of the match overlay component (for animations).
-   */
+  /** The current state of the match overlay component (for animations). */
   currentState: number;
-  /**
-   * @type {string} The message to be shown along with the details of the winner of the match.
-   */
+  /** The message to be shown along with the details of the winner of the match. */
   message: string;
 }
 
@@ -54,9 +44,7 @@ export default inject("config")(
         MatchOverlayProps & RouteComponentProps,
         MatchOverlayState
       > {
-        /**
-         * @type {boolean} Whether the component is mounted or not.
-         */
+        /** Whether the component is mounted or not. */
         private _isMounted: boolean = false;
 
         /**

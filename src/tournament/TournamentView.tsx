@@ -19,21 +19,13 @@ import Config from "../store/config/Config";
  * Properties of the tournament view React component.
  */
 interface TournamentViewProps {
-  /**
-   * @type {Config} The application config.
-   */
+  /** @ignore The application config. */
   config?: Config;
-  /**
-   * @type {string} The ID of the current round.
-   */
+  /** The ID of the current round. */
   roundId: string;
-  /**
-   * @type {string} The ID of the current match.
-   */
+  /** The ID of the current match. */
   matchId: string;
-  /**
-   * @type {Tournamnent} The details of the tournament.
-   */
+  /** The details of the tournament. */
   tournament: Tournament;
 }
 
@@ -41,13 +33,9 @@ interface TournamentViewProps {
  * State of the tournament view React component.
  */
 interface TournamentViewState {
-  /**
-   * @type {number} The current state of the tournament component (for animations).
-   */
+  /** The current state of the tournament component (for animations). */
   currentState: number;
-  /**
-   * @type {boolean} Whether the loser overlay has been shown for the current round.
-   */
+  /** Whether the loser overlay has been shown for the current round. */
   loserOverlayShown: boolean;
 }
 
@@ -60,9 +48,7 @@ export default class TournamentView extends Component<
   TournamentViewProps,
   TournamentViewState
 > {
-  /**
-   * @type {boolean} Whether the component is mounted or not.
-   */
+  /** Whether the component is mounted or not. */
   private _isMounted: boolean = false;
 
   /**

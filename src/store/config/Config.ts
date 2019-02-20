@@ -1,13 +1,17 @@
-import Participant, { Avatar } from "../round/match/participant/Participant";
+import Participant from "../round/match/participant/Participant";
 import ConfigJson from "./config.json";
 import { observable, computed, action } from "mobx";
 import RandomGenerator from "./RandomGenerator";
+import AnimationSpeed from "./AnimationSpeed";
+import Avatar from "../round/match/participant/Avatar";
 
 /**
  * Interface for JSON object representing avatar details.
  */
 interface AvatarJson {
+  /** The URL of the avatar. */
   url: string;
+  /** The alternate text of the avatar image. */
   altText: string;
 }
 
@@ -15,109 +19,32 @@ interface AvatarJson {
  * Interface for JSON object representing participant details.
  */
 interface ParticipantJson {
+  /** The name of the participant. */
   name: string;
+  /** The avatar of the participant (if present). */
   avatar?: AvatarJson;
-}
-
-/**
- * Class the provides possible animation speeds.
- */
-export class AnimationSpeed {
-  /**
-   * @type {Map<string, number>} A map of possible speeds, and their multiplier values.
-   */
-  private static _SPEED_MAP: Map<string, number> = new Map([
-    ["HALF", 0.5],
-    ["ONE", 1],
-    ["ONE_POINT_FIVE", 1.5],
-    ["TWO", 2],
-    ["FIVE", 5],
-    ["TEN", 10],
-    ["TWENTY", 20]
-  ]);
-
-  /**
-   * Returns the speed multiplier of the given key.
-   * @param  {string} key The key whose speed multiplier to return.
-   * @return {number | undefined} The speed multiplier, or undefined if it doesn't exist.
-   */
-  public static get = (key: string): number | undefined =>
-    AnimationSpeed._SPEED_MAP.get(key);
-
-  /**
-   * Returns the list of possible speed multiplier values.
-   * @return {number[]} The list of speed multiplier values.
-   */
-  public static getValues = (): number[] =>
-    Array.from(AnimationSpeed._SPEED_MAP.values());
-
-  /**
-   * Returns the list of possible speed multiplier keys.
-   * @return {string[]} The list of speed multiplier keys.
-   */
-  public static getKeys = (): string[] =>
-    Array.from(AnimationSpeed._SPEED_MAP.keys());
-
-  /**
-   * Returns whether the speed multiplier key exists.
-   * @param  {string} key The key to check.
-   * @return {boolean} Whether the speed multiplier key exists or not.
-   */
-  public static hasKey = (key: string): boolean =>
-    AnimationSpeed._SPEED_MAP.has(key);
-
-  /**
-   * Returns whether the speed multiplier value exists.
-   * @param  {number} value The value to check.
-   * @return {boolean} Whether the speed multiplier value exists or not.
-   */
-  public static hasValue = (value: number): boolean =>
-    AnimationSpeed.getValues().indexOf(value) !== -1;
-
-  /**
-   * Returns the list of possible speed multiplier keys and values.
-   * @return {[string, number][]} Returns the list of speed multiplier keys and values.
-   */
-  public static getEntries = (): [string, number][] =>
-    Array.from(AnimationSpeed._SPEED_MAP.entries());
 }
 
 /**
  * Class representing the basic configuration of the application.
  */
 export default class Config {
-  /**
-   * @type {string} The name of the tournament
-   */
+  /** The name of the tournament. */
   @observable private _name: string;
-  /**
-   * @type {string[]} A list of all messages.
-   */
+  /** A list of all messages. */
   @observable private _messages: string[];
-  /**
-   * @type {Participant[]} The list of participants in the tournament.
-   */
+  /** The list of participants in the tournament. */
   @observable private _allParticipants: Participant[];
-  /**
-   * @type {number} The number of participants per match.
-   */
+  /** The number of participants per match. */
   @observable private _participantsPerMatch: number;
-  /**
-   * @type {number} The animation speed multiplier.
-   */
+  /** The animation speed multiplier. */
   @observable private _speed: number;
-  /**
-   * @type {string} The list of unused messages.
-   */
+  /** The list of unused messages. */
   private _unusedMessages: string[];
-  /**
-   * @type {string} The list of used messages.
-   */
+  /** The list of used messages. */
   private _usedMessages: string[];
 
-  /**
-   * @type {Config | null} The singleton instance of the class, or null if not yet created.
-   */
+  /** The singleton instance of the class, or null if not yet created. */
   private static _instance: Config | null = null;
 
   private _getName = (): string => ConfigJson.name;

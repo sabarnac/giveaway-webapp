@@ -8,13 +8,9 @@ import Participant from "../../../../../store/round/match/participant/Participan
  * Properties of the participant entry React component.
  */
 interface ParticipantEntryProps {
-  /**
-   * @type {Participant} The participant details.
-   */
+  /** The participant details. */
   participant: Participant;
-  /**
-   * @type {boolean} Whether to invert the color of the participant or not.
-   */
+  /** Whether to invert the color of the participant view or not. */
   invert?: boolean;
 }
 
@@ -29,7 +25,7 @@ export default class ParticipantEntry extends Component<ParticipantEntryProps> {
    */
   private getNameView = (): JSX.Element => (
     <div className={classNames("participant-entry__name")}>
-      <strong>{this.props.participant.name}</strong>
+      <strong>{this.props.participant.properName}</strong>
     </div>
   );
 

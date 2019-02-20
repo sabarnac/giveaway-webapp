@@ -11,13 +11,9 @@ import { CSSTransition } from "react-transition-group";
  * Properties of the winner overlay React component.
  */
 interface WinnerOverlayProps {
-  /**
-   * @type {Config} The application config.
-   */
+  /** @ignore The application config. */
   config?: Config;
-  /**
-   * @type {Participant} The tournament winner.
-   */
+  /** The tournament winner. */
   winner: Participant;
 }
 
@@ -25,9 +21,7 @@ interface WinnerOverlayProps {
  * State of the winner overlay React component.
  */
 interface WinnerOverlayState {
-  /**
-   * @type {number} The current state of the winner overlay component (for animations).
-   */
+  /** The current state of the winner overlay component (for animations). */
   currentState: number;
 }
 
@@ -40,9 +34,7 @@ export default class WinnerOverlay extends Component<
   WinnerOverlayProps,
   WinnerOverlayState
 > {
-  /**
-   * @type {boolean} Whether the component is mounted or not.
-   */
+  /** Whether the component is mounted or not. */
   private _isMounted: boolean = false;
 
   /**

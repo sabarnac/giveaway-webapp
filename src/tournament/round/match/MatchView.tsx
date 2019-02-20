@@ -14,21 +14,13 @@ import Config from "../../../store/config/Config";
  * Properties of the match view React component.
  */
 interface MatchViewProps {
-  /**
-   * @type {Config} The application config.
-   */
+  /** @ignore The application config. */
   config?: Config;
-  /**
-   * @type {boolean} Whether it is the currently ongoing match.
-   */
+  /** Whether it is the currently ongoing match. */
   isCurrentMatch: boolean;
-  /**
-   * @type {Match} The details of the current match.
-   */
+  /** The details of the current match. */
   match: Match;
-  /**
-   * @type {() => void} Action to call when the view has finished showing the match.
-   */
+  /** Action to call when the view has finished showing the match. */
   onMatchComplete: () => void;
 }
 
@@ -36,17 +28,11 @@ interface MatchViewProps {
  * State of the match view React component.
  */
 interface MatchViewState {
-  /**
-   * @type {number} The current state of the match component (for animations).
-   */
+  /** The current state of the match component (for animations). */
   currentState: number;
-  /**
-   * @type {number} The index of the current participant being shown in the flip view.
-   */
+  /** The index of the current participant being shown in the flip view. */
   currentParticipant: number;
-  /**
-   * @type {number} The index of the previous participant shown in the flip view.
-   */
+  /** The index of the previous participant shown in the flip view. */
   oldParticipant: number;
 }
 
@@ -59,13 +45,9 @@ export default class MatchView extends Component<
   MatchViewProps,
   MatchViewState
 > {
-  /**
-   * @type {boolean} Whether the component is mounted or not.
-   */
+  /** Whether the component is mounted or not. */
   private _isMounted: boolean = false;
-  /**
-   * @type {boolean} A DOM reference to the match view.
-   */
+  /** A DOM reference to the match view. */
   private _matchRef: RefObject<any> = React.createRef();
 
   /**

@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import { observer, Observer, inject } from "mobx-react";
 import "./SpeedControl.scss";
 import classNames from "classnames";
-import Config, { AnimationSpeed } from "../../store/config/Config";
+import Config from "../../store/config/Config";
+import AnimationSpeed from "../../store/config/AnimationSpeed";
 
 /**
  * Properties of the animation speed controller view React component.
  */
 interface SpeedControlProps {
-  /**
-   * @type {Config} The application config.
-   */
+  /** @ignore The application config. */
   config?: Config;
 }
 

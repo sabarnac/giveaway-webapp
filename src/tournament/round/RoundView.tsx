@@ -15,21 +15,13 @@ const inflect = require("i")();
  * Properties of the round view React component.
  */
 interface RoundViewProps {
-  /**
-   * @type {Config} The application config.
-   */
+  /** @ignore The application config. */
   config?: Config;
-  /**
-   * @type {string} The ID of the current match.
-   */
+  /** The ID of the current match. */
   matchId: string;
-  /**
-   * @type {Round} The details of the current round.
-   */
+  /** The details of the current round. */
   round: Round;
-  /**
-   * @type {() => void} Action to call when the view has finished showing the round.
-   */
+  /** Action to call when the view has finished showing the round. */
   onRoundComplete: () => void;
 }
 
@@ -37,9 +29,7 @@ interface RoundViewProps {
  * State of the round view React component.
  */
 interface RoundViewState {
-  /**
-   * @type {number} The current state of the round component (for animations).
-   */
+  /** The current state of the round component (for animations). */
   currentState: number;
 }
 
@@ -52,9 +42,7 @@ export default class RoundView extends Component<
   RoundViewProps,
   RoundViewState
 > {
-  /**
-   * @type {boolean} Whether the component is mounted or not.
-   */
+  /** Whether the component is mounted or not. */
   private _isMounted: boolean = false;
 
   /**

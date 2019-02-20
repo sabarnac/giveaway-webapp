@@ -7,26 +7,18 @@ import last from "lodash.last";
 import RandomGenerator from "../config/RandomGenerator";
 
 /**
- * Class containing the details of a round of the tournament.
+ * Class containing the details of a round.
  */
 export default class Round {
-  /**
-   * @type {string} The ID of the round.
-   */
+  /** The ID of the round. */
   @observable private _id: string;
-  /**
-   * @type {Match[]} The list of matches of the round.
-   */
+  /** The list of matches of the round. */
   @observable private _matches: Match[];
 
-  /**
-   * @type {number} A counter for generating a unique ID for the match.
-   */
+  /** A counter for generating a unique ID for the match. */
   private static counter: number = 1;
 
-  /**
-   * @type {Config} The config of the application.
-   */
+  /** The config of the application. */
   private _config: Config;
 
   /**
@@ -140,11 +132,4 @@ export default class Round {
   @computed public get losers(): Participant[] {
     return this._matches.map(this._getMatchLosers).flat();
   }
-
-  /**
-   * Determines whether another round is identical to the current one.
-   * @param  {Round} otherRound The other round to compare against.
-   * @return {boolean} Whether the other round is equal to the current one.
-   */
-  public equals = (otherRound: Round): boolean => this._id === otherRound._id;
 }

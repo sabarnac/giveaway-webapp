@@ -8,14 +8,10 @@ import Round from "./round/Round";
  * Class containing the details of a tournament.
  */
 export default class Tournament {
-  /**
-   * @type {Participant[]} The list of rounds of the tournament.
-   */
+  /** The list of rounds of the tournament. */
   @observable private _rounds: Round[];
 
-  /**
-   * @type {Config} The config of the application.
-   */
+  /** The config of the application. */
   private _config: Config;
 
   /**

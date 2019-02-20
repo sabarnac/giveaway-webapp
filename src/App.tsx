@@ -15,9 +15,7 @@ import TournamentView from "./tournament/TournamentView";
  * Properties of the Application React component.
  */
 interface AppProps {
-  /**
-   * @type {Tournamnent} The details of the tournament.
-   */
+  /** The details of the tournament. */
   tournament: Tournament;
 }
 
@@ -25,21 +23,13 @@ interface AppProps {
  * Route related properties of the Application React component.
  */
 interface AppRouteProps {
-  /**
-   * @type {string} The ID of the current round.
-   */
+  /** The ID of the current round. */
   roundId?: string;
-  /**
-   * @type {string} The ID of the current match.
-   */
+  /** The ID of the current match. */
   matchId?: string;
-  /**
-   * @type {string} The ID of the first round of the tournament.
-   */
+  /** The ID of the first round of the tournament. */
   firstRoundId?: string;
-  /**
-   * @type {string} The ID of the first match of the tournament.
-   */
+  /** The ID of the first match of the tournament. */
   firstMatchId: string;
 }
 

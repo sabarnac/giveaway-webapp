@@ -6,22 +6,14 @@ import RandomGenerator from "../../config/RandomGenerator";
  * Class containing details of a match.
  */
 export default class Match {
-  /**
-   * @type {string} The ID of the match.
-   */
+  /** The ID of the match. */
   @observable private _id: string;
-  /**
-   * @type {Participant[]} The list of participants of the match.
-   */
+  /** The list of participants of the match. */
   @observable private _participants: Participant[];
-  /**
-   * @type {Participant} The winner of the match.
-   */
+  /** The winner of the match. */
   @observable private _winner: Participant;
 
-  /**
-   * @type {number} A counter for generating a unique ID for the match.
-   */
+  /** A counter for generating a unique ID for the match. */
   private static counter: number = 1;
 
   /**
@@ -76,11 +68,4 @@ export default class Match {
   @computed public get winner(): Participant {
     return this._winner;
   }
-
-  /**
-   * Determines whether another match is identical to the current one.
-   * @param  {Match} otherMatch The other match to compare against.
-   * @return {boolean} Whether the other match is equal to the current one.
-   */
-  public equals = (otherMatch: Match): boolean => this._id === otherMatch._id;
 }

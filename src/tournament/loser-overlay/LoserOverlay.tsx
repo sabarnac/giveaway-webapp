@@ -12,17 +12,11 @@ import { isInRange } from "../../util/index";
  * Properties of the loser overlay React component.
  */
 interface LoserOverlayProps {
-  /**
-   * @type {Config} The application config.
-   */
+  /** @ignore The application config. */
   config?: Config;
-  /**
-   * @type {Participant[]} The losers of a round.
-   */
+  /** The losers of a round. */
   losers: Participant[];
-  /**
-   * @type {() => void} Action to call when the overlay has finished showing the list of losers.
-   */
+  /** Action to call when the overlay has finished showing the list of losers. */
   onOverlayComplete: () => void;
 }
 
@@ -30,9 +24,7 @@ interface LoserOverlayProps {
  * State of the loser overlay React component.
  */
 interface LoserOverlayState {
-  /**
-   * @type {number} The current state of the loser overlay component (for animations).
-   */
+  /** The current state of the loser overlay component (for animations). */
   currentState: number;
 }
 
@@ -45,9 +37,7 @@ export default class LoserOverlay extends Component<
   LoserOverlayProps,
   LoserOverlayState
 > {
-  /**
-   * @type {boolean} Whether the component is mounted or not.
-   */
+  /** Whether the component is mounted or not. */
   private _isMounted: boolean = false;
 
   /**

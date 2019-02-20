@@ -1,8 +1,5 @@
 import React from "react";
-import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
 
-configure({ adapter: new Adapter() });
 export default undefined;
 
 (() => {
@@ -85,10 +82,9 @@ jest.mock(
 );
 
 jest.mock(
-  "./store/config/Config",
-  (): object => ({
-    __esModules: true,
-    AnimationSpeed: ((): Function => {
+  "./store/config/AnimationSpeed",
+  (): object =>
+    ((): Function => {
       const Foo = function Foo() {};
       if ("getValues" in Foo) {
         Object.defineProperty(Foo, "getValues", {
@@ -101,12 +97,16 @@ jest.mock(
         (Foo as any)["getValues"] = () => [1, 2, 3, 4, 5];
       }
       return Foo;
-    })(),
-    default: jest.fn().mockImplementation(
+    })()
+);
+
+jest.mock(
+  "./store/config/Config",
+  (): object =>
+    jest.fn().mockImplementation(
       (): any => {
         const { createDummyConfig } = require("./util/test");
         return createDummyConfig();
       }
     )
-  })
 );

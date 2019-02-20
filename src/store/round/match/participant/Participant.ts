@@ -1,5 +1,7 @@
 import { observable, computed } from "mobx";
 import { createAvatarImage } from "../../../../util";
+import Avatar from "./Avatar";
+const inflect = require("i")();
 
 interface AvatarJson {
   url: string;
@@ -7,77 +9,12 @@ interface AvatarJson {
 }
 
 /**
- * Class containing the details of a participants' avatar.
- */
-export class Avatar {
-  /**
-   * @type {string} The URL of the avatar image.
-   */
-  @observable private _url: string;
-  /**
-   * @type {string} The alternate text for the image.
-   */
-  @observable private _altText: string;
-
-  public constructor(url: string, altText: string) {
-    this._url = url;
-    this._altText = altText;
-  }
-
-  /**
-   * Gets the avatar URL.
-   * @return {string} The avatar URL.
-   */
-  @computed public get url(): string {
-    return this._url;
-  }
-
-  /**
-   * Gets the avatar image alternate text.
-   * @return {string} The avatar image alternate text.
-   */
-  @computed public get altText(): string {
-    return this._altText;
-  }
-
-  /**
-   * Returns whether the two given URLs are equal.
-   * @param {string} url1 The first URL to compare.
-   * @param {string} url2 The second URL to compare.
-   * @return {boolean} Whether the two URLs are equal.
-   */
-  private _isSameUrl = (url1: string, url2: string): boolean => url1 === url2;
-
-  /**
-   * Returns whether the two alternate texts are equal.
-   * @param {string} altText1 The first alternate text to compare.
-   * @param {string} altText2 The second alternate text to compare.
-   * @return {boolean} Whether the two alternate texts are equal.
-   */
-  private _isSameAltText = (altText1: string, altText2: string): boolean =>
-    altText1 === altText2;
-
-  /**
-   * Determines whether another avatar is identical to the current one.
-   * @param  {Avatar} otherAvatar The other avatar to compare against.
-   * @return {boolean} Whether the other avatar is equal to the current one.
-   */
-  public equals = (otherAvatar: Avatar): boolean =>
-    this._isSameUrl(this._url, otherAvatar._url) &&
-    this._isSameAltText(this._altText, otherAvatar._altText);
-}
-
-/**
  * Class containing the details of a participant.
  */
 export default class Participant {
-  /**
-   * @type {string} The name of the participant.
-   */
+  /** The name of the participant. */
   @observable private _name: string;
-  /**
-   * @type {Avatar} The avatar of the participant
-   */
+  /** The avatar of the participant. */
   @observable private _avatar: Avatar;
 
   /**
@@ -110,9 +47,7 @@ export default class Participant {
    * @return {string} The capitalized name.
    */
   @computed public get properName(): string {
-    return this._name.replace(/\w\S*/g, (subText: string) => {
-      return subText.charAt(0).toUpperCase() + subText.substr(1).toLowerCase();
-    });
+    return inflect.titleize(this._name);
   }
 
   /**
