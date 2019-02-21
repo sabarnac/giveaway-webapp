@@ -3,7 +3,6 @@ import MatchView from "./MatchView";
 import Match from "../../../store/round/match/Match";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyMatch } from "../../../util/test";
-import Config from "../../../store/config/Config";
 
 describe("MatchView Component.", () => {
   describe("Current Match.", () => {

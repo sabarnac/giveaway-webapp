@@ -76,7 +76,7 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                 className="participant-entry__name"
               >
                 <strong>
-                  fozbaz-6
+                  Fozbaz 6
                 </strong>
               </div>
             </div>
@@ -95,7 +95,7 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                 className="participant-entry__name"
               >
                 <strong>
-                  fozbaz-4
+                  Fozbaz 4
                 </strong>
               </div>
             </div>
@@ -141,7 +141,7 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   className="participant-entry__name"
                 >
                   <strong>
-                    fozbaz-6
+                    Fozbaz 6
                   </strong>
                 </div>
               </div>
@@ -188,7 +188,7 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   className="participant-entry__name"
                 >
                   <strong>
-                    fozbaz-4
+                    Fozbaz 4
                   </strong>
                 </div>
               </div>
@@ -234,7 +234,7 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   className="participant-entry__name"
                 >
                   <strong>
-                    fozbaz-4
+                    Fozbaz 4
                   </strong>
                 </div>
               </div>

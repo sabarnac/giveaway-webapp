@@ -45,7 +45,7 @@ exports[`MatchView Component. Current Match. Matches snapshot. 1`] = `
           className="participant-entry__name"
         >
           <strong>
-            fozbaz-1
+            Fozbaz 1
           </strong>
         </div>
       </div>
@@ -64,7 +64,7 @@ exports[`MatchView Component. Current Match. Matches snapshot. 1`] = `
           className="participant-entry__name"
         >
           <strong>
-            fozbaz-2
+            Fozbaz 2
           </strong>
         </div>
       </div>
@@ -110,7 +110,7 @@ exports[`MatchView Component. Current Match. Matches snapshot. 1`] = `
             className="participant-entry__name"
           >
             <strong>
-              fozbaz-1
+              Fozbaz 1
             </strong>
           </div>
         </div>
@@ -157,7 +157,7 @@ exports[`MatchView Component. Current Match. Matches snapshot. 1`] = `
             className="participant-entry__name"
           >
             <strong>
-              fozbaz-2
+              Fozbaz 2
             </strong>
           </div>
         </div>
@@ -203,7 +203,7 @@ exports[`MatchView Component. Current Match. Matches snapshot. 1`] = `
             className="participant-entry__name"
           >
             <strong>
-              fozbaz-1
+              Fozbaz 1
             </strong>
           </div>
         </div>
@@ -258,7 +258,7 @@ exports[`MatchView Component. Not Current Match. Matches snapshot. 1`] = `
           className="participant-entry__name"
         >
           <strong>
-            fozbaz-1
+            Fozbaz 1
           </strong>
         </div>
       </div>
@@ -277,7 +277,7 @@ exports[`MatchView Component. Not Current Match. Matches snapshot. 1`] = `
           className="participant-entry__name"
         >
           <strong>
-            fozbaz-2
+            Fozbaz 2
           </strong>
         </div>
       </div>
@@ -323,7 +323,7 @@ exports[`MatchView Component. Not Current Match. Matches snapshot. 1`] = `
             className="participant-entry__name"
           >
             <strong>
-              fozbaz-1
+              Fozbaz 1
             </strong>
           </div>
         </div>
@@ -370,7 +370,7 @@ exports[`MatchView Component. Not Current Match. Matches snapshot. 1`] = `
             className="participant-entry__name"
           >
             <strong>
-              fozbaz-2
+              Fozbaz 2
             </strong>
           </div>
         </div>
@@ -416,7 +416,7 @@ exports[`MatchView Component. Not Current Match. Matches snapshot. 1`] = `
             className="participant-entry__name"
           >
             <strong>
-              fozbaz-2
+              Fozbaz 2
             </strong>
           </div>
         </div>

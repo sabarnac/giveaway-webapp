@@ -16,7 +16,7 @@ exports[`ParticipantEntry Component. Matches snapshot. 1`] = `
     className="participant-entry__name"
   >
     <strong>
-      fozbaz-1
+      Fozbaz 1
     </strong>
   </div>
 </div>
