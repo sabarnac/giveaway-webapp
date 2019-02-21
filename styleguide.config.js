@@ -3,6 +3,10 @@ module.exports = {
     ignore: ["**/__tests__/**", "**/*.test.{js,jsx,ts,tsx}", "**/*.spec.{js,jsx,ts,tsx}", "**/*.d.ts", "src/store/config/RandomGenerator.ts", "src/util/**/*", "src/index.tsx", "src/setupTests.tsx", "src/serviceWorker.ts"],
     propsParser: require("react-docgen-typescript").parse,
     styleguideDir: "build/docs",
+    ribbon: {
+        url: "https://github.com/sabarnac/giveaway-webapp/",
+        text: "Fork me on GitHub"
+    },
     dangerouslyUpdateWebpackConfig(webpackConfig, env) {
         webpackConfig.output = {
             ...webpackConfig.output,
