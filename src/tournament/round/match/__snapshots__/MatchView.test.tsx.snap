@@ -408,15 +408,15 @@ exports[`MatchView Component. Not Current Match. Matches snapshot. 1`] = `
             className="participant-entry__avatar"
           >
             <img
-              alt="barfoo-2"
-              src="foobar-2"
+              alt="barfoo-1"
+              src="foobar-1"
             />
           </div>
           <div
             className="participant-entry__name"
           >
             <strong>
-              Fozbaz 2
+              Fozbaz 1
             </strong>
           </div>
         </div>

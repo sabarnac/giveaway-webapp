@@ -90,25 +90,6 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
                     className="participant-entry__avatar"
                   >
                     <img
-                      alt="barfoo-2"
-                      src="foobar-2"
-                    />
-                  </div>
-                  <div
-                    className="participant-entry__name"
-                  >
-                    <strong>
-                      Fozbaz 2
-                    </strong>
-                  </div>
-                </div>
-                <div
-                  className="participant participant-entry"
-                >
-                  <div
-                    className="participant-entry__avatar"
-                  >
-                    <img
                       alt="barfoo-1"
                       src="foobar-1"
                     />
@@ -121,51 +102,23 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
                     </strong>
                   </div>
                 </div>
-              </div>
-              <div
-                classNames={
-                  Object {
-                    "enter": "",
-                    "enterActive": "match__interim--entering",
-                    "enterDone": "match__interim--entered",
-                    "exit": "",
-                    "exitActive": "match__interim--exiting",
-                    "exitDone": "match__interim--exited",
-                  }
-                }
-                in={false}
-                mountOnEnter={true}
-                onEntered={[Function]}
-                onExited={[Function]}
-                timeout={200}
-                unmountOnExit={true}
-              >
                 <div
-                  className="match__interim"
-                  style={
-                    Object {
-                      "transition": "opacity 200ms ease-in-out",
-                    }
-                  }
+                  className="participant participant-entry"
                 >
                   <div
-                    className="participant participant-entry"
+                    className="participant-entry__avatar"
                   >
-                    <div
-                      className="participant-entry__avatar"
-                    >
-                      <img
-                        alt="barfoo-2"
-                        src="foobar-2"
-                      />
-                    </div>
-                    <div
-                      className="participant-entry__name"
-                    >
-                      <strong>
-                        Fozbaz 2
-                      </strong>
-                    </div>
+                    <img
+                      alt="barfoo-2"
+                      src="foobar-2"
+                    />
+                  </div>
+                  <div
+                    className="participant-entry__name"
+                  >
+                    <strong>
+                      Fozbaz 2
+                    </strong>
                   </div>
                 </div>
               </div>
@@ -211,6 +164,53 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
                     >
                       <strong>
                         Fozbaz 1
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                classNames={
+                  Object {
+                    "enter": "",
+                    "enterActive": "match__interim--entering",
+                    "enterDone": "match__interim--entered",
+                    "exit": "",
+                    "exitActive": "match__interim--exiting",
+                    "exitDone": "match__interim--exited",
+                  }
+                }
+                in={false}
+                mountOnEnter={true}
+                onEntered={[Function]}
+                onExited={[Function]}
+                timeout={200}
+                unmountOnExit={true}
+              >
+                <div
+                  className="match__interim"
+                  style={
+                    Object {
+                      "transition": "opacity 200ms ease-in-out",
+                    }
+                  }
+                >
+                  <div
+                    className="participant participant-entry"
+                  >
+                    <div
+                      className="participant-entry__avatar"
+                    >
+                      <img
+                        alt="barfoo-2"
+                        src="foobar-2"
+                      />
+                    </div>
+                    <div
+                      className="participant-entry__name"
+                    >
+                      <strong>
+                        Fozbaz 2
                       </strong>
                     </div>
                   </div>
@@ -321,15 +321,15 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
                 className="participant-card__avatar"
               >
                 <img
-                  alt="barfoo-4"
-                  src="foobar-4"
+                  alt="barfoo-1"
+                  src="foobar-1"
                 />
               </div>
               <div
                 className="participant-card__name"
               >
                 <strong>
-                  Fozbaz 4
+                  Fozbaz 1
                 </strong>
               </div>
             </div>

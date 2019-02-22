@@ -26,18 +26,26 @@ export default undefined;
 
           return result.concat(stack);
         },
-        writable: true
+        writable: true,
       },
       flatMap: {
         configurable: true,
         value: function flatMap() {
           return Array.prototype.map.apply(this, arguments as any).flat();
         },
-        writable: true
-      }
+        writable: true,
+      },
     });
   }
 })();
+
+jest.mock(
+  "./store/config/RandomGenerator",
+  (): object => ({
+    shuffle: (arr: any[]) => [...arr],
+    pick: (arr: any[]) => arr[0],
+  }),
+);
 
 jest.mock(
   "mobx-react",
@@ -53,8 +61,8 @@ jest.mock(
     observer: (ClassType: any): Function => (props: any): any => (
       <ClassType {...props} />
     ),
-    Observer: (props: any): any => props.render()
-  })
+    Observer: (props: any): any => props.render(),
+  }),
 );
 
 jest.mock(
@@ -62,8 +70,8 @@ jest.mock(
   (): object => ({
     CSSTransition: "div",
     Transition: "div",
-    TransitionGroup: "div"
-  })
+    TransitionGroup: "div",
+  }),
 );
 
 jest.mock(
@@ -77,8 +85,8 @@ jest.mock(
         {...props}
         location={{ search: "", pathname: "", hash: "", state: null }}
       />
-    )
-  })
+    ),
+  }),
 );
 
 jest.mock(
@@ -91,13 +99,13 @@ jest.mock(
           value: () => [1, 2, 3, 4, 5],
           enumerable: true,
           configurable: true,
-          writable: true
+          writable: true,
         });
       } else {
         (Foo as any)["getValues"] = () => [1, 2, 3, 4, 5];
       }
       return Foo;
-    })()
+    })(),
 );
 
 jest.mock(
@@ -107,6 +115,6 @@ jest.mock(
       (): any => {
         const { createDummyConfig } = require("./util/test");
         return createDummyConfig();
-      }
-    )
+      },
+    ),
 );

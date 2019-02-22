@@ -68,15 +68,15 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                 className="participant-entry__avatar"
               >
                 <img
-                  alt="barfoo-6"
-                  src="foobar-6"
+                  alt="barfoo-1"
+                  src="foobar-1"
                 />
               </div>
               <div
                 className="participant-entry__name"
               >
                 <strong>
-                  Fozbaz 6
+                  Fozbaz 1
                 </strong>
               </div>
             </div>
@@ -87,15 +87,15 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                 className="participant-entry__avatar"
               >
                 <img
-                  alt="barfoo-4"
-                  src="foobar-4"
+                  alt="barfoo-2"
+                  src="foobar-2"
                 />
               </div>
               <div
                 className="participant-entry__name"
               >
                 <strong>
-                  Fozbaz 4
+                  Fozbaz 2
                 </strong>
               </div>
             </div>
@@ -133,15 +133,15 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   className="participant-entry__avatar"
                 >
                   <img
-                    alt="barfoo-6"
-                    src="foobar-6"
+                    alt="barfoo-1"
+                    src="foobar-1"
                   />
                 </div>
                 <div
                   className="participant-entry__name"
                 >
                   <strong>
-                    Fozbaz 6
+                    Fozbaz 1
                   </strong>
                 </div>
               </div>
@@ -180,15 +180,15 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   className="participant-entry__avatar"
                 >
                   <img
-                    alt="barfoo-4"
-                    src="foobar-4"
+                    alt="barfoo-2"
+                    src="foobar-2"
                   />
                 </div>
                 <div
                   className="participant-entry__name"
                 >
                   <strong>
-                    Fozbaz 4
+                    Fozbaz 2
                   </strong>
                 </div>
               </div>
@@ -226,15 +226,15 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   className="participant-entry__avatar"
                 >
                   <img
-                    alt="barfoo-4"
-                    src="foobar-4"
+                    alt="barfoo-1"
+                    src="foobar-1"
                   />
                 </div>
                 <div
                   className="participant-entry__name"
                 >
                   <strong>
-                    Fozbaz 4
+                    Fozbaz 1
                   </strong>
                 </div>
               </div>
