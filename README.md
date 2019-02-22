@@ -1,43 +1,37 @@
-# Note:- This branch is specific to refactoring the application in React using MobX for state management. Be careful when making changes here as nothing is fixed. Also note anything may be outdated, including this README!
-
-## YOU HAVE BEEN WARNED
-
-# The Giveaway Tournament App [![Build Status](https://travis-ci.org/sabarnac/giveaway-webapp.svg?branch=react)](https://travis-ci.org/sabarnac/giveaway-webapp)
+# The Giveaway Tournament App [![Build Status](https://travis-ci.org/sabarnac/giveaway-webapp.svg)](https://travis-ci.org/sabarnac/giveaway-webapp)
 
 Ever wanted to have a giveaway but didn't want to just randomly select a winner? Then just compile this app with a seed, a list of random messages to display for each match, and a list of users, and then just compile and host the generated files on a web server for everyone to see! The fixed seed ensures everyone sees the same results, while the Mersenne Twister engine ensures the random distribution of results is uniform!
 
-![Desktop Preview](https://i.imgur.com/aosE6zt.gif)
-![Mobile Preview](https://i.imgur.com/QBxyhl0.gif)
+![Desktop Preview](https://i.imgur.com/kFENmiH.gif)
+
+![Mobile Preview](https://i.imgur.com/w9A3ipY.gif)
 
 # Usage
 
 1. Clone this repository.
 2. Execute `npm i`.
-3. Modify `src/config.json` with a seed value and a list of messages to show when a match is concluded.
+3. Modify `src/store/config/config.json` with the tournament name, a seed value, the number of participants per match, a list of match conclusion messages, and the list of participants.
    - `#winner` in the message gets replaced with the name of the winner.
    - `#loser` in the message gets replaced with the name of the loser.
-4. Modify `src/users.json` with the list of names of the participants in the tournament.
-5. Execute `npm run build:prod`.
-6. Host the contents of the generated `dist` folder on your website's web server.
+   - A participant can just be a name, or a JSON object `{ name: "string", avatar: { url: "string", altText: "string" } }` (`avatar` property is optional).
+4. Use it as a standard React application created through `create-react-app` using TypeScript, with `sw-precache-cra`, `gh-pages`, and `react-styleguidist`.
 
 # Features
 
 - Automatically selects a winner at random for each match.
 - Constant seed value ensures same result is seen by every website user.
-- Is built as a PWA web-app.
-- Mandatory configuration is simple to do.
+- Is a PWA.
+- Simple configuration.
+- Can start from any round and/or match, with the ability to pause at a particular match.
 
 # Future Plans
 
 - Make the application more customizable (with respect to what text is shown where).
-- Further improve performance while not heavily impacting size.
-- Improve code modularity.
-- Add support for showing images for each participant, and showing images during winner selection in the modal.
 
 # Development
 
-Just follow the first 4 steps above, and then execute `npm run build:dev` which makes webpack compile and watch for changes. Run a server for the dist folder (may add a `server.js` file later to do that for you) and then start developing! 😄
+Just follow the first 3 steps in the `Usage` section, and as mentioned, use it as a standard React application, and start developing! 😄
 
-# gh-pages branch (Do not modify)
+### gh-pages branch (Do not modify)
 
-The gh-pages branch is for hosting a sample website, and for hosting my own giveaway tournaments. All names in their are aliases. No pull-requests will be accepted for that branch.
+That was it. It's for hosting a sample website, docs generated through `react-styleguidist`, and my own giveaways.
