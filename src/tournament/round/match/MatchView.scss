@@ -1,0 +1,57 @@
+.match {
+    width: 100%;
+    display: flex;
+    padding: 2rem 0;
+    border-top: 1px dashed #ffffff;
+    border-bottom: 1px dashed #ffffff;
+    opacity: 0.000001;
+    will-change: opacity;
+    &--exiting,
+    &--exited {
+        opacity: 0.000001;
+    }
+    &--entered,
+    &--entering,
+    &--completed {
+        opacity: 0.99999;
+    }
+    &__list {
+        width: 50%;
+        &>.participant-entry {
+            border-bottom: none;
+            &:last-child {
+                border-bottom: 1px solid #000000;
+            }
+        }
+    }
+    &__winner,
+    &__interim {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        &>.participant-entry {
+            border-left: none;
+        }
+        opacity: 0.000001;
+        will-change: opacity;
+        &--exiting,
+        &--exited {
+            opacity: 0.000001;
+        }
+        &--entered,
+        &--entering,
+        &--completed {
+            opacity: 0.99999;
+        }
+    }
+    &__interim {
+        &>.participant {
+            background: #ffaa00;
+        }
+    }
+    &__winner {
+        &>.participant {
+            background: #00ff00;
+        }
+    }
+}

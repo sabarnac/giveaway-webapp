@@ -1,0 +1,12 @@
+{
+    "name": "Foobar Giveaway",
+    "seed": 1234567890,
+    "participantsPerMatch": 2,
+    "messages": [
+        "#loser lost against #winner.",
+        "#winner won against #loser.",
+        "#winner didn't lose to #loser.",
+        "#loser didn't win against #winner."
+    ],
+    "users": ["FOO", "BAR", "FAZ", "BAZ", "FOX", "BAX", "BOZ", "FAM", "FAA"]
+}
