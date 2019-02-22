@@ -48,7 +48,7 @@ export default class RoundView extends Component<
   /**
    * Moves the component to the next animation state.
    */
-  private goToNextState = (): void =>
+  private _goToNextState = (): void =>
     this._isMounted
       ? this.setState({ currentState: this.state.currentState + 1 })
       : undefined;
@@ -56,15 +56,15 @@ export default class RoundView extends Component<
   /**
    * Calls the action for round completion, after a delay of 500 (ignoring speed multiplier).
    */
-  private onRoundCompleteWithDelay = (): unknown =>
+  private _onRoundCompleteWithDelay = (): unknown =>
     setTimeout(this.props.onRoundComplete, 500 / this.props.config!.speed);
 
   /**
    * Returns the match list of the current round.
    * @return {JSX.Element} The matches list view.
    */
-  private getMatchList = (): JSX.Element => (
-    <div className={classNames("round__list")}>{this.getMatches()}</div>
+  private _getMatchList = (): JSX.Element => (
+    <div className={classNames("round__list")}>{this._getMatches()}</div>
   );
 
   /**
@@ -72,35 +72,35 @@ export default class RoundView extends Component<
    * @param {Match} match The match to check.
    * @return {boolean} Whether the given match is the current match.
    */
-  private isCurrentMatch = (match: Match): boolean =>
+  private _isCurrentMatch = (match: Match): boolean =>
     match.id === this.props.matchId;
 
   /**
    * Returns the index of current match in the tournament.
    * @return {Match} The index of the current match.
    */
-  private getCurrentMatchIndex = (): number =>
-    this.props.round.matches.findIndex(this.isCurrentMatch);
+  private _getCurrentMatchIndex = (): number =>
+    this.props.round.matches.findIndex(this._isCurrentMatch);
 
   /**
    * Returns whether the given match is not a future match.
    * @param {Match} match The match to check.
    * @return {boolean} Whether the given match is not a future match or not.
    */
-  private isNotFutureMatch = (_: Match, index: number): boolean =>
-    index <= this.getCurrentMatchIndex();
+  private _isNotFutureMatch = (_: Match, index: number): boolean =>
+    index <= this._getCurrentMatchIndex();
 
   /**
    * Returns the view for the given match.
    * @param {Match} match The match details.
    * @return {JSX.Element} The match view.
    */
-  private getMatchView = (match: Match): JSX.Element => (
+  private _getMatchView = (match: Match): JSX.Element => (
     <MatchView
       key={match.id}
       match={match}
-      isCurrentMatch={this.isCurrentMatch(match)}
-      onMatchComplete={this.goToNextState}
+      isCurrentMatch={this._isCurrentMatch(match)}
+      onMatchComplete={this._goToNextState}
     />
   );
 
@@ -108,17 +108,17 @@ export default class RoundView extends Component<
    * Returns the list of views of all matches of the current round.
    * @return {JSX.Element[]} The list of match views.
    */
-  private getMatches = (): JSX.Element[] =>
+  private _getMatches = (): JSX.Element[] =>
     this.props.round.matches
-      .filter(this.isNotFutureMatch)
-      .map(this.getMatchView);
+      .filter(this._isNotFutureMatch)
+      .map(this._getMatchView);
 
   /**
    * Returns the redirect for the first match if required.
    * @return {JSX.Element} The redirect, or null if it is not required.
    */
-  private getFirstMatchRedirect = (): JSX.Element | null =>
-    this.getCurrentMatchIndex() === -1 ? (
+  private _getFirstMatchRedirect = (): JSX.Element | null =>
+    this._getCurrentMatchIndex() === -1 ? (
       <Redirect
         to={`/round/${this.props.round.id}/match/${
           this.props.round.firstMatch.id
@@ -130,11 +130,11 @@ export default class RoundView extends Component<
    * Returns whether the next match redirect should be added to the view.
    * @return {boolean} Whether the redirect should be shown.
    */
-  private shouldAddNextMatchRedirect = (): boolean =>
+  private _shouldAddNextMatchRedirect = (): boolean =>
     isInRange(
       this.state.currentState,
       0,
-      (this.props.round.matches.length - 1) * 2 + 1
+      (this.props.round.matches.length - 1) * 2 + 1,
     ) &&
     this.state.currentState % 2 === 0 &&
     this.props.round.matches[this.state.currentState / 2].id !==
@@ -144,8 +144,8 @@ export default class RoundView extends Component<
    * Returns the redirect for the next match if required.
    * @return {JSX.Element} The redirect, or null if it is not required.
    */
-  private getNextMatchRedirect = (): JSX.Element | null =>
-    this.shouldAddNextMatchRedirect() ? (
+  private _getNextMatchRedirect = (): JSX.Element | null =>
+    this._shouldAddNextMatchRedirect() ? (
       <Redirect
         to={`/round/${this.props.round.id}/match/${
           this.props.round.matches[this.state.currentState / 2].id
@@ -157,14 +157,14 @@ export default class RoundView extends Component<
    * Returns the details of the current round, wrapped in an animation transition component.
    * @return {JSX.Element} The current round view.
    */
-  private getRoundDetails = (): JSX.Element => (
+  private _getRoundDetails = (): JSX.Element => (
     <CSSTransition
       in={
         isInRange(
           this.state.currentState,
           1,
-          this.props.round.matches.length * 2 - 1
-        ) && this.getCurrentMatchIndex() !== -1
+          this.props.round.matches.length * 2 - 1,
+        ) && this._getCurrentMatchIndex() !== -1
       }
       timeout={500 / this.props.config!.speed}
       classNames={{
@@ -173,20 +173,20 @@ export default class RoundView extends Component<
         enterDone: "round--entered",
         exit: "",
         exitActive: "round--exiting",
-        exitDone: "round--exited"
+        exitDone: "round--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
-      onExited={this.onRoundCompleteWithDelay}
+      onExited={this._onRoundCompleteWithDelay}
     >
       <div
         className={classNames("round")}
         style={{
-          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`
+          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`,
         }}
       >
         <h2>{inflect.titleize(this.props.round.id)}</h2>
-        {this.getMatchList()}
+        {this._getMatchList()}
       </div>
     </CSSTransition>
   );
@@ -197,7 +197,9 @@ export default class RoundView extends Component<
   public componentWillMount = (): void => {
     this.setState({
       currentState:
-        this.getCurrentMatchIndex() === -1 ? 0 : this.getCurrentMatchIndex() * 2
+        this._getCurrentMatchIndex() === -1
+          ? 0
+          : this._getCurrentMatchIndex() * 2,
     });
   };
 
@@ -206,7 +208,7 @@ export default class RoundView extends Component<
    */
   public componentDidMount = (): void => {
     this._isMounted = true;
-    this.goToNextState();
+    this._goToNextState();
   };
 
   /**
@@ -214,7 +216,7 @@ export default class RoundView extends Component<
    */
   public componentDidUpdate = (prevProps: RoundViewProps): void => {
     if (this.props.matchId !== prevProps.matchId) {
-      this.setState({ currentState: this.getCurrentMatchIndex() * 2 + 1 });
+      this.setState({ currentState: this._getCurrentMatchIndex() * 2 + 1 });
     }
   };
 
@@ -231,11 +233,11 @@ export default class RoundView extends Component<
    */
   public render = (): JSX.Element => (
     <Fragment
-      key={`round-${this.props.round.id}-match-${this.getCurrentMatchIndex()}`}
+      key={`round-${this.props.round.id}-match-${this._getCurrentMatchIndex()}`}
     >
-      {this.getRoundDetails()}
-      {this.getFirstMatchRedirect()}
-      {this.getNextMatchRedirect()}
+      {this._getRoundDetails()}
+      {this._getFirstMatchRedirect()}
+      {this._getNextMatchRedirect()}
     </Fragment>
   );
 }

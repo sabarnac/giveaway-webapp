@@ -40,7 +40,7 @@ export default class WinnerOverlay extends Component<
   /**
    * Moves the component to the next animation state.
    */
-  private goToNextState = (): void =>
+  private _goToNextState = (): void =>
     this._isMounted
       ? this.setState({ currentState: this.state.currentState + 1 })
       : undefined;
@@ -49,7 +49,7 @@ export default class WinnerOverlay extends Component<
    * Returns the card view for the winner participant.
    * @return {JSX.Element} The winner participant card view.
    */
-  private getWinner = (): JSX.Element => (
+  private _getWinner = (): JSX.Element => (
     <div className={classNames("winner-overlay__winner")}>
       <ParticipantCard participant={this.props.winner} />
       <h3>Won The Giveaway!</h3>
@@ -68,7 +68,7 @@ export default class WinnerOverlay extends Component<
    */
   public componentDidMount = (): void => {
     this._isMounted = true;
-    this.goToNextState();
+    this._goToNextState();
   };
 
   /**
@@ -92,7 +92,7 @@ export default class WinnerOverlay extends Component<
         enterDone: "winner-overlay-wrapper--entered",
         exit: "",
         exitActive: "winner-overlay-wrapper--exiting",
-        exitDone: "winner-overlay-wrapper--exited"
+        exitDone: "winner-overlay-wrapper--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
@@ -100,10 +100,10 @@ export default class WinnerOverlay extends Component<
       <div
         className={classNames("winner-overlay-wrapper")}
         style={{
-          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`
+          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`,
         }}
       >
-        <div className={classNames("winner-overlay")}>{this.getWinner()}</div>
+        <div className={classNames("winner-overlay")}>{this._getWinner()}</div>
       </div>
     </CSSTransition>
   );

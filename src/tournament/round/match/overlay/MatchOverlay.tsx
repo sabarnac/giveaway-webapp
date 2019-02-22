@@ -48,7 +48,7 @@ export default inject("config")(
         /**
          * Moves the component to the next animation state.
          */
-        private goToNextState = (): void =>
+        private _goToNextState = (): void =>
           this._isMounted
             ? this.setState({
                 ...this.state,
@@ -59,16 +59,16 @@ export default inject("config")(
         /**
          * Moves the component to the next animation state, after a delay of 2500 (ignoring speed multiplier).
          */
-        private goToNextStateWithDelay = (): unknown =>
-          setTimeout(this.goToNextState, 4000 / this.props.config!.speed);
+        private _goToNextStateWithDelay = (): unknown =>
+          setTimeout(this._goToNextState, 4000 / this.props.config!.speed);
 
         /**
          * Returns the participant list of the current match.
          * @return {JSX.Element} The participants list view.
          */
-        private getParticipantList = (): JSX.Element => (
+        private _getParticipantList = (): JSX.Element => (
           <div className={classNames("match-overlay__list")}>
-            {this.getParticipants()}
+            {this._getParticipants()}
           </div>
         );
 
@@ -77,7 +77,7 @@ export default inject("config")(
          * @param {string} name The query param name.
          * @return {boolean} Whether the query param exists in the URL.
          */
-        private hasQueryParam = (name: string): boolean =>
+        private _hasQueryParam = (name: string): boolean =>
           new URLSearchParams(this.props.location.search).has(name);
 
         /**
@@ -85,7 +85,7 @@ export default inject("config")(
          * @param {Participant} participant The participant details.
          * @return {[JSX.Element, JSX.Element]} The participant details and versus text pair.
          */
-        private getParticipantAndVersusPair = (
+        private _getParticipantAndVersusPair = (
           participant: Participant,
         ): [JSX.Element, JSX.Element] => [
           <div key={participant.name}>
@@ -103,9 +103,9 @@ export default inject("config")(
          * Returns the list of views of all participants of the current match.
          * @return {JSX.Element[]} The list of participant views.
          */
-        private getParticipants = (): JSX.Element[] => {
+        private _getParticipants = (): JSX.Element[] => {
           return this.props.currentMatch.participants
-            .map(this.getParticipantAndVersusPair)
+            .map(this._getParticipantAndVersusPair)
             .flat()
             .slice(0, -1);
         };
@@ -114,7 +114,7 @@ export default inject("config")(
          * Returns the view for the match winner, wrapped in an animation transition component.
          * @return {JSX.Element} The match winner view.
          */
-        private getWinner = (): JSX.Element => (
+        private _getWinner = (): JSX.Element => (
           <CSSTransition
             in={this.state.currentState === 3}
             timeout={500 / this.props.config!.speed}
@@ -129,8 +129,8 @@ export default inject("config")(
             mountOnEnter={true}
             unmountOnExit={true}
             onEntered={
-              !this.hasQueryParam("stop")
-                ? this.goToNextStateWithDelay
+              !this._hasQueryParam("stop")
+                ? this._goToNextStateWithDelay
                 : undefined
             }
           >
@@ -156,7 +156,7 @@ export default inject("config")(
          * Returns the view for the interim text, wrapped in an animation transition component.
          * @return {JSX.Element} The match overlay interim text.
          */
-        private getInterimText = (): JSX.Element => (
+        private _getInterimText = (): JSX.Element => (
           <CSSTransition
             in={this.state.currentState === 1}
             timeout={500 / this.props.config!.speed}
@@ -170,7 +170,7 @@ export default inject("config")(
             }}
             mountOnEnter={true}
             unmountOnExit={true}
-            onExited={this.goToNextState}
+            onExited={this._goToNextState}
           >
             <div
               className={classNames("match-overlay__interim")}
@@ -199,8 +199,8 @@ export default inject("config")(
          */
         public componentDidMount = (): void => {
           this._isMounted = true;
-          this.goToNextState();
-          this.goToNextStateWithDelay();
+          this._goToNextState();
+          this._goToNextStateWithDelay();
         };
 
         /**
@@ -238,9 +238,9 @@ export default inject("config")(
               }}
             >
               <div className={classNames("match-overlay")}>
-                {this.getParticipantList()}
-                {this.getInterimText()}
-                {this.getWinner()}
+                {this._getParticipantList()}
+                {this._getInterimText()}
+                {this._getWinner()}
               </div>
             </div>
           </CSSTransition>

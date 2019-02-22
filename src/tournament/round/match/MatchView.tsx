@@ -53,18 +53,18 @@ export default class MatchView extends Component<
   /**
    * Moves the component to the next animation state.
    */
-  private goToNextState = (): void =>
+  private _goToNextState = (): void =>
     this._isMounted
       ? this.setState({
           ...this.state,
-          currentState: this.state.currentState + 1
+          currentState: this.state.currentState + 1,
         })
       : undefined;
 
   /**
    * Moves the component to the next random participant.
    */
-  private goToNextRandomParticipant = (): void =>
+  private _goToNextRandomParticipant = (): void =>
     this._isMounted
       ? this.setState({
           ...this.state,
@@ -72,50 +72,50 @@ export default class MatchView extends Component<
             this.state.currentState === 3
               ? -2
               : (this.state.oldParticipant + 1) %
-                this.props.match.participants.length
+                this.props.match.participants.length,
         })
       : undefined;
 
   /**
    * Moves the component to a non-existing participant, after a delay of 200 (ignoring speed multiplier).
    */
-  private goToNoParticipantWithDelay = (): unknown =>
+  private _goToNoParticipantWithDelay = (): unknown =>
     setTimeout(
       () =>
         this._isMounted && this.state.currentParticipant !== -2
           ? this.setState({
               ...this.state,
               currentParticipant: -1,
-              oldParticipant: this.state.currentParticipant
+              oldParticipant: this.state.currentParticipant,
             })
           : null,
-      200 / this.props.config!.speed
+      200 / this.props.config!.speed,
     );
 
   /**
    * Moves the component to the next random participant, after a delay of 200 (ignoring speed multiplier).
    */
-  private goToNextRandomParticipantWithDelay = (): unknown =>
-    setTimeout(this.goToNextRandomParticipant, 200 / this.props.config!.speed);
+  private _goToNextRandomParticipantWithDelay = (): unknown =>
+    setTimeout(this._goToNextRandomParticipant, 200 / this.props.config!.speed);
 
   /**
    * Moves the component to the next animation state, after a delay of 2500 (ignoring speed multiplier).
    */
-  private goToNextStateWithDelay = (): unknown =>
-    setTimeout(this.goToNextState, 2500 / this.props.config!.speed);
+  private _goToNextStateWithDelay = (): unknown =>
+    setTimeout(this._goToNextState, 2500 / this.props.config!.speed);
 
   /**
    * Calls the action for match completion, after a delay of 500 (ignoring speed multiplier).
    */
-  private onMatchCompleteWithDelay = (): unknown =>
+  private _onMatchCompleteWithDelay = (): unknown =>
     setTimeout(this.props.onMatchComplete, 1000 / this.props.config!.speed);
 
   /**
    * Returns the participant list of the current match.
    * @return {JSX.Element} The participants list view.
    */
-  private getParticipantList = (): JSX.Element => (
-    <div className={classNames("match__list")}>{this.getParticipants()}</div>
+  private _getParticipantList = (): JSX.Element => (
+    <div className={classNames("match__list")}>{this._getParticipants()}</div>
   );
 
   /**
@@ -123,7 +123,7 @@ export default class MatchView extends Component<
    * @param {Participant} participant The participant details.
    * @return {JSX.Element} The participant view.
    */
-  private getParticipant = (participant: Participant): JSX.Element => (
+  private _getParticipant = (participant: Participant): JSX.Element => (
     <ParticipantEntry key={participant.name} participant={participant} />
   );
 
@@ -131,14 +131,14 @@ export default class MatchView extends Component<
    * Returns the list of views of all participants of the current match.
    * @return {JSX.Element[]} The list of participant views.
    */
-  private getParticipants = (): JSX.Element[] =>
-    this.props.match.participants.map(this.getParticipant);
+  private _getParticipants = (): JSX.Element[] =>
+    this.props.match.participants.map(this._getParticipant);
 
   /**
    * Returns the view for the match winner, wrapped in an animation transition component.
    * @return {JSX.Element} The match winner view.
    */
-  private getWinner = (): JSX.Element => (
+  private _getWinner = (): JSX.Element => (
     <CSSTransition
       in={this.state.currentParticipant === -2}
       timeout={200 / this.props.config!.speed}
@@ -148,19 +148,19 @@ export default class MatchView extends Component<
         enterDone: "match__winner--entered",
         exit: "",
         exitActive: "match__winner--exiting",
-        exitDone: "match__winner--exited"
+        exitDone: "match__winner--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
-      onEntered={this.onMatchCompleteWithDelay}
+      onEntered={this._onMatchCompleteWithDelay}
     >
       <div
         className={classNames("match__winner", {
           "match__winner--completed":
-            !this.props.isCurrentMatch || !this.isAnActualMatch()
+            !this.props.isCurrentMatch || !this._isAnActualMatch(),
         })}
         style={{
-          transition: `opacity ${200 / this.props.config!.speed}ms ease-in-out`
+          transition: `opacity ${200 / this.props.config!.speed}ms ease-in-out`,
         }}
       >
         <ParticipantEntry participant={this.props.match.winner} />
@@ -174,9 +174,9 @@ export default class MatchView extends Component<
    * @param {number} index The index of the participant in the list.
    * @return {JSX.Element} The match final participant interim view.
    */
-  private getParticipantFinalEntry = (
+  private _getParticipantFinalEntry = (
     participant: Participant,
-    index: number
+    index: number,
   ): JSX.Element => (
     <CSSTransition
       key={participant.name}
@@ -191,17 +191,17 @@ export default class MatchView extends Component<
         enterDone: "match__interim--entered",
         exit: "",
         exitActive: "match__interim--exiting",
-        exitDone: "match__interim--exited"
+        exitDone: "match__interim--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
-      onEntered={this.goToNoParticipantWithDelay}
-      onExited={this.goToNextRandomParticipant}
+      onEntered={this._goToNoParticipantWithDelay}
+      onExited={this._goToNextRandomParticipant}
     >
       <div
         className={classNames("match__interim")}
         style={{
-          transition: `opacity ${200 / this.props.config!.speed}ms ease-in-out`
+          transition: `opacity ${200 / this.props.config!.speed}ms ease-in-out`,
         }}
       >
         <ParticipantEntry participant={participant} />
@@ -213,10 +213,10 @@ export default class MatchView extends Component<
    * Returns the view for the final participant view.
    * @return {JSX.Element} The final participant view.
    */
-  private getFinalEntry = (): JSX.Element => (
+  private _getFinalEntry = (): JSX.Element => (
     <Fragment>
-      {this.props.match.participants.map(this.getParticipantFinalEntry)}
-      {this.getWinner()}
+      {this.props.match.participants.map(this._getParticipantFinalEntry)}
+      {this._getWinner()}
     </Fragment>
   );
 
@@ -224,11 +224,11 @@ export default class MatchView extends Component<
    * Returns the match overlay for the current match.
    * @return {JSX.Element} The match overlay.
    */
-  private getMatchOverlay = (): JSX.Element | null =>
+  private _getMatchOverlay = (): JSX.Element | null =>
     this.state.currentState === 2 ? (
       <MatchOverlay
         currentMatch={this.props.match}
-        onMatchComplete={this.goToNextState}
+        onMatchComplete={this._goToNextState}
       />
     ) : null;
 
@@ -236,29 +236,29 @@ export default class MatchView extends Component<
    * Returns whether the current match is an actual match (has more than one participant).
    * @return {boolean} The match overlay.
    */
-  private isAnActualMatch = (): boolean =>
+  private _isAnActualMatch = (): boolean =>
     this.props.match.participants.length > 1;
 
   /**
    * Lifecycle method that runs before component mount.
    */
   public componentWillMount = (): void => {
-    this.isAnActualMatch() && this.props.isCurrentMatch
+    this._isAnActualMatch() && this.props.isCurrentMatch
       ? this.setState({
           currentParticipant: -1,
           oldParticipant: -1,
-          currentState: 0
+          currentState: 0,
         })
       : this.props.isCurrentMatch
       ? this.setState({
           currentParticipant: -2,
           oldParticipant: -2,
-          currentState: 0
+          currentState: 0,
         })
       : this.setState({
           currentParticipant: -2,
           oldParticipant: -2,
-          currentState: 5
+          currentState: 5,
         });
   };
 
@@ -267,13 +267,13 @@ export default class MatchView extends Component<
    */
   public componentDidMount = (): void => {
     this._isMounted = true;
-    if (this.isAnActualMatch() && this.props.isCurrentMatch) {
-      this.goToNextState();
-      this.goToNextStateWithDelay();
-      this.goToNextRandomParticipantWithDelay();
-    } else if (!this.isAnActualMatch()) {
-      this.goToNextState();
-      this.onMatchCompleteWithDelay();
+    if (this._isAnActualMatch() && this.props.isCurrentMatch) {
+      this._goToNextState();
+      this._goToNextStateWithDelay();
+      this._goToNextRandomParticipantWithDelay();
+    } else if (!this._isAnActualMatch()) {
+      this._goToNextState();
+      this._onMatchCompleteWithDelay();
     }
   };
 
@@ -298,7 +298,7 @@ export default class MatchView extends Component<
         enterDone: "match--entered",
         exit: "",
         exitActive: "match--exiting",
-        exitDone: "match--exited"
+        exitDone: "match--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
@@ -306,7 +306,7 @@ export default class MatchView extends Component<
         this._matchRef.current.scrollIntoView({
           behavior: "smooth",
           block: "nearest",
-          inline: "center"
+          inline: "center",
         })
       }
       onExited={this.props.onMatchComplete}
@@ -314,15 +314,15 @@ export default class MatchView extends Component<
       <div
         ref={this._matchRef}
         className={classNames("match", {
-          "match--completed": !this.props.isCurrentMatch
+          "match--completed": !this.props.isCurrentMatch,
         })}
         style={{
-          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`
+          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`,
         }}
       >
-        {this.getParticipantList()}
-        {this.getFinalEntry()}
-        {this.getMatchOverlay()}
+        {this._getParticipantList()}
+        {this._getFinalEntry()}
+        {this._getMatchOverlay()}
       </div>
     </CSSTransition>
   );

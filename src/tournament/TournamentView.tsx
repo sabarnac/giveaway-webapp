@@ -54,22 +54,22 @@ export default class TournamentView extends Component<
   /**
    * Moves the component to the next animation state.
    */
-  private goToNextState = (): void =>
+  private _goToNextState = (): void =>
     this._isMounted
       ? this.setState({
           ...this.state,
-          currentState: this.state.currentState + 1
+          currentState: this.state.currentState + 1,
         })
       : undefined;
 
   /**
    * Toggles whether the loser overlay was shown or not.
    */
-  private toggleLoserOverlayShown = (): void =>
+  private _toggleLoserOverlayShown = (): void =>
     this._isMounted
       ? this.setState({
           ...this.state,
-          loserOverlayShown: !this.state.loserOverlayShown
+          loserOverlayShown: !this.state.loserOverlayShown,
         })
       : undefined;
 
@@ -77,54 +77,54 @@ export default class TournamentView extends Component<
    * Returns the devtools for MobX, if it is the dev environment.
    * @return {JSX.Element | null} The MobX devtools, or null if it is not the dev environment.
    */
-  private getMobxDevTools = (): JSX.Element | null =>
+  private _getMobxDevTools = (): JSX.Element | null =>
     isDevEnvironment() ? <DevTools /> : null;
 
   /**
    * Returns the animation speed controller.
    * @return {JSX.Element} The animation speed controller.
    */
-  private getSpeedControl = (): JSX.Element => <SpeedControl />;
+  private _getSpeedControl = (): JSX.Element => <SpeedControl />;
 
   /**
    * Returns whether the given round is the current round.
    * @param {Round} round The round to check.
    * @return {boolean} Whether the given round is the current round.
    */
-  private isCurrentRound = (round: Round): boolean =>
+  private _isCurrentRound = (round: Round): boolean =>
     round.id === this.props.roundId;
 
   /**
    * Returns the current round details.
    * @return {Round} The current round details.
    */
-  private getCurrentRoundDetails = (): Round =>
-    this.props.tournament.rounds.find(this.isCurrentRound) as Round;
+  private _getCurrentRoundDetails = (): Round =>
+    this.props.tournament.rounds.find(this._isCurrentRound) as Round;
 
   /**
    * Returns the index of current round in the tournament.
    * @return {Round} The index of the current round.
    */
-  private getCurrentRoundIndex = (): number =>
-    this.props.tournament.rounds.findIndex(this.isCurrentRound);
+  private _getCurrentRoundIndex = (): number =>
+    this.props.tournament.rounds.findIndex(this._isCurrentRound);
 
   /**
    * Returns whether it is currently the last round.
    * @return {boolean} Whether it is currently the last round.
    */
-  private isLastRound = (): boolean =>
+  private _isLastRound = (): boolean =>
     this.props.tournament.lastRound.id === this.props.roundId;
 
   /**
    * Returns the view for the current round.
    * @return {JSX.Element} The current round view.
    */
-  private getCurrentRound = (): JSX.Element => (
+  private _getCurrentRound = (): JSX.Element => (
     <RoundView
       key={this.props.roundId}
-      round={this.getCurrentRoundDetails()}
+      round={this._getCurrentRoundDetails()}
       matchId={this.props.matchId}
-      onRoundComplete={this.goToNextState}
+      onRoundComplete={this._goToNextState}
     />
   );
 
@@ -132,7 +132,7 @@ export default class TournamentView extends Component<
    * Returns the current round view of the tournament, wrapped in an animation transition component.
    * @return {JSX.Element} The current round view.
    */
-  private getCurrentRoundView = (): JSX.Element => (
+  private _getCurrentRoundView = (): JSX.Element => (
     <CSSTransition
       in={this.state.currentState > 0}
       timeout={500}
@@ -142,12 +142,12 @@ export default class TournamentView extends Component<
         enterDone: "round--entered",
         exit: "",
         exitActive: "round--exiting",
-        exitDone: "round--exited"
+        exitDone: "round--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
     >
-      {this.getCurrentRound()}
+      {this._getCurrentRound()}
     </CSSTransition>
   );
 
@@ -155,8 +155,8 @@ export default class TournamentView extends Component<
    * Returns the redirect for the first round if required.
    * @return {JSX.Element} The redirect, or null if it is not required.
    */
-  private getFirstRoundRedirect = (): JSX.Element | null =>
-    this.getCurrentRoundIndex() === -1 ? (
+  private _getFirstRoundRedirect = (): JSX.Element | null =>
+    this._getCurrentRoundIndex() === -1 ? (
       <Redirect to={`/round/${this.props.tournament.firstRound.id}`} />
     ) : null;
 
@@ -164,11 +164,11 @@ export default class TournamentView extends Component<
    * Returns whether the next round redirect should be added to the view.
    * @return {boolean} Whether the redirect should be shown.
    */
-  private shouldAddNextRoundRedirect = (): boolean =>
+  private _shouldAddNextRoundRedirect = (): boolean =>
     isInRange(
       this.state.currentState,
       0,
-      (this.props.tournament.rounds.length - 1) * 2 + 1
+      (this.props.tournament.rounds.length - 1) * 2 + 1,
     ) &&
     this.state.loserOverlayShown &&
     this.state.currentState % 2 === 0 &&
@@ -179,8 +179,8 @@ export default class TournamentView extends Component<
    * Returns the redirect for the next round if required.
    * @return {JSX.Element} The redirect, or null if it is not required.
    */
-  private getNextRoundRedirect = (): JSX.Element | null =>
-    this.shouldAddNextRoundRedirect() ? (
+  private _getNextRoundRedirect = (): JSX.Element | null =>
+    this._shouldAddNextRoundRedirect() ? (
       <Redirect
         to={`/round/${
           this.props.tournament.rounds[this.state.currentState / 2].id
@@ -192,17 +192,17 @@ export default class TournamentView extends Component<
    * Returns whether the winner overlay should be shown.
    * @return {boolean} Whether the overlay should be shown.
    */
-  private shouldShowWinnerOverlay = (): boolean =>
-    this.state.currentState >= (this.getCurrentRoundIndex() + 1) * 2 &&
-    this.isLastRound();
+  private _shouldShowWinnerOverlay = (): boolean =>
+    this.state.currentState >= (this._getCurrentRoundIndex() + 1) * 2 &&
+    this._isLastRound();
 
   /**
    * Returns the winner overlay, wrapped in an animation transition component.
    * @return {JSX.Element} The winner overlay.
    */
-  private getWinnerOverlay = (): JSX.Element => (
+  private _getWinnerOverlay = (): JSX.Element => (
     <CSSTransition
-      in={this.shouldShowWinnerOverlay()}
+      in={this._shouldShowWinnerOverlay()}
       timeout={500}
       classNames={{
         enter: "",
@@ -210,7 +210,7 @@ export default class TournamentView extends Component<
         enterDone: "round--entered",
         exit: "",
         exitActive: "round--exiting",
-        exitDone: "round--exited"
+        exitDone: "round--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
@@ -223,27 +223,27 @@ export default class TournamentView extends Component<
    * Returns whether the loser overlay should be shown.
    * @return {boolean} Whether the overlay should be shown.
    */
-  private shouldShowLoserOverlay = (): boolean =>
+  private _shouldShowLoserOverlay = (): boolean =>
     isInRange(
       this.state.currentState,
       0,
-      (this.props.tournament.rounds.length - 1) * 2 + 1
+      (this.props.tournament.rounds.length - 1) * 2 + 1,
     ) &&
     !this.state.loserOverlayShown &&
     this.state.currentState % 2 === 0 &&
     this.props.tournament.rounds[this.state.currentState / 2].id !==
       this.props.roundId &&
-    !this.isLastRound();
+    !this._isLastRound();
 
   /**
    * Returns the loser overlay if it is supposed to be shown.
    * @return {JSX.Element | null} The loser overlay, or null if it should not be shown.
    */
-  private getLoserOverlay = (): JSX.Element | null =>
-    this.shouldShowLoserOverlay() && this.getCurrentRoundIndex() !== -1 ? (
+  private _getLoserOverlay = (): JSX.Element | null =>
+    this._shouldShowLoserOverlay() && this._getCurrentRoundIndex() !== -1 ? (
       <LoserOverlay
-        losers={this.getCurrentRoundDetails().losers}
-        onOverlayComplete={() => this.toggleLoserOverlayShown()}
+        losers={this._getCurrentRoundDetails().losers}
+        onOverlayComplete={() => this._toggleLoserOverlayShown()}
       />
     ) : null;
 
@@ -254,7 +254,9 @@ export default class TournamentView extends Component<
     this.setState({
       loserOverlayShown: false,
       currentState:
-        this.getCurrentRoundIndex() === -1 ? 0 : this.getCurrentRoundIndex() * 2
+        this._getCurrentRoundIndex() === -1
+          ? 0
+          : this._getCurrentRoundIndex() * 2,
     });
   };
 
@@ -263,7 +265,7 @@ export default class TournamentView extends Component<
    */
   public componentDidMount = (): void => {
     this._isMounted = true;
-    this.goToNextState();
+    this._goToNextState();
   };
 
   /**
@@ -273,13 +275,13 @@ export default class TournamentView extends Component<
     if (this.props.roundId !== prevProps.roundId) {
       this.setState({
         ...this.state,
-        currentState: this.getCurrentRoundIndex() * 2 + 1
+        currentState: this._getCurrentRoundIndex() * 2 + 1,
       });
     } else if (this.props.matchId !== prevProps.matchId) {
       this.setState({
         ...this.state,
-        currentState: this.getCurrentRoundIndex() * 2 + 1,
-        loserOverlayShown: false
+        currentState: this._getCurrentRoundIndex() * 2 + 1,
+        loserOverlayShown: false,
       });
     }
   };
@@ -298,17 +300,17 @@ export default class TournamentView extends Component<
   public render = (): JSX.Element => {
     return (
       <div
-        key={`round-${this.getCurrentRoundIndex()}`}
+        key={`round-${this._getCurrentRoundIndex()}`}
         className={classNames("tournament")}
       >
         <h1>{this.props.config!.name} Tournament</h1>
-        {this.getCurrentRoundView()}
-        {this.getFirstRoundRedirect()}
-        {this.getNextRoundRedirect()}
-        {this.getLoserOverlay()}
-        {this.getWinnerOverlay()}
-        {this.getSpeedControl()}
-        {this.getMobxDevTools()}
+        {this._getCurrentRoundView()}
+        {this._getFirstRoundRedirect()}
+        {this._getNextRoundRedirect()}
+        {this._getLoserOverlay()}
+        {this._getWinnerOverlay()}
+        {this._getSpeedControl()}
+        {this._getMobxDevTools()}
       </div>
     );
   };

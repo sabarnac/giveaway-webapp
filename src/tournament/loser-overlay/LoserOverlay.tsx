@@ -43,7 +43,7 @@ export default class LoserOverlay extends Component<
   /**
    * Moves the component to the next animation state.
    */
-  private goToNextState = (): void =>
+  private _goToNextState = (): void =>
     this._isMounted
       ? this.setState({ currentState: this.state.currentState + 1 })
       : undefined;
@@ -51,22 +51,22 @@ export default class LoserOverlay extends Component<
   /**
    * Moves the component to the next animation state, after a delay of 1000 (ignoring speed multiplier).
    */
-  private goToNextStateWithDelay = (): unknown =>
-    setTimeout(this.goToNextState, 1000 / this.props.config!.speed);
+  private _goToNextStateWithDelay = (): unknown =>
+    setTimeout(this._goToNextState, 1000 / this.props.config!.speed);
 
   /**
    * Returns the fragment for the list of participants.
    * @return {JSX.Element} The participants list fragment.
    */
-  private getParticipantList = (): JSX.Element => (
-    <Fragment>{this.getParticipants()}</Fragment>
+  private _getParticipantList = (): JSX.Element => (
+    <Fragment>{this._getParticipants()}</Fragment>
   );
 
   /**
    * Returns whether it should show the loser at the given index in the list.
    * @return {boolean} Whether to show the loser or not.
    */
-  private shouldShowLoser = (index: number) =>
+  private _shouldShowLoser = (index: number) =>
     this.state.currentState % 2 === 0 &&
     this.state.currentState / 2 - 1 === index;
 
@@ -74,13 +74,13 @@ export default class LoserOverlay extends Component<
    * Returns the card view for the given loser participant, wrapped in an animation transition component.
    * @return {JSX.Element} The loser participant card view.
    */
-  private getLoserEntry = (
+  private _getLoserEntry = (
     participant: Participant,
-    index: number
+    index: number,
   ): JSX.Element => (
     <CSSTransition
       key={participant.name}
-      in={this.shouldShowLoser(index)}
+      in={this._shouldShowLoser(index)}
       timeout={200 / this.props.config!.speed}
       classNames={{
         enter: "",
@@ -88,17 +88,17 @@ export default class LoserOverlay extends Component<
         enterDone: "loser-overlay__loser--entered",
         exit: "",
         exitActive: "loser-overlay__loser--exiting",
-        exitDone: "loser-overlay__loser--exited"
+        exitDone: "loser-overlay__loser--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
-      onEntered={this.goToNextStateWithDelay}
-      onExited={this.goToNextState}
+      onEntered={this._goToNextStateWithDelay}
+      onExited={this._goToNextState}
     >
       <div
         className={classNames("loser-overlay__loser")}
         style={{
-          transition: `opacity ${200 / this.props.config!.speed}ms ease-in-out`
+          transition: `opacity ${200 / this.props.config!.speed}ms ease-in-out`,
         }}
       >
         <ParticipantCard participant={participant} />
@@ -110,8 +110,8 @@ export default class LoserOverlay extends Component<
    * Returns the list of views for each loser participant.
    * @return {JSX.Element[]} The views for the loser participants.
    */
-  private getParticipants = (): JSX.Element[] =>
-    this.props.losers.map(this.getLoserEntry);
+  private _getParticipants = (): JSX.Element[] =>
+    this.props.losers.map(this._getLoserEntry);
 
   /**
    * Lifecycle method that runs before component mount.
@@ -125,8 +125,8 @@ export default class LoserOverlay extends Component<
    */
   public componentDidMount = (): void => {
     this._isMounted = true;
-    this.goToNextState();
-    this.goToNextStateWithDelay();
+    this._goToNextState();
+    this._goToNextStateWithDelay();
   };
 
   /**
@@ -145,7 +145,7 @@ export default class LoserOverlay extends Component<
       in={isInRange(
         this.state.currentState,
         1,
-        this.props.losers.length * 2 + 1
+        this.props.losers.length * 2 + 1,
       )}
       timeout={500 / this.props.config!.speed}
       classNames={{
@@ -154,7 +154,7 @@ export default class LoserOverlay extends Component<
         enterDone: "loser-overlay-wrapper--entered",
         exit: "",
         exitActive: "loser-overlay-wrapper--exiting",
-        exitDone: "loser-overlay-wrapper--exited"
+        exitDone: "loser-overlay-wrapper--exited",
       }}
       mountOnEnter={true}
       unmountOnExit={true}
@@ -163,12 +163,12 @@ export default class LoserOverlay extends Component<
       <div
         className={classNames("loser-overlay-wrapper")}
         style={{
-          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`
+          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`,
         }}
       >
         <div className={classNames("loser-overlay")}>
           <h2>Losers</h2>
-          {this.getParticipantList()}
+          {this._getParticipantList()}
         </div>
       </div>
     </CSSTransition>

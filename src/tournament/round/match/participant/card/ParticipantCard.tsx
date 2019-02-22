@@ -23,7 +23,7 @@ export default class ParticipantCard extends Component<ParticipantCardProps> {
    * Returns the name view of the participant.
    * @return {JSX.Element} The name view.
    */
-  private getNameView = (): JSX.Element => (
+  private _getNameView = (): JSX.Element => (
     <div className={classNames("participant-card__name")}>
       <strong>{this.props.participant.properName}</strong>
     </div>
@@ -33,7 +33,7 @@ export default class ParticipantCard extends Component<ParticipantCardProps> {
    * Returns the avatar image view of the participant.
    * @return {JSX.Element} The avatar image view.
    */
-  private getAvatarImage = (): JSX.Element => (
+  private _getAvatarImage = (): JSX.Element => (
     <img
       src={this.props.participant.avatar.url}
       alt={this.props.participant.avatar.altText}
@@ -44,9 +44,9 @@ export default class ParticipantCard extends Component<ParticipantCardProps> {
    * Returns the avatar view of the participant.
    * @return {JSX.Element} The avatar view.
    */
-  private getAvatarView = (): JSX.Element => (
+  private _getAvatarView = (): JSX.Element => (
     <div className={classNames("participant-card__avatar")}>
-      {this.getAvatarImage()}
+      {this._getAvatarImage()}
     </div>
   );
 
@@ -58,11 +58,11 @@ export default class ParticipantCard extends Component<ParticipantCardProps> {
     <div
       className={classNames("participant", "participant-card", {
         "participant--invert": this.props.invert,
-        "participant-card--invert": this.props.invert
+        "participant-card--invert": this.props.invert,
       })}
     >
-      {this.getAvatarView()}
-      {this.getNameView()}
+      {this._getAvatarView()}
+      {this._getNameView()}
     </div>
   );
 }

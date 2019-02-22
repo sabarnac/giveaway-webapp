@@ -23,7 +23,7 @@ export default class SpeedControl extends Component<SpeedControlProps> {
    * Sets the new animation speed.
    * @param {number} speed The new animation speed.
    */
-  private setSpeed = (speed: number): void =>
+  private _setSpeed = (speed: number): void =>
     this.props.config!.setSpeed(speed);
 
   /**
@@ -31,7 +31,7 @@ export default class SpeedControl extends Component<SpeedControlProps> {
    * @param {number} speed The animation speed to check.
    * @return {boolean} Whether the given animation speed is the current animation speed.
    */
-  private isCurrentSpeed = (speed: number): boolean =>
+  private _isCurrentSpeed = (speed: number): boolean =>
     speed === this.props.config!.speed;
 
   /**
@@ -39,16 +39,16 @@ export default class SpeedControl extends Component<SpeedControlProps> {
    * @param {number} speed The animation speed.
    * @return {JSX.Element} The animation speed option.
    */
-  private getOption = (speed: number): JSX.Element => (
+  private _getOption = (speed: number): JSX.Element => (
     <Observer
       key={speed}
       render={() => (
         <button
           key={speed}
           className={classNames("speed-control__option", {
-            "button-primary": this.isCurrentSpeed(speed)
+            "button-primary": this._isCurrentSpeed(speed),
           })}
-          onClick={() => this.setSpeed(speed)}
+          onClick={() => this._setSpeed(speed)}
         >
           {`${speed}X`}
         </button>
@@ -60,14 +60,14 @@ export default class SpeedControl extends Component<SpeedControlProps> {
    * Returns the list of options for all animation speeds.
    * @return {JSX.Element[]} The list of animation speed option views.
    */
-  private getOptions = (): JSX.Element[] =>
-    AnimationSpeed.getValues().map(this.getOption);
+  private _getOptions = (): JSX.Element[] =>
+    AnimationSpeed.getValues().map(this._getOption);
 
   /**
    * Renders the component.
    * @return {JSX.Element} The rendered component.
    */
   public render = (): JSX.Element => (
-    <div className={classNames("speed-control")}>{this.getOptions()}</div>
+    <div className={classNames("speed-control")}>{this._getOptions()}</div>
   );
 }
