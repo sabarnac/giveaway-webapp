@@ -2,9 +2,12 @@
 
 Ever wanted to have a giveaway but didn't want to just randomly select a winner? Then just compile this app with a seed, a list of random messages to display for each match, and a list of users, and then just compile and host the generated files on a web server for everyone to see! The fixed seed ensures everyone sees the same results, while the Mersenne Twister engine ensures the random distribution of results is uniform!
 
-![Desktop Preview](https://i.imgur.com/kFENmiH.gif)
-
-![Mobile Preview](https://i.imgur.com/w9A3ipY.gif)
+<p align="center">
+<img alt="Desktop Preview" src="https://i.imgur.com/kFENmiH.gif" />
+</p>
+<p align="center">
+<img alt="Mobile Preview" src="https://i.imgur.com/w9A3ipY.gif" />
+</p>
 
 # Usage
 
