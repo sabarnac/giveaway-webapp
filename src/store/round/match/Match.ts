@@ -31,11 +31,15 @@ export default class Match {
 
   /**
    * Returns the name of the given participant.
-   * @return {string} The list of participant views.
+   * @return {string} The participant name.
    */
   private _getParticipantName = (participant: Participant): string =>
     participant.name;
 
+  /**
+   * Returns a random conclusion message for the match.
+   * @returns {string} The conclusion message.
+   */
   private _getMessage = (): string =>
     this._config.getRandomMessage(
       this._winner.name,
