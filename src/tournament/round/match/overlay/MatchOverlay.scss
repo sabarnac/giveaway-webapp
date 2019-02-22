@@ -65,6 +65,7 @@
       }
       & > h3 {
         margin-right: 2 rem;
+        text-align: center;
       }
     }
     &__winner {
@@ -83,6 +84,12 @@
       }
       & > .participant-entry {
         margin-bottom: 3rem;
+      }
+      & > h3,
+      & > h5,
+      & > h5 > strong,
+      & > h5 > strong > em {
+        text-align: center;
       }
     }
   }
