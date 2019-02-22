@@ -1,25 +1,25 @@
-@import '../Participant';
+@import "../Participant";
 .participant-entry {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 2rem;
-    width: 100%;
-    border: 1px solid #000000;
-    &--invert {
-        border: 1px solid #ffffff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  border: 1px solid #000000;
+  &--invert {
+    border: 1px solid #ffffff;
+  }
+  &__avatar {
+    text-align: center;
+    height: 5rem;
+    img {
+      height: 5rem;
     }
-    &__avatar {
-        text-align: center;
-        height: 5rem;
-        img {
-            height: 5rem;
-        }
-    }
-    &__name {
-        text-align: center;
-        font-size: 3rem;
-        flex-grow: 1;
-        word-break: break-all;
-    }
+  }
+  &__name {
+    text-align: center;
+    font-size: 3rem;
+    flex-grow: 1;
+    word-break: break-all;
+  }
 }

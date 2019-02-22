@@ -1,79 +1,87 @@
 .match-overlay-wrapper {
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.35);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.35);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.000001;
+  will-change: transition;
+  &--exiting,
+  &--exited {
     opacity: 0.000001;
-    will-change: transition;
-    &--exiting,
-    &--exited {
+  }
+  &--entered,
+  &--entering {
+    opacity: 0.99999;
+  }
+  .match-overlay {
+    border: 1px dashed #000000;
+    position: relative;
+    background: #ffffff;
+    max-width: 80vw;
+    min-width: 50vw;
+    &__list {
+      padding: 4rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      color: #ffffff;
+      background: #000000;
+      & > div > .participant-card {
+        margin-bottom: 2rem;
+      }
+      & > .versus-text {
+        padding: 2rem 4rem;
+      }
+      @media (max-aspect-ratio: 1/1) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    &__interim {
+      padding: 4rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      opacity: 0.999999;
+      &--exiting,
+      &--exited {
         opacity: 0.000001;
+      }
+      &--exiting,
+      &--entering,
+      &--entered {
+        opacity: 0.999999;
+      }
+      & > h3 {
+        margin-right: 2 rem;
+      }
     }
-    &--entered,
-    &--entering {
-        opacity: 0.99999;
+    &__winner {
+      padding: 4rem 4rem 2rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0.000001;
+      &--entering,
+      &--entered {
+        opacity: 0.000001;
+      }
+      &--entering,
+      &--entered {
+        opacity: 0.999999;
+      }
+      & > .participant-entry {
+        margin-bottom: 3rem;
+      }
     }
-    .match-overlay {
-        border: 1px dashed #000000;
-        position: relative;
-        background: #ffffff;
-        max-width: 80vw;
-        min-width: 50vw;
-        &__list {
-            padding: 4rem;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-            color: #ffffff;
-            background: #000000;
-            &>.participant-card {
-                margin-bottom: 2rem;
-            }
-            &>.versus-text {
-                padding: 2rem 4rem;
-            }
-        }
-        &__interim {
-            padding: 4rem;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            opacity: 0.999999;
-            &--exiting,
-            &--exited {
-                opacity: 0.000001;
-            }
-            &--exiting,
-            &--entering,
-            &--entered {
-                opacity: 0.999999;
-            }
-        }
-        &__winner {
-            padding: 4rem 4rem 2rem 4rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0.000001;
-            &--entering,
-            &--entered {
-                opacity: 0.000001;
-            }
-            &--entering,
-            &--entered {
-                opacity: 0.999999;
-            }
-            &>.participant-entry {
-                margin-bottom: 3rem;
-            }
-        }
-    }
+  }
 }
