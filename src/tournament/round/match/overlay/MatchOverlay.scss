@@ -26,6 +26,8 @@
     background: #ffffff;
     max-width: 80vw;
     min-width: 50vw;
+    max-height: 90vh;
+    overflow-y: auto;
     &__list {
       padding: 4rem;
       display: flex;
