@@ -30,8 +30,6 @@ interface MatchOverlayProps {
 interface MatchOverlayState {
   /** The current state of the match overlay component (for animations). */
   currentState: number;
-  /** The message to be shown along with the details of the winner of the match. */
-  message: string;
 }
 
 export default inject("config")(
@@ -54,7 +52,7 @@ export default inject("config")(
           this._isMounted
             ? this.setState({
                 ...this.state,
-                currentState: this.state.currentState + 1
+                currentState: this.state.currentState + 1,
               })
             : undefined;
 
@@ -88,7 +86,7 @@ export default inject("config")(
          * @return {[JSX.Element, JSX.Element]} The participant details and versus text pair.
          */
         private getParticipantAndVersusPair = (
-          participant: Participant
+          participant: Participant,
         ): [JSX.Element, JSX.Element] => [
           <div key={participant.name}>
             <ParticipantCard invert={true} participant={participant} />
@@ -98,7 +96,7 @@ export default inject("config")(
             key={`${participant.name} versus`}
           >
             VS
-          </h3>
+          </h3>,
         ];
 
         /**
@@ -111,13 +109,6 @@ export default inject("config")(
             .flat()
             .slice(0, -1);
         };
-
-        /**
-         * Returns the name of the given participant.
-         * @return {string} The list of participant views.
-         */
-        private getParticipantName = (participant: Participant): string =>
-          participant.name;
 
         /**
          * Returns the view for the match winner, wrapped in an animation transition component.
@@ -133,7 +124,7 @@ export default inject("config")(
               enterDone: "match-overlay__winner--entered",
               exit: "",
               exitActive: "match-overlay__winner--exiting",
-              exitDone: "match-overlay__winner--exited"
+              exitDone: "match-overlay__winner--exited",
             }}
             mountOnEnter={true}
             unmountOnExit={true}
@@ -147,14 +138,14 @@ export default inject("config")(
               className={classNames("match-overlay__winner")}
               style={{
                 transition: `opacity ${500 /
-                  this.props.config!.speed}ms ease-in-out`
+                  this.props.config!.speed}ms ease-in-out`,
               }}
             >
               <ParticipantEntry participant={this.props.currentMatch.winner} />
               <h3>Won The Match!</h3>
               <h5>
                 <strong>
-                  <em>{this.state.message}</em>
+                  <em>{this.props.currentMatch.message}</em>
                 </strong>
               </h5>
             </div>
@@ -175,7 +166,7 @@ export default inject("config")(
               enterDone: "match-overlay__interim--entered",
               exit: "",
               exitActive: "match-overlay__interim--exiting",
-              exitDone: "match-overlay__interim--exited"
+              exitDone: "match-overlay__interim--exited",
             }}
             mountOnEnter={true}
             unmountOnExit={true}
@@ -185,7 +176,7 @@ export default inject("config")(
               className={classNames("match-overlay__interim")}
               style={{
                 transition: `opacity ${500 /
-                  this.props.config!.speed}ms ease-in-out`
+                  this.props.config!.speed}ms ease-in-out`,
               }}
             >
               <h3>Selecting Winner</h3>
@@ -195,29 +186,11 @@ export default inject("config")(
         );
 
         /**
-         * Returns the name of the match winner.
-         * @return {string} The winner name.
-         */
-        private getWinnerName = (): string =>
-          this.props.currentMatch.winner.name;
-
-        /**
-         * Returns the names of the match losers.
-         * @return {string[]} The losers names.
-         */
-        private getLoserNames = (): string[] =>
-          this.props.currentMatch.losers.map(this.getParticipantName);
-
-        /**
          * Lifecycle method that runs before component mount.
          */
         public componentWillMount = (): void => {
           this.setState({
-            message: this.props.config!.getRandomMessage(
-              this.getWinnerName(),
-              this.getLoserNames()
-            ),
-            currentState: 0
+            currentState: 0,
           });
         };
 
@@ -251,7 +224,7 @@ export default inject("config")(
               enterDone: "match-overlay-wrapper--entered",
               exit: "",
               exitActive: "match-overlay-wrapper--exiting",
-              exitDone: "match-overlay-wrapper--exited"
+              exitDone: "match-overlay-wrapper--exited",
             }}
             mountOnEnter={true}
             unmountOnExit={true}
@@ -261,7 +234,7 @@ export default inject("config")(
               className={classNames("match-overlay-wrapper")}
               style={{
                 transition: `opacity ${500 /
-                  this.props.config!.speed}ms ease-in-out`
+                  this.props.config!.speed}ms ease-in-out`,
               }}
             >
               <div className={classNames("match-overlay")}>
@@ -272,7 +245,7 @@ export default inject("config")(
             </div>
           </CSSTransition>
         );
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

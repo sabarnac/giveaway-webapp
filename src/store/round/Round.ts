@@ -35,7 +35,7 @@ export default class Round {
    * @return {Match} The created match.
    */
   private _createMatch = (participants: Participant[]): Match =>
-    new Match(participants);
+    new Match(this._config, participants);
 
   /**
    * Returns a list of matches with all the participants of the round.
@@ -45,7 +45,7 @@ export default class Round {
   private _getMatches = (participants: Participant[]): Match[] =>
     chunk(
       this._shuffleParticipants(participants),
-      this._config.participantsPerMatch
+      this._config.participantsPerMatch,
     ).map(this._createMatch);
 
   public constructor(config: Config, participants: Participant[]) {

@@ -8,7 +8,7 @@ import Avatar from "../../store/round/match/participant/Avatar";
 export const createDummyParticipant = function(id: number = 1): Participant {
   return new Participant(
     `fozbaz-${id}`,
-    new Avatar(`foobar-${id}`, `barfoo-${id}`)
+    new Avatar(`foobar-${id}`, `barfoo-${id}`),
   );
 };
 
@@ -19,18 +19,21 @@ export const createDummyConfig = (): Config => {
       createDummyParticipant(1),
       createDummyParticipant(2),
       createDummyParticipant(3),
-      createDummyParticipant(4)
+      createDummyParticipant(4),
     ],
     participantsPerMatch: 2,
     speed: 1,
-    getRandomMessage: () => "foobar message"
+    getRandomMessage: () => "foobar message",
   };
   mockConfig.getInstance = () => mockConfig;
   return mockConfig;
 };
 
 export const createDummyMatch = (): Match => {
-  return new Match([createDummyParticipant(1), createDummyParticipant(2)]);
+  return new Match(createDummyConfig(), [
+    createDummyParticipant(1),
+    createDummyParticipant(2),
+  ]);
 };
 
 export const createDummyRound = (): Round => {
@@ -40,7 +43,7 @@ export const createDummyRound = (): Round => {
     createDummyParticipant(3),
     createDummyParticipant(4),
     createDummyParticipant(5),
-    createDummyParticipant(6)
+    createDummyParticipant(6),
   ]);
 };
 

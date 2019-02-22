@@ -1,6 +1,7 @@
 import { observable, computed } from "mobx";
 import Participant from "./participant/Participant";
 import RandomGenerator from "../../config/RandomGenerator";
+import Config from "../../config/Config";
 
 /**
  * Class containing details of a match.
@@ -12,6 +13,11 @@ export default class Match {
   @observable private _participants: Participant[];
   /** The winner of the match. */
   @observable private _winner: Participant;
+  /** The match conclusion message. */
+  @observable private _message: string;
+
+  /** The config of the application. */
+  private _config: Config;
 
   /** A counter for generating a unique ID for the match. */
   private static counter: number = 1;
@@ -23,10 +29,26 @@ export default class Match {
   private _getWinner = (): Participant =>
     RandomGenerator.pick(this._participants);
 
-  public constructor(participants: Participant[]) {
+  /**
+   * Returns the name of the given participant.
+   * @return {string} The list of participant views.
+   */
+  private _getParticipantName = (participant: Participant): string =>
+    participant.name;
+
+  private _getMessage = (): string =>
+    this._config.getRandomMessage(
+      this._winner.name,
+      this.losers.map(this._getParticipantName),
+    );
+
+  public constructor(config: Config, participants: Participant[]) {
+    this._config = config;
+
     this._id = `match-${Match.counter++}`;
     this._participants = participants;
     this._winner = this._getWinner();
+    this._message = this._getMessage();
   }
 
   /**
@@ -67,5 +89,13 @@ export default class Match {
    */
   @computed public get winner(): Participant {
     return this._winner;
+  }
+
+  /**
+   * Get the conslusion message of the match.
+   * @return {string} The message.
+   */
+  @computed public get message(): string {
+    return this._message;
   }
 }
