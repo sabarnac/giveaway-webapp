@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 import "./ParticipantEntry.scss";
 import classNames from "classnames";
@@ -17,52 +17,23 @@ interface ParticipantEntryProps {
 /**
  * React component for the participant entry.
  */
-@observer
-export default class ParticipantEntry extends Component<ParticipantEntryProps> {
-  /**
-   * Returns the name view of the participant.
-   * @return {JSX.Element} The name view.
-   */
-  private _getNameView = (): JSX.Element => (
-    <div className={classNames("participant-entry__name")}>
-      <strong>{this.props.participant.properName}</strong>
-    </div>
-  );
-
-  /**
-   * Returns the avatar image view of the participant.
-   * @return {JSX.Element} The avatar image view.
-   */
-  private _getAvatarImage = (): JSX.Element => (
-    <img
-      src={this.props.participant.avatar.url}
-      alt={this.props.participant.avatar.altText}
-    />
-  );
-
-  /**
-   * Returns the avatar view of the participant.
-   * @return {JSX.Element} The avatar view.
-   */
-  private _getAvatarView = (): JSX.Element => (
-    <div className={classNames("participant-entry__avatar")}>
-      {this._getAvatarImage()}
-    </div>
-  );
-
-  /**
-   * Renders the component.
-   * @return {JSX.Element} The rendered component.
-   */
-  public render = (): JSX.Element => (
+export default observer(
+  (props: ParticipantEntryProps): JSX.Element => (
     <div
       className={classNames("participant", "participant-entry", {
-        "participant--invert": this.props.invert,
-        "participant-entry--invert": this.props.invert,
+        "participant--invert": props.invert,
+        "participant-entry--invert": props.invert
       })}
     >
-      {this._getAvatarView()}
-      {this._getNameView()}
+      <div className={classNames("participant-entry__avatar")}>
+        <img
+          src={props.participant.avatar.url}
+          alt={props.participant.avatar.altText}
+        />
+      </div>
+      <div className={classNames("participant-entry__name")}>
+        <strong>{props.participant.properName}</strong>
+      </div>
     </div>
-  );
-}
+  )
+);
