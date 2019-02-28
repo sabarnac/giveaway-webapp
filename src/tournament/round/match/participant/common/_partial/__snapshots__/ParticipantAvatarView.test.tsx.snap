@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ParticipantAvatarView Component. Matches snapshot. 1`] = `
+<div
+  className="foobar__avatar"
+>
+  <img
+    alt="barfoo-1"
+    src="foobar-1"
+  />
+</div>
+`;

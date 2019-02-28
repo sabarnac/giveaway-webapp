@@ -1,7 +1,8 @@
 .participant {
-    background: #ffffff;
-    &--invert {
-        background: #000000;
-        color: #ffffff;
-    }
+  background: #ffffff;
+  &--invert {
+    border: 1px solid #ffffff;
+    background: #000000;
+    color: #ffffff;
+  }
 }
