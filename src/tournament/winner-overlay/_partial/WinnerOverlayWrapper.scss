@@ -20,13 +20,4 @@
   &--entering {
     opacity: 0.99999;
   }
-  .winner-overlay {
-    border: 1px dashed #000000;
-    position: relative;
-    background: #ffffff;
-    max-width: 80vw;
-    min-width: 50vw;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
 }

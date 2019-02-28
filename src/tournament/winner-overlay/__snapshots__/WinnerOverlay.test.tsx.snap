@@ -12,7 +12,7 @@ exports[`WinnerOverlay Component. Matches snapshot. 1`] = `
       "exitDone": "winner-overlay-wrapper--exited",
     }
   }
-  in={true}
+  in={false}
   mountOnEnter={true}
   timeout={500}
   unmountOnExit={true}
