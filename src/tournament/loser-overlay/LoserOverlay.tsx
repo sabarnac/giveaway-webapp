@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
 import "./LoserOverlay.scss";
 import classNames from "classnames";
@@ -53,14 +53,6 @@ export default class LoserOverlay extends Component<
    */
   private _goToNextStateWithDelay = (): unknown =>
     setTimeout(this._goToNextState, 1000 / this.props.config!.speed);
-
-  /**
-   * Returns the fragment for the list of participants.
-   * @return {JSX.Element} The participants list fragment.
-   */
-  private _getParticipantList = (): JSX.Element => (
-    <Fragment>{this._getParticipants()}</Fragment>
-  );
 
   /**
    * Returns whether it should show the loser at the given index in the list.
@@ -168,7 +160,7 @@ export default class LoserOverlay extends Component<
       >
         <div className={classNames("loser-overlay")}>
           <h2>Losers</h2>
-          {this._getParticipantList()}
+          {this._getParticipants()}
         </div>
       </div>
     </CSSTransition>
