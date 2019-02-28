@@ -15,7 +15,7 @@ Ever wanted to have a giveaway but didn't want to just randomly select a winner?
 2. Execute `npm install`.
 3. Modify `src/store/config/config.json` with the tournament name, a seed value, the number of participants per match, a list of match conclusion messages, and the list of participants.
    - `#winner` in the message gets replaced with the name of the winner.
-   - `#loser` in the message gets replaced with the name of the loser.
+   - `#loser` in the message gets replaced with the name of the loser(s).
    - A participant can just be a name, or a JSON object `{ name: "string", avatar: { url: "string", altText: "string" } }` (`avatar` property is optional).
 4. Use it as a standard React application created through `create-react-app` using TypeScript, with `sw-precache-cra`, `gh-pages`, and `react-styleguidist`.
 
