@@ -36,36 +36,12 @@ interface AppRouteProps {
 /**
  * React component that returns a redirect depending upon what route properties are present.
  */
-class AppRedirect extends Component<AppRouteProps> {
-  /**
-   * Returns the redirect when only a partial route is provided.
-   * @return {JSX.Element} The partial route redirect.
-   */
-  private _getPartialRouteRedirect = (): JSX.Element => (
-    <Redirect
-      to={`/round/${this.props.roundId}/match/${this.props.firstMatchId}`}
-    />
+const AppRedirect = (props: AppRouteProps): JSX.Element =>
+  props.roundId ? (
+    <Redirect to={`/round/${props.roundId}/match/${props.firstMatchId}`} />
+  ) : (
+    <Redirect to={`/round/${props.firstRoundId}/match/${props.firstMatchId}`} />
   );
-
-  /**
-   * Returns the redirect when only a unknown route is provided.
-   * @return {JSX.Element} The unknown route redirect.
-   */
-  private _getUnknownRouteRedirect = (): JSX.Element => (
-    <Redirect
-      to={`/round/${this.props.firstRoundId}/match/${this.props.firstMatchId}`}
-    />
-  );
-
-  /**
-   * Renders the component.
-   * @return {JSX.Element} The rendered component.
-   */
-  public render = (): JSX.Element =>
-    this.props.roundId
-      ? this._getPartialRouteRedirect()
-      : this._getUnknownRouteRedirect();
-}
 
 /**
  * React component for the application.
