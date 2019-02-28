@@ -38,7 +38,7 @@ export default class Match {
 
   /**
    * Returns a random conclusion message for the match.
-   * @returns {string} The conclusion message.
+   * @return {string} The conclusion message.
    */
   private _getMessage = (): string =>
     this._config.getRandomMessage(
