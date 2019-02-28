@@ -18,19 +18,21 @@ serviceWorker.register({
     swal({
       title: "Use Offline",
       text: "This web application can now be used offline!",
-      icon: "success"
+      icon: "success",
     }),
   onUpdate: () =>
     swal({
       title: "App Updated",
       text:
         "This web application has been updated. Please close all tabs/instances of it and open it again to see the update.",
-      icon: "warning"
-    })
+      icon: "warning",
+    }),
 });
 
 // Create the tournament store
 const store: Tournament = new Tournament(Config.getInstance());
+
+document.title = `${Config.getInstance().name} Tournament`;
 
 // Render the application! :D
 ReactDOM.render(
@@ -39,5 +41,5 @@ ReactDOM.render(
       <App tournament={store} />
     </Provider>
   </HashRouter>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
