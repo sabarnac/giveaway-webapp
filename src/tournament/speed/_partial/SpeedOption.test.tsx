@@ -1,10 +1,10 @@
 import React from "react";
-import SpeedControl from "./SpeedControl";
+import SpeedOption from "./SpeedOption";
 import { create, ReactTestRenderer } from "react-test-renderer";
 
-describe("SpeedControl Component.", () => {
+describe("SpeedOption Component.", () => {
   it("Matches snapshot.", () => {
-    const component: ReactTestRenderer = create(<SpeedControl />);
+    const component: ReactTestRenderer = create(<SpeedOption speed={1} />);
 
     expect(component.toJSON()).toMatchSnapshot();
   });

@@ -1,73 +1,20 @@
-import React, { Component } from "react";
-import { observer, Observer, inject } from "mobx-react";
+import React from "react";
 import "./SpeedControl.scss";
 import classNames from "classnames";
-import Config from "../../store/config/Config";
 import AnimationSpeed from "../../store/config/AnimationSpeed";
+import SpeedOption from "./_partial/SpeedOption";
 
-/**
- * Properties of the animation speed controller view React component.
- */
-interface SpeedControlProps {
-  /** @ignore The application config. */
-  config?: Config;
-}
+const allAnimationValues = AnimationSpeed.getValues();
 
 /**
  * React component for the animation speed controller.
  */
-@inject("config")
-@observer
-export default class SpeedControl extends Component<SpeedControlProps> {
-  /**
-   * Sets the new animation speed.
-   * @param {number} speed The new animation speed.
-   */
-  private _setSpeed = (speed: number): void =>
-    this.props.config!.setSpeed(speed);
-
-  /**
-   * Returns whether the given animation speed is the current animation speed.
-   * @param {number} speed The animation speed to check.
-   * @return {boolean} Whether the given animation speed is the current animation speed.
-   */
-  private _isCurrentSpeed = (speed: number): boolean =>
-    speed === this.props.config!.speed;
-
-  /**
-   * Returns the option view for the given animation speed.
-   * @param {number} speed The animation speed.
-   * @return {JSX.Element} The animation speed option.
-   */
-  private _getOption = (speed: number): JSX.Element => (
-    <Observer
-      key={speed}
-      render={() => (
-        <button
-          key={speed}
-          className={classNames("speed-control__option", {
-            "button-primary": this._isCurrentSpeed(speed),
-          })}
-          onClick={() => this._setSpeed(speed)}
-        >
-          {`${speed}X`}
-        </button>
-      )}
-    />
-  );
-
-  /**
-   * Returns the list of options for all animation speeds.
-   * @return {JSX.Element[]} The list of animation speed option views.
-   */
-  private _getOptions = (): JSX.Element[] =>
-    AnimationSpeed.getValues().map(this._getOption);
-
-  /**
-   * Renders the component.
-   * @return {JSX.Element} The rendered component.
-   */
-  public render = (): JSX.Element => (
-    <div className={classNames("speed-control")}>{this._getOptions()}</div>
-  );
-}
+export default (): JSX.Element => (
+  <div className={classNames("speed-control")}>
+    {allAnimationValues.map(
+      (speed: number): JSX.Element => (
+        <SpeedOption key={`${speed}-speed`} speed={speed} />
+      ),
+    )}
+  </div>
+);
