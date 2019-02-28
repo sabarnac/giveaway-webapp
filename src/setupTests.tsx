@@ -61,7 +61,8 @@ jest.mock(
     observer: (ClassType: any): Function => (props: any): any => (
       <ClassType {...props} />
     ),
-    Observer: (props: any): any => props.render(),
+    Observer: (props: any): any =>
+      props.children ? props.children() : props.render(),
   }),
 );
 
@@ -91,30 +92,18 @@ jest.mock(
 
 jest.mock(
   "./store/config/AnimationSpeed",
-  (): object =>
-    ((): Function => {
-      const Foo = function Foo() {};
-      if ("getValues" in Foo) {
-        Object.defineProperty(Foo, "getValues", {
-          value: () => [1, 2, 3, 4, 5],
-          enumerable: true,
-          configurable: true,
-          writable: true,
-        });
-      } else {
-        (Foo as any)["getValues"] = () => [1, 2, 3, 4, 5];
-      }
-      return Foo;
-    })(),
+  (): object => {
+    const animationSpeed: any = {};
+    animationSpeed.getValues = () => [1, 2, 3, 4, 5];
+    animationSpeed.get = (speed: string) => 1;
+    return animationSpeed;
+  },
 );
 
 jest.mock(
   "./store/config/Config",
-  (): object =>
-    jest.fn().mockImplementation(
-      (): any => {
-        const { createDummyConfig } = require("./util/test");
-        return createDummyConfig();
-      },
-    ),
+  (): object => {
+    const { createDummyConfig } = require("./util/test");
+    return createDummyConfig();
+  },
 );
