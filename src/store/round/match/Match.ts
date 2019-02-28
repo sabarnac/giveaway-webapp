@@ -33,8 +33,8 @@ export default class Match {
    * Returns the name of the given participant.
    * @return {string} The participant name.
    */
-  private _getParticipantName = (participant: Participant): string =>
-    participant.name;
+  private _getParticipantProperName = (participant: Participant): string =>
+    participant.properName;
 
   /**
    * Returns a random conclusion message for the match.
@@ -42,8 +42,8 @@ export default class Match {
    */
   private _getMessage = (): string =>
     this._config.getRandomMessage(
-      this._winner.name,
-      this.losers.map(this._getParticipantName),
+      this._winner.properName,
+      this.losers.map(this._getParticipantProperName),
     );
 
   public constructor(config: Config, participants: Participant[]) {
