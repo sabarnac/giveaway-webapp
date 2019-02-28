@@ -30,8 +30,8 @@ export default class Match {
     RandomGenerator.pick(this._participants);
 
   /**
-   * Returns the name of the given participant.
-   * @return {string} The participant name.
+   * Returns the proper name of the given participant.
+   * @return {string} The participant proper name.
    */
   private _getParticipantProperName = (participant: Participant): string =>
     participant.properName;
