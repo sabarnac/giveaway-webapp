@@ -32,6 +32,7 @@ serviceWorker.register({
 // Create the tournament store
 const store: Tournament = new Tournament(Config.getInstance());
 
+// Set the webpage title.
 document.title = `${Config.getInstance().name} Tournament`;
 
 // Render the application! :D
