@@ -12,7 +12,7 @@ Ever wanted to have a giveaway but didn't want to just randomly select a winner?
 # Usage
 
 1. Clone this repository.
-2. Execute `npm i`.
+2. Execute `npm install`.
 3. Modify `src/store/config/config.json` with the tournament name, a seed value, the number of participants per match, a list of match conclusion messages, and the list of participants.
    - `#winner` in the message gets replaced with the name of the winner.
    - `#loser` in the message gets replaced with the name of the loser.
