@@ -6,7 +6,7 @@ import Match from "../../../store/round/match/Match";
 import Participant from "../../../store/round/match/participant/Participant";
 import ParticipantEntry from "./participant/entry/ParticipantEntry";
 import MatchOverlay from "./overlay/MatchOverlay";
-import { isInRange } from "../../../util/index";
+import { isInRange, getNormalizedSpeed } from "../../../util/index";
 import { CSSTransition } from "react-transition-group";
 import Config from "../../../store/config/Config";
 
@@ -89,26 +89,26 @@ export default class MatchView extends Component<
               oldParticipant: this.state.currentParticipant,
             })
           : null,
-      200 / this.props.config!.speed,
+      getNormalizedSpeed(200),
     );
 
   /**
    * Moves the component to the next random participant, after a delay of 200 (ignoring speed multiplier).
    */
   private _goToNextRandomParticipantWithDelay = (): unknown =>
-    setTimeout(this._goToNextRandomParticipant, 200 / this.props.config!.speed);
+    setTimeout(this._goToNextRandomParticipant, getNormalizedSpeed(200));
 
   /**
    * Moves the component to the next animation state, after a delay of 2500 (ignoring speed multiplier).
    */
   private _goToNextStateWithDelay = (): unknown =>
-    setTimeout(this._goToNextState, 2500 / this.props.config!.speed);
+    setTimeout(this._goToNextState, getNormalizedSpeed(2500));
 
   /**
    * Calls the action for match completion, after a delay of 500 (ignoring speed multiplier).
    */
   private _onMatchCompleteWithDelay = (): unknown =>
-    setTimeout(this.props.onMatchComplete, 1000 / this.props.config!.speed);
+    setTimeout(this.props.onMatchComplete, getNormalizedSpeed(1000));
 
   /**
    * Returns the participant list of the current match.
@@ -141,7 +141,7 @@ export default class MatchView extends Component<
   private _getWinner = (): JSX.Element => (
     <CSSTransition
       in={this.state.currentParticipant === -2}
-      timeout={200 / this.props.config!.speed}
+      timeout={getNormalizedSpeed(200)}
       classNames={{
         enter: "",
         enterActive: "match__winner--entering",
@@ -160,7 +160,7 @@ export default class MatchView extends Component<
             !this.props.isCurrentMatch || !this._isAnActualMatch(),
         })}
         style={{
-          transition: `opacity ${200 / this.props.config!.speed}ms ease-in-out`,
+          transition: `opacity ${getNormalizedSpeed(200)}ms ease-in-out`,
         }}
       >
         <ParticipantEntry participant={this.props.match.winner} />
@@ -184,7 +184,7 @@ export default class MatchView extends Component<
         isInRange(this.state.currentState, 1, 2) &&
         this.state.currentParticipant === index
       }
-      timeout={200 / this.props.config!.speed}
+      timeout={getNormalizedSpeed(200)}
       classNames={{
         enter: "",
         enterActive: "match__interim--entering",
@@ -201,7 +201,7 @@ export default class MatchView extends Component<
       <div
         className={classNames("match__interim")}
         style={{
-          transition: `opacity ${200 / this.props.config!.speed}ms ease-in-out`,
+          transition: `opacity ${getNormalizedSpeed(200)}ms ease-in-out`,
         }}
       >
         <ParticipantEntry participant={participant} />
@@ -291,7 +291,7 @@ export default class MatchView extends Component<
   public render = (): JSX.Element => (
     <CSSTransition
       in={isInRange(this.state.currentState, 1, 5)}
-      timeout={500 / this.props.config!.speed}
+      timeout={getNormalizedSpeed(500)}
       classNames={{
         enter: "",
         enterActive: "match--entering",
@@ -317,7 +317,7 @@ export default class MatchView extends Component<
           "match--completed": !this.props.isCurrentMatch,
         })}
         style={{
-          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`,
+          transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
         }}
       >
         {this._getParticipantList()}

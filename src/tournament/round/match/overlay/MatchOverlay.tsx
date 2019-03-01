@@ -8,7 +8,7 @@ import ParticipantCard from "../participant/card/ParticipantCard";
 import ParticipantEntry from "../participant/entry/ParticipantEntry";
 import Config from "../../../../store/config/Config";
 import { CSSTransition } from "react-transition-group";
-import { isInRange } from "../../../../util/index";
+import { isInRange, getNormalizedSpeed } from "../../../../util/index";
 import { ClipLoader } from "react-spinners";
 import { RouteComponentProps, withRouter } from "react-router";
 
@@ -60,7 +60,7 @@ export default inject("config")(
          * Moves the component to the next animation state, after a delay of 2500 (ignoring speed multiplier).
          */
         private _goToNextStateWithDelay = (): unknown =>
-          setTimeout(this._goToNextState, 4000 / this.props.config!.speed);
+          setTimeout(this._goToNextState, getNormalizedSpeed(4000));
 
         /**
          * Returns the participant list of the current match.
@@ -117,7 +117,7 @@ export default inject("config")(
         private _getWinner = (): JSX.Element => (
           <CSSTransition
             in={this.state.currentState === 3}
-            timeout={500 / this.props.config!.speed}
+            timeout={getNormalizedSpeed(500)}
             classNames={{
               enter: "",
               enterActive: "match-overlay__winner--entering",
@@ -159,7 +159,7 @@ export default inject("config")(
         private _getInterimText = (): JSX.Element => (
           <CSSTransition
             in={this.state.currentState === 1}
-            timeout={500 / this.props.config!.speed}
+            timeout={getNormalizedSpeed(500)}
             classNames={{
               enter: "",
               enterActive: "match-overlay__interim--entering",
@@ -217,7 +217,7 @@ export default inject("config")(
         public render = (): JSX.Element => (
           <CSSTransition
             in={isInRange(this.state.currentState, 1, 3)}
-            timeout={500 / this.props.config!.speed}
+            timeout={getNormalizedSpeed(500)}
             classNames={{
               enter: "",
               enterActive: "match-overlay-wrapper--entering",

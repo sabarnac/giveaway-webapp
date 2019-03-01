@@ -7,7 +7,7 @@ import Match from "../../store/round/match/Match";
 import MatchView from "./match/MatchView";
 import { Redirect } from "react-router";
 import { CSSTransition } from "react-transition-group";
-import { isInRange } from "../../util/index";
+import { isInRange, getNormalizedSpeed } from "../../util/index";
 import Config from "../../store/config/Config";
 const inflect = require("i")();
 
@@ -57,7 +57,7 @@ export default class RoundView extends Component<
    * Calls the action for round completion, after a delay of 500 (ignoring speed multiplier).
    */
   private _onRoundCompleteWithDelay = (): unknown =>
-    setTimeout(this.props.onRoundComplete, 500 / this.props.config!.speed);
+    setTimeout(this.props.onRoundComplete, getNormalizedSpeed(500));
 
   /**
    * Returns the match list of the current round.
@@ -166,7 +166,7 @@ export default class RoundView extends Component<
           this.props.round.matches.length * 2 - 1,
         ) && this._getCurrentMatchIndex() !== -1
       }
-      timeout={500 / this.props.config!.speed}
+      timeout={getNormalizedSpeed(500)}
       classNames={{
         enter: "",
         enterActive: "round--entering",
@@ -182,7 +182,7 @@ export default class RoundView extends Component<
       <div
         className={classNames("round")}
         style={{
-          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`,
+          transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
         }}
       >
         <h2>{inflect.titleize(this.props.round.id)}</h2>
