@@ -4,10 +4,9 @@ import "./TournamentView.scss";
 import classNames from "classnames";
 import Tournament from "../store/Tournament";
 import DevTools from "mobx-react-devtools";
-import { isDevEnvironment } from "../util";
+import { isDevEnvironment, getMatchRedirect } from "../util";
 import RoundView from "./round/RoundView";
 import Round from "../store/round/Round";
-import { Redirect } from "react-router";
 import { isInRange } from "../util/index";
 import { CSSTransition } from "react-transition-group";
 import WinnerOverlay from "./winner-overlay/WinnerOverlay";
@@ -74,19 +73,6 @@ export default class TournamentView extends Component<
       : undefined;
 
   /**
-   * Returns the devtools for MobX, if it is the dev environment.
-   * @return {JSX.Element | null} The MobX devtools, or null if it is not the dev environment.
-   */
-  private _getMobxDevTools = (): JSX.Element | null =>
-    isDevEnvironment() ? <DevTools /> : null;
-
-  /**
-   * Returns the animation speed controller.
-   * @return {JSX.Element} The animation speed controller.
-   */
-  private _getSpeedControl = (): JSX.Element => <SpeedControl />;
-
-  /**
    * Returns whether the given round is the current round.
    * @param {Round} round The round to check.
    * @return {boolean} Whether the given round is the current round.
@@ -121,7 +107,7 @@ export default class TournamentView extends Component<
    */
   private _getCurrentRound = (): JSX.Element => (
     <RoundView
-      key={this.props.roundId}
+      key={`${this.props.roundId}-${this.props.matchId}`}
       round={this._getCurrentRoundDetails()}
       matchId={this.props.matchId}
       onRoundComplete={this._goToNextState}
@@ -156,9 +142,12 @@ export default class TournamentView extends Component<
    * @return {JSX.Element} The redirect, or null if it is not required.
    */
   private _getFirstRoundRedirect = (): JSX.Element | null =>
-    this._getCurrentRoundIndex() === -1 ? (
-      <Redirect to={`/round/${this.props.tournament.firstRound.id}`} />
-    ) : null;
+    this._getCurrentRoundIndex() === -1
+      ? getMatchRedirect(
+          this.props.tournament.firstRound.id,
+          this.props.tournament.firstRound.firstMatch.id,
+        )
+      : null;
 
   /**
    * Returns whether the next round redirect should be added to the view.
@@ -180,13 +169,13 @@ export default class TournamentView extends Component<
    * @return {JSX.Element} The redirect, or null if it is not required.
    */
   private _getNextRoundRedirect = (): JSX.Element | null =>
-    this._shouldAddNextRoundRedirect() ? (
-      <Redirect
-        to={`/round/${
-          this.props.tournament.rounds[this.state.currentState / 2].id
-        }`}
-      />
-    ) : null;
+    this._shouldAddNextRoundRedirect()
+      ? getMatchRedirect(
+          this.props.tournament.rounds[this.state.currentState / 2].id,
+          this.props.tournament.rounds[this.state.currentState / 2].firstMatch
+            .id,
+        )
+      : null;
 
   /**
    * Returns whether the winner overlay should be shown.
@@ -309,8 +298,8 @@ export default class TournamentView extends Component<
         {this._getNextRoundRedirect()}
         {this._getLoserOverlay()}
         {this._getWinnerOverlay()}
-        {this._getSpeedControl()}
-        {this._getMobxDevTools()}
+        <SpeedControl />
+        {isDevEnvironment() ? <DevTools /> : null}
       </div>
     );
   };

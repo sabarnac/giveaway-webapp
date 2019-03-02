@@ -1,5 +1,5 @@
 import React, { Component, Fragment, RefObject } from "react";
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 import "./MatchView.scss";
 import classNames from "classnames";
 import Match from "../../../store/round/match/Match";
@@ -36,7 +36,6 @@ interface MatchViewState {
 /**
  * React component for the match view.
  */
-@inject("config")
 @observer
 export default class MatchView extends Component<
   MatchViewProps,
@@ -105,7 +104,7 @@ export default class MatchView extends Component<
    * Calls the action for match completion, after a delay of 500 (ignoring speed multiplier).
    */
   private _onMatchCompleteWithDelay = (): unknown =>
-    setTimeout(this.props.onMatchComplete, getNormalizedSpeed(1000));
+    setTimeout(() => this.props.onMatchComplete(), getNormalizedSpeed(1000));
 
   /**
    * Returns the participant list of the current match.

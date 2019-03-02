@@ -10,6 +10,7 @@ import {
   useAnimationState,
   getNormalizedSpeed,
   runOnPredicate,
+  isInRange,
 } from "../../../util";
 
 /**
@@ -37,12 +38,15 @@ export default (props: LoserInfoProps): JSX.Element => {
   ]: AnimationStateHookResult = useAnimationState();
 
   useEffect(runOnPredicate(currentState === 0, updateState));
+  useEffect(runOnPredicate(currentState === 2, () => updateStateDelay(1000)), [
+    currentState,
+  ]);
 
   return (
     <Observer>
       {() => (
         <CSSTransition
-          in={currentState === 1 && props.show}
+          in={isInRange(currentState, 1, 2) && props.show}
           timeout={getNormalizedSpeed(200)}
           classNames={{
             enter: "",
@@ -54,7 +58,7 @@ export default (props: LoserInfoProps): JSX.Element => {
           }}
           mountOnEnter={true}
           unmountOnExit={true}
-          onEntered={() => updateStateDelay(getNormalizedSpeed(1000))}
+          onEntered={updateState}
           onExited={props.onInfoComplete}
         >
           <div

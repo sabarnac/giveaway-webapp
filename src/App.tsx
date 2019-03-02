@@ -1,15 +1,10 @@
 import React, { Component } from "react";
-import {
-  Switch,
-  Route,
-  RouteComponentProps,
-  Redirect,
-  withRouter,
-} from "react-router";
+import { Switch, Route, RouteComponentProps, withRouter } from "react-router";
 import { observer } from "mobx-react";
 import Tournament from "./store/Tournament";
 import Round from "./store/round/Round";
 import TournamentView from "./tournament/TournamentView";
+import { getMatchRedirect } from "./util";
 
 /**
  * Properties of the Application React component.
@@ -37,11 +32,9 @@ interface AppRouteProps {
  * React component that returns a redirect depending upon what route properties are present.
  */
 const AppRedirect = (props: AppRouteProps): JSX.Element =>
-  props.roundId ? (
-    <Redirect to={`/round/${props.roundId}/match/${props.firstMatchId}`} />
-  ) : (
-    <Redirect to={`/round/${props.firstRoundId}/match/${props.firstMatchId}`} />
-  );
+  props.roundId
+    ? getMatchRedirect(props.roundId, props.firstMatchId)
+    : getMatchRedirect(props.firstRoundId, props.firstMatchId);
 
 /**
  * React component for the application.

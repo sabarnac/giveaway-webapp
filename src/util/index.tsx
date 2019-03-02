@@ -1,5 +1,7 @@
+import React from "react";
 import { Dispatch, useState } from "react";
 import Config from "../store/config/Config";
+import { Redirect } from "react-router";
 
 /**
  * Returns if it is currently a dev environment.
@@ -46,22 +48,25 @@ export type VoidFunction = () => void;
  * @param {Function} action The action to run.
  * @param {number} delay The minimum delay to wait for.
  */
-export const runOnDelay = (action: Function, delay: number): void => {
+export const runOnDelay = (action: Function, delay: number): number =>
   setTimeout(action, delay);
-};
 
 /**
  * Create an animation state hook.
  * @return {AnimationStateHookResult} The current animation state, a state update method, and a delayed state update method.
  */
-export const useAnimationState = (): AnimationStateHookResult => {
+export const useAnimationState = (
+  start: number = 0,
+): AnimationStateHookResult => {
   const [currentState, setCurrentState]: [number, Dispatch<number>] = useState(
-    0,
+    start,
   );
 
   const updateState = (): void => setCurrentState(currentState + 1);
-  const updateStateDelay = (delay: number): void =>
-    runOnDelay(updateState, delay);
+  const updateStateDelay = (delay: number): VoidFunction => {
+    const delayId: number = runOnDelay(updateState, delay);
+    return () => clearTimeout(delayId);
+  };
 
   return [currentState, updateState, updateStateDelay];
 };
@@ -82,4 +87,15 @@ export const getNormalizedSpeed = (time: number): number =>
 export const runOnPredicate = (
   predicate: boolean,
   action: Function,
-): VoidFunction => () => (predicate ? action() : undefined);
+): VoidFunction | (() => VoidFunction) => (): void | VoidFunction =>
+  predicate ? action() : undefined;
+
+/**
+ * Returns a redirect component for a given round and match.
+ * @param {string} roundId The ID of the round to redirect to.
+ * @param {string} matchId The ID of the match to redirect to.
+ * @return {JSX.Element} The redirect element.
+ */
+export const getMatchRedirect = (roundId?: string, matchId?: string) => (
+  <Redirect to={`/round/${roundId}/match/${matchId}`} />
+);

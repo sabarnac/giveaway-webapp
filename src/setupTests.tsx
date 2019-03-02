@@ -56,7 +56,7 @@ jest.mock(
         message: ["foobar1", "foobar2", "foobar3", "foobar4"],
         allParticipants: new Array(4)
           .fill(0)
-          .map((num: number, index: number) => index + 1)
+          .map((_: number, index: number) => index + 1)
           .map((num: number) => ({
             name: `fozbaz-${num}`,
             properName: `Fozbaz ${num}w`,
@@ -124,7 +124,7 @@ jest.mock(
       message: ["foobar1", "foobar2", "foobar3", "foobar4"],
       allParticipants: new Array(4)
         .fill(0)
-        .map((num: number, index: number) => index + 1)
+        .map((_: number, index: number) => index + 1)
         .map((num: number) => ({
           name: `fozbaz-${num}`,
           properName: `Fozbaz ${num}w`,

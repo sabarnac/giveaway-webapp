@@ -8,6 +8,7 @@ import {
   AnimationStateHookResult,
   useAnimationState,
   runOnPredicate,
+  isInRange,
 } from "../../../../../util/index";
 import { ClipLoader } from "react-spinners";
 
@@ -32,12 +33,16 @@ export default inject("config")(
     ]: AnimationStateHookResult = useAnimationState();
 
     useEffect(runOnPredicate(currentState === 0, updateState));
+    useEffect(
+      runOnPredicate(currentState === 2, () => updateStateDelay(4000)),
+      [currentState],
+    );
 
     return (
       <Observer>
         {() => (
           <CSSTransition
-            in={currentState === 1 && props.show}
+            in={isInRange(currentState, 1, 2) && props.show}
             timeout={getNormalizedSpeed(500)}
             classNames={{
               enter: "",
@@ -49,7 +54,7 @@ export default inject("config")(
             }}
             mountOnEnter={true}
             unmountOnExit={true}
-            onEntered={() => updateStateDelay(getNormalizedSpeed(4000))}
+            onEntered={updateState}
             onExited={props.onInterimComplete}
           >
             <div
