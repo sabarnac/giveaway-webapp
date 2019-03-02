@@ -3,12 +3,12 @@ import { Observer } from "mobx-react";
 import "./WinnerOverlay.scss";
 import Participant from "../../store/round/match/participant/Participant";
 import classNames from "classnames";
-import Config from "../../store/config/Config";
 import { CSSTransition } from "react-transition-group";
 import {
   useAnimationState,
   AnimationStateHookResult,
   getNormalizedSpeed,
+  runOnPredicate,
 } from "../../util";
 import WinnerOverlayView from "./_partial/WinnerOverlayView";
 
@@ -16,8 +16,6 @@ import WinnerOverlayView from "./_partial/WinnerOverlayView";
  * Properties of the winner overlay React component.
  */
 interface WinnerOverlayProps {
-  /** @ignore The application config. */
-  config?: Config;
   /** The tournament winner. */
   winner: Participant;
 }
@@ -30,9 +28,9 @@ export default (props: WinnerOverlayProps): JSX.Element => {
     currentState,
     updateState,
   ]: AnimationStateHookResult = useAnimationState();
-  const className: string = "winner-overlay-wrapper";
+  const className: string = "winner-overlay";
 
-  useEffect(updateState);
+  useEffect(runOnPredicate(currentState === 0, updateState));
 
   return (
     <Observer>
@@ -42,11 +40,11 @@ export default (props: WinnerOverlayProps): JSX.Element => {
           timeout={getNormalizedSpeed(500)}
           classNames={{
             enter: "",
-            enterActive: `${className}--entering`,
-            enterDone: `${className}--entered`,
+            enterActive: `${className}-wrapper--entering`,
+            enterDone: `${className}-wrapper--entered`,
             exit: "",
-            exitActive: `${className}--exiting`,
-            exitDone: `${className}--exited`,
+            exitActive: `${className}-wrapper--exiting`,
+            exitDone: `${className}-wrapper--exited`,
           }}
           mountOnEnter={true}
           unmountOnExit={true}
@@ -57,7 +55,7 @@ export default (props: WinnerOverlayProps): JSX.Element => {
               transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
             }}
           >
-            <WinnerOverlayView winner={props.winner} />
+            <WinnerOverlayView className={className} winner={props.winner} />
           </div>
         </CSSTransition>
       )}
