@@ -42,6 +42,15 @@ export type AnimationStateHookResult = [
 export type VoidFunction = () => void;
 
 /**
+ * Runs the given action at laest after the given delay.
+ * @param {Function} action The action to run.
+ * @param {number} delay The minimum delay to wait for.
+ */
+export const runOnDelay = (action: Function, delay: number): void => {
+  setTimeout(action, delay);
+};
+
+/**
  * Create an animation state hook.
  * @return {AnimationStateHookResult} The current animation state, a state update method, and a delayed state update method.
  */
@@ -51,9 +60,8 @@ export const useAnimationState = (): AnimationStateHookResult => {
   );
 
   const updateState = (): void => setCurrentState(currentState + 1);
-  const updateStateDelay = (delay: number): void => {
-    setTimeout(() => setCurrentState(currentState + 1), delay);
-  };
+  const updateStateDelay = (delay: number): void =>
+    runOnDelay(updateState, delay);
 
   return [currentState, updateState, updateStateDelay];
 };
