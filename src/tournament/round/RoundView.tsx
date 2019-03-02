@@ -8,6 +8,7 @@ import {
   useAnimationState,
   runOnPredicate,
   runOnDelay,
+  getNormalizedSpeed,
 } from "../../util/index";
 import RoundDetails from "./_partial/RoundDetails";
 
@@ -43,7 +44,10 @@ export default (props: RoundViewProps): JSX.Element => {
 
   useEffect(
     runOnPredicate(currentState === props.round.matches.length, () => {
-      const delayId: number = runOnDelay(props.onRoundComplete, 1000);
+      const delayId: number = runOnDelay(
+        props.onRoundComplete,
+        getNormalizedSpeed(500),
+      );
       return () => clearTimeout(delayId);
     }),
     [currentState],
@@ -54,7 +58,7 @@ export default (props: RoundViewProps): JSX.Element => {
       <RoundDetails
         className={className}
         round={props.round}
-        show={true}
+        show={currentState !== props.round.matches.length}
         matchId={props.matchId}
         onRoundMatchComplete={updateState}
       />

@@ -34,7 +34,9 @@ export default inject("config")(
 
     useEffect(runOnPredicate(currentState === 0, updateState));
     useEffect(
-      runOnPredicate(currentState === 2, () => updateStateDelay(4000)),
+      runOnPredicate(currentState === 2, () =>
+        updateStateDelay(getNormalizedSpeed(4000)),
+      ),
       [currentState],
     );
 
