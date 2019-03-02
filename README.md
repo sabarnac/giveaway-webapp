@@ -17,7 +17,7 @@ Ever wanted to have a giveaway but didn't want to just randomly select a winner?
    - `#winner` in the message gets replaced with the name of the winner.
    - `#loser` in the message gets replaced with the name of the loser(s).
    - A participant can just be a name, or a JSON object `{ name: "string", avatar: { url: "string", altText: "string" } }` (`avatar` property is optional).
-4. Use it as a standard React application created through `create-react-app` using TypeScript, with `sw-precache-cra`, `gh-pages`, and `react-styleguidist`.
+4. Use it as a standard React application created through `create-react-app` using TypeScript, `MobX` for state management, with `sw-precache-cra`, `gh-pages`, and `react-styleguidist`.
 
 # Features
 
