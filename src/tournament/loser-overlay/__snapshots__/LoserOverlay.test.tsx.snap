@@ -12,7 +12,7 @@ exports[`LoserOverlay Component. Matches snapshot. 1`] = `
       "exitDone": "loser-overlay-wrapper--exited",
     }
   }
-  in={true}
+  in={false}
   mountOnEnter={true}
   onExited={[Function]}
   timeout={500}

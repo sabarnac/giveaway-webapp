@@ -8,7 +8,7 @@ describe("WinnerOverlayView Component.", () => {
   it("Matches snapshot.", () => {
     const participant: Participant = createDummyParticipant(0);
     const component: ReactTestRenderer = create(
-      <WinnerOverlayView winner={participant} />,
+      <WinnerOverlayView className="foobar" winner={participant} />,
     );
 
     expect(component.toJSON()).toMatchSnapshot();

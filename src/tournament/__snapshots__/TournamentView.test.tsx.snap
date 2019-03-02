@@ -348,31 +348,31 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
       className="speed-control__option button-primary"
       onClick={[Function]}
     >
-      1X
+      1x
     </button>
     <button
       className="speed-control__option"
       onClick={[Function]}
     >
-      2X
+      2x
     </button>
     <button
       className="speed-control__option"
       onClick={[Function]}
     >
-      3X
+      3x
     </button>
     <button
       className="speed-control__option"
       onClick={[Function]}
     >
-      4X
+      4x
     </button>
     <button
       className="speed-control__option"
       onClick={[Function]}
     >
-      5X
+      5x
     </button>
   </div>
 </div>

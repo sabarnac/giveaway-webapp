@@ -3,13 +3,12 @@ import Config from "../../store/config/Config";
 import Participant from "../../store/round/match/participant/Participant";
 import Round from "../../store/round/Round";
 import Tournament from "../../store/Tournament";
-import Avatar from "../../store/round/match/participant/Avatar";
 
 export const createDummyParticipant = function(id: number = 1): Participant {
-  return new Participant(
-    `fozbaz-${id}`,
-    new Avatar(`foobar-${id}`, `barfoo-${id}`),
-  );
+  return new Participant(`fozbaz-${id}`, {
+    url: `foobar-${id}`,
+    altText: `barfoo-${id}`,
+  });
 };
 
 export const createDummyConfig = (): Config => {

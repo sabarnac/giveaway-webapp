@@ -2,10 +2,10 @@
 
 exports[`WinnerOverlayView Component. Matches snapshot. 1`] = `
 <div
-  className="winner-overlay"
+  className="foobar"
 >
   <div
-    className="winner-overlay__winner"
+    className="foobar__winner"
   >
     <div
       className="participant participant-card"

@@ -8,7 +8,7 @@ describe("WinnerInfo Component.", () => {
   it("Matches snapshot.", () => {
     const participant: Participant = createDummyParticipant(0);
     const component: ReactTestRenderer = create(
-      <WinnerInfo winner={participant} />,
+      <WinnerInfo className="foobar" winner={participant} />,
     );
 
     expect(component.toJSON()).toMatchSnapshot();

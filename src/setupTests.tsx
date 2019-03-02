@@ -52,8 +52,25 @@ jest.mock(
   (): object => ({
     Provider: "div",
     inject: (storeName: string): Function => {
-      const { createDummyConfig } = require("./util/test");
-      const store: any = storeName === "config" ? createDummyConfig() : {};
+      const mockConfig: any = {
+        message: ["foobar1", "foobar2", "foobar3", "foobar4"],
+        allParticipants: new Array(4)
+          .fill(0)
+          .map((num: number, index: number) => index + 1)
+          .map((num: number) => ({
+            name: `fozbaz-${num}`,
+            properName: `Fozbaz ${num}w`,
+            avatar: {
+              url: `foobar-${num}`,
+              altText: `barfoo-${num}`,
+            },
+          })),
+        participantsPerMatch: 2,
+        speed: 1,
+        getRandomMessage: () => "foobar message",
+      };
+      mockConfig.getInstance = () => mockConfig;
+      const store: any = storeName === "config" ? mockConfig : {};
       return (ClassType: any): Function => (props: any): any => (
         <ClassType {...{ [storeName]: store }} {...props} />
       );
@@ -103,7 +120,24 @@ jest.mock(
 jest.mock(
   "./store/config/Config",
   (): object => {
-    const { createDummyConfig } = require("./util/test");
-    return createDummyConfig();
+    const mockConfig: any = {
+      message: ["foobar1", "foobar2", "foobar3", "foobar4"],
+      allParticipants: new Array(4)
+        .fill(0)
+        .map((num: number, index: number) => index + 1)
+        .map((num: number) => ({
+          name: `fozbaz-${num}`,
+          properName: `Fozbaz ${num}w`,
+          avatar: {
+            url: `foobar-${num}`,
+            altText: `barfoo-${num}`,
+          },
+        })),
+      participantsPerMatch: 2,
+      speed: 1,
+      getRandomMessage: () => "foobar message",
+    };
+    mockConfig.getInstance = () => mockConfig;
+    return mockConfig;
   },
 );
