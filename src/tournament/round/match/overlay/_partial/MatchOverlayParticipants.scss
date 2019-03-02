@@ -1,0 +1,20 @@
+.match-overlay__list {
+  padding: 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #ffffff;
+  background: #000000;
+  & > div > .participant-card {
+    margin-bottom: 2rem;
+  }
+  & > .versus-text {
+    padding: 2rem 4rem;
+  }
+  @media (max-aspect-ratio: 1/1) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

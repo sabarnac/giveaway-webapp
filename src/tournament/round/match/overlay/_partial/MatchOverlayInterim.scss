@@ -1,0 +1,20 @@
+.match-overlay__interim {
+  padding: 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0.999999;
+  &--exiting,
+  &--exited {
+    opacity: 0.000001;
+  }
+  &--exiting,
+  &--entering,
+  &--entered {
+    opacity: 0.999999;
+  }
+  & > h3 {
+    margin-right: 2 rem;
+    text-align: center;
+  }
+}
