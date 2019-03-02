@@ -27,7 +27,7 @@ export default inject("config")(
         })}
         onClick={() => props.config!.setSpeed(props.speed)}
       >
-        {`${props.speed}X`}
+        {`${props.speed}x`}
       </button>
     ),
   ),
