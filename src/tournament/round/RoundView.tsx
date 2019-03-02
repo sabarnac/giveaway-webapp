@@ -8,15 +8,12 @@ import MatchView from "./match/MatchView";
 import { Redirect } from "react-router";
 import { CSSTransition } from "react-transition-group";
 import { isInRange, getNormalizedSpeed } from "../../util/index";
-import Config from "../../store/config/Config";
 const inflect = require("i")();
 
 /**
  * Properties of the round view React component.
  */
 interface RoundViewProps {
-  /** @ignore The application config. */
-  config?: Config;
   /** The ID of the current match. */
   matchId: string;
   /** The details of the current round. */

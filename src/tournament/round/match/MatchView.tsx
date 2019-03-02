@@ -8,14 +8,11 @@ import ParticipantEntry from "./participant/entry/ParticipantEntry";
 import MatchOverlay from "./overlay/MatchOverlay";
 import { isInRange, getNormalizedSpeed } from "../../../util/index";
 import { CSSTransition } from "react-transition-group";
-import Config from "../../../store/config/Config";
 
 /**
  * Properties of the match view React component.
  */
 interface MatchViewProps {
-  /** @ignore The application config. */
-  config?: Config;
   /** Whether it is the currently ongoing match. */
   isCurrentMatch: boolean;
   /** The details of the current match. */
