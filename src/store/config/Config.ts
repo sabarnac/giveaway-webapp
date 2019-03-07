@@ -41,8 +41,6 @@ export default class Config {
   @observable private _speed: number;
   /** The list of unused messages. */
   private _unusedMessages: string[];
-  /** The list of used messages. */
-  private _usedMessages: string[];
 
   /** The singleton instance of the class, or null if not yet created. */
   private static _instance: Config | null = null;
@@ -56,7 +54,7 @@ export default class Config {
       ? new Participant(user)
       : new Participant(
           (<ParticipantJson>user).name,
-          this._createAvatar((<ParticipantJson>user).avatar)
+          this._createAvatar((<ParticipantJson>user).avatar),
         );
 
   private _createAvatar = (avatar?: AvatarJson): Avatar | undefined =>
@@ -75,10 +73,10 @@ export default class Config {
 
   private _appendToLastParticipant = (
     participantSize: number,
-    stringToAppend: string
+    stringToAppend: string,
   ): ((name: string, index: number) => string) => (
     name: string,
-    index: number
+    index: number,
   ): string =>
     this._shouldAppend(index, participantSize)
       ? `${stringToAppend} ${name}`
@@ -91,7 +89,6 @@ export default class Config {
     this._name = this._getName();
     this._messages = this._getMessages();
     this._unusedMessages = RandomGenerator.shuffle([...this._messages]);
-    this._usedMessages = [];
     this._allParticipants = this._getParticipants();
     this._participantsPerMatch = this._getParticipantsPerMatch();
     this._speed = this._getSpeed();
@@ -132,11 +129,9 @@ export default class Config {
   public getRandomMessage(winnerName: string, loserNames: string[]): string {
     if (this._unusedMessages.length === 0) {
       this._unusedMessages = RandomGenerator.shuffle([...this._messages]);
-      this._usedMessages = [];
     }
     const message = RandomGenerator.pick(this._unusedMessages);
-    this._unusedMessages.splice(this._unusedMessages.indexOf(message));
-    this._usedMessages.push(message);
+    this._unusedMessages.splice(this._unusedMessages.indexOf(message), 1);
     return message
       .replace("#winner", winnerName)
       .replace("#loser", this._formatLosers(loserNames));
