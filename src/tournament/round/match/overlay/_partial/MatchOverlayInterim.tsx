@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { CSSTransition } from "react-transition-group";
 import {
   getNormalizedSpeed,
-  AnimationStateHookResult,
+  AnimationStateHook,
   useAnimationState,
   runOnPredicate,
   isInRange,
@@ -30,7 +30,7 @@ export default inject("config")(
       currentState,
       updateState,
       updateStateDelay,
-    ]: AnimationStateHookResult = useAnimationState();
+    ]: AnimationStateHook = useAnimationState();
 
     useEffect(runOnPredicate(currentState === 0, updateState));
     useEffect(

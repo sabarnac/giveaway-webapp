@@ -7,7 +7,7 @@ import { CSSTransition } from "react-transition-group";
 import {
   isInRange,
   getNormalizedSpeed,
-  AnimationStateHookResult,
+  AnimationStateHook,
   useAnimationState,
   runOnPredicate,
 } from "../../../../util/index";
@@ -27,10 +27,7 @@ interface MatchOverlayProps {
 
 export default inject("config")(
   (props: MatchOverlayProps): JSX.Element => {
-    const [
-      currentState,
-      updateState,
-    ]: AnimationStateHookResult = useAnimationState();
+    const [currentState, updateState]: AnimationStateHook = useAnimationState();
     const className: string = "match-overlay";
 
     useEffect(runOnPredicate(currentState === 0, updateState));

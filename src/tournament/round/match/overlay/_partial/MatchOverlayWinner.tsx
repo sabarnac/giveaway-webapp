@@ -7,7 +7,7 @@ import { CSSTransition } from "react-transition-group";
 import {
   getNormalizedSpeed,
   runOnDelay,
-  AnimationStateHookResult,
+  AnimationStateHook,
   useAnimationState,
   runOnPredicate,
 } from "../../../../../util/index";
@@ -39,7 +39,7 @@ export default inject("config")(
       const [
         currentState,
         updateState,
-      ]: AnimationStateHookResult = useAnimationState();
+      ]: AnimationStateHook = useAnimationState();
       const shouldNotStopOnEnd: boolean = !new URLSearchParams(
         props.location.search,
       ).has(STOP_QUERY_FLAG);

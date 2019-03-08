@@ -24,7 +24,7 @@ export default inject("config")(
     (props: MatchOverlayParticipantsProps): JSX.Element => (
       <div className={classNames(`${props.className}__list`)}>
         {props.currentMatch.participants
-          .map(
+          .flatMap(
             (participant: Participant): [JSX.Element, JSX.Element] => [
               <div key={participant.name}>
                 <ParticipantCard invert={true} participant={participant} />
@@ -37,7 +37,6 @@ export default inject("config")(
               </h3>,
             ],
           )
-          .flat()
           .slice(0, -1)}
       </div>
     ),
