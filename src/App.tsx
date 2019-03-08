@@ -69,6 +69,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
     props: RouteComponentProps<AppRouteProps>,
   ): JSX.Element => (
     <TournamentView
+      key={this._getParams(props).roundId as string}
       tournament={this.props.tournament}
       roundId={this._getParams(props).roundId as string}
       matchId={this._getParams(props).matchId as string}
