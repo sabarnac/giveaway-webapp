@@ -104,7 +104,10 @@ export default class MatchView extends Component<
    * Calls the action for match completion, after a delay of 500 (ignoring speed multiplier).
    */
   private _onMatchCompleteWithDelay = (): unknown =>
-    setTimeout(() => this.props.onMatchComplete(), getNormalizedSpeed(1000));
+    setTimeout(
+      () => (this._isMounted ? this.props.onMatchComplete() : undefined),
+      getNormalizedSpeed(1000),
+    );
 
   /**
    * Returns the participant list of the current match.
