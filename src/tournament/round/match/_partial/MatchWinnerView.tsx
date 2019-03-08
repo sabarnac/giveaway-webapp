@@ -49,7 +49,7 @@ export default (props: MatchWinnerViewProps): JSX.Element => {
       }}
       mountOnEnter={true}
       unmountOnExit={true}
-      onEntered={props.onWinnerComplete}
+      onEntered={props.isCurrentMatch ? props.onWinnerComplete : undefined}
     >
       <div
         className={classNames("match__winner", {
