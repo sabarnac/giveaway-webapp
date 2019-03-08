@@ -7,7 +7,7 @@ import { CSSTransition } from "react-transition-group";
 import {
   getNormalizedSpeed,
   useAnimationState,
-  AnimationStateHookResult,
+  AnimationStateHook,
   runOnPredicate,
 } from "../../util/index";
 import LoserOverlayView from "./_partial/LoserOverlayView";
@@ -26,10 +26,7 @@ interface LoserOverlayProps {
  * React component for the loser overlay.
  */
 export default (props: LoserOverlayProps): JSX.Element => {
-  const [
-    currentState,
-    updateState,
-  ]: AnimationStateHookResult = useAnimationState();
+  const [currentState, updateState]: AnimationStateHook = useAnimationState();
   const className: string = "loser-overlay";
 
   useEffect(runOnPredicate(currentState === 0, updateState));

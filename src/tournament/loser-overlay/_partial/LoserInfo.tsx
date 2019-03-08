@@ -6,7 +6,7 @@ import Participant from "../../../store/round/match/participant/Participant";
 import ParticipantCard from "../../round/match/participant/card/ParticipantCard";
 import { CSSTransition } from "react-transition-group";
 import {
-  AnimationStateHookResult,
+  AnimationStateHook,
   useAnimationState,
   getNormalizedSpeed,
   runOnPredicate,
@@ -35,12 +35,15 @@ export default (props: LoserInfoProps): JSX.Element => {
     currentState,
     updateState,
     updateStateDelay,
-  ]: AnimationStateHookResult = useAnimationState();
+  ]: AnimationStateHook = useAnimationState();
 
   useEffect(runOnPredicate(currentState === 0, updateState));
-  useEffect(runOnPredicate(currentState === 2, () => updateStateDelay(1000)), [
-    currentState,
-  ]);
+  useEffect(
+    runOnPredicate(currentState === 2, () =>
+      updateStateDelay(getNormalizedSpeed(1000)),
+    ),
+    [currentState],
+  );
 
   return (
     <Observer>

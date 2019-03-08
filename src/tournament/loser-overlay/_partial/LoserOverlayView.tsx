@@ -4,7 +4,7 @@ import "./LoserOverlayView.scss";
 import classNames from "classnames";
 import Participant from "../../../store/round/match/participant/Participant";
 import {
-  AnimationStateHookResult,
+  AnimationStateHook,
   useAnimationState,
   runOnPredicate,
 } from "../../../util/index";
@@ -26,10 +26,7 @@ interface LoserOverlayViewProps {
  * React component for the loser overlay.
  */
 export default (props: LoserOverlayViewProps): JSX.Element => {
-  const [
-    currentState,
-    updateState,
-  ]: AnimationStateHookResult = useAnimationState();
+  const [currentState, updateState]: AnimationStateHook = useAnimationState();
 
   useEffect(
     runOnPredicate(currentState === props.losers.length, props.onViewComplete),
