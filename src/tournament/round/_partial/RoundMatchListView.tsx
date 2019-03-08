@@ -7,7 +7,7 @@ import Match from "../../../store/round/match/Match";
 import MatchView from "../match/MatchView";
 import {
   useAnimationState,
-  AnimationStateHookResult,
+  AnimationStateHook,
   runOnPredicate,
 } from "../../../util";
 
@@ -29,10 +29,7 @@ interface RoundMatchListViewProps {
  * React component for the round view.
  */
 export default (props: RoundMatchListViewProps): JSX.Element => {
-  const [
-    currentState,
-    updateState,
-  ]: AnimationStateHookResult = useAnimationState();
+  const [currentState, updateState]: AnimationStateHook = useAnimationState();
   const currentMatchIndex: number = props.round.matches.findIndex(
     (match: Match): boolean => match.id === props.matchId,
   );

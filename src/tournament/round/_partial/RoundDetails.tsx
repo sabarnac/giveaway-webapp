@@ -7,7 +7,7 @@ import Match from "../../../store/round/match/Match";
 import { CSSTransition } from "react-transition-group";
 import {
   getNormalizedSpeed,
-  AnimationStateHookResult,
+  AnimationStateHook,
   useAnimationState,
   runOnPredicate,
 } from "../../../util/index";
@@ -34,10 +34,7 @@ interface RoundViewProps {
  * React component for the round view.
  */
 export default (props: RoundViewProps): JSX.Element => {
-  const [
-    currentState,
-    updateState,
-  ]: AnimationStateHookResult = useAnimationState();
+  const [currentState, updateState]: AnimationStateHook = useAnimationState();
   const currentMatchIndex: number = props.round.matches.findIndex(
     (match: Match): boolean => match.id === props.matchId,
   );

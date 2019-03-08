@@ -1,21 +1,24 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import "./RoundView.scss";
 import Round from "../../store/round/Round";
 import Match from "../../store/round/match/Match";
 import {
   getMatchRedirect,
-  AnimationStateHookResult,
+  AnimationStateHook,
   useAnimationState,
   runOnPredicate,
   runOnDelay,
   getNormalizedSpeed,
 } from "../../util/index";
 import RoundDetails from "./_partial/RoundDetails";
+import { CSSTransition } from "react-transition-group";
 
 /**
  * Properties of the round view React component.
  */
 interface RoundViewProps {
+  /** Whether to show the round or not. */
+  show: boolean;
   /** The ID of the current match. */
   matchId: string;
   /** The details of the current round. */
@@ -33,10 +36,9 @@ export default (props: RoundViewProps): JSX.Element => {
   );
   const className: string = "round";
 
-  const [
-    currentState,
-    updateState,
-  ]: AnimationStateHookResult = useAnimationState(currentMatchIndex);
+  const [currentState, updateState]: AnimationStateHook = useAnimationState(
+    currentMatchIndex,
+  );
   const shouldNextRedirect: boolean =
     currentMatchIndex !== currentState &&
     currentMatchIndex !== -1 &&
@@ -54,23 +56,38 @@ export default (props: RoundViewProps): JSX.Element => {
   );
 
   return (
-    <Fragment>
-      <RoundDetails
-        className={className}
-        round={props.round}
-        show={currentState !== props.round.matches.length}
-        matchId={props.matchId}
-        onRoundMatchComplete={updateState}
-      />
-      {currentMatchIndex === -1
-        ? getMatchRedirect(props.round.id, props.round.firstMatch.id)
-        : null}
-      {shouldNextRedirect
-        ? getMatchRedirect(
-            props.round.id,
-            props.round.matches[Math.max(currentMatchIndex, currentState)].id,
-          )
-        : null}
-    </Fragment>
+    <CSSTransition
+      in={props.show}
+      timeout={500}
+      classNames={{
+        enter: "",
+        enterActive: "round--entering",
+        enterDone: "round--entered",
+        exit: "",
+        exitActive: "round--exiting",
+        exitDone: "round--exited",
+      }}
+      mountOnEnter={true}
+      unmountOnExit={true}
+    >
+      <Fragment>
+        <RoundDetails
+          className={className}
+          round={props.round}
+          show={currentState !== props.round.matches.length}
+          matchId={props.matchId}
+          onRoundMatchComplete={updateState}
+        />
+        {currentMatchIndex === -1
+          ? getMatchRedirect(props.round.id, props.round.firstMatch.id)
+          : null}
+        {shouldNextRedirect
+          ? getMatchRedirect(
+              props.round.id,
+              props.round.matches[Math.max(currentMatchIndex, currentState)].id,
+            )
+          : null}
+      </Fragment>
+    </CSSTransition>
   );
 };

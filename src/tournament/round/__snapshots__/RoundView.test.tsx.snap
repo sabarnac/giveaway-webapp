@@ -14,7 +14,6 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
   }
   in={true}
   mountOnEnter={true}
-  onExited={[Function]}
   timeout={500}
   unmountOnExit={true}
 >
