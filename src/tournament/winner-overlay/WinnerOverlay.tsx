@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { CSSTransition } from "react-transition-group";
 import {
   useAnimationState,
-  AnimationStateHookResult,
+  AnimationStateHook,
   getNormalizedSpeed,
   runOnPredicate,
 } from "../../util";
@@ -16,6 +16,8 @@ import WinnerOverlayView from "./_partial/WinnerOverlayView";
  * Properties of the winner overlay React component.
  */
 interface WinnerOverlayProps {
+  /** Whether to show the overlay or not. */
+  show: boolean;
   /** The tournament winner. */
   winner: Participant;
 }
@@ -24,10 +26,7 @@ interface WinnerOverlayProps {
  * React component for the winner overlay.
  */
 export default (props: WinnerOverlayProps): JSX.Element => {
-  const [
-    currentState,
-    updateState,
-  ]: AnimationStateHookResult = useAnimationState();
+  const [currentState, updateState]: AnimationStateHook = useAnimationState();
   const className: string = "winner-overlay";
 
   useEffect(runOnPredicate(currentState === 0, updateState));
@@ -36,7 +35,7 @@ export default (props: WinnerOverlayProps): JSX.Element => {
     <Observer>
       {() => (
         <CSSTransition
-          in={currentState > 0}
+          in={currentState > 0 && props.show}
           timeout={getNormalizedSpeed(500)}
           classNames={{
             enter: "",
