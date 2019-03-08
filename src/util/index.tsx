@@ -30,13 +30,19 @@ export const isInRange = (num: number, start: number, end: number): boolean =>
   num >= start && num <= end;
 
 /**
- * Type for custom animation state hook result.
+ * Type for custom animation state hook.
  */
-export type AnimationStateHookResult = [
+export type AnimationStateHook = [
   number,
   () => void,
-  (delay: number) => void
+  (delay: number) => void,
+  (state: number) => void
 ];
+
+/**
+ * Type for show overlay state hook.
+ */
+export type ShowOverlayHook = [boolean, (newValue: boolean) => void];
 
 /**
  * Type for void function.
@@ -53,22 +59,18 @@ export const runOnDelay = (action: Function, delay: number): number =>
 
 /**
  * Create an animation state hook.
- * @return {AnimationStateHookResult} The current animation state, a state update method, and a delayed state update method.
+ * @return {AnimationStateHook} The current animation state, a state update method, and a delayed state update method.
  */
-export const useAnimationState = (
-  start: number = 0,
-): AnimationStateHookResult => {
-  const [currentState, setCurrentState]: [number, Dispatch<number>] = useState(
-    start,
-  );
+export const useAnimationState = (start: number = 0): AnimationStateHook => {
+  const [currentState, setState]: [number, Dispatch<number>] = useState(start);
 
-  const updateState = (): void => setCurrentState(currentState + 1);
+  const updateState = (): void => setState(currentState + 1);
   const updateStateDelay = (delay: number): VoidFunction => {
     const delayId: number = runOnDelay(updateState, delay);
     return () => clearTimeout(delayId);
   };
 
-  return [currentState, updateState, updateStateDelay];
+  return [currentState, updateState, updateStateDelay, setState];
 };
 
 /**
