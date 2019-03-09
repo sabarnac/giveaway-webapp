@@ -15,7 +15,7 @@ import Round from "../store/round/Round";
 import WinnerOverlay from "./winner-overlay/WinnerOverlay";
 import SpeedControl from "./speed/SpeedControl";
 import Config from "../store/config/Config";
-import MobxDevTools from "./_partial/MobxDevTools";
+import AppDevTools from "./_partial/AppDevTools";
 import LoserOverlayView from "./_partial/LoserOverlayView";
 
 /**
@@ -101,7 +101,7 @@ export default inject("config")(
                   props.matchId,
                 )
               : null}
-            <MobxDevTools />
+            <AppDevTools />
           </div>
         )}
       </Observer>
