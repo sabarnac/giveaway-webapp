@@ -50,7 +50,7 @@ export type ShowOverlayHook = [boolean, (newValue: boolean) => void];
 export type VoidFunction = () => void;
 
 /**
- * Runs the given action at laest after the given delay.
+ * Runs the given action at least after the given delay.
  * @param {Function} action The action to run.
  * @param {number} delay The minimum delay to wait for.
  */
