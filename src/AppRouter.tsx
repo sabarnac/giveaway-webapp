@@ -9,7 +9,7 @@ import { getMatchRedirect } from "./util";
 /**
  * Properties of the Application React component.
  */
-interface AppProps {
+interface AppRouterProps {
   /** The details of the tournament. */
   tournament: Tournament;
 }
@@ -40,7 +40,9 @@ const AppRedirect = (props: AppRouteProps): JSX.Element =>
  * React component for the application.
  */
 @observer
-class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
+class AppRouter extends Component<
+  AppRouterProps & RouteComponentProps<AppRouteProps>
+> {
   /**
    * Returns the route params.
    * @return {AppRouteProps} The route params.
@@ -169,4 +171,4 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
   );
 }
 
-export default withRouter(App);
+export default withRouter(AppRouter);
