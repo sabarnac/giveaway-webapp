@@ -15,7 +15,7 @@ export default class Tournament {
   private _config: Config;
 
   /**
-   * Creates a round with the given list of participants
+   * Creates a round with the given list of participants.
    * @param  {Participant[]} participants The list of participants to create the round with.
    * @return {Round} The created round.
    */
