@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./MatchView.scss";
+import "./MatchWinnerView.scss";
 import classNames from "classnames";
 import ParticipantEntry from "../participant/entry/ParticipantEntry";
 import { getNormalizedSpeed } from "../../../../util/index";
@@ -17,14 +17,8 @@ import {
 interface MatchWinnerViewProps {
   /** Whether it is the currently ongoing match. */
   isCurrentMatch: boolean;
-  /** Whether it is an actual match. */
-  isActualMatch: boolean;
   /** The details of the current match. */
   winner: Participant;
-  /** Whether to show the round details or not. */
-  show: boolean;
-  /** Action to call when the view has finished showing the match. */
-  onWinnerComplete: () => void;
 }
 
 /**
@@ -37,7 +31,7 @@ export default (props: MatchWinnerViewProps): JSX.Element => {
 
   return (
     <CSSTransition
-      in={currentState > 0 && props.show}
+      in={currentState > 0}
       timeout={getNormalizedSpeed(200)}
       classNames={{
         enter: "",
@@ -49,13 +43,9 @@ export default (props: MatchWinnerViewProps): JSX.Element => {
       }}
       mountOnEnter={true}
       unmountOnExit={true}
-      onEntered={props.isCurrentMatch ? props.onWinnerComplete : undefined}
     >
       <div
-        className={classNames("match__winner", {
-          "match__winner--completed":
-            !props.isCurrentMatch || !props.isActualMatch,
-        })}
+        className={classNames("match__winner")}
         style={{
           transition: `opacity ${getNormalizedSpeed(200)}ms ease-in-out`,
         }}

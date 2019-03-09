@@ -1,0 +1,9 @@
+.match__list {
+  width: 50%;
+  & > .participant-entry {
+    border-bottom: none;
+    &:last-child {
+      border-bottom: 1px solid #000000;
+    }
+  }
+}

@@ -1,9 +1,10 @@
-.match {
-  width: 100%;
+.match__winner {
+  width: 50%;
   display: flex;
-  padding: 2rem 0;
-  border-top: 1px dashed #ffffff;
-  border-bottom: 1px dashed #ffffff;
+  align-items: center;
+  & > .participant-entry {
+    border-left: none;
+  }
   opacity: 0.000001;
   will-change: opacity;
   &--exiting,
@@ -14,5 +15,8 @@
   &--entering,
   &--completed {
     opacity: 0.99999;
+  }
+  & > .participant {
+    background: #00ff00;
   }
 }
