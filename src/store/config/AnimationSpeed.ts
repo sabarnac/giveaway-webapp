@@ -6,11 +6,10 @@ export default class AnimationSpeed {
   private static _SPEED_MAP: Map<string, number> = new Map([
     ["HALF", 0.5],
     ["ONE", 1],
-    ["ONE_POINT_FIVE", 1.5],
     ["TWO", 2],
     ["FIVE", 5],
     ["TEN", 10],
-    ["TWENTY", 20]
+    ["TWENTY", 20],
   ]);
 
   /**
