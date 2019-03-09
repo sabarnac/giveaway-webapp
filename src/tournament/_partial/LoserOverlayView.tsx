@@ -4,19 +4,19 @@ import Round from "../../store/round/Round";
 import LoserOverlay from "../loser-overlay/LoserOverlay";
 
 /**
- * Properties of the round view React component.
+ * Properties of the tournament loser overlay view React component.
  */
 interface LoserOverlayViewProps {
   /** The details of the current round. */
   round: Round;
-  /** Whether to show the round details or not. */
+  /** Whether to show the loser overlay or not. */
   show: boolean;
   /** Action to call when the view has finished showing the losers. */
   onOverlayComplete: () => void;
 }
 
 /**
- * React component for the round view.
+ * React component for the loser overlay view.
  */
 export default observer(
   (props: LoserOverlayViewProps): JSX.Element | null => {
