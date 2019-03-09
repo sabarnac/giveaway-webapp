@@ -78,8 +78,8 @@ export default class Round {
   private _getMatchLosers = (match: Match): Participant[] => match.losers;
 
   /**
-   * Get the match ID.
-   * @return {string} The unique ID of the match.
+   * Get the round ID.
+   * @return {string} The unique ID of the round.
    */
   @computed public get id(): string {
     return this._id;
