@@ -2,6 +2,7 @@ import { observable, computed } from "mobx";
 import Participant from "./participant/Participant";
 import RandomGenerator from "../../config/RandomGenerator";
 import Config from "../../config/Config";
+const gcd = require("gcd");
 
 /**
  * Class containing details of a match.
@@ -23,11 +24,44 @@ export default class Match {
   private static counter: number = 1;
 
   /**
-   * Picks and returns a winner of the match from the list of participants at random.
+   * Returns the weight of the given participant.
+   * @param {Participant} participant The participant to get the weight of.
+   * @return {number} The participant weight.
+   */
+  private _getParticipantWeight = (participant: Participant): number =>
+    participant.weight;
+
+  /**
+   * Returns the GCD of the weights of all participants of the match.
+   * @return {number} The GCD of the participant weights.
+   */
+  private _getParticipantWeightsGcd = (): number =>
+    this._participants
+      .map(this._getParticipantWeight)
+      .reduce(
+        (prevGcd: number, weight: number): number => gcd(prevGcd, weight),
+      );
+
+  /**
+   * Returns a list of cloned participants whose count is the weight of the participant divided by the GCD of weights of all participants in the list.
+   * @param {Participant} participant The participant to clone.
+   * @return {Participant[]} The list of cloned participants.
+   */
+  private _cloneParticipantByWeight = (
+    participant: Participant,
+  ): Participant[] =>
+    new Array(participant.weight / this._getParticipantWeightsGcd()).fill(
+      participant,
+    );
+
+  /**
+   * Picks and returns a winner of the match from the list of participants at random, with participant weight factored in.
    * @return {Participant} The participant selected as the winner.
    */
   private _getWinner = (): Participant =>
-    RandomGenerator.pick(this._participants);
+    RandomGenerator.pick(
+      this._participants.flatMap(this._cloneParticipantByWeight),
+    );
 
   /**
    * Returns the proper name of the given participant.
