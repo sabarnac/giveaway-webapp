@@ -22,7 +22,7 @@ interface RoundViewProps {
   /** The ID of the current match. */
   matchId: string;
   /** The details of the current round. */
-  round: Round;
+  round: Round | undefined;
   /** Action to call when the view has finished showing the round. */
   onRoundComplete: () => void;
 }
@@ -44,7 +44,11 @@ export const getRoundRedirectIfRequired = (
 /**
  * React component for the round view.
  */
-export default (props: RoundViewProps): JSX.Element => {
+export default (props: RoundViewProps): JSX.Element | null => {
+  if (props.round === undefined) {
+    return null;
+  }
+
   const currentMatchIndex: number = props.round.matches.findIndex(
     (match: Match): boolean => match.id === props.matchId,
   );

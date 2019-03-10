@@ -30,7 +30,11 @@ interface MatchViewProps {
 /**
  * React component for the match view.
  */
-export default (props: MatchViewProps): JSX.Element => {
+export default (props: MatchViewProps): JSX.Element | null => {
+  if (props.match === undefined) {
+    return null;
+  }
+
   const className: string = "match";
   const isActualMatch: boolean = props.match.participants.length > 1;
 
