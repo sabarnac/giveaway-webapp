@@ -14,117 +14,67 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
   }
   in={true}
   mountOnEnter={true}
-  onExited={[Function]}
   timeout={500}
   unmountOnExit={true}
 >
   <div
-    className="round"
-    style={
+    classNames={
       Object {
-        "transition": "opacity 500ms ease-in-out",
+        "enter": "",
+        "enterActive": "round--entering",
+        "enterDone": "round--entered",
+        "exit": "",
+        "exitActive": "round--exiting",
+        "exitDone": "round--exited",
       }
     }
+    in={false}
+    mountOnEnter={true}
+    timeout={500}
+    unmountOnExit={true}
   >
-    <h2>
-      Round 1
-    </h2>
     <div
-      className="round__list"
-    >
-      <div
-        classNames={
-          Object {
-            "enter": "",
-            "enterActive": "match--entering",
-            "enterDone": "match--entered",
-            "exit": "",
-            "exitActive": "match--exiting",
-            "exitDone": "match--exited",
-          }
+      className="round"
+      style={
+        Object {
+          "transition": "opacity 500ms ease-in-out",
         }
-        in={true}
-        mountOnEnter={true}
-        onEntering={[Function]}
-        onExited={[Function]}
-        timeout={500}
-        unmountOnExit={true}
+      }
+    >
+      <h2>
+        Round 1
+      </h2>
+      <div
+        className="round__list"
       >
         <div
-          className="match"
-          style={
+          classNames={
             Object {
-              "transition": "opacity 500ms ease-in-out",
+              "enter": "",
+              "enterActive": "match--entering",
+              "enterDone": "match--entered",
+              "exit": "",
+              "exitActive": "match--exiting",
+              "exitDone": "match--exited",
             }
           }
+          in={false}
+          mountOnEnter={true}
+          onEntering={[Function]}
+          onExited={[Function]}
+          timeout={500}
+          unmountOnExit={true}
         >
           <div
-            className="match__list"
-          >
-            <div
-              className="participant participant-entry"
-            >
-              <div
-                className="participant-entry__avatar"
-              >
-                <img
-                  alt="barfoo-1"
-                  src="foobar-1"
-                />
-              </div>
-              <div
-                className="participant-entry__name"
-              >
-                <strong>
-                  Fozbaz 1
-                </strong>
-              </div>
-            </div>
-            <div
-              className="participant participant-entry"
-            >
-              <div
-                className="participant-entry__avatar"
-              >
-                <img
-                  alt="barfoo-2"
-                  src="foobar-2"
-                />
-              </div>
-              <div
-                className="participant-entry__name"
-              >
-                <strong>
-                  Fozbaz 2
-                </strong>
-              </div>
-            </div>
-          </div>
-          <div
-            classNames={
+            className="match"
+            style={
               Object {
-                "enter": "",
-                "enterActive": "match__interim--entering",
-                "enterDone": "match__interim--entered",
-                "exit": "",
-                "exitActive": "match__interim--exiting",
-                "exitDone": "match__interim--exited",
+                "transition": "opacity 500ms ease-in-out",
               }
             }
-            in={false}
-            mountOnEnter={true}
-            onEntered={[Function]}
-            onExited={[Function]}
-            timeout={200}
-            unmountOnExit={true}
           >
             <div
-              className="match__interim"
-              style={
-                Object {
-                  "transition": "opacity 200ms ease-in-out",
-                }
-              }
+              className="match__list"
             >
               <div
                 className="participant participant-entry"
@@ -133,8 +83,8 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   className="participant-entry__avatar"
                 >
                   <img
-                    alt="barfoo-1"
-                    src="foobar-1"
+                    alt="fozbaz-1"
+                    src="https://api.adorable.io/avatars/480/fozbaz-1"
                   />
                 </div>
                 <div
@@ -145,34 +95,6 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   </strong>
                 </div>
               </div>
-            </div>
-          </div>
-          <div
-            classNames={
-              Object {
-                "enter": "",
-                "enterActive": "match__interim--entering",
-                "enterDone": "match__interim--entered",
-                "exit": "",
-                "exitActive": "match__interim--exiting",
-                "exitDone": "match__interim--exited",
-              }
-            }
-            in={false}
-            mountOnEnter={true}
-            onEntered={[Function]}
-            onExited={[Function]}
-            timeout={200}
-            unmountOnExit={true}
-          >
-            <div
-              className="match__interim"
-              style={
-                Object {
-                  "transition": "opacity 200ms ease-in-out",
-                }
-              }
-            >
               <div
                 className="participant participant-entry"
               >
@@ -180,8 +102,8 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                   className="participant-entry__avatar"
                 >
                   <img
-                    alt="barfoo-2"
-                    src="foobar-2"
+                    alt="fozbaz-2"
+                    src="https://api.adorable.io/avatars/480/fozbaz-2"
                   />
                 </div>
                 <div
@@ -193,49 +115,269 @@ exports[`RoundView Component. Roundes snapshot. 1`] = `
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            classNames={
-              Object {
-                "enter": "",
-                "enterActive": "match__winner--entering",
-                "enterDone": "match__winner--entered",
-                "exit": "",
-                "exitActive": "match__winner--exiting",
-                "exitDone": "match__winner--exited",
-              }
-            }
-            in={false}
-            mountOnEnter={true}
-            onEntered={[Function]}
-            timeout={200}
-            unmountOnExit={true}
-          >
             <div
-              className="match__winner"
-              style={
+              classNames={
                 Object {
-                  "transition": "opacity 200ms ease-in-out",
+                  "enter": "",
+                  "enterActive": "match__interim--entering",
+                  "enterDone": "match__interim--entered",
+                  "exit": "",
+                  "exitActive": "match__interim--exiting",
+                  "exitDone": "match__interim--exited",
                 }
               }
+              in={false}
+              mountOnEnter={true}
+              onEntered={[Function]}
+              onExited={[Function]}
+              timeout={200}
+              unmountOnExit={true}
             >
               <div
-                className="participant participant-entry"
+                className="match__interim"
+                style={
+                  Object {
+                    "transition": "opacity 200ms ease-in-out",
+                  }
+                }
               >
                 <div
-                  className="participant-entry__avatar"
+                  className="participant participant-entry"
                 >
-                  <img
-                    alt="barfoo-1"
-                    src="foobar-1"
-                  />
+                  <div
+                    className="participant-entry__avatar"
+                  >
+                    <img
+                      alt="fozbaz-1"
+                      src="https://api.adorable.io/avatars/480/fozbaz-1"
+                    />
+                  </div>
+                  <div
+                    className="participant-entry__name"
+                  >
+                    <strong>
+                      Fozbaz 1
+                    </strong>
+                  </div>
                 </div>
+              </div>
+            </div>
+            <div
+              classNames={
+                Object {
+                  "enter": "",
+                  "enterActive": "match__interim--entering",
+                  "enterDone": "match__interim--entered",
+                  "exit": "",
+                  "exitActive": "match__interim--exiting",
+                  "exitDone": "match__interim--exited",
+                }
+              }
+              in={false}
+              mountOnEnter={true}
+              onEntered={[Function]}
+              onExited={[Function]}
+              timeout={200}
+              unmountOnExit={true}
+            >
+              <div
+                className="match__interim"
+                style={
+                  Object {
+                    "transition": "opacity 200ms ease-in-out",
+                  }
+                }
+              >
                 <div
-                  className="participant-entry__name"
+                  className="participant participant-entry"
                 >
-                  <strong>
-                    Fozbaz 1
-                  </strong>
+                  <div
+                    className="participant-entry__avatar"
+                  >
+                    <img
+                      alt="fozbaz-2"
+                      src="https://api.adorable.io/avatars/480/fozbaz-2"
+                    />
+                  </div>
+                  <div
+                    className="participant-entry__name"
+                  >
+                    <strong>
+                      Fozbaz 2
+                    </strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              classNames={
+                Object {
+                  "enter": "",
+                  "enterActive": "match-overlay-wrapper--entering",
+                  "enterDone": "match-overlay-wrapper--entered",
+                  "exit": "",
+                  "exitActive": "match-overlay-wrapper--exiting",
+                  "exitDone": "match-overlay-wrapper--exited",
+                }
+              }
+              in={false}
+              mountOnEnter={true}
+              onExited={[Function]}
+              timeout={500}
+              unmountOnExit={true}
+            >
+              <div
+                className="match-overlay-wrapper"
+                style={
+                  Object {
+                    "transition": "opacity 500ms ease-in-out",
+                  }
+                }
+              >
+                <div
+                  className="match-overlay"
+                >
+                  <div
+                    className="match-overlay__list"
+                  >
+                    <div>
+                      <div
+                        className="participant participant-card participant--invert"
+                      >
+                        <div
+                          className="participant-card__avatar"
+                        >
+                          <img
+                            alt="fozbaz-1"
+                            src="https://api.adorable.io/avatars/480/fozbaz-1"
+                          />
+                        </div>
+                        <div
+                          className="participant-card__name"
+                        >
+                          <strong>
+                            Fozbaz 1
+                          </strong>
+                        </div>
+                      </div>
+                    </div>
+                    <h3
+                      className="versus-text"
+                    >
+                      VS
+                    </h3>
+                    <div>
+                      <div
+                        className="participant participant-card participant--invert"
+                      >
+                        <div
+                          className="participant-card__avatar"
+                        >
+                          <img
+                            alt="fozbaz-2"
+                            src="https://api.adorable.io/avatars/480/fozbaz-2"
+                          />
+                        </div>
+                        <div
+                          className="participant-card__name"
+                        >
+                          <strong>
+                            Fozbaz 2
+                          </strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    classNames={
+                      Object {
+                        "enter": "",
+                        "enterActive": "match-overlay__interim--entering",
+                        "enterDone": "match-overlay__interim--entered",
+                        "exit": "",
+                        "exitActive": "match-overlay__interim--exiting",
+                        "exitDone": "match-overlay__interim--exited",
+                      }
+                    }
+                    in={false}
+                    mountOnEnter={true}
+                    onEntered={[Function]}
+                    onExited={[Function]}
+                    timeout={500}
+                    unmountOnExit={true}
+                  >
+                    <div
+                      className="match-overlay__interim"
+                      style={
+                        Object {
+                          "transition": "opacity 500ms ease-in-out",
+                        }
+                      }
+                    >
+                      <h3>
+                        Selecting Winner
+                      </h3>
+                      <div
+                        className="css-yd6m5-style"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    classNames={
+                      Object {
+                        "enter": "",
+                        "enterActive": "match-overlay__winner--entering",
+                        "enterDone": "match-overlay__winner--entered",
+                        "exit": "",
+                        "exitActive": "match-overlay__winner--exiting",
+                        "exitDone": "match-overlay__winner--exited",
+                      }
+                    }
+                    in={false}
+                    mountOnEnter={true}
+                    onEntered={[Function]}
+                    timeout={500}
+                    unmountOnExit={true}
+                  >
+                    <div
+                      className="match-overlay__winner"
+                      style={
+                        Object {
+                          "transition": "opacity 500ms ease-in-out",
+                        }
+                      }
+                    >
+                      <div
+                        className="participant participant-entry"
+                      >
+                        <div
+                          className="participant-entry__avatar"
+                        >
+                          <img
+                            alt="fozbaz-1"
+                            src="https://api.adorable.io/avatars/480/fozbaz-1"
+                          />
+                        </div>
+                        <div
+                          className="participant-entry__name"
+                        >
+                          <strong>
+                            Fozbaz 1
+                          </strong>
+                        </div>
+                      </div>
+                      <h3>
+                        Won The Match!
+                      </h3>
+                      <h5>
+                        <strong>
+                          <em>
+                            foobar message
+                          </em>
+                        </strong>
+                      </h5>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

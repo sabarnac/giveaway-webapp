@@ -1,28 +1,23 @@
 import React, { Component } from "react";
-import {
-  Switch,
-  Route,
-  RouteComponentProps,
-  Redirect,
-  withRouter,
-} from "react-router";
+import { Switch, Route, RouteComponentProps, withRouter } from "react-router";
 import { observer } from "mobx-react";
 import Tournament from "./store/Tournament";
 import Round from "./store/round/Round";
 import TournamentView from "./tournament/TournamentView";
+import { getMatchRedirect } from "./util";
 
 /**
- * Properties of the Application React component.
+ * Properties of the application router React component.
  */
-interface AppProps {
+interface AppRouterProps {
   /** The details of the tournament. */
   tournament: Tournament;
 }
 
 /**
- * Route related properties of the Application React component.
+ * Route related properties of the application redirect React component.
  */
-interface AppRouteProps {
+interface AppRedirectProps {
   /** The ID of the current round. */
   roundId?: string;
   /** The ID of the current match. */
@@ -36,25 +31,25 @@ interface AppRouteProps {
 /**
  * React component that returns a redirect depending upon what route properties are present.
  */
-const AppRedirect = (props: AppRouteProps): JSX.Element =>
-  props.roundId ? (
-    <Redirect to={`/round/${props.roundId}/match/${props.firstMatchId}`} />
-  ) : (
-    <Redirect to={`/round/${props.firstRoundId}/match/${props.firstMatchId}`} />
-  );
+const AppRedirect = (props: AppRedirectProps): JSX.Element =>
+  props.roundId
+    ? getMatchRedirect(props.roundId, props.firstMatchId)
+    : getMatchRedirect(props.firstRoundId, props.firstMatchId);
 
 /**
- * React component for the application.
+ * React component for the application router.
  */
 @observer
-class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
+class AppRouter extends Component<
+  AppRouterProps & RouteComponentProps<AppRedirectProps>
+> {
   /**
    * Returns the route params.
-   * @return {AppRouteProps} The route params.
+   * @return {AppRedirectProps} The route params.
    */
   private _getParams = (
-    routeProps: RouteComponentProps<AppRouteProps>,
-  ): AppRouteProps => routeProps.match.params;
+    routeProps: RouteComponentProps<AppRedirectProps>,
+  ): AppRedirectProps => routeProps.match.params;
 
   /**
    * Returns the route for the application.
@@ -64,7 +59,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
     <Route
       exact
       path="/round/:roundId/match/:matchId"
-      render={this._getApplication}
+      render={this._getTournament}
     />
   );
 
@@ -72,10 +67,11 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
    * Returns the main tournament.
    * @return {JSX.Element} The main tournament.
    */
-  private _getApplication = (
-    props: RouteComponentProps<AppRouteProps>,
+  private _getTournament = (
+    props: RouteComponentProps<AppRedirectProps>,
   ): JSX.Element => (
     <TournamentView
+      key={this._getParams(props).roundId as string}
       tournament={this.props.tournament}
       roundId={this._getParams(props).roundId as string}
       matchId={this._getParams(props).matchId as string}
@@ -95,7 +91,7 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
    * @return {JSX.Element} The application redirect.
    */
   private _getPartialAppRedirect = (
-    props: RouteComponentProps<AppRouteProps>,
+    props: RouteComponentProps<AppRedirectProps>,
   ): JSX.Element =>
     this._getCurrentRoundDetails(this._getParams(props).roundId as string) ? (
       <AppRedirect
@@ -175,4 +171,4 @@ class App extends Component<AppProps & RouteComponentProps<AppRouteProps>> {
   );
 }
 
-export default withRouter(App);
+export default withRouter(AppRouter);

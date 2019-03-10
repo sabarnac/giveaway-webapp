@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchWinnerView Component. Current Match. Matches snapshot. 1`] = `
+<div
+  classNames={
+    Object {
+      "enter": "",
+      "enterActive": "foobar__winner--entering",
+      "enterDone": "foobar__winner--entered",
+      "exit": "",
+      "exitActive": "foobar__winner--exiting",
+      "exitDone": "foobar__winner--exited",
+    }
+  }
+  in={false}
+  mountOnEnter={true}
+  timeout={200}
+  unmountOnExit={true}
+>
+  <div
+    className="foobar__winner"
+    style={
+      Object {
+        "transition": "opacity 200ms ease-in-out",
+      }
+    }
+  >
+    <div
+      className="participant participant-entry"
+    >
+      <div
+        className="participant-entry__avatar"
+      >
+        <img
+          alt="fozbaz-1"
+          src="https://api.adorable.io/avatars/480/fozbaz-1"
+        />
+      </div>
+      <div
+        className="participant-entry__name"
+      >
+        <strong>
+          Fozbaz 1
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`MatchWinnerView Component. Not Current Match. Matches snapshot. 1`] = `
+<div
+  classNames={
+    Object {
+      "enter": "",
+      "enterActive": "foobar__winner--entering",
+      "enterDone": "foobar__winner--entered",
+      "exit": "",
+      "exitActive": "foobar__winner--exiting",
+      "exitDone": "foobar__winner--exited",
+    }
+  }
+  in={false}
+  mountOnEnter={true}
+  timeout={200}
+  unmountOnExit={true}
+>
+  <div
+    className="foobar__winner"
+    style={
+      Object {
+        "transition": "opacity 200ms ease-in-out",
+      }
+    }
+  >
+    <div
+      className="participant participant-entry"
+    >
+      <div
+        className="participant-entry__avatar"
+      >
+        <img
+          alt="fozbaz-1"
+          src="https://api.adorable.io/avatars/480/fozbaz-1"
+        />
+      </div>
+      <div
+        className="participant-entry__name"
+      >
+        <strong>
+          Fozbaz 1
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>
+`;

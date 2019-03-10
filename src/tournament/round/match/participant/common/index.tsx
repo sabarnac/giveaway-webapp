@@ -6,7 +6,7 @@ import ParticipantAvatarView from "./_partial/ParticipantAvatarView";
 import ParticipantNameView from "./_partial/ParticipantNameView";
 
 /**
- * Properties of the participant card React component.
+ * Properties of the participant view React component.
  */
 interface ParticipantViewProps {
   /** The participant details. */
@@ -20,14 +20,18 @@ interface ParticipantViewProps {
  */
 export default (className: string) =>
   observer(
-    (props: ParticipantViewProps): JSX.Element => (
-      <div
-        className={classNames("participant", className, {
-          "participant--invert": props.invert,
-        })}
-      >
-        <ParticipantAvatarView className={className} {...props} />
-        <ParticipantNameView className={className} {...props} />
-      </div>
-    ),
+    (props: ParticipantViewProps): JSX.Element => {
+      const rootClassName: string = "participant";
+
+      return (
+        <div
+          className={classNames(rootClassName, className, {
+            [`${rootClassName}--invert`]: props.invert,
+          })}
+        >
+          <ParticipantAvatarView className={className} {...props} />
+          <ParticipantNameView className={className} {...props} />
+        </div>
+      );
+    },
   );

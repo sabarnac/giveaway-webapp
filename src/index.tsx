@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import Tournament from "./store/Tournament";
 import Config from "./store/config/Config";
 import { HashRouter } from "react-router-dom";
-import App from "./App";
+import AppRouter from "./AppRouter";
 import { Provider } from "mobx-react";
 import "skeleton-css/css/skeleton.css";
 
@@ -39,7 +39,7 @@ document.title = `${Config.getInstance().name} Tournament`;
 ReactDOM.render(
   <HashRouter>
     <Provider config={Config.getInstance()}>
-      <App tournament={store} />
+      <AppRouter tournament={store} />
     </Provider>
   </HashRouter>,
   document.getElementById("root"),

@@ -10,5 +10,15 @@
     "#loser lost against #winner who won.",
     "#winner won against #loser who lost."
   ],
-  "users": ["FOO", "BAR", "FAZ", "BAZ", "FOX", "BAX", "BOZ", "FAM", "FAA"]
+  "users": [
+    { "name": "FOO", "weight": 2 },
+    { "name": "BAR", "weight": 4 },
+    { "name": "FAZ", "weight": 6 },
+    { "name": "BAZ", "weight": 4 },
+    { "name": "FOX", "weight": 1 },
+    { "name": "BAX", "weight": 2 },
+    { "name": "BOZ", "weight": 5 },
+    { "name": "FAM", "weight": 3 },
+    { "name": "FAA", "weight": 2 }
+  ]
 }

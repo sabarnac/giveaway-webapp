@@ -9,6 +9,8 @@ import WinnerInfo from "./WinnerInfo";
  * Properties of the winner overlay main view React component.
  */
 interface WinnerOverlayViewProps {
+  /** CSS class */
+  className: string;
   /** The tournament winner. */
   winner: Participant;
 }
@@ -18,8 +20,8 @@ interface WinnerOverlayViewProps {
  */
 export default observer(
   (props: WinnerOverlayViewProps): JSX.Element => (
-    <div className={classNames("winner-overlay")}>
-      <WinnerInfo winner={props.winner} />
+    <div className={classNames(props.className)}>
+      <WinnerInfo {...props} />
     </div>
   ),
 );

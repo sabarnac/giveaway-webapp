@@ -1,172 +1,83 @@
-import React, { Component, Fragment } from "react";
-import { observer, inject } from "mobx-react";
+import React, { useEffect, Fragment } from "react";
 import "./RoundView.scss";
-import classNames from "classnames";
 import Round from "../../store/round/Round";
 import Match from "../../store/round/match/Match";
-import MatchView from "./match/MatchView";
-import { Redirect } from "react-router";
+import {
+  AnimationStateHook,
+  useAnimationState,
+  runOnPredicate,
+  runOnDelay,
+  getNormalizedSpeed,
+  getMatchRedirect,
+} from "../../util/index";
+import RoundDetails from "./_partial/RoundDetails";
 import { CSSTransition } from "react-transition-group";
-import { isInRange } from "../../util/index";
-import Config from "../../store/config/Config";
-const inflect = require("i")();
 
 /**
  * Properties of the round view React component.
  */
 interface RoundViewProps {
-  /** @ignore The application config. */
-  config?: Config;
+  /** Whether to show the round or not. */
+  show: boolean;
   /** The ID of the current match. */
   matchId: string;
   /** The details of the current round. */
-  round: Round;
+  round: Round | undefined;
   /** Action to call when the view has finished showing the round. */
   onRoundComplete: () => void;
 }
 
 /**
- * State of the round view React component.
+ * Returns a redirect to the given round and match if required.
+ * @param {boolean} required Whether the redirect is required or not.
+ * @param {Round} round The details of the round.
+ * @param {number} matchIndex The index of the match to redirect to.
+ * @return {JSX.Element | null} The redirect if it is required, or null if it is not.
  */
-interface RoundViewState {
-  /** The current state of the round component (for animations). */
-  currentState: number;
-}
+export const getRoundRedirectIfRequired = (
+  required: boolean = false,
+  round: Round,
+  matchIndex: number,
+): JSX.Element | null =>
+  required ? getMatchRedirect(round.id, round.matches[matchIndex].id) : null;
 
 /**
  * React component for the round view.
  */
-@inject("config")
-@observer
-export default class RoundView extends Component<
-  RoundViewProps,
-  RoundViewState
-> {
-  /** Whether the component is mounted or not. */
-  private _isMounted: boolean = false;
+export default (props: RoundViewProps): JSX.Element | null => {
+  if (props.round === undefined) {
+    return null;
+  }
 
-  /**
-   * Moves the component to the next animation state.
-   */
-  private _goToNextState = (): void =>
-    this._isMounted
-      ? this.setState({ currentState: this.state.currentState + 1 })
-      : undefined;
+  const currentMatchIndex: number = props.round.matches.findIndex(
+    (match: Match): boolean => match.id === props.matchId,
+  );
+  const className: string = "round";
 
-  /**
-   * Calls the action for round completion, after a delay of 500 (ignoring speed multiplier).
-   */
-  private _onRoundCompleteWithDelay = (): unknown =>
-    setTimeout(this.props.onRoundComplete, 500 / this.props.config!.speed);
+  const [currentState, updateState]: AnimationStateHook = useAnimationState(
+    currentMatchIndex,
+  );
+  const shouldNextRedirect: boolean =
+    currentState > 0 &&
+    currentMatchIndex !== currentState &&
+    currentMatchIndex !== -1 &&
+    currentState < props.round.matches.length;
 
-  /**
-   * Returns the match list of the current round.
-   * @return {JSX.Element} The matches list view.
-   */
-  private _getMatchList = (): JSX.Element => (
-    <div className={classNames("round__list")}>{this._getMatches()}</div>
+  useEffect(
+    runOnPredicate(currentState === props.round.matches.length, () => {
+      const delayId: number = runOnDelay(
+        props.onRoundComplete,
+        getNormalizedSpeed(500),
+      );
+      return () => clearTimeout(delayId);
+    }),
+    [currentState],
   );
 
-  /**
-   * Returns whether the given match is the current match.
-   * @param {Match} match The match to check.
-   * @return {boolean} Whether the given match is the current match.
-   */
-  private _isCurrentMatch = (match: Match): boolean =>
-    match.id === this.props.matchId;
-
-  /**
-   * Returns the index of current match in the tournament.
-   * @return {Match} The index of the current match.
-   */
-  private _getCurrentMatchIndex = (): number =>
-    this.props.round.matches.findIndex(this._isCurrentMatch);
-
-  /**
-   * Returns whether the given match is not a future match.
-   * @param {Match} match The match to check.
-   * @return {boolean} Whether the given match is not a future match or not.
-   */
-  private _isNotFutureMatch = (_: Match, index: number): boolean =>
-    index <= this._getCurrentMatchIndex();
-
-  /**
-   * Returns the view for the given match.
-   * @param {Match} match The match details.
-   * @return {JSX.Element} The match view.
-   */
-  private _getMatchView = (match: Match): JSX.Element => (
-    <MatchView
-      key={match.id}
-      match={match}
-      isCurrentMatch={this._isCurrentMatch(match)}
-      onMatchComplete={this._goToNextState}
-    />
-  );
-
-  /**
-   * Returns the list of views of all matches of the current round.
-   * @return {JSX.Element[]} The list of match views.
-   */
-  private _getMatches = (): JSX.Element[] =>
-    this.props.round.matches
-      .filter(this._isNotFutureMatch)
-      .map(this._getMatchView);
-
-  /**
-   * Returns the redirect for the first match if required.
-   * @return {JSX.Element} The redirect, or null if it is not required.
-   */
-  private _getFirstMatchRedirect = (): JSX.Element | null =>
-    this._getCurrentMatchIndex() === -1 ? (
-      <Redirect
-        to={`/round/${this.props.round.id}/match/${
-          this.props.round.firstMatch.id
-        }`}
-      />
-    ) : null;
-
-  /**
-   * Returns whether the next match redirect should be added to the view.
-   * @return {boolean} Whether the redirect should be shown.
-   */
-  private _shouldAddNextMatchRedirect = (): boolean =>
-    isInRange(
-      this.state.currentState,
-      0,
-      (this.props.round.matches.length - 1) * 2 + 1,
-    ) &&
-    this.state.currentState % 2 === 0 &&
-    this.props.round.matches[this.state.currentState / 2].id !==
-      this.props.matchId;
-
-  /**
-   * Returns the redirect for the next match if required.
-   * @return {JSX.Element} The redirect, or null if it is not required.
-   */
-  private _getNextMatchRedirect = (): JSX.Element | null =>
-    this._shouldAddNextMatchRedirect() ? (
-      <Redirect
-        to={`/round/${this.props.round.id}/match/${
-          this.props.round.matches[this.state.currentState / 2].id
-        }`}
-      />
-    ) : null;
-
-  /**
-   * Returns the details of the current round, wrapped in an animation transition component.
-   * @return {JSX.Element} The current round view.
-   */
-  private _getRoundDetails = (): JSX.Element => (
+  return (
     <CSSTransition
-      in={
-        isInRange(
-          this.state.currentState,
-          1,
-          this.props.round.matches.length * 2 - 1,
-        ) && this._getCurrentMatchIndex() !== -1
-      }
-      timeout={500 / this.props.config!.speed}
+      in={props.show}
+      timeout={500}
       classNames={{
         enter: "",
         enterActive: "round--entering",
@@ -177,67 +88,22 @@ export default class RoundView extends Component<
       }}
       mountOnEnter={true}
       unmountOnExit={true}
-      onExited={this._onRoundCompleteWithDelay}
     >
-      <div
-        className={classNames("round")}
-        style={{
-          transition: `opacity ${500 / this.props.config!.speed}ms ease-in-out`,
-        }}
-      >
-        <h2>{inflect.titleize(this.props.round.id)}</h2>
-        {this._getMatchList()}
-      </div>
+      <Fragment>
+        <RoundDetails
+          className={className}
+          round={props.round}
+          show={currentState !== props.round.matches.length}
+          matchId={props.matchId}
+          onCurrentComplete={updateState}
+        />
+        {getRoundRedirectIfRequired(currentMatchIndex === -1, props.round, 0)}
+        {getRoundRedirectIfRequired(
+          shouldNextRedirect,
+          props.round,
+          Math.max(currentMatchIndex, currentState),
+        )}
+      </Fragment>
     </CSSTransition>
   );
-
-  /**
-   * Lifecycle method that runs before component mount.
-   */
-  public componentWillMount = (): void => {
-    this.setState({
-      currentState:
-        this._getCurrentMatchIndex() === -1
-          ? 0
-          : this._getCurrentMatchIndex() * 2,
-    });
-  };
-
-  /**
-   * Lifecycle method that runs after component mount.
-   */
-  public componentDidMount = (): void => {
-    this._isMounted = true;
-    this._goToNextState();
-  };
-
-  /**
-   * Lifecycle method that runs after component update.
-   */
-  public componentDidUpdate = (prevProps: RoundViewProps): void => {
-    if (this.props.matchId !== prevProps.matchId) {
-      this.setState({ currentState: this._getCurrentMatchIndex() * 2 + 1 });
-    }
-  };
-
-  /**
-   * Lifecycle method that runs before component unmount.
-   */
-  public componentWillUnmount = (): void => {
-    this._isMounted = false;
-  };
-
-  /**
-   * Renders the component.
-   * @return {JSX.Element} The rendered component.
-   */
-  public render = (): JSX.Element => (
-    <Fragment
-      key={`round-${this.props.round.id}-match-${this._getCurrentMatchIndex()}`}
-    >
-      {this._getRoundDetails()}
-      {this._getFirstMatchRedirect()}
-      {this._getNextMatchRedirect()}
-    </Fragment>
-  );
-}
+};

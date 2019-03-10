@@ -1,0 +1,22 @@
+.loser-overlay__loser {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  opacity: 0.000001;
+  width: 100%;
+  &--entering,
+  &--entered {
+    opacity: 0.000001;
+  }
+  &--entering,
+  &--entered {
+    opacity: 0.999999;
+  }
+  & > .participant-card {
+    margin-bottom: 3rem;
+    width: 100%;
+  }
+}

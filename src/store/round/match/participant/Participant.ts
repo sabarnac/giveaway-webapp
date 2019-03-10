@@ -16,6 +16,8 @@ export default class Participant {
   @observable private _name: string;
   /** The avatar of the participant. */
   @observable private _avatar: Avatar;
+  /** The weight of the participant. */
+  @observable private _weight: number;
 
   /**
    * Gets the avatar of the participant if present, or creates a random one,
@@ -29,9 +31,10 @@ export default class Participant {
       : new Avatar(createAvatarImage(name), name);
   };
 
-  public constructor(name: string, avatar?: AvatarJson) {
+  public constructor(name: string, avatar?: AvatarJson, weight: number = 1) {
     this._name = name;
     this._avatar = this._getOrCreateAvatar(name, avatar);
+    this._weight = weight;
   }
 
   /**
@@ -56,6 +59,14 @@ export default class Participant {
    */
   @computed public get avatar(): Avatar {
     return this._avatar;
+  }
+
+  /**
+   * Gets the participant weight.
+   * @return {number} The participant weight.
+   */
+  @computed public get weight(): number {
+    return this._weight;
   }
 
   /**

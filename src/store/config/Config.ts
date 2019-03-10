@@ -3,7 +3,6 @@ import ConfigJson from "./config.json";
 import { observable, computed, action } from "mobx";
 import RandomGenerator from "./RandomGenerator";
 import AnimationSpeed from "./AnimationSpeed";
-import Avatar from "../round/match/participant/Avatar";
 
 /**
  * Interface for JSON object representing avatar details.
@@ -23,6 +22,8 @@ interface ParticipantJson {
   name: string;
   /** The avatar of the participant (if present). */
   avatar?: AvatarJson;
+  /** The weight of the participant (if present). */
+  weight?: number;
 }
 
 /**
@@ -45,45 +46,85 @@ export default class Config {
   /** The singleton instance of the class, or null if not yet created. */
   private static _instance: Config | null = null;
 
+  /**
+   * Returns the name of the tournament.
+   * @return {string} The tournament name.
+   */
   private _getName = (): string => ConfigJson.name;
 
+  /**
+   * Returns the match conclusion messages that can be used for the tournament.
+   * @return {string[]} The tournament match conclusion messages.
+   */
   private _getMessages = (): string[] => ConfigJson.messages;
 
+  /**
+   * Returns a created participant for the given JSON details.
+   * @param {string | ParticipantJson} user The participants details.
+   * @return {Participant} The created participant.
+   */
   private _createParticipant = (user: string | ParticipantJson): Participant =>
     typeof user === "string"
       ? new Participant(user)
       : new Participant(
           (<ParticipantJson>user).name,
-          this._createAvatar((<ParticipantJson>user).avatar),
+          (<ParticipantJson>user).avatar,
+          (<ParticipantJson>user).weight,
         );
 
-  private _createAvatar = (avatar?: AvatarJson): Avatar | undefined =>
-    avatar ? new Avatar(avatar.url, avatar.altText) : undefined;
-
+  /**
+   * Returns a created list of participants using the given participant details.
+   * @return {Participant[]} The created participants list.
+   */
   private _getParticipants = (): Participant[] =>
     ConfigJson.users.map(this._createParticipant);
 
+  /**
+   * Returns the max. number of participants that are to be present per match in the tournament.
+   * @return {number} The max. number of participants per match.
+   */
   private _getParticipantsPerMatch = (): number =>
     ConfigJson.participantsPerMatch;
 
+  /**
+   * Returns the animation speed multiplier of the application.
+   * @return {number} The animation speed multiplier.
+   */
   private _getSpeed = (): number => AnimationSpeed.get("ONE") as number;
 
-  private _shouldAppend = (index: number, participantSize: number): boolean =>
+  /**
+   * Returns whether a string should be prepended to a participants' name.
+   * @param {number} index The index of the participant.
+   * @param {number} participantSize The total number of participants.
+   * @return {boolean} Whether the string should be prepended.
+   */
+  private _shouldPrepend = (index: number, participantSize: number): boolean =>
     index === participantSize - 1 && participantSize > 1;
 
-  private _appendToLastParticipant = (
+  /**
+   * Returns a function that can returns the participant name prepended with a string if it's the last participant, or just the name.
+   * @param {number} participantSize The total number of participants.
+   * @param {string} stringToPrepend The string to prepend.
+   * @return {(name: string, index: number) => string} The function that will return the participants' name
+   */
+  private _prependToLastParticipant = (
     participantSize: number,
-    stringToAppend: string,
+    stringToPrepend: string,
   ): ((name: string, index: number) => string) => (
     name: string,
     index: number,
   ): string =>
-    this._shouldAppend(index, participantSize)
-      ? `${stringToAppend} ${name}`
+    this._shouldPrepend(index, participantSize)
+      ? `${stringToPrepend} ${name}`
       : name;
 
+  /**
+   * Returns a formatted losers list.
+   * @param {string[]} names The list of loser names.
+   * @return {string} The formatted string.
+   */
   private _formatLosers = (names: string[]): string =>
-    names.map(this._appendToLastParticipant(names.length, "and")).join(", ");
+    names.map(this._prependToLastParticipant(names.length, "and")).join(", ");
 
   private constructor() {
     this._name = this._getName();

@@ -1,18 +1,16 @@
 import React from "react";
 import MatchOverlay from "./MatchOverlay";
 import { create, ReactTestRenderer } from "react-test-renderer";
-import { createDummyConfig, createDummyMatch } from "../../../../util/test";
-import Config from "../../../../store/config/Config";
+import { createDummyMatch } from "../../../../util/test";
 
 describe("MatchOverlay Component.", () => {
   it("Matches snapshot.", () => {
-    const config: Config = createDummyConfig();
     const component: ReactTestRenderer = create(
       <MatchOverlay
-        config={config}
+        show={true}
         currentMatch={createDummyMatch()}
-        onMatchComplete={() => {}}
-      />
+        onOverlayComplete={() => {}}
+      />,
     );
 
     expect(component.toJSON()).toMatchSnapshot();

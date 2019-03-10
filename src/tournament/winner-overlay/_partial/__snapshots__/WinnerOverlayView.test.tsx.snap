@@ -2,10 +2,10 @@
 
 exports[`WinnerOverlayView Component. Matches snapshot. 1`] = `
 <div
-  className="winner-overlay"
+  className="foobar"
 >
   <div
-    className="winner-overlay__winner"
+    className="foobar__winner"
   >
     <div
       className="participant participant-card"
@@ -14,8 +14,8 @@ exports[`WinnerOverlayView Component. Matches snapshot. 1`] = `
         className="participant-card__avatar"
       >
         <img
-          alt="barfoo-0"
-          src="foobar-0"
+          alt="fozbaz-0"
+          src="https://api.adorable.io/avatars/480/fozbaz-0"
         />
       </div>
       <div

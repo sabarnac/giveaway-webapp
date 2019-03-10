@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchParticipantList Component. Roundes snapshot. 1`] = `
+<div
+  className="foobar__list"
+>
+  <div
+    className="participant participant-entry"
+  >
+    <div
+      className="participant-entry__avatar"
+    >
+      <img
+        alt="fozbaz-1"
+        src="https://api.adorable.io/avatars/480/fozbaz-1"
+      />
+    </div>
+    <div
+      className="participant-entry__name"
+    >
+      <strong>
+        Fozbaz 1
+      </strong>
+    </div>
+  </div>
+  <div
+    className="participant participant-entry"
+  >
+    <div
+      className="participant-entry__avatar"
+    >
+      <img
+        alt="fozbaz-2"
+        src="https://api.adorable.io/avatars/480/fozbaz-2"
+      />
+    </div>
+    <div
+      className="participant-entry__name"
+    >
+      <strong>
+        Fozbaz 2
+      </strong>
+    </div>
+  </div>
+</div>
+`;

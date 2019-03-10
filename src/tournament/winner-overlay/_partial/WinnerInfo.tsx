@@ -9,6 +9,8 @@ import ParticipantCard from "../../round/match/participant/card/ParticipantCard"
  * Properties of the winner info React component.
  */
 interface WinnerInfoProps {
+  /** CSS class */
+  className: string;
   /** The tournament winner. */
   winner: Participant;
 }
@@ -18,7 +20,7 @@ interface WinnerInfoProps {
  */
 export default observer(
   (props: WinnerInfoProps): JSX.Element => (
-    <div className={classNames("winner-overlay__winner")}>
+    <div className={classNames(`${props.className}__winner`)}>
       <ParticipantCard participant={props.winner} />
       <h3>Won The Giveaway!</h3>
     </div>

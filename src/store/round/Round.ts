@@ -78,8 +78,8 @@ export default class Round {
   private _getMatchLosers = (match: Match): Participant[] => match.losers;
 
   /**
-   * Get the match ID.
-   * @return {string} The unique ID of the match.
+   * Get the round ID.
+   * @return {string} The unique ID of the round.
    */
   @computed public get id(): string {
     return this._id;
@@ -114,7 +114,7 @@ export default class Round {
    * @return {Participant[]} The list of participants.
    */
   @computed public get participants(): Participant[] {
-    return this._matches.map(this._getMatchParticipants).flat();
+    return this._matches.flatMap(this._getMatchParticipants);
   }
 
   /**
@@ -130,6 +130,6 @@ export default class Round {
    * @return {Participant[]} The list of losers.
    */
   @computed public get losers(): Participant[] {
-    return this._matches.map(this._getMatchLosers).flat();
+    return this._matches.flatMap(this._getMatchLosers);
   }
 }
