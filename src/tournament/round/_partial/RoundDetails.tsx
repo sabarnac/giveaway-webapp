@@ -26,7 +26,7 @@ interface RoundDetailsProps {
   round: Round;
   /** Whether to show the round details or not. */
   show: boolean;
-  /** Action to call when the view has finished showing the round. */
+  /** Action to call when the current match is completed. */
   onCurrentComplete: () => void;
 }
 
@@ -42,8 +42,6 @@ export default (props: RoundDetailsProps): JSX.Element => {
   );
 
   useEffect(runOnPredicate(currentState === 0, updateState));
-
-  console.log(currentMatchIndex, currentState);
 
   return (
     <Observer>

@@ -69,8 +69,6 @@ export default (props: RoundViewProps): JSX.Element => {
     [currentState],
   );
 
-  console.log(currentMatchIndex, currentState);
-
   return (
     <CSSTransition
       in={props.show}

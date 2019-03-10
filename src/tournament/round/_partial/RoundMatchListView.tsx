@@ -21,7 +21,7 @@ interface RoundMatchListViewProps {
   matchId: string;
   /** The details of the current round. */
   round: Round;
-  /** Action to call when the list display is completed. */
+  /** Action to call when the current match is completed. */
   onCurrentMatchComplete: () => void;
 }
 
@@ -37,8 +37,6 @@ export default (props: RoundMatchListViewProps): JSX.Element => {
   );
 
   useEffect(runOnPredicate(currentState === 0, updateState));
-
-  console.log(currentMatchIndex, currentState);
 
   return (
     <Observer>
