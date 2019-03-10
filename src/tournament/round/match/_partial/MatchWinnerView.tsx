@@ -15,6 +15,8 @@ import {
  * Properties of the match view React component.
  */
 interface MatchWinnerViewProps {
+  /** CSS class */
+  className: string;
   /** Whether it is the currently ongoing match. */
   isCurrentMatch: boolean;
   /** The details of the current match. */
@@ -35,17 +37,17 @@ export default (props: MatchWinnerViewProps): JSX.Element => {
       timeout={getNormalizedSpeed(200)}
       classNames={{
         enter: "",
-        enterActive: "match__winner--entering",
-        enterDone: "match__winner--entered",
+        enterActive: `${props.className}__winner--entering`,
+        enterDone: `${props.className}__winner--entered`,
         exit: "",
-        exitActive: "match__winner--exiting",
-        exitDone: "match__winner--exited",
+        exitActive: `${props.className}__winner--exiting`,
+        exitDone: `${props.className}__winner--exited`,
       }}
       mountOnEnter={true}
       unmountOnExit={true}
     >
       <div
-        className={classNames("match__winner")}
+        className={classNames(`${props.className}__winner`)}
         style={{
           transition: `opacity ${getNormalizedSpeed(200)}ms ease-in-out`,
         }}

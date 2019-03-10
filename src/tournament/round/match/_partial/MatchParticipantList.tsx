@@ -10,6 +10,8 @@ import ParticipantEntry from "../participant/entry/ParticipantEntry";
  * Properties of the match view React component.
  */
 interface MatchParticipantListProps {
+  /** CSS class */
+  className: string;
   /** The details of the current match. */
   match: Match;
 }
@@ -19,7 +21,7 @@ interface MatchParticipantListProps {
  */
 export default observer(
   (props: MatchParticipantListProps): JSX.Element => (
-    <div className={classNames("match__list")}>
+    <div className={classNames(`${props.className}__list`)}>
       {props.match.participants.map(
         (participant: Participant): JSX.Element => (
           <ParticipantEntry key={participant.name} participant={participant} />

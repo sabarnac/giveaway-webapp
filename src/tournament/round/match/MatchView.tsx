@@ -31,6 +31,7 @@ interface MatchViewProps {
  * React component for the match view.
  */
 export default (props: MatchViewProps): JSX.Element => {
+  const className: string = "match";
   const isActualMatch: boolean = props.match.participants.length > 1;
 
   const [
@@ -68,11 +69,11 @@ export default (props: MatchViewProps): JSX.Element => {
           timeout={getNormalizedSpeed(500)}
           classNames={{
             enter: "",
-            enterActive: "match--entering",
-            enterDone: "match--entered",
+            enterActive: `${className}--entering`,
+            enterDone: `${className}--entered`,
             exit: "",
-            exitActive: "match--exiting",
-            exitDone: "match--exited",
+            exitActive: `${className}--exiting`,
+            exitDone: `${className}--exited`,
           }}
           mountOnEnter={true}
           unmountOnExit={true}
@@ -87,15 +88,16 @@ export default (props: MatchViewProps): JSX.Element => {
         >
           <div
             ref={matchRef}
-            className={classNames("match", {
-              "match--completed": !props.isCurrentMatch,
+            className={classNames(className, {
+              [`${className}--completed`]: !props.isCurrentMatch,
             })}
             style={{
               transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
             }}
           >
-            <MatchParticipantList match={props.match} />
+            <MatchParticipantList className={className} match={props.match} />
             <MatchFinalEntry
+              className={className}
               isCurrentMatch={props.isCurrentMatch && currentState < 3}
               isActualMatch={isActualMatch}
               match={props.match}
