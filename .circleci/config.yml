@@ -71,12 +71,12 @@ workflows:
   version: 2
   commit-workflow:
     jobs:
-      - build
+      - build:
           filters:
             branches:
               ignore:
                 - gh-pages
-      - test
+      - test:
           requires:
             - build
           filters:
@@ -92,12 +92,12 @@ workflows:
               ignore:
                 - gh-pages
     jobs:
-      - build
+      - build:
           filters:
             branches:
               ignore:
                 - gh-pages
-      - test
+      - test:
           requires:
             - build
           filters:
