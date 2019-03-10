@@ -12,7 +12,7 @@ import {
 } from "../../../util";
 
 /**
- * Properties of the round view React component.
+ * Properties of the round match list view React component.
  */
 interface RoundMatchListViewProps {
   /** CSS class */
@@ -21,12 +21,12 @@ interface RoundMatchListViewProps {
   matchId: string;
   /** The details of the current round. */
   round: Round;
-  /** Action to call when the view has finished showing the round. */
+  /** Action to call when the list display is completed. */
   onListComplete: () => void;
 }
 
 /**
- * React component for the round view.
+ * React component for the round match list view.
  */
 export default (props: RoundMatchListViewProps): JSX.Element => {
   const [currentState, updateState]: AnimationStateHook = useAnimationState();
