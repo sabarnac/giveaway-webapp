@@ -17,12 +17,18 @@ interface ParticipantAvatarViewProps {
  * Function that returns a React component for the participant avatar.
  */
 export default observer(
-  (props: ParticipantAvatarViewProps): JSX.Element => (
-    <div className={classNames(`${props.className}__avatar`)}>
-      <img
-        src={props.participant.avatar.url}
-        alt={props.participant.avatar.altText}
-      />
-    </div>
-  ),
+  (props: ParticipantAvatarViewProps): JSX.Element | null => {
+    if (props.participant.avatar === undefined) {
+      return null;
+    }
+
+    return (
+      <div className={classNames(`${props.className}__avatar`)}>
+        <img
+          src={props.participant.avatar.url}
+          alt={props.participant.avatar.altText}
+        />
+      </div>
+    );
+  },
 );
