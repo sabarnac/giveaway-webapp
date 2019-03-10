@@ -13,17 +13,20 @@ import {
 import { ClipLoader } from "react-spinners";
 
 /**
- * Properties of the match overlay React component.
+ * Properties of the match overlay interim React component.
  */
 interface MatchOverlayInterimProps {
   /** CSS class */
   className: string;
-  /** Whether to show the winner or not. */
+  /** Whether to show the interim text or not. */
   show: boolean;
-  /** Action to call when the view has finished showing the match. */
+  /** Action to call when the view has finished showing the interim text. */
   onInterimComplete: () => void;
 }
 
+/**
+ * React component for the match overlay interim.
+ */
 export default inject("config")(
   (props: MatchOverlayInterimProps): JSX.Element => {
     const [

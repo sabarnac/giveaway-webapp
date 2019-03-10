@@ -15,25 +15,25 @@ import { RouteComponentProps, withRouter } from "react-router";
 import Match from "../../../../../store/round/match/Match";
 
 /**
- * Properties of the match overlay React component.
+ * Properties of the match overlay winner React component.
  */
 interface MatchOverlayWinnerProps {
   /** CSS class */
   className: string;
-  /** Whether to show the winner or not. */
+  /** The current match details. */
   currentMatch: Match;
   /** Whether to show the winner or not. */
   show: boolean;
-  /** Action to call when the view has finished showing the match. */
+  /** Action to call when the view has finished showing the winner. */
   onWinnerComplete: () => void;
 }
 
 const STOP_QUERY_FLAG: string = "stop";
 
+/**
+ * React component for the match overlay winner.
+ */
 export default inject("config")(
-  /**
-   * React component for the match overlay.
-   */
   withRouter(
     (props: MatchOverlayWinnerProps & RouteComponentProps): JSX.Element => {
       const [

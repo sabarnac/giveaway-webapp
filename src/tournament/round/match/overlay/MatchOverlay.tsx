@@ -27,6 +27,9 @@ interface MatchOverlayProps {
   onOverlayComplete: () => void;
 }
 
+/**
+ * React component for the match overlay.
+ */
 export default inject("config")(
   (props: MatchOverlayProps): JSX.Element => {
     const [currentState, updateState]: AnimationStateHook = useAnimationState();

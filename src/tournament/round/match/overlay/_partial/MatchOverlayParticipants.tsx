@@ -7,20 +7,20 @@ import Participant from "../../../../../store/round/match/participant/Participan
 import ParticipantCard from "../../participant/card/ParticipantCard";
 
 /**
- * Properties of the match overlay React component.
+ * Properties of the match overlay participants React component.
  */
 interface MatchOverlayParticipantsProps {
   /** CSS class */
   className: string;
-  /** The match details. */
+  /** The current match details. */
   currentMatch: Match;
 }
 
+/**
+ * React component for the match overlay participants.
+ */
 export default inject("config")(
   observer(
-    /**
-     * React component for the match overlay.
-     */
     (props: MatchOverlayParticipantsProps): JSX.Element => (
       <div className={classNames(`${props.className}__list`)}>
         {props.currentMatch.participants
