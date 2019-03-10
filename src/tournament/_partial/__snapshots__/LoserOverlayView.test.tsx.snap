@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoserOverlayView Component. Matches snapshot. 1`] = `
+<div
+  classNames={
+    Object {
+      "enter": "",
+      "enterActive": "loser-overlay-wrapper--entering",
+      "enterDone": "loser-overlay-wrapper--entered",
+      "exit": "",
+      "exitActive": "loser-overlay-wrapper--exiting",
+      "exitDone": "loser-overlay-wrapper--exited",
+    }
+  }
+  in={false}
+  mountOnEnter={true}
+  onExited={[Function]}
+  timeout={500}
+  unmountOnExit={true}
+>
+  <div
+    className="loser-overlay-wrapper"
+    style={
+      Object {
+        "transition": "opacity 500ms ease-in-out",
+      }
+    }
+  >
+    <div
+      className="loser-overlay"
+    >
+      <h2>
+        Losers
+      </h2>
+      <div
+        classNames={
+          Object {
+            "enter": "",
+            "enterActive": "loser-overlay__loser--entering",
+            "enterDone": "loser-overlay__loser--entered",
+            "exit": "",
+            "exitActive": "loser-overlay__loser--exiting",
+            "exitDone": "loser-overlay__loser--exited",
+          }
+        }
+        in={false}
+        mountOnEnter={true}
+        onEntered={[Function]}
+        onExited={[Function]}
+        timeout={200}
+        unmountOnExit={true}
+      >
+        <div
+          className="loser-overlay__loser"
+          style={
+            Object {
+              "transition": "opacity 200ms ease-in-out",
+            }
+          }
+        >
+          <div
+            className="participant participant-card"
+          >
+            <div
+              className="participant-card__avatar"
+            >
+              <img
+                alt="barfoo-2"
+                src="foobar-2"
+              />
+            </div>
+            <div
+              className="participant-card__name"
+            >
+              <strong>
+                Fozbaz 2
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        classNames={
+          Object {
+            "enter": "",
+            "enterActive": "loser-overlay__loser--entering",
+            "enterDone": "loser-overlay__loser--entered",
+            "exit": "",
+            "exitActive": "loser-overlay__loser--exiting",
+            "exitDone": "loser-overlay__loser--exited",
+          }
+        }
+        in={false}
+        mountOnEnter={true}
+        onEntered={[Function]}
+        onExited={[Function]}
+        timeout={200}
+        unmountOnExit={true}
+      >
+        <div
+          className="loser-overlay__loser"
+          style={
+            Object {
+              "transition": "opacity 200ms ease-in-out",
+            }
+          }
+        >
+          <div
+            className="participant participant-card"
+          >
+            <div
+              className="participant-card__avatar"
+            >
+              <img
+                alt="barfoo-4"
+                src="foobar-4"
+              />
+            </div>
+            <div
+              className="participant-card__name"
+            >
+              <strong>
+                Fozbaz 4
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        classNames={
+          Object {
+            "enter": "",
+            "enterActive": "loser-overlay__loser--entering",
+            "enterDone": "loser-overlay__loser--entered",
+            "exit": "",
+            "exitActive": "loser-overlay__loser--exiting",
+            "exitDone": "loser-overlay__loser--exited",
+          }
+        }
+        in={false}
+        mountOnEnter={true}
+        onEntered={[Function]}
+        onExited={[Function]}
+        timeout={200}
+        unmountOnExit={true}
+      >
+        <div
+          className="loser-overlay__loser"
+          style={
+            Object {
+              "transition": "opacity 200ms ease-in-out",
+            }
+          }
+        >
+          <div
+            className="participant participant-card"
+          >
+            <div
+              className="participant-card__avatar"
+            >
+              <img
+                alt="barfoo-6"
+                src="foobar-6"
+              />
+            </div>
+            <div
+              className="participant-card__name"
+            >
+              <strong>
+                Fozbaz 6
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
