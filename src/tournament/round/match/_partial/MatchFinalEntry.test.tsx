@@ -5,9 +5,9 @@ import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyMatch } from "../../../../util/test";
 
 describe("MatchFinalEntry Component.", () => {
+  const match: Match = createDummyMatch();
   describe("Current And Actual Match.", () => {
     it("Matches snapshot.", () => {
-      const match: Match = createDummyMatch();
       const component: ReactTestRenderer = create(
         <MatchFinalEntry
           match={match}
@@ -22,7 +22,6 @@ describe("MatchFinalEntry Component.", () => {
   });
   describe("Not Current But Actual Match.", () => {
     it("Matches snapshot.", () => {
-      const match: Match = createDummyMatch();
       const component: ReactTestRenderer = create(
         <MatchFinalEntry
           match={match}
@@ -37,7 +36,6 @@ describe("MatchFinalEntry Component.", () => {
   });
   describe("Current But Not Actual Match.", () => {
     it("Matches snapshot.", () => {
-      const match: Match = createDummyMatch();
       const component: ReactTestRenderer = create(
         <MatchFinalEntry
           match={match}
@@ -52,7 +50,6 @@ describe("MatchFinalEntry Component.", () => {
   });
   describe("Not Current Nor Actual Match.", () => {
     it("Matches snapshot.", () => {
-      const match: Match = createDummyMatch();
       const component: ReactTestRenderer = create(
         <MatchFinalEntry
           match={match}
