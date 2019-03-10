@@ -7,7 +7,7 @@ import Participant from "../../../../store/round/match/participant/Participant";
 import ParticipantEntry from "../participant/entry/ParticipantEntry";
 
 /**
- * Properties of the match view React component.
+ * Properties of the match participant list React component.
  */
 interface MatchParticipantListProps {
   /** CSS class */
@@ -17,7 +17,7 @@ interface MatchParticipantListProps {
 }
 
 /**
- * React component for the match view.
+ * React component for the match participant list.
  */
 export default observer(
   (props: MatchParticipantListProps): JSX.Element => (

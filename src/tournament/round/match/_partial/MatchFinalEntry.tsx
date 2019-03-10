@@ -14,7 +14,7 @@ import Participant from "../../../../store/round/match/participant/Participant";
 import MatchWinnerView from "./MatchWinnerView";
 
 /**
- * Properties of the match view React component.
+ * Properties of the match final entry React component.
  */
 interface MatchFinalEntryProps {
   /** CSS class */
@@ -28,7 +28,7 @@ interface MatchFinalEntryProps {
 }
 
 /**
- * React component for the match view.
+ * React component for the match final entry.
  */
 export default (props: MatchFinalEntryProps): JSX.Element => {
   const [

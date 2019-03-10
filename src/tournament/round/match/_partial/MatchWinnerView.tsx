@@ -12,19 +12,19 @@ import {
 } from "../../../../util";
 
 /**
- * Properties of the match view React component.
+ * Properties of the match winner view React component.
  */
 interface MatchWinnerViewProps {
   /** CSS class */
   className: string;
   /** Whether it is the currently ongoing match. */
   isCurrentMatch: boolean;
-  /** The details of the current match. */
+  /** The details of the match winner. */
   winner: Participant;
 }
 
 /**
- * React component for the match view.
+ * React component for the match winner view.
  */
 export default (props: MatchWinnerViewProps): JSX.Element => {
   const [currentState, updateState]: AnimationStateHook = useAnimationState();
