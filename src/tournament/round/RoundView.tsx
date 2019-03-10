@@ -76,7 +76,7 @@ export default (props: RoundViewProps): JSX.Element => {
           round={props.round}
           show={currentState !== props.round.matches.length}
           matchId={props.matchId}
-          onRoundMatchComplete={updateState}
+          onRoundComplete={updateState}
         />
         {getRoundRedirectIfRequired(
           currentMatchIndex === -1,

@@ -15,9 +15,9 @@ import RoundMatchListView from "./RoundMatchListView";
 const inflect = require("i")();
 
 /**
- * Properties of the round view React component.
+ * Properties of the round details React component.
  */
-interface RoundViewProps {
+interface RoundDetailsProps {
   /** CSS class */
   className: string;
   /** The ID of the current match. */
@@ -27,20 +27,20 @@ interface RoundViewProps {
   /** Whether to show the round details or not. */
   show: boolean;
   /** Action to call when the view has finished showing the round. */
-  onRoundMatchComplete: () => void;
+  onRoundComplete: () => void;
 }
 
 /**
- * React component for the round view.
+ * React component for the round details.
  */
-export default (props: RoundViewProps): JSX.Element => {
+export default (props: RoundDetailsProps): JSX.Element => {
   const [currentState, updateState]: AnimationStateHook = useAnimationState();
   const currentMatchIndex: number = props.round.matches.findIndex(
     (match: Match): boolean => match.id === props.matchId,
   );
 
   useEffect(runOnPredicate(currentState === 0, updateState));
-  useEffect(runOnPredicate(currentState === 2, props.onRoundMatchComplete), [
+  useEffect(runOnPredicate(currentState === 2, props.onRoundComplete), [
     currentState,
   ]);
 
