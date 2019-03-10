@@ -48,7 +48,7 @@ workflows:
   commit-workflow:
     jobs:
       - build
-    schedule-workflow:
-      triggers:
-        - schedule:
-          cron: "0 0 * * 0"
+  schedule-workflow:
+    triggers:
+      - schedule:
+        cron: "0 0 * * 0"
