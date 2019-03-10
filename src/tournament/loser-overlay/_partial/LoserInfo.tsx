@@ -19,8 +19,8 @@ import {
 interface LoserInfoProps {
   /** CSS class */
   className: string;
-  /** The losers of a round. */
-  participant: Participant;
+  /** The loser details. */
+  loser: Participant;
   /** Whether to show the entry or not. */
   show: boolean;
   /** Action to call when the info has finished showing the list of losers. */
@@ -70,7 +70,7 @@ export default (props: LoserInfoProps): JSX.Element => {
               transition: `opacity ${getNormalizedSpeed(200)}ms ease-in-out`,
             }}
           >
-            <ParticipantCard participant={props.participant} />
+            <ParticipantCard participant={props.loser} />
           </div>
         </CSSTransition>
       )}
