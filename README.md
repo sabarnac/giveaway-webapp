@@ -1,4 +1,4 @@
-# The Giveaway Tournament App [![Build Status](https://travis-ci.org/sabarnac/giveaway-webapp.svg)](https://travis-ci.org/sabarnac/giveaway-webapp)
+# The Giveaway Tournament App [![CircleCI](https://circleci.com/gh/sabarnac/giveaway-webapp.svg?style=svg)](https://circleci.com/gh/sabarnac/giveaway-webapp)
 
 Ever wanted to have a giveaway but didn't want to just randomly select a winner? Then just compile this app with a seed, a list of random messages to display for each match, and a list of users, and then just compile and host the generated files on a web server for everyone to see! The fixed seed ensures everyone sees the same results, while the Mersenne Twister engine ensures the random distribution of results is uniform!
 
