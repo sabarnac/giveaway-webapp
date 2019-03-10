@@ -5,17 +5,17 @@ import classNames from "classnames";
 import Config from "../../../store/config/Config";
 
 /**
- * Properties of the animation speed controller view React component.
+ * Properties of the animation speed option React component.
  */
 interface SpeedOptionProps {
   /** @ignore The application config. */
   config?: Config;
-  /** The speed option value. */
+  /** The animation speed option value. */
   speed: number;
 }
 
 /**
- * React component for the animation speed controller.
+ * React component for the animation speed option.
  */
 export default inject("config")(
   observer(
