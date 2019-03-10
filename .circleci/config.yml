@@ -42,3 +42,13 @@ jobs:
 
       # run tests!
       - run: npm run test
+
+workflows:
+  version: 2
+  commit-workflow:
+    jobs:
+      - build
+    schedule-workflow:
+      triggers:
+        - schedule:
+          cron: "0 0 * * 0"
