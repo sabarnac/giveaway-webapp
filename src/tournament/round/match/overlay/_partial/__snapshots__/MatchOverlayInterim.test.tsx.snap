@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchOverlayInterim Component. Matches snapshot. 1`] = `
+<div
+  classNames={
+    Object {
+      "enter": "",
+      "enterActive": "foobar__interim--entering",
+      "enterDone": "foobar__interim--entered",
+      "exit": "",
+      "exitActive": "foobar__interim--exiting",
+      "exitDone": "foobar__interim--exited",
+    }
+  }
+  in={false}
+  mountOnEnter={true}
+  onEntered={[Function]}
+  onExited={[Function]}
+  timeout={500}
+  unmountOnExit={true}
+>
+  <div
+    className="foobar__interim"
+    style={
+      Object {
+        "transition": "opacity 500ms ease-in-out",
+      }
+    }
+  >
+    <h3>
+      Selecting Winner
+    </h3>
+    <div
+      className="css-yd6m5-style"
+    />
+  </div>
+</div>
+`;

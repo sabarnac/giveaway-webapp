@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchOverlayWinner Component. Matches snapshot. 1`] = `
+<div
+  classNames={
+    Object {
+      "enter": "",
+      "enterActive": "foobar__winner--entering",
+      "enterDone": "foobar__winner--entered",
+      "exit": "",
+      "exitActive": "foobar__winner--exiting",
+      "exitDone": "foobar__winner--exited",
+    }
+  }
+  in={false}
+  mountOnEnter={true}
+  onEntered={[Function]}
+  timeout={500}
+  unmountOnExit={true}
+>
+  <div
+    className="foobar__winner"
+    style={
+      Object {
+        "transition": "opacity 500ms ease-in-out",
+      }
+    }
+  >
+    <div
+      className="participant participant-entry"
+    >
+      <div
+        className="participant-entry__avatar"
+      >
+        <img
+          alt="barfoo-1"
+          src="foobar-1"
+        />
+      </div>
+      <div
+        className="participant-entry__name"
+      >
+        <strong>
+          Fozbaz 1
+        </strong>
+      </div>
+    </div>
+    <h3>
+      Won The Match!
+    </h3>
+    <h5>
+      <strong>
+        <em>
+          foobar message
+        </em>
+      </strong>
+    </h5>
+  </div>
+</div>
+`;

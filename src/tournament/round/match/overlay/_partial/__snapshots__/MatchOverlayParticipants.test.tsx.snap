@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchOverlayParticipants Component. Matches snapshot. 1`] = `
+<div
+  className="foobar__list"
+>
+  <div>
+    <div
+      className="participant participant-card participant--invert"
+    >
+      <div
+        className="participant-card__avatar"
+      >
+        <img
+          alt="barfoo-1"
+          src="foobar-1"
+        />
+      </div>
+      <div
+        className="participant-card__name"
+      >
+        <strong>
+          Fozbaz 1
+        </strong>
+      </div>
+    </div>
+  </div>
+  <h3
+    className="versus-text"
+  >
+    VS
+  </h3>
+  <div>
+    <div
+      className="participant participant-card participant--invert"
+    >
+      <div
+        className="participant-card__avatar"
+      >
+        <img
+          alt="barfoo-2"
+          src="foobar-2"
+        />
+      </div>
+      <div
+        className="participant-card__name"
+      >
+        <strong>
+          Fozbaz 2
+        </strong>
+      </div>
+    </div>
+  </div>
+</div>
+`;
