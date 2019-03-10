@@ -38,12 +38,12 @@ export default (props: LoserOverlayViewProps): JSX.Element => {
         <div className={classNames(props.className)}>
           <h2>Losers</h2>
           {props.losers.map(
-            (participant: Participant, index: number): JSX.Element => (
+            (loser: Participant, index: number): JSX.Element => (
               <LoserInfo
-                key={participant.name}
+                key={loser.name}
                 className={props.className}
                 show={currentState === index}
-                participant={participant}
+                loser={loser}
                 onInfoComplete={updateState}
               />
             ),
