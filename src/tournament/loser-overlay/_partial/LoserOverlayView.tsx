@@ -11,7 +11,7 @@ import {
 import LoserInfo from "./LoserInfo";
 
 /**
- * Properties of the loser overlay React component.
+ * Properties of the loser overlay view React component.
  */
 interface LoserOverlayViewProps {
   /** CSS class */
@@ -23,7 +23,7 @@ interface LoserOverlayViewProps {
 }
 
 /**
- * React component for the loser overlay.
+ * React component for the loser overlay view.
  */
 export default (props: LoserOverlayViewProps): JSX.Element => {
   const [currentState, updateState]: AnimationStateHook = useAnimationState();
