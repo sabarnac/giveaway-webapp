@@ -65,8 +65,8 @@ exports[`LoserOverlayView Component. Matches snapshot. 1`] = `
               className="participant-card__avatar"
             >
               <img
-                alt="barfoo-2"
-                src="foobar-2"
+                alt="fozbaz-2"
+                src="https://api.adorable.io/avatars/480/fozbaz-2"
               />
             </div>
             <div
@@ -112,8 +112,8 @@ exports[`LoserOverlayView Component. Matches snapshot. 1`] = `
               className="participant-card__avatar"
             >
               <img
-                alt="barfoo-4"
-                src="foobar-4"
+                alt="fozbaz-4"
+                src="https://api.adorable.io/avatars/480/fozbaz-4"
               />
             </div>
             <div
@@ -159,8 +159,8 @@ exports[`LoserOverlayView Component. Matches snapshot. 1`] = `
               className="participant-card__avatar"
             >
               <img
-                alt="barfoo-6"
-                src="foobar-6"
+                alt="fozbaz-6"
+                src="https://api.adorable.io/avatars/480/fozbaz-6"
               />
             </div>
             <div

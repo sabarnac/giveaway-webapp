@@ -5,10 +5,7 @@ import Round from "../../store/round/Round";
 import Tournament from "../../store/Tournament";
 
 export const createDummyParticipant = function(id: number = 1): Participant {
-  return new Participant(`fozbaz-${id}`, {
-    url: `foobar-${id}`,
-    altText: `barfoo-${id}`,
-  });
+  return new Participant(`fozbaz-${id}`);
 };
 
 export const createDummyConfig = (): Config => {
