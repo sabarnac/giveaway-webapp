@@ -101,16 +101,3 @@ export const runOnPredicate = (
 export const getMatchRedirect = (roundId?: string, matchId?: string) => (
   <Redirect to={`/round/${roundId}/match/${matchId}`} />
 );
-
-/**
- * Returns a redirect to the given round and match if required.
- * @param {boolean} required Whether the redirect is required or not.
- * @param {string} roundId The ID of the round to redirect to.
- * @param {string} matchId The ID of the match to redirect to.
- * @return {JSX.Element | null} The redirect if it is required, or null if it is not.
- */
-export const getRoundRedirectIfRequired = (
-  required: boolean = false,
-  roundId: string,
-  matchId: string,
-): JSX.Element | null => (required ? getMatchRedirect(roundId, matchId) : null);

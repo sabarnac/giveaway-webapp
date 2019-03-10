@@ -13,7 +13,7 @@ import {
 import { CSSTransition } from "react-transition-group";
 import MatchFinalEntry from "./_partial/MatchFinalEntry";
 import MatchParticipantList from "./_partial/MatchParticipantList";
-import MatchOverlayView from "./_partial/MatchOverlayView";
+import MatchOverlay from "./overlay/MatchOverlay";
 
 /**
  * Properties of the match view React component.
@@ -49,15 +49,15 @@ export default (props: MatchViewProps): JSX.Element => {
   };
 
   useEffect(runOnPredicate(currentState === 0, updateState));
-  if (isActualMatch && props.isCurrentMatch) {
-    useEffect(
-      runOnPredicate(currentState === 1, () =>
-        updateStateDelay(getNormalizedSpeed(200)),
-      ),
-    );
-  } else if (!isActualMatch) {
-    useEffect(runOnPredicate(currentState === 1, onMatchComplete));
-  }
+  useEffect(
+    runOnPredicate(
+      currentState === 1 && isActualMatch && props.isCurrentMatch,
+      () => updateStateDelay(getNormalizedSpeed(200)),
+    ),
+  );
+  useEffect(
+    runOnPredicate(currentState === 1 && !isActualMatch, onMatchComplete),
+  );
 
   const matchRef: MutableRefObject<HTMLDivElement> = useRef(null as any);
 
@@ -102,8 +102,8 @@ export default (props: MatchViewProps): JSX.Element => {
               isActualMatch={isActualMatch}
               match={props.match}
             />
-            <MatchOverlayView
-              match={props.match}
+            <MatchOverlay
+              currentMatch={props.match}
               show={currentState === 2}
               onOverlayComplete={onMatchComplete}
             />

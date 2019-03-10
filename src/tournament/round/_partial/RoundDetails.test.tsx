@@ -13,7 +13,7 @@ describe("RoundDetails Component.", () => {
         show={true}
         round={round}
         matchId={round.firstMatch.id}
-        onRoundComplete={() => {}}
+        onCurrentComplete={() => {}}
       />,
     );
 

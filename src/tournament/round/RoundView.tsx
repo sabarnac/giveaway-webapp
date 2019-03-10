@@ -8,7 +8,7 @@ import {
   runOnPredicate,
   runOnDelay,
   getNormalizedSpeed,
-  getRoundRedirectIfRequired,
+  getMatchRedirect,
 } from "../../util/index";
 import RoundDetails from "./_partial/RoundDetails";
 import { CSSTransition } from "react-transition-group";
@@ -26,6 +26,20 @@ interface RoundViewProps {
   /** Action to call when the view has finished showing the round. */
   onRoundComplete: () => void;
 }
+
+/**
+ * Returns a redirect to the given round and match if required.
+ * @param {boolean} required Whether the redirect is required or not.
+ * @param {Round} round The details of the round.
+ * @param {number} matchIndex The index of the match to redirect to.
+ * @return {JSX.Element | null} The redirect if it is required, or null if it is not.
+ */
+export const getRoundRedirectIfRequired = (
+  required: boolean = false,
+  round: Round,
+  matchIndex: number,
+): JSX.Element | null =>
+  required ? getMatchRedirect(round.id, round.matches[matchIndex].id) : null;
 
 /**
  * React component for the round view.
@@ -55,6 +69,8 @@ export default (props: RoundViewProps): JSX.Element => {
     [currentState],
   );
 
+  console.log(currentMatchIndex, currentState);
+
   return (
     <CSSTransition
       in={props.show}
@@ -76,17 +92,13 @@ export default (props: RoundViewProps): JSX.Element => {
           round={props.round}
           show={currentState !== props.round.matches.length}
           matchId={props.matchId}
-          onRoundComplete={updateState}
+          onCurrentComplete={updateState}
         />
-        {getRoundRedirectIfRequired(
-          currentMatchIndex === -1,
-          props.round.id,
-          props.round.firstMatch.id,
-        )}
+        {getRoundRedirectIfRequired(currentMatchIndex === -1, props.round, 0)}
         {getRoundRedirectIfRequired(
           shouldNextRedirect,
-          props.round.id,
-          props.round.matches[Math.max(currentMatchIndex, currentState)].id,
+          props.round,
+          Math.max(currentMatchIndex, currentState),
         )}
       </Fragment>
     </CSSTransition>

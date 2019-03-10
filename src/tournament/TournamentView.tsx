@@ -8,7 +8,7 @@ import {
   useAnimationState,
   ShowOverlayHook,
   runOnPredicate,
-  getRoundRedirectIfRequired,
+  getMatchRedirect,
 } from "../util";
 import RoundView from "./round/RoundView";
 import Round from "../store/round/Round";
@@ -31,6 +31,27 @@ interface TournamentViewProps {
   /** The details of the tournament. */
   tournament: Tournament;
 }
+
+/**
+ * Returns a redirect to the given round and match if required.
+ * @param {boolean} required Whether the redirect is required or not.
+ * @param {Tournament} tournament The details of the tournament.
+ * @param {number} roundIndex The index of the round to redirect to.
+ * @param {number} matchIndex The index of the match to redirect to.
+ * @return {JSX.Element | null} The redirect if it is required, or null if it is not.
+ */
+export const getRoundRedirectIfRequired = (
+  required: boolean = false,
+  tournament: Tournament,
+  roundIndex: number,
+  matchIndex: number,
+): JSX.Element | null =>
+  required
+    ? getMatchRedirect(
+        tournament.rounds[roundIndex].id,
+        tournament.rounds[roundIndex].matches[matchIndex].id,
+      )
+    : null;
 
 /**
  * React component for the tournament view.
@@ -69,7 +90,7 @@ export default inject("config")(
             <h1>{props.config!.name} Tournament</h1>
             <SpeedControl />
             <RoundView
-              key={`${props.roundId}-${props.matchId}`}
+              key={`${props.roundId}`}
               show={currentState === currentRoundIndex + 1}
               round={props.tournament.rounds[currentRoundIndex]}
               matchId={props.matchId}
@@ -89,15 +110,15 @@ export default inject("config")(
             />
             {getRoundRedirectIfRequired(
               currentRoundIndex === -1,
-              props.tournament.firstRound.id,
-              props.tournament.firstRound.firstMatch.id,
+              props.tournament,
+              0,
+              0,
             )}
             {getRoundRedirectIfRequired(
               shouldNextRedirect,
-              props.tournament.rounds[
-                Math.max(currentRoundIndex, currentState - 1)
-              ].id,
-              props.matchId,
+              props.tournament,
+              Math.max(currentRoundIndex, currentState - 1),
+              0,
             )}
             <AppDevTools />
           </div>

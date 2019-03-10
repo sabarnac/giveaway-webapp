@@ -12,7 +12,7 @@ describe("RoundMatchListView Component.", () => {
         className="foobar"
         round={round}
         matchId={round.firstMatch.id}
-        onListComplete={() => {}}
+        onCurrentMatchComplete={() => {}}
       />,
     );
 

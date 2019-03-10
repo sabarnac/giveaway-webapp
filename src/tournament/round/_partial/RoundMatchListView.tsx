@@ -22,22 +22,23 @@ interface RoundMatchListViewProps {
   /** The details of the current round. */
   round: Round;
   /** Action to call when the list display is completed. */
-  onListComplete: () => void;
+  onCurrentMatchComplete: () => void;
 }
 
 /**
  * React component for the round match list view.
  */
 export default (props: RoundMatchListViewProps): JSX.Element => {
-  const [currentState, updateState]: AnimationStateHook = useAnimationState();
   const currentMatchIndex: number = props.round.matches.findIndex(
     (match: Match): boolean => match.id === props.matchId,
   );
+  const [currentState, updateState]: AnimationStateHook = useAnimationState(
+    currentMatchIndex,
+  );
 
   useEffect(runOnPredicate(currentState === 0, updateState));
-  useEffect(runOnPredicate(currentState === 2, props.onListComplete), [
-    currentState,
-  ]);
+
+  console.log(currentMatchIndex, currentState);
 
   return (
     <Observer>
@@ -53,7 +54,7 @@ export default (props: RoundMatchListViewProps): JSX.Element => {
                   key={match.id}
                   match={match}
                   isCurrentMatch={match.id === props.matchId}
-                  onMatchComplete={updateState}
+                  onMatchComplete={props.onCurrentMatchComplete}
                 />
               ),
             )}

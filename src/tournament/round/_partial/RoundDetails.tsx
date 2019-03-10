@@ -27,22 +27,23 @@ interface RoundDetailsProps {
   /** Whether to show the round details or not. */
   show: boolean;
   /** Action to call when the view has finished showing the round. */
-  onRoundComplete: () => void;
+  onCurrentComplete: () => void;
 }
 
 /**
  * React component for the round details.
  */
 export default (props: RoundDetailsProps): JSX.Element => {
-  const [currentState, updateState]: AnimationStateHook = useAnimationState();
   const currentMatchIndex: number = props.round.matches.findIndex(
     (match: Match): boolean => match.id === props.matchId,
   );
+  const [currentState, updateState]: AnimationStateHook = useAnimationState(
+    currentMatchIndex,
+  );
 
   useEffect(runOnPredicate(currentState === 0, updateState));
-  useEffect(runOnPredicate(currentState === 2, props.onRoundComplete), [
-    currentState,
-  ]);
+
+  console.log(currentMatchIndex, currentState);
 
   return (
     <Observer>
@@ -72,7 +73,7 @@ export default (props: RoundDetailsProps): JSX.Element => {
               className={props.className}
               round={props.round}
               matchId={props.matchId}
-              onListComplete={updateState}
+              onCurrentMatchComplete={props.onCurrentComplete}
             />
           </div>
         </CSSTransition>
