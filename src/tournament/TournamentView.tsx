@@ -4,11 +4,11 @@ import "./TournamentView.scss";
 import classNames from "classnames";
 import Tournament from "../store/Tournament";
 import {
-  getMatchRedirect,
   AnimationStateHook,
   useAnimationState,
   ShowOverlayHook,
   runOnPredicate,
+  getRoundRedirectIfRequired,
 } from "../util";
 import RoundView from "./round/RoundView";
 import Round from "../store/round/Round";
@@ -87,20 +87,18 @@ export default inject("config")(
               show={showOverlay && isLastRound}
               winner={props.tournament.winner}
             />
-            {currentRoundIndex === -1
-              ? getMatchRedirect(
-                  props.tournament.firstRound.id,
-                  props.tournament.firstRound.firstMatch.id,
-                )
-              : null}
-            {shouldNextRedirect
-              ? getMatchRedirect(
-                  props.tournament.rounds[
-                    Math.max(currentRoundIndex, currentState - 1)
-                  ].id,
-                  props.matchId,
-                )
-              : null}
+            {getRoundRedirectIfRequired(
+              currentRoundIndex === -1,
+              props.tournament.firstRound.id,
+              props.tournament.firstRound.firstMatch.id,
+            )}
+            {getRoundRedirectIfRequired(
+              shouldNextRedirect,
+              props.tournament.rounds[
+                Math.max(currentRoundIndex, currentState - 1)
+              ].id,
+              props.matchId,
+            )}
             <AppDevTools />
           </div>
         )}

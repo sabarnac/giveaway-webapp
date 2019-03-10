@@ -3,12 +3,12 @@ import "./RoundView.scss";
 import Round from "../../store/round/Round";
 import Match from "../../store/round/match/Match";
 import {
-  getMatchRedirect,
   AnimationStateHook,
   useAnimationState,
   runOnPredicate,
   runOnDelay,
   getNormalizedSpeed,
+  getRoundRedirectIfRequired,
 } from "../../util/index";
 import RoundDetails from "./_partial/RoundDetails";
 import { CSSTransition } from "react-transition-group";
@@ -78,15 +78,16 @@ export default (props: RoundViewProps): JSX.Element => {
           matchId={props.matchId}
           onRoundMatchComplete={updateState}
         />
-        {currentMatchIndex === -1
-          ? getMatchRedirect(props.round.id, props.round.firstMatch.id)
-          : null}
-        {shouldNextRedirect
-          ? getMatchRedirect(
-              props.round.id,
-              props.round.matches[Math.max(currentMatchIndex, currentState)].id,
-            )
-          : null}
+        {getRoundRedirectIfRequired(
+          currentMatchIndex === -1,
+          props.round.id,
+          props.round.firstMatch.id,
+        )}
+        {getRoundRedirectIfRequired(
+          shouldNextRedirect,
+          props.round.id,
+          props.round.matches[Math.max(currentMatchIndex, currentState)].id,
+        )}
       </Fragment>
     </CSSTransition>
   );
