@@ -9,10 +9,11 @@ describe("RoundView Component.", () => {
     const round: Round = createDummyRound();
     const component: ReactTestRenderer = create(
       <RoundView
+        show={true}
         round={round}
         matchId={round.firstMatch.id}
         onRoundComplete={() => {}}
-      />
+      />,
     );
 
     expect(component.toJSON()).toMatchSnapshot();
