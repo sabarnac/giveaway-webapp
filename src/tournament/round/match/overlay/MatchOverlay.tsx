@@ -21,8 +21,10 @@ import MatchOverlayParticipants from "./_partial/MatchOverlayParticipants";
 interface MatchOverlayProps {
   /** The match details. */
   currentMatch: Match;
+  /** Whether to show the match overlay or not. */
+  show: boolean;
   /** Action to call when the view has finished showing the match. */
-  onMatchComplete: () => void;
+  onOverlayComplete: () => void;
 }
 
 export default inject("config")(
@@ -30,13 +32,13 @@ export default inject("config")(
     const [currentState, updateState]: AnimationStateHook = useAnimationState();
     const className: string = "match-overlay";
 
-    useEffect(runOnPredicate(currentState === 0, updateState));
+    useEffect(runOnPredicate(currentState === 0 && props.show, updateState));
 
     return (
       <Observer>
         {() => (
           <CSSTransition
-            in={isInRange(currentState, 1, 2)}
+            in={isInRange(currentState, 1, 2) && props.show}
             timeout={getNormalizedSpeed(500)}
             classNames={{
               enter: "",
@@ -48,7 +50,7 @@ export default inject("config")(
             }}
             mountOnEnter={true}
             unmountOnExit={true}
-            onExited={props.onMatchComplete}
+            onExited={props.onOverlayComplete}
           >
             <div
               className={classNames(`${className}-wrapper`)}

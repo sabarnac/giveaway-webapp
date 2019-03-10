@@ -7,8 +7,9 @@ describe("MatchOverlay Component.", () => {
   it("Matches snapshot.", () => {
     const component: ReactTestRenderer = create(
       <MatchOverlay
+        show={true}
         currentMatch={createDummyMatch()}
-        onMatchComplete={() => {}}
+        onOverlayComplete={() => {}}
       />,
     );
 
