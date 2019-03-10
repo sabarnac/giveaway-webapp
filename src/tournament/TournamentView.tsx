@@ -73,6 +73,7 @@ export default inject("config")(
       setState,
     ]: AnimationStateHook = useAnimationState();
     const shouldNextRedirect: boolean =
+      currentState > 0 &&
       currentRoundIndex + 1 !== currentState &&
       currentState <= props.tournament.rounds.length;
 

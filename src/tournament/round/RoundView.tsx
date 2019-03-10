@@ -58,6 +58,7 @@ export default (props: RoundViewProps): JSX.Element | null => {
     currentMatchIndex,
   );
   const shouldNextRedirect: boolean =
+    currentState > 0 &&
     currentMatchIndex !== currentState &&
     currentMatchIndex !== -1 &&
     currentState < props.round.matches.length;
