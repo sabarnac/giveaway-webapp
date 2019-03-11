@@ -17,6 +17,7 @@ import SpeedControl from "./speed/SpeedControl";
 import Config from "../store/config/Config";
 import AppDevTools from "./_partial/AppDevTools";
 import LoserOverlayView from "./_partial/LoserOverlayView";
+import { Trans } from "react-i18next";
 
 /**
  * Properties of the tournament view React component.
@@ -81,6 +82,8 @@ export default inject("config")(
       runOnPredicate(currentState === 0, () => setState(currentRoundIndex + 1)),
     );
 
+    const tournamentName: string = props.config!.name;
+
     return (
       <Observer>
         {() => (
@@ -88,7 +91,11 @@ export default inject("config")(
             key={`round-${currentRoundIndex}`}
             className={classNames("tournament")}
           >
-            <h1>{props.config!.name} Tournament</h1>
+            <h1>
+              <Trans i18nKey="tournamentView.title">
+                {{ tournamentName }} Tournament
+              </Trans>
+            </h1>
             <SpeedControl />
             <RoundView
               key={`${props.roundId}`}
