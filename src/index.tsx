@@ -9,6 +9,7 @@ import { HashRouter } from "react-router-dom";
 import AppRouter from "./AppRouter";
 import { Provider } from "mobx-react";
 import "skeleton-css/css/skeleton.css";
+import "./i18n";
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
