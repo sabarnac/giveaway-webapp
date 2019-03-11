@@ -5,6 +5,7 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
   className="tournament"
 >
   <h1>
+    Foobar Giveaway
      Tournament
   </h1>
   <div

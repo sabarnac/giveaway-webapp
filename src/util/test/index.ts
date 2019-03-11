@@ -10,6 +10,7 @@ export const createDummyParticipant = function(id: number = 1): Participant {
 
 export const createDummyConfig = (): Config => {
   const mockConfig: any = {
+    name: "Foobar Giveaway",
     message: ["foobar1", "foobar2", "foobar3", "foobar4"],
     allParticipants: [
       createDummyParticipant(1),
