@@ -13,6 +13,7 @@ import {
 } from "../../../../../util/index";
 import { RouteComponentProps, withRouter } from "react-router";
 import Match from "../../../../../store/round/match/Match";
+import { Trans } from "react-i18next";
 
 /**
  * Properties of the match overlay winner React component.
@@ -81,7 +82,11 @@ export default inject("config")(
                 }}
               >
                 <ParticipantEntry participant={props.currentMatch.winner} />
-                <h3>Won The Match!</h3>
+                <h3>
+                  <Trans i18nKey="matchOverlay.winnerTitle">
+                    Won The Match!
+                  </Trans>
+                </h3>
                 <h5>
                   <strong>
                     <em>{props.currentMatch.message}</em>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Observer, inject } from "mobx-react";
+import { Observer } from "mobx-react";
 import "./TournamentView.scss";
 import classNames from "classnames";
 import Tournament from "../store/Tournament";
@@ -14,17 +14,14 @@ import RoundView from "./round/RoundView";
 import Round from "../store/round/Round";
 import WinnerOverlay from "./winner-overlay/WinnerOverlay";
 import SpeedControl from "./speed/SpeedControl";
-import Config from "../store/config/Config";
 import AppDevTools from "./_partial/AppDevTools";
 import LoserOverlayView from "./_partial/LoserOverlayView";
-import { Trans } from "react-i18next";
+import TournamentTitle from "./_partial/TournamentTitle";
 
 /**
  * Properties of the tournament view React component.
  */
 interface TournamentViewProps {
-  /** @ignore The application config. */
-  config?: Config;
   /** The ID of the current round. */
   roundId: string;
   /** The ID of the current match. */
@@ -57,81 +54,72 @@ export const getRoundRedirectIfRequired = (
 /**
  * React component for the tournament view.
  */
-export default inject("config")(
-  (props: TournamentViewProps): JSX.Element => {
-    const currentRoundIndex: number = props.tournament.rounds.findIndex(
-      (round: Round): boolean => round.id === props.roundId,
-    );
-    const isLastRound: boolean =
-      props.tournament.lastRound.id === props.roundId;
+export default (props: TournamentViewProps): JSX.Element => {
+  const currentRoundIndex: number = props.tournament.rounds.findIndex(
+    (round: Round): boolean => round.id === props.roundId,
+  );
+  const isLastRound: boolean = props.tournament.lastRound.id === props.roundId;
 
-    const [showOverlay, setShowOverlay]: ShowOverlayHook = useState(false);
+  const [showOverlay, setShowOverlay]: ShowOverlayHook = useState(false);
 
-    const [
-      currentState,
-      updateState,
-      ,
-      setState,
-    ]: AnimationStateHook = useAnimationState();
-    const shouldNextRedirect: boolean =
-      currentState > 0 &&
-      currentRoundIndex + 1 !== currentState &&
-      currentState <= props.tournament.rounds.length;
+  const [
+    currentState,
+    updateState,
+    ,
+    setState,
+  ]: AnimationStateHook = useAnimationState();
+  const shouldNextRedirect: boolean =
+    currentState > 0 &&
+    currentRoundIndex + 1 !== currentState &&
+    currentState <= props.tournament.rounds.length;
 
-    useEffect(
-      runOnPredicate(currentState === 0, () => setState(currentRoundIndex + 1)),
-    );
+  useEffect(
+    runOnPredicate(currentState === 0, () => setState(currentRoundIndex + 1)),
+  );
 
-    const tournamentName: string = props.config!.name;
-
-    return (
-      <Observer>
-        {() => (
-          <div
-            key={`round-${currentRoundIndex}`}
-            className={classNames("tournament")}
-          >
-            <h1>
-              <Trans i18nKey="tournamentView.title">
-                {{ tournamentName }} Tournament
-              </Trans>
-            </h1>
-            <SpeedControl />
-            <RoundView
-              key={`${props.roundId}`}
-              show={currentState === currentRoundIndex + 1}
-              round={props.tournament.rounds[currentRoundIndex]}
-              matchId={props.matchId}
-              onRoundComplete={() => setShowOverlay(true)}
-            />
-            <LoserOverlayView
-              show={showOverlay && !isLastRound}
-              round={props.tournament.rounds[currentRoundIndex]}
-              onOverlayComplete={() => {
-                setShowOverlay(false);
-                updateState();
-              }}
-            />
-            <WinnerOverlay
-              show={showOverlay && isLastRound}
-              winner={props.tournament.winner}
-            />
-            {getRoundRedirectIfRequired(
-              currentRoundIndex === -1,
-              props.tournament,
-              0,
-              0,
-            )}
-            {getRoundRedirectIfRequired(
-              shouldNextRedirect,
-              props.tournament,
-              Math.max(currentRoundIndex, currentState - 1),
-              0,
-            )}
-            <AppDevTools />
-          </div>
-        )}
-      </Observer>
-    );
-  },
-);
+  return (
+    <Observer>
+      {() => (
+        <div
+          key={`round-${currentRoundIndex}`}
+          className={classNames("tournament")}
+        >
+          <TournamentTitle />
+          <SpeedControl />
+          <RoundView
+            key={`${props.roundId}`}
+            show={currentState === currentRoundIndex + 1}
+            round={props.tournament.rounds[currentRoundIndex]}
+            matchId={props.matchId}
+            onRoundComplete={() => setShowOverlay(true)}
+          />
+          <LoserOverlayView
+            show={showOverlay && !isLastRound}
+            round={props.tournament.rounds[currentRoundIndex]}
+            onOverlayComplete={() => {
+              setShowOverlay(false);
+              updateState();
+            }}
+          />
+          <WinnerOverlay
+            show={showOverlay && isLastRound}
+            winner={props.tournament.winner}
+          />
+          {getRoundRedirectIfRequired(
+            currentRoundIndex === -1,
+            props.tournament,
+            0,
+            0,
+          )}
+          {getRoundRedirectIfRequired(
+            shouldNextRedirect,
+            props.tournament,
+            Math.max(currentRoundIndex, currentState - 1),
+            0,
+          )}
+          <AppDevTools />
+        </div>
+      )}
+    </Observer>
+  );
+};

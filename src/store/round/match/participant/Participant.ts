@@ -12,12 +12,17 @@ interface AvatarJson {
  * Class containing the details of a participant.
  */
 export default class Participant {
+  /** The ID of the participant. */
+  @observable private _id: string;
   /** The name of the participant. */
   @observable private _name: string;
   /** The avatar of the participant. */
   @observable private _avatar: Avatar;
   /** The weight of the participant. */
   @observable private _weight: number;
+
+  /** A counter for generating a unique ID for the match. */
+  private static counter: number = 1;
 
   /**
    * Gets the avatar of the participant if present, or creates a random one,
@@ -32,9 +37,18 @@ export default class Participant {
   };
 
   public constructor(name: string, avatar?: AvatarJson, weight: number = 1) {
+    this._id = `${Participant.counter++}`;
     this._name = name;
     this._avatar = this._getOrCreateAvatar(name, avatar);
     this._weight = weight;
+  }
+
+  /**
+   * Get the participant ID.
+   * @return {string} The unique ID of the participant.
+   */
+  @computed public get id(): string {
+    return this._id;
   }
 
   /**

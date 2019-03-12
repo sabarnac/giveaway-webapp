@@ -27,10 +27,11 @@ export const createDummyConfig = (): Config => {
 };
 
 export const createDummyMatch = (): Match => {
-  return new Match(createDummyConfig(), [
-    createDummyParticipant(1),
-    createDummyParticipant(2),
-  ]);
+  return new Match(
+    createDummyConfig(),
+    [createDummyParticipant(1), createDummyParticipant(2)],
+    "1",
+  );
 };
 
 export const createDummyRound = (): Round => {

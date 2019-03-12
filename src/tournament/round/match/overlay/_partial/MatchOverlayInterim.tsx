@@ -11,6 +11,7 @@ import {
   isInRange,
 } from "../../../../../util/index";
 import { ClipLoader } from "react-spinners";
+import { Trans } from "react-i18next";
 
 /**
  * Properties of the match overlay interim React component.
@@ -68,7 +69,11 @@ export default inject("config")(
                 transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
               }}
             >
-              <h3>Selecting Winner</h3>
+              <h3>
+                <Trans i18nKey="matchOverlay.interimText">
+                  Selecting Winner
+                </Trans>
+              </h3>
               <ClipLoader sizeUnit={"rem"} size={3} />
             </div>
           </CSSTransition>

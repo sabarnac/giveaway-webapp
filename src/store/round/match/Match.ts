@@ -10,6 +10,8 @@ const gcd = require("gcd");
 export default class Match {
   /** The ID of the match. */
   @observable private _id: string;
+  /** The ID of the round the match is a part of. */
+  @observable private _roundId: string;
   /** The list of participants of the match. */
   @observable private _participants: Participant[];
   /** The winner of the match. */
@@ -21,7 +23,7 @@ export default class Match {
   private _config: Config;
 
   /** A counter for generating a unique ID for the match. */
-  private static counter: number = 1;
+  private static counter: { [k: string]: number } = {};
 
   /**
    * Returns the weight of the given participant.
@@ -80,10 +82,27 @@ export default class Match {
       this.losers.map(this._getParticipantProperName),
     );
 
-  public constructor(config: Config, participants: Participant[]) {
+  /**
+   * Returns a unique ID for the match based on the round it belongs to.
+   * @param {string} roundId The ID of the round the match belongs to.
+   * @return {string} The unique match ID.
+   */
+  private _getMatchId = (roundId: string): string => {
+    if (!Match.counter[roundId]) {
+      Match.counter[roundId] = 1;
+    }
+    return `${Match.counter[roundId]++}`;
+  };
+
+  public constructor(
+    config: Config,
+    participants: Participant[],
+    roundId: string,
+  ) {
     this._config = config;
 
-    this._id = `match-${Match.counter++}`;
+    this._id = `${this._getMatchId(roundId)}`;
+    this._roundId = roundId;
     this._participants = participants;
     this._winner = this._getWinner();
     this._message = this._getMessage();
@@ -99,10 +118,18 @@ export default class Match {
 
   /**
    * Get the match ID.
-   * @return {string} The unique ID of the match.
+   * @return {string} The unique ID of the match within the context of the round it belongs to.
    */
   @computed public get id(): string {
     return this._id;
+  }
+
+  /**
+   * Get the complete match ID (prepended with round ID).
+   * @return {string} The unique complete ID of the match.
+   */
+  @computed public get fullId(): string {
+    return `${this._roundId}:${this._id}`;
   }
 
   /**

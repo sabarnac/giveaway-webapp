@@ -5,6 +5,7 @@ import classNames from "classnames";
 import Match from "../../../../../store/round/match/Match";
 import Participant from "../../../../../store/round/match/participant/Participant";
 import ParticipantCard from "../../participant/card/ParticipantCard";
+import { Trans } from "react-i18next";
 
 /**
  * Properties of the match overlay participants React component.
@@ -33,7 +34,7 @@ export default inject("config")(
                 className={classNames("versus-text")}
                 key={`${participant.name} versus`}
               >
-                VS
+                <Trans i18nKey="matchOverlay.versus">VS</Trans>
               </h3>,
             ],
           )

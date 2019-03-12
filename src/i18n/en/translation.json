@@ -1,5 +1,19 @@
 {
   "tournamentView": {
-    "title": "<0>{{tournamentName}}</0> Tournament"
+    "title": "<0>{{tournamentName}}</0> Tournamento"
+  },
+  "loserOverlay": {
+    "title": "Losers"
+  },
+  "roundView": {
+    "title": "Round <1>{{roundId}}</1>"
+  },
+  "matchOverlay": {
+    "interimText": "Selecting Winner",
+    "versus": "VS",
+    "winnerTitle": "Won The Match!"
+  },
+  "winnerOverlay": {
+    "message": "Won The Giveaway!"
   }
 }

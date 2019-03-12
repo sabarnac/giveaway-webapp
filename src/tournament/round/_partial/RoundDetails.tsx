@@ -12,7 +12,7 @@ import {
   runOnPredicate,
 } from "../../../util/index";
 import RoundMatchListView from "./RoundMatchListView";
-const inflect = require("i")();
+import RoundTitle from "./RoundTitle";
 
 /**
  * Properties of the round details React component.
@@ -66,7 +66,7 @@ export default (props: RoundDetailsProps): JSX.Element => {
               transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
             }}
           >
-            <h2>{inflect.titleize(props.round.id)}</h2>
+            <RoundTitle round={props.round} />
             <RoundMatchListView
               className={props.className}
               round={props.round}

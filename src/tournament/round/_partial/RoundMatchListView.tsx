@@ -49,7 +49,7 @@ export default (props: RoundMatchListViewProps): JSX.Element => {
             .map(
               (match: Match): JSX.Element => (
                 <MatchView
-                  key={match.id}
+                  key={match.fullId}
                   match={match}
                   isCurrentMatch={match.id === props.matchId}
                   onMatchComplete={props.onCurrentMatchComplete}

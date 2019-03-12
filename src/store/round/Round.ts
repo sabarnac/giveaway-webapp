@@ -35,7 +35,7 @@ export default class Round {
    * @return {Match} The created match.
    */
   private _createMatch = (participants: Participant[]): Match =>
-    new Match(this._config, participants);
+    new Match(this._config, participants, this._id);
 
   /**
    * Returns a list of matches with all the participants of the round.
@@ -51,7 +51,7 @@ export default class Round {
   public constructor(config: Config, participants: Participant[]) {
     this._config = config;
 
-    this._id = `round-${Round.counter++}`;
+    this._id = `${Round.counter++}`;
     this._matches = this._getMatches(participants);
   }
 

@@ -9,6 +9,7 @@ import {
   runOnPredicate,
 } from "../../../util/index";
 import LoserInfo from "./LoserInfo";
+import { Trans } from "react-i18next";
 
 /**
  * Properties of the loser overlay view React component.
@@ -36,7 +37,9 @@ export default (props: LoserOverlayViewProps): JSX.Element => {
     <Observer>
       {() => (
         <div className={classNames(props.className)}>
-          <h2>Losers</h2>
+          <h2>
+            <Trans i18nKey="loserOverlay.title">Losers</Trans>
+          </h2>
           {props.losers.map(
             (loser: Participant, index: number): JSX.Element => (
               <LoserInfo
