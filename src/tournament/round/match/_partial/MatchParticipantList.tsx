@@ -24,7 +24,7 @@ export default observer(
     <div className={classNames(`${props.className}__list`)}>
       {props.match.participants.map(
         (participant: Participant): JSX.Element => (
-          <ParticipantEntry key={participant.name} participant={participant} />
+          <ParticipantEntry key={participant.id} participant={participant} />
         ),
       )}
     </div>

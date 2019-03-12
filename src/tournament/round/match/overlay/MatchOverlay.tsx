@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { inject, Observer } from "mobx-react";
+import { Observer } from "mobx-react";
 import "./MatchOverlay.scss";
 import classNames from "classnames";
 import Match from "../../../../store/round/match/Match";
@@ -30,58 +30,56 @@ interface MatchOverlayProps {
 /**
  * React component for the match overlay.
  */
-export default inject("config")(
-  (props: MatchOverlayProps): JSX.Element => {
-    const [currentState, updateState]: AnimationStateHook = useAnimationState();
-    const className: string = "match-overlay";
+export default (props: MatchOverlayProps): JSX.Element => {
+  const [currentState, updateState]: AnimationStateHook = useAnimationState();
+  const className: string = "match-overlay";
 
-    useEffect(runOnPredicate(currentState === 0 && props.show, updateState));
+  useEffect(runOnPredicate(currentState === 0 && props.show, updateState));
 
-    return (
-      <Observer>
-        {() => (
-          <CSSTransition
-            in={isInRange(currentState, 1, 2) && props.show}
-            timeout={getNormalizedSpeed(500)}
-            classNames={{
-              enter: "",
-              enterActive: `${className}-wrapper--entering`,
-              enterDone: `${className}-wrapper--entered`,
-              exit: "",
-              exitActive: `${className}-wrapper--exiting`,
-              exitDone: `${className}-wrapper--exited`,
+  return (
+    <Observer>
+      {() => (
+        <CSSTransition
+          in={isInRange(currentState, 1, 2) && props.show}
+          timeout={getNormalizedSpeed(500)}
+          classNames={{
+            enter: "",
+            enterActive: `${className}-wrapper--entering`,
+            enterDone: `${className}-wrapper--entered`,
+            exit: "",
+            exitActive: `${className}-wrapper--exiting`,
+            exitDone: `${className}-wrapper--exited`,
+          }}
+          mountOnEnter={true}
+          unmountOnExit={true}
+          onExited={props.onOverlayComplete}
+        >
+          <div
+            className={classNames(`${className}-wrapper`)}
+            style={{
+              transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
             }}
-            mountOnEnter={true}
-            unmountOnExit={true}
-            onExited={props.onOverlayComplete}
           >
-            <div
-              className={classNames(`${className}-wrapper`)}
-              style={{
-                transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
-              }}
-            >
-              <div className={classNames(className)}>
-                <MatchOverlayParticipants
-                  className={className}
-                  currentMatch={props.currentMatch}
-                />
-                <MatchOverlayInterim
-                  className={className}
-                  show={currentState === 1}
-                  onInterimComplete={updateState}
-                />
-                <MatchOverlayWinner
-                  currentMatch={props.currentMatch}
-                  className={className}
-                  show={currentState === 2}
-                  onWinnerComplete={updateState}
-                />
-              </div>
+            <div className={classNames(className)}>
+              <MatchOverlayParticipants
+                className={className}
+                currentMatch={props.currentMatch}
+              />
+              <MatchOverlayInterim
+                className={className}
+                show={currentState === 1}
+                onInterimComplete={updateState}
+              />
+              <MatchOverlayWinner
+                currentMatch={props.currentMatch}
+                className={className}
+                show={currentState === 2}
+                onWinnerComplete={updateState}
+              />
             </div>
-          </CSSTransition>
-        )}
-      </Observer>
-    );
-  },
-);
+          </div>
+        </CSSTransition>
+      )}
+    </Observer>
+  );
+};

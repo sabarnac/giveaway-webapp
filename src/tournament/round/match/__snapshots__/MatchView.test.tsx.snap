@@ -326,7 +326,7 @@ exports[`MatchView Component. Current Match. Matches snapshot. 1`] = `
               <h5>
                 <strong>
                   <em>
-                    foobar message
+                    formatted foobar message
                   </em>
                 </strong>
               </h5>
@@ -616,7 +616,7 @@ exports[`MatchView Component. Not Current Match. Matches snapshot. 1`] = `
               <h5>
                 <strong>
                   <em>
-                    foobar message
+                    formatted foobar message
                   </em>
                 </strong>
               </h5>

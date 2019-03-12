@@ -1,6 +1,6 @@
 {
   "tournamentView": {
-    "title": "<0>{{tournamentName}}</0> Tournamento"
+    "title": "<0>{{tournamentName}}</0> Tournament"
   },
   "loserOverlay": {
     "title": "Losers"
@@ -11,6 +11,14 @@
   "matchOverlay": {
     "interimText": "Selecting Winner",
     "versus": "VS",
+    "messages": [
+      "#loser lost against #winner.",
+      "#winner won against #loser.",
+      "#winner didn't lose to #loser.",
+      "#loser didn't win against #winner.",
+      "#loser lost against #winner who won.",
+      "#winner won against #loser who lost."
+    ],
     "winnerTitle": "Won The Match!"
   },
   "winnerOverlay": {

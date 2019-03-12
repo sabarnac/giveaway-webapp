@@ -18,6 +18,7 @@ i18n
     lng: "en",
     fallbackLng: "en",
     debug: true,
+    returnObjects: true,
     interpolation: {
       escapeValue: false,
     },

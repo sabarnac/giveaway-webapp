@@ -10,15 +10,20 @@ import {
   AnimationStateHook,
   useAnimationState,
   runOnPredicate,
+  isInRange,
 } from "../../../../../util/index";
 import { RouteComponentProps, withRouter } from "react-router";
 import Match from "../../../../../store/round/match/Match";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import Config from "../../../../../store/config/Config";
+import Participant from "../../../../../store/round/match/participant/Participant";
 
 /**
  * Properties of the match overlay winner React component.
  */
 interface MatchOverlayWinnerProps {
+  /** @ignore The application config. */
+  config?: Config;
   /** CSS class */
   className: string;
   /** The current match details. */
@@ -46,6 +51,25 @@ export default inject("config")(
       ).has(STOP_QUERY_FLAG);
 
       useEffect(runOnPredicate(currentState === 0, updateState));
+
+      const { t } = useTranslation();
+      const messagesList: string = t("matchOverlay.messages");
+      let matchMessage: string = props.currentMatch.message;
+
+      const messageIndex: number = props.config!.getMessageIndex(
+        props.currentMatch.message,
+      );
+      if (
+        messageIndex !== -1 &&
+        isInRange(messageIndex, 0, messagesList.length - 1)
+      ) {
+        matchMessage = messagesList[messageIndex];
+      }
+
+      const winnerName: string = props.currentMatch.winner.properName;
+      const loserNames: string[] = props.currentMatch.losers.map(
+        (loser: Participant): string => loser.properName,
+      );
 
       return (
         <Observer>
@@ -89,7 +113,13 @@ export default inject("config")(
                 </h3>
                 <h5>
                   <strong>
-                    <em>{props.currentMatch.message}</em>
+                    <em>
+                      {props.config!.getFormattedMessage(
+                        matchMessage,
+                        winnerName,
+                        loserNames,
+                      )}
+                    </em>
                   </strong>
                 </h5>
               </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { observer, inject } from "mobx-react";
+import { observer } from "mobx-react";
 import "./MatchOverlayParticipants.scss";
 import classNames from "classnames";
 import Match from "../../../../../store/round/match/Match";
@@ -20,26 +20,24 @@ interface MatchOverlayParticipantsProps {
 /**
  * React component for the match overlay participants.
  */
-export default inject("config")(
-  observer(
-    (props: MatchOverlayParticipantsProps): JSX.Element => (
-      <div className={classNames(`${props.className}__list`)}>
-        {props.currentMatch.participants
-          .flatMap(
-            (participant: Participant): [JSX.Element, JSX.Element] => [
-              <div key={participant.name}>
-                <ParticipantCard invert={true} participant={participant} />
-              </div>,
-              <h3
-                className={classNames("versus-text")}
-                key={`${participant.name} versus`}
-              >
-                <Trans i18nKey="matchOverlay.versus">VS</Trans>
-              </h3>,
-            ],
-          )
-          .slice(0, -1)}
-      </div>
-    ),
+export default observer(
+  (props: MatchOverlayParticipantsProps): JSX.Element => (
+    <div className={classNames(`${props.className}__list`)}>
+      {props.currentMatch.participants
+        .flatMap(
+          (participant: Participant): [JSX.Element, JSX.Element] => [
+            <div key={participant.id}>
+              <ParticipantCard invert={true} participant={participant} />
+            </div>,
+            <h3
+              className={classNames("versus-text")}
+              key={`${participant.id} versus`}
+            >
+              <Trans i18nKey="matchOverlay.versus">VS</Trans>
+            </h3>,
+          ],
+        )
+        .slice(0, -1)}
+    </div>
   ),
 );

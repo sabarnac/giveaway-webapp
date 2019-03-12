@@ -68,6 +68,8 @@ jest.mock(
           })),
         participantsPerMatch: 2,
         speed: 1,
+        getMessageIndex: () => 0,
+        getFormattedMessage: () => "formatted foobar message",
         getRandomMessage: () => "foobar message",
       };
       mockConfig.getInstance = () => mockConfig;
@@ -196,6 +198,8 @@ jest.mock(
         })),
       participantsPerMatch: 2,
       speed: 1,
+      getMessageIndex: () => 0,
+      getFormattedMessage: () => "formatted foobar message",
       getRandomMessage: () => "foobar message",
     };
     mockConfig.getInstance = () => mockConfig;

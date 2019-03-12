@@ -162,21 +162,41 @@ export default class Config {
   }
 
   /**
-   * Gets a random message with the winner and loser.
+   * Returns the formatted version of the given message.
+   * @param {string} message The message to format.
    * @param {string} winnerName The name of the winner.
    * @param {string[]} loserNames The names of the losers.
    * @return {string} The formatted message.
    */
-  public getRandomMessage(winnerName: string, loserNames: string[]): string {
+  public getFormattedMessage = (
+    message: string,
+    winnerName: string,
+    loserNames: string[],
+  ): string =>
+    message
+      .replace("#winner", winnerName)
+      .replace("#loser", this._formatLosers(loserNames));
+
+  /**
+   * Gets a random message with the winner and loser.
+   * @return {string} The formatted message.
+   */
+  public getRandomMessage(): string {
     if (this._unusedMessages.length === 0) {
       this._unusedMessages = RandomGenerator.shuffle([...this._messages]);
     }
     const message = RandomGenerator.pick(this._unusedMessages);
     this._unusedMessages.splice(this._unusedMessages.indexOf(message), 1);
-    return message
-      .replace("#winner", winnerName)
-      .replace("#loser", this._formatLosers(loserNames));
+    return message;
   }
+
+  /**
+   * Gets the index of the given message.
+   * @param {string} message The message.
+   * @return {number} The index of the message.
+   */
+  public getMessageIndex = (message: string): number =>
+    this._messages.indexOf(message);
 
   /**
    * Get the list of all participants in the tournament.

@@ -83,7 +83,8 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
         }
       >
         <h2>
-          Round 1
+          Round 
+          1
         </h2>
         <div
           className="round__list"
@@ -413,7 +414,7 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
                         <h5>
                           <strong>
                             <em>
-                              foobar message
+                              formatted foobar message
                             </em>
                           </strong>
                         </h5>

@@ -66,21 +66,10 @@ export default class Match {
     );
 
   /**
-   * Returns the proper name of the given participant.
-   * @return {string} The participant proper name.
-   */
-  private _getParticipantProperName = (participant: Participant): string =>
-    participant.properName;
-
-  /**
    * Returns a random conclusion message for the match.
    * @return {string} The conclusion message.
    */
-  private _getMessage = (): string =>
-    this._config.getRandomMessage(
-      this._winner.properName,
-      this.losers.map(this._getParticipantProperName),
-    );
+  private _getMessage = (): string => this._config.getRandomMessage();
 
   /**
    * Returns a unique ID for the match based on the round it belongs to.

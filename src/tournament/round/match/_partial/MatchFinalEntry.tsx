@@ -57,7 +57,7 @@ export default (props: MatchFinalEntryProps): JSX.Element => {
         props.match.participants.map(
           (participant: Participant, index: number): JSX.Element => (
             <CSSTransition
-              key={participant.name}
+              key={participant.id}
               in={isInRange(currentState, index * 3 + 1, index * 3 + 2)}
               timeout={getNormalizedSpeed(200)}
               classNames={{
