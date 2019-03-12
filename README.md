@@ -29,7 +29,7 @@ Ever wanted to have a giveaway but didn't want to just randomly select a winner?
 
 # Future Plans
 
-- Make the application more customizable (with respect to what text is shown where).
+- ~~Make the application more customizable (with respect to what text is shown where).~~ (`i18n` branch).
 - ~~Add support for weights on participants.~~
 - Improve tests
 
