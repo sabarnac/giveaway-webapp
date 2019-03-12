@@ -68,6 +68,7 @@ export default (props: RoundDetailsProps): JSX.Element => {
           >
             <RoundTitle round={props.round} />
             <RoundMatchListView
+              key={`${props.round.id}:${props.matchId}`}
               className={props.className}
               round={props.round}
               matchId={props.matchId}

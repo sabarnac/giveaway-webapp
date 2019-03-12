@@ -54,9 +54,12 @@ export default (props: RoundViewProps): JSX.Element | null => {
   );
   const className: string = "round";
 
-  const [currentState, updateState]: AnimationStateHook = useAnimationState(
-    currentMatchIndex,
-  );
+  const [
+    currentState,
+    updateState,
+    ,
+    setState,
+  ]: AnimationStateHook = useAnimationState(currentMatchIndex);
   const shouldNextRedirect: boolean =
     currentState > 0 &&
     currentMatchIndex !== currentState &&
@@ -73,6 +76,8 @@ export default (props: RoundViewProps): JSX.Element | null => {
     }),
     [currentState],
   );
+
+  useEffect(() => setState(currentMatchIndex), [props.matchId]);
 
   return (
     <CSSTransition
@@ -101,7 +106,7 @@ export default (props: RoundViewProps): JSX.Element | null => {
         {getRoundRedirectIfRequired(
           shouldNextRedirect,
           props.round,
-          Math.max(currentMatchIndex, currentState),
+          currentState,
         )}
       </Fragment>
     </CSSTransition>
