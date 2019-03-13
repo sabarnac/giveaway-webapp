@@ -2,6 +2,7 @@ const injectAcornStaticClassPropertyInitializer = require("acorn-static-class-pr
 const injectAcornStage3 = require("acorn-stage3/inject");
 const injectAcornEs7 = require("acorn-es7");
 const injectAcornJsx = require("acorn-jsx/inject");
+const ConfigJson = require("./src/store/config/config.json");
 
 module.exports = {
   contextSeparator: "_",
@@ -13,13 +14,13 @@ module.exports = {
   defaultNamespace: "translation",
   // Default namespace used in your i18next config
 
-  defaultValue: "",
+  defaultValue: "foobar",
   // Default value to give to empty keys
 
   indentation: 2,
   // Indentation of the catalog files
 
-  keepRemoved: false,
+  keepRemoved: true,
   // Keep keys from the catalog that are no longer in code
 
   keySeparator: ".",
@@ -101,7 +102,7 @@ module.exports = {
   lineEnding: "auto",
   // Control the line ending. See options at https://github.com/ryanve/eol
 
-  locales: ["en"],
+  locales: ConfigJson.lang,
   // An array of the locales in your applications
 
   namespaceSeparator: ":",
@@ -121,7 +122,7 @@ module.exports = {
   // For react file, extract the defaultNamespace - https://react.i18next.com/components/translate-hoc.html
   // Ignored when parsing a `.jsx` file and namespace is extracted from that file.
 
-  sort: true,
+  sort: false,
   // Whether or not to sort the catalog
 
   useKeysAsDefaultValue: false,
