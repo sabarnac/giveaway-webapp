@@ -1,7 +1,13 @@
 import React from "react";
 import { inject } from "mobx-react";
 import "./TournamentTitle.scss";
-import { Trans, useTranslation, UseTranslationResponse } from "react-i18next";
+import {
+  Trans,
+  useTranslation,
+  UseTranslationResponse,
+  WithTranslation,
+  withTranslation,
+} from "react-i18next";
 import Config from "../../store/config/Config";
 const isString = require("is-string");
 
@@ -16,21 +22,23 @@ interface TournamentTitleProps {
 /**
  * React component for the tournament title.
  */
-export default inject("config")(
-  (props: TournamentTitleProps): JSX.Element => {
-    const { t }: UseTranslationResponse = useTranslation();
-    const translatedTournamentName: string = t("tournamentView.name");
+export default withTranslation()(
+  inject("config")(
+    (props: TournamentTitleProps & WithTranslation): JSX.Element => {
+      const { t }: UseTranslationResponse = useTranslation();
+      const translatedTournamentName: string = t("tournamentView.name");
 
-    let tournamentName: string = isString(translatedTournamentName)
-      ? translatedTournamentName
-      : props.config!.name;
+      let tournamentName: string = isString(translatedTournamentName)
+        ? translatedTournamentName
+        : props.config!.name;
 
-    return (
-      <h1>
-        <Trans i18nKey="tournamentView.title">
-          {{ tournamentName }} Tournament
-        </Trans>
-      </h1>
-    );
-  },
+      return (
+        <h1>
+          <Trans i18nKey="tournamentView.title">
+            {{ tournamentName }} Tournament
+          </Trans>
+        </h1>
+      );
+    },
+  ),
 );

@@ -11,7 +11,7 @@ import {
   isInRange,
 } from "../../../../../util/index";
 import { ClipLoader } from "react-spinners";
-import { Trans } from "react-i18next";
+import { Trans, WithTranslation, withTranslation } from "react-i18next";
 
 /**
  * Properties of the match overlay interim React component.
@@ -28,53 +28,57 @@ interface MatchOverlayInterimProps {
 /**
  * React component for the match overlay interim.
  */
-export default (props: MatchOverlayInterimProps): JSX.Element => {
-  const [
-    currentState,
-    updateState,
-    updateStateDelay,
-  ]: AnimationStateHook = useAnimationState();
+export default withTranslation()(
+  (props: MatchOverlayInterimProps & WithTranslation): JSX.Element => {
+    const [
+      currentState,
+      updateState,
+      updateStateDelay,
+    ]: AnimationStateHook = useAnimationState();
 
-  useEffect(runOnPredicate(currentState === 0, updateState));
-  useEffect(
-    runOnPredicate(currentState === 2, () =>
-      updateStateDelay(getNormalizedSpeed(4000)),
-    ),
-    [currentState],
-  );
+    useEffect(runOnPredicate(currentState === 0, updateState));
+    useEffect(
+      runOnPredicate(currentState === 2, () =>
+        updateStateDelay(getNormalizedSpeed(4000)),
+      ),
+      [currentState],
+    );
 
-  return (
-    <Observer>
-      {() => (
-        <CSSTransition
-          in={isInRange(currentState, 1, 2) && props.show}
-          timeout={getNormalizedSpeed(500)}
-          classNames={{
-            enter: "",
-            enterActive: `${props.className}__interim--entering`,
-            enterDone: `${props.className}__interim--entered`,
-            exit: "",
-            exitActive: `${props.className}__interim--exiting`,
-            exitDone: `${props.className}__interim--exited`,
-          }}
-          mountOnEnter={true}
-          unmountOnExit={true}
-          onEntered={updateState}
-          onExited={props.onInterimComplete}
-        >
-          <div
-            className={classNames(`${props.className}__interim`)}
-            style={{
-              transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
+    return (
+      <Observer>
+        {() => (
+          <CSSTransition
+            in={isInRange(currentState, 1, 2) && props.show}
+            timeout={getNormalizedSpeed(500)}
+            classNames={{
+              enter: "",
+              enterActive: `${props.className}__interim--entering`,
+              enterDone: `${props.className}__interim--entered`,
+              exit: "",
+              exitActive: `${props.className}__interim--exiting`,
+              exitDone: `${props.className}__interim--exited`,
             }}
+            mountOnEnter={true}
+            unmountOnExit={true}
+            onEntered={updateState}
+            onExited={props.onInterimComplete}
           >
-            <h3>
-              <Trans i18nKey="matchOverlay.interimText">Selecting Winner</Trans>
-            </h3>
-            <ClipLoader sizeUnit={"rem"} size={3} />
-          </div>
-        </CSSTransition>
-      )}
-    </Observer>
-  );
-};
+            <div
+              className={classNames(`${props.className}__interim`)}
+              style={{
+                transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
+              }}
+            >
+              <h3>
+                <Trans i18nKey="matchOverlay.interimText">
+                  Selecting Winner
+                </Trans>
+              </h3>
+              <ClipLoader sizeUnit={"rem"} size={3} />
+            </div>
+          </CSSTransition>
+        )}
+      </Observer>
+    );
+  },
+);

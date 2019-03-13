@@ -5,7 +5,7 @@ import classNames from "classnames";
 import Match from "../../../../../store/round/match/Match";
 import Participant from "../../../../../store/round/match/participant/Participant";
 import ParticipantCard from "../../participant/card/ParticipantCard";
-import { Trans } from "react-i18next";
+import { Trans, WithTranslation, withTranslation } from "react-i18next";
 
 /**
  * Properties of the match overlay participants React component.
@@ -20,29 +20,31 @@ interface MatchOverlayParticipantsProps {
 /**
  * React component for the match overlay participants.
  */
-export default observer(
-  (props: MatchOverlayParticipantsProps): JSX.Element => (
-    <div className={classNames(`${props.className}__list`)}>
-      {props.currentMatch.participants
-        .flatMap(
-          (participant: Participant): [JSX.Element, JSX.Element] => [
-            <div key={participant.id}>
-              <ParticipantCard invert={true} participant={participant} />
-            </div>,
-            <h3
-              className={classNames("versus-text")}
-              key={`${participant.id} versus`}
-            >
-              <Trans
-                i18nKey="matchOverlay.versus"
-                count={props.currentMatch.participants.length}
+export default withTranslation()(
+  observer(
+    (props: MatchOverlayParticipantsProps & WithTranslation): JSX.Element => (
+      <div className={classNames(`${props.className}__list`)}>
+        {props.currentMatch.participants
+          .flatMap(
+            (participant: Participant): [JSX.Element, JSX.Element] => [
+              <div key={participant.id}>
+                <ParticipantCard invert={true} participant={participant} />
+              </div>,
+              <h3
+                className={classNames("versus-text")}
+                key={`${participant.id} versus`}
               >
-                VS
-              </Trans>
-            </h3>,
-          ],
-        )
-        .slice(0, -1)}
-    </div>
+                <Trans
+                  i18nKey="matchOverlay.versus"
+                  count={props.currentMatch.participants.length}
+                >
+                  VS
+                </Trans>
+              </h3>,
+            ],
+          )
+          .slice(0, -1)}
+      </div>
+    ),
   ),
 );
