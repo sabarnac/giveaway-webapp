@@ -72,13 +72,15 @@ workflows:
   commit-workflow:
     jobs:
       - build:
-          branches:
-            ignore:
-              - gh-pages
+          filters:
+            branches:
+              ignore:
+                - gh-pages
       - test:
-          branches:
-            ignore:
-              - gh-pages
+          filters:
+            branches:
+              ignore:
+                - gh-pages
   schedule-workflow:
     triggers:
       - schedule:
@@ -88,10 +90,12 @@ workflows:
               - gh-pages
     jobs:
       - build:
-          branches:
-            ignore:
-              - gh-pages
+          filters:
+            branches:
+              ignore:
+                - gh-pages
       - test:
-          branches:
-            ignore:
-              - gh-pages
+          filters:
+            branches:
+              ignore:
+                - gh-pages
