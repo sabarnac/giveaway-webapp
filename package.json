@@ -19,6 +19,7 @@
     "i": "^0.3.6",
     "i18next": "^15.0.6",
     "i18next-browser-languagedetector": "^3.0.1",
+    "is-string": "^1.0.4",
     "lodash.chunk": "^4.2.0",
     "lodash.last": "^3.0.0",
     "mobx": "^5.9.0",
@@ -46,7 +47,7 @@
     "deploy": "gh-pages -d build",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
-    "translations": "i18next 'src/**/*.{ts,tsx}' -c i18next-parser.config.js"
+    "translations": "i18next -c i18next-parser.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"
