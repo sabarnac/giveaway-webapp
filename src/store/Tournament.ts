@@ -1,4 +1,3 @@
-import { observable, computed } from "mobx";
 import Participant from "./round/match/participant/Participant";
 import last from "lodash.last";
 import Config from "./config/Config";
@@ -9,7 +8,7 @@ import Round from "./round/Round";
  */
 export default class Tournament {
   /** The list of rounds of the tournament. */
-  @observable private _rounds: Round[];
+  private _rounds: Round[];
 
   /** The config of the application. */
   private _config: Config;
@@ -44,7 +43,7 @@ export default class Tournament {
    * Returns whether the tournament has a final winner or not.
    * @return {boolean} Whether the tournament has a final winner or not.
    */
-  @computed private get _hasWinner(): boolean {
+  private get _hasWinner(): boolean {
     return this.lastRound.winners.length === 1;
   }
 
@@ -52,7 +51,7 @@ export default class Tournament {
    * Get the first round of the tournament.
    * @return {Round} The first round.
    */
-  @computed public get firstRound(): Round {
+  public get firstRound(): Round {
     return <Round>this._rounds[0];
   }
 
@@ -60,7 +59,7 @@ export default class Tournament {
    * Get the last round of the tournament.
    * @return {Round} The last round.
    */
-  @computed public get lastRound(): Round {
+  public get lastRound(): Round {
     return <Round>last(this._rounds);
   }
 
@@ -68,7 +67,7 @@ export default class Tournament {
    * Gets the list of rounds in the tournament.
    * @return {Round[]} The rounds in the tournament.
    */
-  @computed public get rounds(): Round[] {
+  public get rounds(): Round[] {
     return this._rounds;
   }
 
@@ -76,7 +75,7 @@ export default class Tournament {
    * Gets the final winner of the tournament.
    * @return {Participant} The final winner, or null if there is none.
    */
-  @computed public get winner(): Participant {
+  public get winner(): Participant {
     return <Participant>this.lastRound.winners[0];
   }
 }

@@ -1,13 +1,11 @@
-import { observable, computed } from "mobx";
-
 /**
  * Class containing the details of a participants' avatar.
  */
 export default class Avatar {
   /** The URL of the avatar image. */
-  @observable private _url: string;
+  private _url: string;
   /** The alternate text for the image. */
-  @observable private _altText: string;
+  private _altText: string;
 
   public constructor(url: string, altText: string) {
     this._url = url;
@@ -18,7 +16,7 @@ export default class Avatar {
    * Gets the avatar URL.
    * @return {string} The avatar URL.
    */
-  @computed public get url(): string {
+  public get url(): string {
     return this._url;
   }
 
@@ -26,7 +24,7 @@ export default class Avatar {
    * Gets the avatar image alternate text.
    * @return {string} The avatar image alternate text.
    */
-  @computed public get altText(): string {
+  public get altText(): string {
     return this._altText;
   }
 

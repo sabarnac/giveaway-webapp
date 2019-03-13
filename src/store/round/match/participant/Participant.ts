@@ -1,4 +1,3 @@
-import { observable, computed } from "mobx";
 import { createAvatarImage } from "../../../../util";
 import Avatar from "./Avatar";
 const inflect = require("i")();
@@ -13,13 +12,13 @@ interface AvatarJson {
  */
 export default class Participant {
   /** The ID of the participant. */
-  @observable private _id: string;
+  private _id: string;
   /** The name of the participant. */
-  @observable private _name: string;
+  private _name: string;
   /** The avatar of the participant. */
-  @observable private _avatar: Avatar;
+  private _avatar: Avatar;
   /** The weight of the participant. */
-  @observable private _weight: number;
+  private _weight: number;
 
   /** A counter for generating a unique ID for the match. */
   private static counter: number = 1;
@@ -47,7 +46,7 @@ export default class Participant {
    * Get the participant ID.
    * @return {string} The unique ID of the participant.
    */
-  @computed public get id(): string {
+  public get id(): string {
     return this._id;
   }
 
@@ -55,7 +54,7 @@ export default class Participant {
    * Gets the participant name.
    * @return {string} The participant name.
    */
-  @computed public get name(): string {
+  public get name(): string {
     return this._name;
   }
 
@@ -63,7 +62,7 @@ export default class Participant {
    * Gets the capitalized name of the participant.
    * @return {string} The capitalized name.
    */
-  @computed public get properName(): string {
+  public get properName(): string {
     return inflect.titleize(this._name);
   }
 
@@ -71,7 +70,7 @@ export default class Participant {
    * Gets the participant avatar, if it exists.
    * @return {string} The participant avatar.
    */
-  @computed public get avatar(): Avatar {
+  public get avatar(): Avatar {
     return this._avatar;
   }
 
@@ -79,7 +78,7 @@ export default class Participant {
    * Gets the participant weight.
    * @return {number} The participant weight.
    */
-  @computed public get weight(): number {
+  public get weight(): number {
     return this._weight;
   }
 

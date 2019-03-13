@@ -1,4 +1,3 @@
-import { observable, computed } from "mobx";
 import Participant from "./participant/Participant";
 import RandomGenerator from "../../config/RandomGenerator";
 import Config from "../../config/Config";
@@ -9,15 +8,15 @@ const gcd = require("gcd");
  */
 export default class Match {
   /** The ID of the match. */
-  @observable private _id: string;
+  private _id: string;
   /** The ID of the round the match is a part of. */
-  @observable private _roundId: string;
+  private _roundId: string;
   /** The list of participants of the match. */
-  @observable private _participants: Participant[];
+  private _participants: Participant[];
   /** The winner of the match. */
-  @observable private _winner: Participant;
+  private _winner: Participant;
   /** The match conclusion message. */
-  @observable private _message: string;
+  private _message: string;
 
   /** The config of the application. */
   private _config: Config;
@@ -109,7 +108,7 @@ export default class Match {
    * Get the match ID.
    * @return {string} The unique ID of the match within the context of the round it belongs to.
    */
-  @computed public get id(): string {
+  public get id(): string {
     return this._id;
   }
 
@@ -117,7 +116,7 @@ export default class Match {
    * Get the complete match ID (prepended with round ID).
    * @return {string} The unique complete ID of the match.
    */
-  @computed public get fullId(): string {
+  public get fullId(): string {
     return `${this._roundId}:${this._id}`;
   }
 
@@ -125,7 +124,7 @@ export default class Match {
    * Get the list of losers of the match.
    * @return {Participant[]} The list of losers.
    */
-  @computed public get losers(): Participant[] {
+  public get losers(): Participant[] {
     return this._participants.filter(this._isNotWinner);
   }
 
@@ -133,7 +132,7 @@ export default class Match {
    * Get the list of participants in the match.
    * @return {Participant[]} The list of participants.
    */
-  @computed public get participants(): Participant[] {
+  public get participants(): Participant[] {
     return this._participants;
   }
 
@@ -141,7 +140,7 @@ export default class Match {
    * Get the winner of the match.
    * @return {Participant} The winner.
    */
-  @computed public get winner(): Participant {
+  public get winner(): Participant {
     return this._winner;
   }
 
@@ -149,7 +148,7 @@ export default class Match {
    * Get the conslusion message of the match.
    * @return {string} The message.
    */
-  @computed public get message(): string {
+  public get message(): string {
     return this._message;
   }
 }

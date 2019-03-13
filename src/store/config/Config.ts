@@ -31,13 +31,13 @@ interface ParticipantJson {
  */
 export default class Config {
   /** The name of the tournament. */
-  @observable private _name: string;
+  private _name: string;
   /** A list of all messages. */
-  @observable private _messages: string[];
+  private _messages: string[];
   /** The list of participants in the tournament. */
-  @observable private _allParticipants: Participant[];
+  private _allParticipants: Participant[];
   /** The number of participants per match. */
-  @observable private _participantsPerMatch: number;
+  private _participantsPerMatch: number;
   /** The animation speed multiplier. */
   @observable private _speed: number;
   /** The list of unused messages. */
@@ -149,7 +149,7 @@ export default class Config {
    * Get the name of the tournament.
    * @return {string} The tournament name.
    */
-  @computed public get name(): string {
+  public get name(): string {
     return this._name;
   }
 
@@ -157,7 +157,7 @@ export default class Config {
    * Get the list of winner/loser messages.
    * @return {string[]} The list of mesasges.
    */
-  @computed public get messages(): string[] {
+  public get messages(): string[] {
     return [...this._messages];
   }
 
@@ -202,7 +202,7 @@ export default class Config {
    * Get the list of all participants in the tournament.
    * @return {Participant[]} The list of all participants.
    */
-  @computed public get allParticipants(): Participant[] {
+  public get allParticipants(): Participant[] {
     return this._allParticipants;
   }
 
@@ -210,7 +210,7 @@ export default class Config {
    * Get the number of participants per match.
    * @return {number} The number of participants per match.
    */
-  @computed public get participantsPerMatch(): number {
+  public get participantsPerMatch(): number {
     return this._participantsPerMatch;
   }
 
