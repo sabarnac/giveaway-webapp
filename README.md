@@ -41,4 +41,4 @@ Just follow the first 3 steps in the `Usage` section, and as mentioned, use it a
 
 ### gh-pages branch (Do not modify)
 
-That was it. It's for hosting a sample website, docs generated through `react-styleguidist`, and my own giveaways.
+That was it. It's for hosting a sample website (docs generated through `react-styleguidist`), and my own giveaways.
