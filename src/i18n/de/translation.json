@@ -1,39 +1,39 @@
 {
   "serviceWorker": {
     "offlineMessage": {
-      "title": "Use Offlineo",
-      "message": "This web application can now be used offlineo!"
+      "title": "Offline verwenden",
+      "message": "Diese Webanwendung kann jetzt offline verwendet werden!"
     },
     "updateMessage": {
-      "title": "App Updatedo",
-      "message": "This web application has been updated. Please close all tabs/instances of it and open it again to see the updateo."
+      "title": "App aktualisiert",
+      "message": "Diese Webanwendung wurde aktualisiert. Bitte schließen Sie alle Tabs / Instanzen und öffnen Sie es erneut, um das Update anzuzeigen."
     }
   },
   "tournamentView": {
-    "name": "NameO",
-    "title": "<0>{{tournamentName}}</0> Tournamento"
+    "name": "Foobar-Werbegeschenk",
+    "title": "<0>{{tournamentName}}</0>-Turnier"
   },
   "loserOverlay": {
-    "title": "Loserso"
+    "title": "Verlierer"
   },
   "roundView": {
-    "title": "Roundo <1>{{roundId}}</1>"
+    "title": "Runde <1>{{roundId}}</1>"
   },
   "matchOverlay": {
-    "interimText": "Selecting Winnero",
-    "versus": "VSo",
+    "interimText": "Gewinner auswählen",
+    "versus": "VS",
     "messages": [
-      "#loser lost againsto #winner.",
-      "#winner won againsto #loser.",
-      "#winner didn't loseo to #loser.",
-      "#loser didn't win againsto #winner.",
-      "#loser lost against #winner who wono.",
-      "#winner won against #loser who losto."
+      "#loser gegen #winner verloren.",
+      "#winner gewann gegen #loser.",
+      "#winner hat nicht an #loser verloren.",
+      "#loser hat nicht gegen #winner gewonnen.",
+      "#loser gegen #winner verloren, der gewonnen hat.",
+      "#winner gewann gegen #loser, der verloren hat."
     ],
-    "winnerTitle": "Won The Matcho!"
+    "winnerTitle": "<0></0><1>hat das Match gewonnen!</1>"
   },
   "winnerOverlay": {
-    "message": "Won The Giveawayo!"
+    "message": "<0></0><1>hat das Turnier gewonnen!</1>"
   },
   "#loserOverlay.title_note": "Count is passed for plurals (if required).",
   "#matchOverlay.messages_note": "Count is passed for plurals (if required).",

@@ -30,10 +30,10 @@
       "#loser lost against #winner who won.",
       "#winner won against #loser who lost."
     ],
-    "winnerTitle": "Won The Match!"
+    "winnerTitle": "<0></0><1>Won The Match!</1>"
   },
   "winnerOverlay": {
-    "message": "Won The Giveaway!"
+    "message": "<0></0><1>Won The Tournament!</1>"
   },
   "#loserOverlay.title_note": "Count is passed for plurals (if required).",
   "#matchOverlay.messages_note": "Count is passed for plurals (if required).",
