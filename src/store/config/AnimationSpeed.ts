@@ -9,7 +9,6 @@ export default class AnimationSpeed {
     ["TWO", 2],
     ["FIVE", 5],
     ["TEN", 10],
-    ["TWENTY", 20],
   ]);
 
   /**
