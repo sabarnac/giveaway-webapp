@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import * as serviceWorker from "./serviceWorker";
@@ -10,8 +10,6 @@ import { Provider } from "mobx-react";
 import "skeleton-css/css/skeleton.css";
 import "./i18n";
 import ServiceWorkerAlertsConfig from "./store/config/ServiceWorkerAlertsConfig";
-import ServiceWorkerAddAlert from "./service-worker/ServiceWorkerAddAlert";
-import ServiceWorkerUpdateAlert from "./service-worker/ServiceWorkerUpdateAlert";
 
 const config: Config = Config.getInstance();
 const serviceWorkerAlertsConfig: ServiceWorkerAlertsConfig = ServiceWorkerAlertsConfig.getInstance();
@@ -37,11 +35,7 @@ ReactDOM.render(
       config={config}
       serviceWorkerAlertsConfig={serviceWorkerAlertsConfig}
     >
-      <Fragment>
-        <AppRouter tournament={store} />
-        <ServiceWorkerAddAlert />
-        <ServiceWorkerUpdateAlert />
-      </Fragment>
+      <AppRouter tournament={store} />
     </Provider>
   </HashRouter>,
   document.getElementById("root"),

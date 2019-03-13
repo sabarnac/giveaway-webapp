@@ -18,6 +18,8 @@ import AppDevTools from "./_partial/AppDevTools";
 import LoserOverlayView from "./_partial/LoserOverlayView";
 import TournamentTitle from "./_partial/TournamentTitle";
 import LanguageControl from "./language/LanguageControl";
+import ServiceWorkerUpdateAlert from "../service-worker/ServiceWorkerUpdateAlert";
+import ServiceWorkerAddAlert from "../service-worker/ServiceWorkerAddAlert";
 
 /**
  * Properties of the tournament view React component.
@@ -119,6 +121,8 @@ export default (props: TournamentViewProps): JSX.Element => {
           )}
           <SpeedControl />
           <LanguageControl />
+          <ServiceWorkerAddAlert />
+          <ServiceWorkerUpdateAlert />
           <AppDevTools />
         </div>
       )}
