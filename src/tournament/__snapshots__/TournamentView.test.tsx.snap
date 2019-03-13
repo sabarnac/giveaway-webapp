@@ -5,43 +5,9 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
   className="tournament"
 >
   <h1>
-    Foobar Giveaway
+    tournamentView.name
      Tournament
   </h1>
-  <div
-    className="speed-control"
-  >
-    <button
-      className="speed-control__option button-primary"
-      onClick={[Function]}
-    >
-      1x
-    </button>
-    <button
-      className="speed-control__option"
-      onClick={[Function]}
-    >
-      2x
-    </button>
-    <button
-      className="speed-control__option"
-      onClick={[Function]}
-    >
-      3x
-    </button>
-    <button
-      className="speed-control__option"
-      onClick={[Function]}
-    >
-      4x
-    </button>
-    <button
-      className="speed-control__option"
-      onClick={[Function]}
-    >
-      5x
-    </button>
-  </div>
   <div
     classNames={
       Object {
@@ -484,6 +450,56 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="speed-control"
+  >
+    <button
+      className="speed-control__option button-primary"
+      onClick={[Function]}
+    >
+      1x
+    </button>
+    <button
+      className="speed-control__option"
+      onClick={[Function]}
+    >
+      2x
+    </button>
+    <button
+      className="speed-control__option"
+      onClick={[Function]}
+    >
+      3x
+    </button>
+    <button
+      className="speed-control__option"
+      onClick={[Function]}
+    >
+      4x
+    </button>
+    <button
+      className="speed-control__option"
+      onClick={[Function]}
+    >
+      5x
+    </button>
+  </div>
+  <div
+    className="language-control"
+  >
+    <button
+      className="speed-control__option button-primary"
+      onClick={[Function]}
+    >
+      en
+    </button>
+    <button
+      className="speed-control__option"
+      onClick={[Function]}
+    >
+      fr
+    </button>
   </div>
 </div>
 `;

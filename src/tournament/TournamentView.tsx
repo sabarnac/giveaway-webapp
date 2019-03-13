@@ -17,6 +17,7 @@ import SpeedControl from "./speed/SpeedControl";
 import AppDevTools from "./_partial/AppDevTools";
 import LoserOverlayView from "./_partial/LoserOverlayView";
 import TournamentTitle from "./_partial/TournamentTitle";
+import LanguageControl from "./language/LanguageControl";
 
 /**
  * Properties of the tournament view React component.
@@ -85,7 +86,6 @@ export default (props: TournamentViewProps): JSX.Element => {
           className={classNames("tournament")}
         >
           <TournamentTitle />
-          <SpeedControl />
           <RoundView
             key={`${props.roundId}`}
             show={currentState === currentRoundIndex + 1}
@@ -117,6 +117,8 @@ export default (props: TournamentViewProps): JSX.Element => {
             Math.max(currentRoundIndex, currentState - 1),
             0,
           )}
+          <SpeedControl />
+          <LanguageControl />
           <AppDevTools />
         </div>
       )}
