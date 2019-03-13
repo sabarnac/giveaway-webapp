@@ -38,7 +38,9 @@ export default (props: LoserOverlayViewProps): JSX.Element => {
       {() => (
         <div className={classNames(props.className)}>
           <h2>
-            <Trans i18nKey="loserOverlay.title">Losers</Trans>
+            <Trans i18nKey="loserOverlay.title" count={props.losers.length}>
+              Losers
+            </Trans>
           </h2>
           {props.losers.map(
             (loser: Participant, index: number): JSX.Element => (

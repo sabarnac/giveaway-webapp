@@ -33,7 +33,12 @@ export default observer(
               className={classNames("versus-text")}
               key={`${participant.id} versus`}
             >
-              <Trans i18nKey="matchOverlay.versus">VS</Trans>
+              <Trans
+                i18nKey="matchOverlay.versus"
+                count={props.currentMatch.participants.length}
+              >
+                VS
+              </Trans>
             </h3>,
           ],
         )

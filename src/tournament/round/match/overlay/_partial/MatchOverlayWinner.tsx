@@ -14,7 +14,7 @@ import {
 } from "../../../../../util/index";
 import { RouteComponentProps, withRouter } from "react-router";
 import Match from "../../../../../store/round/match/Match";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans, useTranslation, UseTranslationResponse } from "react-i18next";
 import Config from "../../../../../store/config/Config";
 import Participant from "../../../../../store/round/match/participant/Participant";
 
@@ -52,8 +52,11 @@ export default inject("config")(
 
       useEffect(runOnPredicate(currentState === 0, updateState));
 
-      const { t } = useTranslation();
-      const messagesList: string = t("matchOverlay.messages");
+      const { t }: UseTranslationResponse = useTranslation();
+      const translatedMessagesList: string = t("matchOverlay.messages", {
+        returnObjects: true,
+        count: props.currentMatch.losers.length,
+      });
       let matchMessage: string = props.currentMatch.message;
 
       const messageIndex: number = props.config!.getMessageIndex(
@@ -61,9 +64,10 @@ export default inject("config")(
       );
       if (
         messageIndex !== -1 &&
-        isInRange(messageIndex, 0, messagesList.length - 1)
+        Array.isArray(translatedMessagesList) &&
+        isInRange(messageIndex, 0, translatedMessagesList.length - 1)
       ) {
-        matchMessage = messagesList[messageIndex];
+        matchMessage = translatedMessagesList[messageIndex];
       }
 
       const winnerName: string = props.currentMatch.winner.properName;
