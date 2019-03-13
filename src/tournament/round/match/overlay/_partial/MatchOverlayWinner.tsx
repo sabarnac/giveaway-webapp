@@ -118,12 +118,10 @@ export default withTranslation()(
                     )}ms ease-in-out`,
                   }}
                 >
-                  <ParticipantEntry participant={props.currentMatch.winner} />
-                  <h3>
-                    <Trans i18nKey="matchOverlay.winnerTitle">
-                      Won The Match!
-                    </Trans>
-                  </h3>
+                  <Trans i18nKey="matchOverlay.winnerTitle">
+                    <ParticipantEntry participant={props.currentMatch.winner} />
+                    <h3>Won The Match!</h3>
+                  </Trans>
                   <h5>
                     <strong>
                       <em>

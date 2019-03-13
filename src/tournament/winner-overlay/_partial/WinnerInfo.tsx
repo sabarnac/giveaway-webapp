@@ -23,10 +23,10 @@ export default withTranslation()(
   observer(
     (props: WinnerInfoProps & WithTranslation): JSX.Element => (
       <div className={classNames(`${props.className}__winner`)}>
-        <ParticipantCard participant={props.winner} />
-        <h3>
-          <Trans i18nKey="winnerOverlay.message">Won The Giveaway!</Trans>
-        </h3>
+        <Trans i18nKey="winnerOverlay.message">
+          <ParticipantCard participant={props.winner} />
+          <h3>Won The Tournament!</h3>
+        </Trans>
       </div>
     ),
   ),
