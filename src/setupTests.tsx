@@ -75,7 +75,18 @@ jest.mock(
         getRandomMessage: () => "foobar message",
       };
       mockConfig.getInstance = () => mockConfig;
-      const store: any = storeName === "config" ? mockConfig : {};
+      const mockServiceWorkerAlertsConfig: any = {
+        added: true,
+        updated: true,
+      };
+      mockServiceWorkerAlertsConfig.getInstance = () =>
+        mockServiceWorkerAlertsConfig;
+      const store: any =
+        storeName === "config"
+          ? mockConfig
+          : storeName === "serviceWorkerAlertsConfig"
+          ? mockServiceWorkerAlertsConfig
+          : {};
       return (ClassType: any): Function => (props: any): any => (
         <ClassType {...{ [storeName]: store }} {...props} />
       );
@@ -209,4 +220,25 @@ jest.mock(
     mockConfig.getInstance = () => mockConfig;
     return mockConfig;
   },
+);
+
+jest.mock(
+  "./store/config/ServiceWorkerAlertsConfig",
+  (): object => {
+    const mockServiceWorkerAlertsConfig: any = {
+      added: true,
+      updated: true,
+    };
+    mockServiceWorkerAlertsConfig.getInstance = () =>
+      mockServiceWorkerAlertsConfig;
+    return mockServiceWorkerAlertsConfig;
+  },
+);
+
+jest.mock(
+  "sweetalert2-react",
+  (): object => ({
+    __esModule: true,
+    default: "div",
+  }),
 );
