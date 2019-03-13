@@ -72,35 +72,26 @@ workflows:
   commit-workflow:
     jobs:
       - build:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
+          branches:
+            ignore:
+              - gh-pages
       - test:
-          requires:
-            - build
-          filters:
-            branches:
-              ignore:
-                - gh-pages
+          branches:
+            ignore:
+              - gh-pages
   schedule-workflow:
     triggers:
       - schedule:
           cron: "0 0 * * 0"
-          filters:
-            branches:
-              ignore:
-                - gh-pages
+          branches:
+            ignore:
+              - gh-pages
     jobs:
       - build:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
+          branches:
+            ignore:
+              - gh-pages
       - test:
-          requires:
-            - build
-          filters:
-            branches:
-              ignore:
-                - gh-pages
+          branches:
+            ignore:
+              - gh-pages
