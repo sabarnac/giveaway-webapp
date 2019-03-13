@@ -1,4 +1,14 @@
 {
+  "serviceWorker": {
+    "offlineMessage": {
+      "title": "Use Offline",
+      "message": "This web application can now be used offline!"
+    },
+    "updateMessage": {
+      "title": "App Updated",
+      "message": "This web application has been updated. Please close all tabs/instances of it and open it again to see the update."
+    }
+  },
   "tournamentView": {
     "name": "",
     "title": "<0>{{tournamentName}}</0> Tournament"
