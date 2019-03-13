@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LanguageControl Component. Matches snapshot. 1`] = `
+<div
+  className="language-control"
+>
+  <button
+    className="language-control__option button-primary"
+    onClick={[Function]}
+  >
+    en
+  </button>
+  <button
+    className="language-control__option"
+    onClick={[Function]}
+  >
+    fr
+  </button>
+</div>
+`;

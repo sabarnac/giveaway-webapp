@@ -1,5 +1,6 @@
 import Participant from "../round/match/participant/Participant";
 import ConfigJson from "./config.json";
+import i18n from "../../i18n";
 import { observable, computed, action } from "mobx";
 import RandomGenerator from "./RandomGenerator";
 import AnimationSpeed from "./AnimationSpeed";
@@ -31,13 +32,17 @@ interface ParticipantJson {
  */
 export default class Config {
   /** The name of the tournament. */
-  @observable private _name: string;
+  private _name: string;
   /** A list of all messages. */
-  @observable private _messages: string[];
+  private _messages: string[];
   /** The list of participants in the tournament. */
-  @observable private _allParticipants: Participant[];
+  private _allParticipants: Participant[];
   /** The number of participants per match. */
-  @observable private _participantsPerMatch: number;
+  private _participantsPerMatch: number;
+  /** The languages supported by the application. */
+  private _languages: string[];
+  /** The current language. */
+  @observable private _currentLanguage: string;
   /** The animation speed multiplier. */
   @observable private _speed: number;
   /** The list of unused messages. */
@@ -87,6 +92,12 @@ export default class Config {
     ConfigJson.participantsPerMatch;
 
   /**
+   * Returns the list of languages supported by the application.
+   * @return {string[]} The list of languages.
+   */
+  private _getlLanguages = (): string[] => ConfigJson.lang;
+
+  /**
    * Returns the animation speed multiplier of the application.
    * @return {number} The animation speed multiplier.
    */
@@ -132,6 +143,8 @@ export default class Config {
     this._unusedMessages = RandomGenerator.shuffle([...this._messages]);
     this._allParticipants = this._getParticipants();
     this._participantsPerMatch = this._getParticipantsPerMatch();
+    this._languages = this._getlLanguages();
+    this._currentLanguage = "en";
     this._speed = this._getSpeed();
   }
 
@@ -149,7 +162,7 @@ export default class Config {
    * Get the name of the tournament.
    * @return {string} The tournament name.
    */
-  @computed public get name(): string {
+  public get name(): string {
     return this._name;
   }
 
@@ -157,32 +170,52 @@ export default class Config {
    * Get the list of winner/loser messages.
    * @return {string[]} The list of mesasges.
    */
-  @computed public get messages(): string[] {
+  public get messages(): string[] {
     return [...this._messages];
   }
 
   /**
-   * Gets a random message with the winner and loser.
+   * Returns the formatted version of the given message.
+   * @param {string} message The message to format.
    * @param {string} winnerName The name of the winner.
    * @param {string[]} loserNames The names of the losers.
    * @return {string} The formatted message.
    */
-  public getRandomMessage(winnerName: string, loserNames: string[]): string {
+  public getFormattedMessage = (
+    message: string,
+    winnerName: string,
+    loserNames: string[],
+  ): string =>
+    message
+      .replace("#winner", winnerName)
+      .replace("#loser", this._formatLosers(loserNames));
+
+  /**
+   * Gets a random message with the winner and loser.
+   * @return {string} The formatted message.
+   */
+  public getRandomMessage(): string {
     if (this._unusedMessages.length === 0) {
       this._unusedMessages = RandomGenerator.shuffle([...this._messages]);
     }
     const message = RandomGenerator.pick(this._unusedMessages);
     this._unusedMessages.splice(this._unusedMessages.indexOf(message), 1);
-    return message
-      .replace("#winner", winnerName)
-      .replace("#loser", this._formatLosers(loserNames));
+    return message;
   }
+
+  /**
+   * Gets the index of the given message.
+   * @param {string} message The message.
+   * @return {number} The index of the message.
+   */
+  public getMessageIndex = (message: string): number =>
+    this._messages.indexOf(message);
 
   /**
    * Get the list of all participants in the tournament.
    * @return {Participant[]} The list of all participants.
    */
-  @computed public get allParticipants(): Participant[] {
+  public get allParticipants(): Participant[] {
     return this._allParticipants;
   }
 
@@ -190,8 +223,37 @@ export default class Config {
    * Get the number of participants per match.
    * @return {number} The number of participants per match.
    */
-  @computed public get participantsPerMatch(): number {
+  public get participantsPerMatch(): number {
     return this._participantsPerMatch;
+  }
+
+  /**
+   * Get the list of languages supported by the application.
+   * @return {string[]} The list of languages.
+   */
+  public get languages(): string[] {
+    return this._languages;
+  }
+
+  /**
+   * Get the current application language.
+   * @return {string} The current language.
+   */
+  @computed public get currentLanguage(): string {
+    return this._currentLanguage;
+  }
+
+  /**
+   * Set the current language of the application.
+   * @param {string} value The new current language.
+   */
+  @action public setCurrentLanguage(value: string): void {
+    if (this._languages.indexOf(value) !== -1) {
+      this._currentLanguage = value;
+      i18n.changeLanguage(value);
+    } else {
+      console.error(`Illegal value '${value}' for current language.`);
+    }
   }
 
   /**
@@ -210,7 +272,7 @@ export default class Config {
     if (AnimationSpeed.hasValue(value)) {
       this._speed = value;
     } else {
-      console.error(`Illegal value '${value}' for speed`);
+      console.error(`Illegal value '${value}' for speed.`);
     }
   }
 }

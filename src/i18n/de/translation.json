@@ -1,0 +1,42 @@
+{
+  "serviceWorker": {
+    "offlineMessage": {
+      "title": "Offline verwenden",
+      "message": "Diese Webanwendung kann jetzt offline verwendet werden!"
+    },
+    "updateMessage": {
+      "title": "App aktualisiert",
+      "message": "Diese Webanwendung wurde aktualisiert. Bitte schließen Sie alle Tabs / Instanzen und öffnen Sie es erneut, um das Update anzuzeigen."
+    }
+  },
+  "tournamentView": {
+    "name": "Foobar-Werbegeschenk",
+    "title": "<0>{{tournamentName}}</0>-Turnier"
+  },
+  "loserOverlay": {
+    "title": "Verlierer"
+  },
+  "roundView": {
+    "title": "Runde <1>{{roundId}}</1>"
+  },
+  "matchOverlay": {
+    "interimText": "Gewinner auswählen",
+    "versus": "VS",
+    "messages": [
+      "#loser gegen #winner verloren.",
+      "#winner gewann gegen #loser.",
+      "#winner hat nicht an #loser verloren.",
+      "#loser hat nicht gegen #winner gewonnen.",
+      "#loser gegen #winner verloren, der gewonnen hat.",
+      "#winner gewann gegen #loser, der verloren hat."
+    ],
+    "winnerTitle": "<0></0><1>hat das Match gewonnen!</1>"
+  },
+  "winnerOverlay": {
+    "message": "<0></0><1>hat das Turnier gewonnen!</1>"
+  },
+  "#loserOverlay.title_note": "Count is passed for plurals (if required).",
+  "#matchOverlay.messages_note": "Count is passed for plurals (if required).",
+  "#matchOverlay.versus_note": "Count is passed for plurals (if required).",
+  "#tournamentView.name_note": "To be filled in by end developer."
+}

@@ -1,4 +1,3 @@
-import { observable, computed } from "mobx";
 import Participant from "./participant/Participant";
 import RandomGenerator from "../../config/RandomGenerator";
 import Config from "../../config/Config";
@@ -9,19 +8,21 @@ const gcd = require("gcd");
  */
 export default class Match {
   /** The ID of the match. */
-  @observable private _id: string;
+  private _id: string;
+  /** The ID of the round the match is a part of. */
+  private _roundId: string;
   /** The list of participants of the match. */
-  @observable private _participants: Participant[];
+  private _participants: Participant[];
   /** The winner of the match. */
-  @observable private _winner: Participant;
+  private _winner: Participant;
   /** The match conclusion message. */
-  @observable private _message: string;
+  private _message: string;
 
   /** The config of the application. */
   private _config: Config;
 
   /** A counter for generating a unique ID for the match. */
-  private static counter: number = 1;
+  private static counter: { [k: string]: number } = {};
 
   /**
    * Returns the weight of the given participant.
@@ -64,26 +65,32 @@ export default class Match {
     );
 
   /**
-   * Returns the proper name of the given participant.
-   * @return {string} The participant proper name.
-   */
-  private _getParticipantProperName = (participant: Participant): string =>
-    participant.properName;
-
-  /**
    * Returns a random conclusion message for the match.
    * @return {string} The conclusion message.
    */
-  private _getMessage = (): string =>
-    this._config.getRandomMessage(
-      this._winner.properName,
-      this.losers.map(this._getParticipantProperName),
-    );
+  private _getMessage = (): string => this._config.getRandomMessage();
 
-  public constructor(config: Config, participants: Participant[]) {
+  /**
+   * Returns a unique ID for the match based on the round it belongs to.
+   * @param {string} roundId The ID of the round the match belongs to.
+   * @return {string} The unique match ID.
+   */
+  private _getMatchId = (roundId: string): string => {
+    if (!Match.counter[roundId]) {
+      Match.counter[roundId] = 1;
+    }
+    return `${Match.counter[roundId]++}`;
+  };
+
+  public constructor(
+    config: Config,
+    participants: Participant[],
+    roundId: string,
+  ) {
     this._config = config;
 
-    this._id = `match-${Match.counter++}`;
+    this._id = `${this._getMatchId(roundId)}`;
+    this._roundId = roundId;
     this._participants = participants;
     this._winner = this._getWinner();
     this._message = this._getMessage();
@@ -99,17 +106,25 @@ export default class Match {
 
   /**
    * Get the match ID.
-   * @return {string} The unique ID of the match.
+   * @return {string} The unique ID of the match within the context of the round it belongs to.
    */
-  @computed public get id(): string {
+  public get id(): string {
     return this._id;
+  }
+
+  /**
+   * Get the complete match ID (prepended with round ID).
+   * @return {string} The unique complete ID of the match.
+   */
+  public get fullId(): string {
+    return `${this._roundId}:${this._id}`;
   }
 
   /**
    * Get the list of losers of the match.
    * @return {Participant[]} The list of losers.
    */
-  @computed public get losers(): Participant[] {
+  public get losers(): Participant[] {
     return this._participants.filter(this._isNotWinner);
   }
 
@@ -117,7 +132,7 @@ export default class Match {
    * Get the list of participants in the match.
    * @return {Participant[]} The list of participants.
    */
-  @computed public get participants(): Participant[] {
+  public get participants(): Participant[] {
     return this._participants;
   }
 
@@ -125,7 +140,7 @@ export default class Match {
    * Get the winner of the match.
    * @return {Participant} The winner.
    */
-  @computed public get winner(): Participant {
+  public get winner(): Participant {
     return this._winner;
   }
 
@@ -133,7 +148,7 @@ export default class Match {
    * Get the conslusion message of the match.
    * @return {string} The message.
    */
-  @computed public get message(): string {
+  public get message(): string {
     return this._message;
   }
 }

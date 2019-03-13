@@ -1,4 +1,6 @@
-# The Giveaway Tournament App [![CircleCI](https://circleci.com/gh/sabarnac/giveaway-webapp.svg?style=svg)](https://circleci.com/gh/sabarnac/giveaway-webapp)
+# NOTICE: This branch is for add i18n support to the application, which uses react-i18next for handling translations, and i18next-parser for parsing translation points in the code.
+
+# The Giveaway Tournament App [![CircleCI](https://circleci.com/gh/sabarnac/giveaway-webapp/tree/i18n.svg?style=svg)](https://circleci.com/gh/sabarnac/giveaway-webapp/tree/i18n)
 
 Ever wanted to have a giveaway but didn't want to just randomly select a winner? Then just compile this app with a seed, a list of random messages to display for each match, and a list of users, and then just compile and host the generated files on a web server for everyone to see! The fixed seed ensures everyone sees the same results, while the Mersenne Twister engine ensures the random distribution of results is uniform!
 
@@ -29,7 +31,7 @@ Ever wanted to have a giveaway but didn't want to just randomly select a winner?
 
 # Future Plans
 
-- ~~Make the application more customizable (with respect to what text is shown where).~~ (`i18n` branch).
+- ~~Make the application more customizable (with respect to what text is shown where).~~
 - ~~Add support for weights on participants.~~
 - Improve tests
 
@@ -39,4 +41,4 @@ Just follow the first 3 steps in the `Usage` section, and as mentioned, use it a
 
 ### gh-pages branch (Do not modify)
 
-That was it. It's for hosting a sample website, docs generated through `react-styleguidist`, and my own giveaways.
+That was it. It's for hosting a sample website (docs generated through `react-styleguidist`), and my own giveaways.

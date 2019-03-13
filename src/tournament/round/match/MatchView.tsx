@@ -47,9 +47,11 @@ export default (props: MatchViewProps): JSX.Element | null => {
 
   const onMatchComplete = () => {
     setState(3);
-    runOnDelay(() => {
-      props.onMatchComplete();
-    }, getNormalizedSpeed(1000));
+    props.isCurrentMatch
+      ? runOnDelay(() => {
+          props.isCurrentMatch ? props.onMatchComplete() : undefined;
+        }, getNormalizedSpeed(1000))
+      : undefined;
   };
 
   useEffect(runOnPredicate(currentState === 0, updateState));
@@ -108,7 +110,7 @@ export default (props: MatchViewProps): JSX.Element | null => {
             />
             <MatchOverlay
               currentMatch={props.match}
-              show={currentState === 2}
+              show={currentState === 2 && props.isCurrentMatch}
               onOverlayComplete={onMatchComplete}
             />
           </div>

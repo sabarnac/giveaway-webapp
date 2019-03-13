@@ -10,6 +10,7 @@ export const createDummyParticipant = function(id: number = 1): Participant {
 
 export const createDummyConfig = (): Config => {
   const mockConfig: any = {
+    name: "Foobar Giveaway",
     message: ["foobar1", "foobar2", "foobar3", "foobar4"],
     allParticipants: [
       createDummyParticipant(1),
@@ -19,6 +20,10 @@ export const createDummyConfig = (): Config => {
     ],
     participantsPerMatch: 2,
     speed: 1,
+    languages: ["en", "fr"],
+    currentLanguage: "en",
+    getMessageIndex: () => 0,
+    getFormattedMessage: () => "formatted foobar message",
     getRandomMessage: () => "foobar message",
   };
   mockConfig.getInstance = () => mockConfig;
@@ -26,10 +31,11 @@ export const createDummyConfig = (): Config => {
 };
 
 export const createDummyMatch = (): Match => {
-  return new Match(createDummyConfig(), [
-    createDummyParticipant(1),
-    createDummyParticipant(2),
-  ]);
+  return new Match(
+    createDummyConfig(),
+    [createDummyParticipant(1), createDummyParticipant(2)],
+    "1",
+  );
 };
 
 export const createDummyRound = (): Round => {

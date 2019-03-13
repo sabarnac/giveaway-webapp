@@ -1,0 +1,42 @@
+{
+  "serviceWorker": {
+    "offlineMessage": {
+      "title": "Use Offline",
+      "message": "This web application can now be used offline!"
+    },
+    "updateMessage": {
+      "title": "App Updated",
+      "message": "This web application has been updated. Please close all tabs/instances of it and open it again to see the update."
+    }
+  },
+  "tournamentView": {
+    "name": "",
+    "title": "<0>{{tournamentName}}</0> Tournament"
+  },
+  "loserOverlay": {
+    "title": "Losers"
+  },
+  "roundView": {
+    "title": "Round <1>{{roundId}}</1>"
+  },
+  "matchOverlay": {
+    "interimText": "Selecting Winner",
+    "versus": "VS",
+    "messages": [
+      "#loser lost against #winner.",
+      "#winner won against #loser.",
+      "#winner didn't lose to #loser.",
+      "#loser didn't win against #winner.",
+      "#loser lost against #winner who won.",
+      "#winner won against #loser who lost."
+    ],
+    "winnerTitle": "<0></0><1>Won The Match!</1>"
+  },
+  "winnerOverlay": {
+    "message": "<0></0><1>Won The Tournament!</1>"
+  },
+  "#loserOverlay.title_note": "Count is passed for plurals (if required).",
+  "#matchOverlay.messages_note": "Count is passed for plurals (if required).",
+  "#matchOverlay.versus_note": "Count is passed for plurals (if required).",
+  "#tournamentView.name_note": "To be filled in by end developer."
+}

@@ -164,7 +164,7 @@ exports[`MatchOverlay Component. Matches snapshot. 1`] = `
           <h5>
             <strong>
               <em>
-                foobar message
+                formatted foobar message
               </em>
             </strong>
           </h5>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { inject, Observer } from "mobx-react";
+import { Observer } from "mobx-react";
 import "./MatchOverlayInterim.scss";
 import classNames from "classnames";
 import { CSSTransition } from "react-transition-group";
@@ -11,6 +11,7 @@ import {
   isInRange,
 } from "../../../../../util/index";
 import { ClipLoader } from "react-spinners";
+import { Trans, WithTranslation, withTranslation } from "react-i18next";
 
 /**
  * Properties of the match overlay interim React component.
@@ -27,8 +28,8 @@ interface MatchOverlayInterimProps {
 /**
  * React component for the match overlay interim.
  */
-export default inject("config")(
-  (props: MatchOverlayInterimProps): JSX.Element => {
+export default withTranslation()(
+  (props: MatchOverlayInterimProps & WithTranslation): JSX.Element => {
     const [
       currentState,
       updateState,
@@ -68,7 +69,11 @@ export default inject("config")(
                 transition: `opacity ${getNormalizedSpeed(500)}ms ease-in-out`,
               }}
             >
-              <h3>Selecting Winner</h3>
+              <h3>
+                <Trans i18nKey="matchOverlay.interimText">
+                  Selecting Winner
+                </Trans>
+              </h3>
               <ClipLoader sizeUnit={"rem"} size={3} />
             </div>
           </CSSTransition>

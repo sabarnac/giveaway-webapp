@@ -9,6 +9,7 @@ import {
   runOnPredicate,
 } from "../../../util/index";
 import LoserInfo from "./LoserInfo";
+import { Trans, WithTranslation, withTranslation } from "react-i18next";
 
 /**
  * Properties of the loser overlay view React component.
@@ -25,31 +26,40 @@ interface LoserOverlayViewProps {
 /**
  * React component for the loser overlay view.
  */
-export default (props: LoserOverlayViewProps): JSX.Element => {
-  const [currentState, updateState]: AnimationStateHook = useAnimationState();
+export default withTranslation()(
+  (props: LoserOverlayViewProps & WithTranslation): JSX.Element => {
+    const [currentState, updateState]: AnimationStateHook = useAnimationState();
 
-  useEffect(
-    runOnPredicate(currentState === props.losers.length, props.onViewComplete),
-  );
+    useEffect(
+      runOnPredicate(
+        currentState === props.losers.length,
+        props.onViewComplete,
+      ),
+    );
 
-  return (
-    <Observer>
-      {() => (
-        <div className={classNames(props.className)}>
-          <h2>Losers</h2>
-          {props.losers.map(
-            (loser: Participant, index: number): JSX.Element => (
-              <LoserInfo
-                key={loser.name}
-                className={props.className}
-                show={currentState === index}
-                loser={loser}
-                onInfoComplete={updateState}
-              />
-            ),
-          )}
-        </div>
-      )}
-    </Observer>
-  );
-};
+    return (
+      <Observer>
+        {() => (
+          <div className={classNames(props.className)}>
+            <h2>
+              <Trans i18nKey="loserOverlay.title" count={props.losers.length}>
+                Losers
+              </Trans>
+            </h2>
+            {props.losers.map(
+              (loser: Participant, index: number): JSX.Element => (
+                <LoserInfo
+                  key={loser.name}
+                  className={props.className}
+                  show={currentState === index}
+                  loser={loser}
+                  onInfoComplete={updateState}
+                />
+              ),
+            )}
+          </div>
+        )}
+      </Observer>
+    );
+  },
+);
