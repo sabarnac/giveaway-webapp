@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ServiceWorkerAddAlert Component. Matches snapshot. 1`] = `
+<div
+  onConfirm={[Function]}
+  show={true}
+  text="serviceWorker.offlineMessage.message"
+  title="serviceWorker.offlineMessage.title"
+/>
+`;
