@@ -8,6 +8,8 @@ import Config from "../../../store/config/Config";
  * Properties of the language option React component.
  */
 interface LanguageOptionProps {
+  /** CSS class */
+  className: string;
   /** @ignore The application config. */
   config?: Config;
   /** The language option value. */
@@ -22,7 +24,7 @@ export default inject("config")(
     (props: LanguageOptionProps): JSX.Element => (
       <button
         key={props.language}
-        className={classNames("speed-control__option", {
+        className={classNames(`${props.className}__option`, {
           "button-primary": props.language === props.config!.currentLanguage,
         })}
         onClick={() => props.config!.setCurrentLanguage(props.language)}

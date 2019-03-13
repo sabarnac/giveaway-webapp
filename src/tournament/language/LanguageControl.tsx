@@ -18,14 +18,22 @@ interface LanguageControlProps {
  */
 export default inject("config")(
   observer(
-    (props: LanguageControlProps): JSX.Element => (
-      <div className={classNames("language-control")}>
-        {props.config!.languages.map(
-          (language: string): JSX.Element => (
-            <LanguageOption key={`${language}-language`} language={language} />
-          ),
-        )}
-      </div>
-    ),
+    (props: LanguageControlProps): JSX.Element => {
+      const className: string = "language-control";
+
+      return (
+        <div className={classNames(className)}>
+          {props.config!.languages.map(
+            (language: string): JSX.Element => (
+              <LanguageOption
+                key={`${language}-language`}
+                className={className}
+                language={language}
+              />
+            ),
+          )}
+        </div>
+      );
+    },
   ),
 );
