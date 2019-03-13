@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { pure } from "recompose";
 import { inject } from "mobx-react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import ServiceWorkerAlertsConfig from "../store/config/ServiceWorkerAlertsConfig";
@@ -17,20 +18,26 @@ interface ServiceWorkerAddAlertProps {
  */
 export default withTranslation()(
   inject("serviceWorkerAlertsConfig")(
-    (props: ServiceWorkerAddAlertProps & WithTranslation): JSX.Element => {
-      const [show, setShow] = useState(true);
+    pure(
+      (props: ServiceWorkerAddAlertProps & WithTranslation): JSX.Element => {
+        const [show, setShow] = useState(true);
 
-      const title: string = props.t("serviceWorker.offlineMessage.title");
-      const message: string = props.t("serviceWorker.offlineMessage.message");
+        const title: string = props.t("serviceWorker.offlineMessage.title");
+        const message: string = props.t("serviceWorker.offlineMessage.message");
 
-      return (
-        <SweetAlert.default
-          show={show && props.serviceWorkerAlertsConfig!.added}
-          title={title}
-          text={message}
-          onConfirm={() => setShow(false)}
-        />
-      );
-    },
+        return (
+          <SweetAlert.default
+            show={show && props.serviceWorkerAlertsConfig!.added}
+            type="success"
+            title={title}
+            text={message}
+            onConfirm={() => {
+              setShow(false);
+              props.serviceWorkerAlertsConfig!.setIsAdded(false);
+            }}
+          />
+        );
+      },
+    ),
   ),
 );
