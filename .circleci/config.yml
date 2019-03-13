@@ -85,9 +85,10 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0 * * 0"
-          branches:
-            ignore:
-              - gh-pages
+          filters:
+            branches:
+              ignore:
+                - gh-pages
     jobs:
       - build:
           filters:
