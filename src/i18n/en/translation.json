@@ -1,11 +1,17 @@
 {
-  "#_note": "Do not keep comments in your translation files (other than this one).",
+  "tournamentView": {
+    "name": "",
+    "title": "<0>{{tournamentName}}</0> Tournament"
+  },
   "loserOverlay": {
-    "title": "Losers",
-    "#_title_note": "Count is passed for plurals (if required)."
+    "title": "Losers"
+  },
+  "roundView": {
+    "title": "Round <1>{{roundId}}</1>"
   },
   "matchOverlay": {
     "interimText": "Selecting Winner",
+    "versus": "VS",
     "messages": [
       "#loser lost against #winner.",
       "#winner won against #loser.",
@@ -14,20 +20,13 @@
       "#loser lost against #winner who won.",
       "#winner won against #loser who lost."
     ],
-    "#_messages_note": "Count is passed for plurals (if required).",
-    "versus": "VS",
-    "#_versus_note": "Count is passed for plurals (if required).",
     "winnerTitle": "Won The Match!"
-  },
-  "roundView": {
-    "title": "Round <1>{{roundId}}</1>"
-  },
-  "tournamentView": {
-    "name": "",
-    "#_name_note": "To be filled in by end developer.",
-    "title": "<0>{{tournamentName}}</0> Tournament"
   },
   "winnerOverlay": {
     "message": "Won The Giveaway!"
-  }
+  },
+  "#loserOverlay.title_note": "Count is passed for plurals (if required).",
+  "#matchOverlay.messages_note": "Count is passed for plurals (if required).",
+  "#matchOverlay.versus_note": "Count is passed for plurals (if required).",
+  "#tournamentView.name_note": "To be filled in by end developer."
 }

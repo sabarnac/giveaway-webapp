@@ -1,0 +1,32 @@
+{
+  "tournamentView": {
+    "name": "NameO",
+    "title": "<0>{{tournamentName}}</0> Tournamento"
+  },
+  "loserOverlay": {
+    "title": "Loserso"
+  },
+  "roundView": {
+    "title": "Roundo <1>{{roundId}}</1>"
+  },
+  "matchOverlay": {
+    "interimText": "Selecting Winnero",
+    "versus": "VSo",
+    "messages": [
+      "#loser lost againsto #winner.",
+      "#winner won againsto #loser.",
+      "#winner didn't loseo to #loser.",
+      "#loser didn't win againsto #winner.",
+      "#loser lost against #winner who wono.",
+      "#winner won against #loser who losto."
+    ],
+    "winnerTitle": "Won The Matcho!"
+  },
+  "winnerOverlay": {
+    "message": "Won The Giveawayo!"
+  },
+  "#loserOverlay.title_note": "Count is passed for plurals (if required).",
+  "#matchOverlay.messages_note": "Count is passed for plurals (if required).",
+  "#matchOverlay.versus_note": "Count is passed for plurals (if required).",
+  "#tournamentView.name_note": "To be filled in by end developer."
+}

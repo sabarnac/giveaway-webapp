@@ -20,6 +20,8 @@ export const createDummyConfig = (): Config => {
     ],
     participantsPerMatch: 2,
     speed: 1,
+    languages: ["en", "fr"],
+    currentLanguage: "en",
     getMessageIndex: () => 0,
     getFormattedMessage: () => "formatted foobar message",
     getRandomMessage: () => "foobar message",
