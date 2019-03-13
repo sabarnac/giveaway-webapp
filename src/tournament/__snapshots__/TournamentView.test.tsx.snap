@@ -489,13 +489,13 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
     className="language-control"
   >
     <button
-      className="speed-control__option button-primary"
+      className="language-control__option button-primary"
       onClick={[Function]}
     >
       en
     </button>
     <button
-      className="speed-control__option"
+      className="language-control__option"
       onClick={[Function]}
     >
       fr

@@ -2,7 +2,7 @@
 
 exports[`LanguageOption Component. Matches snapshot. 1`] = `
 <button
-  className="speed-control__option button-primary"
+  className="undefined__option button-primary"
   onClick={[Function]}
 >
   en
