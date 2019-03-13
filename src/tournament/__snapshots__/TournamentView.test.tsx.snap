@@ -501,5 +501,19 @@ exports[`TournamentView Component. Matches snapshot. 1`] = `
       fr
     </button>
   </div>
+  <div
+    onConfirm={[Function]}
+    show={true}
+    text="serviceWorker.offlineMessage.message"
+    title="serviceWorker.offlineMessage.title"
+    type="success"
+  />
+  <div
+    onConfirm={[Function]}
+    show={true}
+    text="serviceWorker.updateMessage.message"
+    title="serviceWorker.updateMessage.title"
+    type="warning"
+  />
 </div>
 `;
