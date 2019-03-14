@@ -7,31 +7,30 @@ export default undefined;
     Object.defineProperties(Array.prototype, {
       flat: {
         configurable: true,
-        value: function flat() {
-          let depth = isNaN(arguments[0]) ? 1 : Number(arguments[0]);
-          const stack = Array.prototype.slice.call(this);
-          const result = [];
-
-          while (depth && stack.length) {
-            const next = stack.pop();
-
-            if (Object(next) instanceof Array) {
-              --depth;
-
-              Array.prototype.push.apply(stack, next);
-            } else {
-              result.unshift(next);
+        value: function flat(depth: number = 1) {
+          let remainDepth: number = depth;
+          let result: any = [...this];
+          let stack: any[] = [];
+          while (remainDepth) {
+            stack = [...result];
+            result = [];
+            while (stack.length) {
+              let top: any = stack.pop();
+              if (!(Object(top) instanceof Array)) {
+                top = [top];
+              }
+              result.unshift(...top);
             }
+            --remainDepth;
           }
-
-          return result.concat(stack);
+          return result;
         },
         writable: true,
       },
       flatMap: {
         configurable: true,
-        value: function flatMap() {
-          return Array.prototype.map.apply(this, arguments as any).flat();
+        value: function flatMap(callback: Function) {
+          return this.map(callback).flat();
         },
         writable: true,
       },

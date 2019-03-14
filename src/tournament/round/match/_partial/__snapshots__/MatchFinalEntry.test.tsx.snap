@@ -35,8 +35,8 @@ Array [
           className="participant-entry__avatar"
         >
           <img
-            alt="fozbaz-1"
-            src="https://api.adorable.io/avatars/480/fozbaz-1"
+            alt="foobar-1"
+            src="foobar-1"
           />
         </div>
         <div
@@ -82,8 +82,8 @@ Array [
           className="participant-entry__avatar"
         >
           <img
-            alt="fozbaz-2"
-            src="https://api.adorable.io/avatars/480/fozbaz-2"
+            alt="foobar-2"
+            src="foobar-2"
           />
         </div>
         <div
@@ -131,8 +131,8 @@ exports[`MatchFinalEntry Component. Current But Not Actual Match. Matches snapsh
         className="participant-entry__avatar"
       >
         <img
-          alt="fozbaz-1"
-          src="https://api.adorable.io/avatars/480/fozbaz-1"
+          alt="foobar-1"
+          src="foobar-1"
         />
       </div>
       <div
@@ -179,8 +179,8 @@ exports[`MatchFinalEntry Component. Not Current But Actual Match. Matches snapsh
         className="participant-entry__avatar"
       >
         <img
-          alt="fozbaz-1"
-          src="https://api.adorable.io/avatars/480/fozbaz-1"
+          alt="foobar-1"
+          src="foobar-1"
         />
       </div>
       <div
@@ -227,8 +227,8 @@ exports[`MatchFinalEntry Component. Not Current Nor Actual Match. Matches snapsh
         className="participant-entry__avatar"
       >
         <img
-          alt="fozbaz-1"
-          src="https://api.adorable.io/avatars/480/fozbaz-1"
+          alt="foobar-1"
+          src="foobar-1"
         />
       </div>
       <div

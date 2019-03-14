@@ -17,6 +17,8 @@ export default class Match {
   private _winner: Participant;
   /** The match conclusion message. */
   private _message: string;
+  /** The GCD of all participant weights. */
+  private _participantWeightGcd: number;
 
   /** The config of the application. */
   private _config: Config;
@@ -50,10 +52,13 @@ export default class Match {
    */
   private _cloneParticipantByWeight = (
     participant: Participant,
-  ): Participant[] =>
-    new Array(participant.weight / this._getParticipantWeightsGcd()).fill(
-      participant,
-    );
+  ): Participant[] => {
+    const participants: Participant[] = [];
+    for (let i = 0; i < participant.weight / this._participantWeightGcd; i++) {
+      participants.push(participant);
+    }
+    return participants;
+  };
 
   /**
    * Picks and returns a winner of the match from the list of participants at random, with participant weight factored in.
@@ -92,6 +97,7 @@ export default class Match {
     this._id = `${this._getMatchId(roundId)}`;
     this._roundId = roundId;
     this._participants = participants;
+    this._participantWeightGcd = this._getParticipantWeightsGcd();
     this._winner = this._getWinner();
     this._message = this._getMessage();
   }

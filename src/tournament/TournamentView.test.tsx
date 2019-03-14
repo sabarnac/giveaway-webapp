@@ -12,7 +12,7 @@ describe("TournamentView Component.", () => {
         tournament={tournament}
         roundId={tournament.firstRound.id}
         matchId={tournament.firstRound.firstMatch.id}
-      />
+      />,
     );
 
     expect(component.toJSON()).toMatchSnapshot();

@@ -12,8 +12,8 @@ exports[`MatchOverlayParticipants Component. Matches snapshot. 1`] = `
         className="participant-card__avatar"
       >
         <img
-          alt="fozbaz-1"
-          src="https://api.adorable.io/avatars/480/fozbaz-1"
+          alt="foobar-1"
+          src="foobar-1"
         />
       </div>
       <div
@@ -38,8 +38,8 @@ exports[`MatchOverlayParticipants Component. Matches snapshot. 1`] = `
         className="participant-card__avatar"
       >
         <img
-          alt="fozbaz-2"
-          src="https://api.adorable.io/avatars/480/fozbaz-2"
+          alt="foobar-2"
+          src="foobar-2"
         />
       </div>
       <div
