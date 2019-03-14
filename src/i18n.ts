@@ -52,7 +52,6 @@ i18n
     },
     react: {
       wait: true,
-      defaultTransParent: "span",
     },
   });
 
