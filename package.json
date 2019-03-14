@@ -45,9 +45,8 @@
     "build": "react-scripts build && sw-precache-cra --config sw-config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "copy-config": "cp -r ./.circleci ./build/.circleci",
-    "predeploy": "npm run build && npm run styleguide:build && npm run copy-config",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build && npm run styleguide:build",
+    "deploy": "gh-pages -m 'Updates [ci skip]' -d build",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
     "translations": "i18next -c i18next-parser.config.js"
