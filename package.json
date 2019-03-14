@@ -70,6 +70,7 @@
     "gcd": "0.0.1",
     "gh-pages": "^2.0.1",
     "i18next-parser": "^1.0.0-beta34",
+    "license-extractor": "^1.0.4",
     "mobx-react-devtools": "^6.0.3",
     "react-docgen-typescript": "^1.12.3",
     "react-styleguidist": "^9.0.0",
