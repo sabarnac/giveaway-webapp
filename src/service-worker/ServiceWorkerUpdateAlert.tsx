@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { pure } from "recompose";
 import { inject } from "mobx-react";
 import { WithTranslation, withTranslation } from "react-i18next";
@@ -24,10 +24,6 @@ export default withTranslation()(
 
         const title: string = props.t("serviceWorker.updateMessage.title");
         const message: string = props.t("serviceWorker.updateMessage.message");
-
-        useEffect(() => {
-          console.log(props);
-        });
 
         return (
           <SweetAlert.default
