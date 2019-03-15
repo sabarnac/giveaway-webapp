@@ -14,7 +14,7 @@ const isString = require("is-string");
 /**
  * Properties of the tournament title React component.
  */
-interface TournamentTitleProps {
+interface TournamentTitleProps extends WithTranslation {
   /** @ignore The application config. */
   config?: Config;
 }
@@ -24,7 +24,7 @@ interface TournamentTitleProps {
  */
 export default withTranslation()(
   inject("config")(
-    (props: TournamentTitleProps & WithTranslation): JSX.Element => {
+    (props: TournamentTitleProps): JSX.Element => {
       const { t }: UseTranslationResponse = useTranslation();
       const translatedTournamentName: string = t("tournamentView.name");
 

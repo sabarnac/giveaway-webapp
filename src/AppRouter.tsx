@@ -7,14 +7,6 @@ import TournamentView from "./tournament/TournamentView";
 import { getMatchRedirect } from "./util";
 
 /**
- * Properties of the application router React component.
- */
-interface AppRouterProps {
-  /** The details of the tournament. */
-  tournament: Tournament;
-}
-
-/**
  * Route related properties of the application redirect React component.
  */
 interface AppRedirectProps {
@@ -29,6 +21,14 @@ interface AppRedirectProps {
 }
 
 /**
+ * Properties of the application router React component.
+ */
+interface AppRouterProps extends RouteComponentProps<AppRedirectProps> {
+  /** The details of the tournament. */
+  tournament: Tournament;
+}
+
+/**
  * React component that returns a redirect depending upon what route properties are present.
  */
 const AppRedirect = (props: AppRedirectProps): JSX.Element =>
@@ -40,9 +40,7 @@ const AppRedirect = (props: AppRedirectProps): JSX.Element =>
  * React component for the application router.
  */
 @observer
-class AppRouter extends Component<
-  AppRouterProps & RouteComponentProps<AppRedirectProps>
-> {
+class AppRouter extends Component<AppRouterProps> {
   /**
    * Returns the route params.
    * @return {AppRedirectProps} The route params.

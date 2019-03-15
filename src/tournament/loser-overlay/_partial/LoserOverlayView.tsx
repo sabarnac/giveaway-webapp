@@ -14,7 +14,7 @@ import { Trans, WithTranslation, withTranslation } from "react-i18next";
 /**
  * Properties of the loser overlay view React component.
  */
-interface LoserOverlayViewProps {
+interface LoserOverlayViewProps extends WithTranslation {
   /** CSS class */
   className: string;
   /** The losers of a round. */
@@ -27,7 +27,7 @@ interface LoserOverlayViewProps {
  * React component for the loser overlay view.
  */
 export default withTranslation()(
-  (props: LoserOverlayViewProps & WithTranslation): JSX.Element => {
+  (props: LoserOverlayViewProps): JSX.Element => {
     const [currentState, updateState]: AnimationStateHook = useAnimationState();
 
     useEffect(

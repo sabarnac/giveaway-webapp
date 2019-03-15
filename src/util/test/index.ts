@@ -3,6 +3,7 @@ import Config from "../../store/config/Config";
 import Participant from "../../store/round/match/participant/Participant";
 import Round from "../../store/round/Round";
 import Tournament from "../../store/Tournament";
+import { WithTranslation } from "react-i18next";
 
 export const createDummyParticipant = function(id: number = 1): Participant {
   return new Participant(
@@ -59,3 +60,9 @@ export const createDummyRound = (): Round => {
 export const createDummyTournament = (): Tournament => {
   return new Tournament(createDummyConfig());
 };
+
+export const createDummyTranslationProps = (): WithTranslation => ({
+  t: (key: any) => key,
+  tReady: true,
+  i18n: {} as any,
+});

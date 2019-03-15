@@ -27,7 +27,7 @@ import Participant from "../../../../../store/round/match/participant/Participan
 /**
  * Properties of the match overlay winner React component.
  */
-interface MatchOverlayWinnerProps {
+interface MatchOverlayWinnerProps extends RouteComponentProps, WithTranslation {
   /** @ignore The application config. */
   config?: Config;
   /** CSS class */
@@ -48,9 +48,7 @@ const STOP_QUERY_FLAG: string = "stop";
 export default withTranslation()(
   inject("config")(
     withRouter(
-      (
-        props: MatchOverlayWinnerProps & RouteComponentProps & WithTranslation,
-      ): JSX.Element => {
+      (props: MatchOverlayWinnerProps): JSX.Element => {
         const [
           currentState,
           updateState,

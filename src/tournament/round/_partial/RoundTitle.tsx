@@ -7,7 +7,7 @@ import { Trans, withTranslation, WithTranslation } from "react-i18next";
 /**
  * Properties of the round title React component.
  */
-interface RoundTitleProps {
+interface RoundTitleProps extends WithTranslation {
   /** The details of the current round. */
   round: Round;
 }
@@ -17,7 +17,7 @@ interface RoundTitleProps {
  */
 export default withTranslation()(
   observer(
-    (props: RoundTitleProps & WithTranslation): JSX.Element => {
+    (props: RoundTitleProps): JSX.Element => {
       const roundId: string = props.round.id;
       return (
         <h2>

@@ -10,7 +10,7 @@ import { Trans, WithTranslation, withTranslation } from "react-i18next";
 /**
  * Properties of the match overlay participants React component.
  */
-interface MatchOverlayParticipantsProps {
+interface MatchOverlayParticipantsProps extends WithTranslation {
   /** CSS class */
   className: string;
   /** The current match details. */
@@ -22,7 +22,7 @@ interface MatchOverlayParticipantsProps {
  */
 export default withTranslation()(
   observer(
-    (props: MatchOverlayParticipantsProps & WithTranslation): JSX.Element => (
+    (props: MatchOverlayParticipantsProps): JSX.Element => (
       <div className={classNames(`${props.className}__list`)}>
         {props.currentMatch.participants
           .flatMap(

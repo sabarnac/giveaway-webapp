@@ -8,7 +8,7 @@ const SweetAlert = require("sweetalert2-react");
 /**
  * Properties of the service worker add alert React component.
  */
-interface ServiceWorkerAddAlertProps {
+interface ServiceWorkerAddAlertProps extends WithTranslation {
   /** @ignore The service worker alerts config. */
   serviceWorkerAlertsConfig?: ServiceWorkerAlertsConfig;
 }
@@ -19,7 +19,7 @@ interface ServiceWorkerAddAlertProps {
 export default withTranslation()(
   inject("serviceWorkerAlertsConfig")(
     pure(
-      (props: ServiceWorkerAddAlertProps & WithTranslation): JSX.Element => {
+      (props: ServiceWorkerAddAlertProps): JSX.Element => {
         const [show, setShow] = useState(true);
 
         const title: string = props.t("serviceWorker.offlineMessage.title");

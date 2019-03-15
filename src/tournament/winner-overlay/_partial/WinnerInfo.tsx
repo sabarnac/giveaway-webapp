@@ -9,7 +9,7 @@ import { Trans, withTranslation, WithTranslation } from "react-i18next";
 /**
  * Properties of the winner info React component.
  */
-interface WinnerInfoProps {
+interface WinnerInfoProps extends WithTranslation {
   /** CSS class */
   className: string;
   /** The tournament winner. */
@@ -21,7 +21,7 @@ interface WinnerInfoProps {
  */
 export default withTranslation()(
   observer(
-    (props: WinnerInfoProps & WithTranslation): JSX.Element => (
+    (props: WinnerInfoProps): JSX.Element => (
       <div className={classNames(`${props.className}__winner`)}>
         <Trans i18nKey="winnerOverlay.message">
           <ParticipantCard participant={props.winner} />

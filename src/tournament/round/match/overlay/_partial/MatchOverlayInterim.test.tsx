@@ -1,6 +1,7 @@
 import React from "react";
-import MatchOverlayInterim from "./MatchOverlayInterim";
+import MatchOverlayInterim from "./MatchOverlayInterim.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
+import { createDummyTranslationProps } from "../../../../../util/test";
 
 describe("MatchOverlayInterim Component.", () => {
   it("Matches snapshot.", () => {
@@ -9,6 +10,7 @@ describe("MatchOverlayInterim Component.", () => {
         show={true}
         className="foobar"
         onInterimComplete={() => {}}
+        {...createDummyTranslationProps()}
       />,
     );
 
