@@ -1,34 +1,3 @@
-import React from "react";
-import { observer } from "mobx-react";
-import classNames from "classnames";
-import Participant from "../../../../../../store/round/match/participant/Participant";
+import ParticipantAvatarView from "./ParticipantAvatarView.react";
 
-/**
- * Properties of the participant avatar React component.
- */
-interface ParticipantAvatarViewProps {
-  /** CSS class */
-  className: string;
-  /** The participant details. */
-  participant: Participant;
-}
-
-/**
- * Function that returns a React component for the participant avatar.
- */
-export default observer(
-  (props: ParticipantAvatarViewProps): JSX.Element | null => {
-    if (props.participant.avatar === undefined) {
-      return null;
-    }
-
-    return (
-      <div className={classNames(`${props.className}__avatar`)}>
-        <img
-          src={props.participant.avatar.url}
-          alt={props.participant.avatar.altText}
-        />
-      </div>
-    );
-  },
-);
+export default ParticipantAvatarView;

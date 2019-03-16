@@ -1,5 +1,5 @@
 import React from "react";
-import ParticipantAvatarView from "./ParticipantAvatarView";
+import ParticipantAvatarView from "./ParticipantAvatarView.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyParticipant } from "../../../../../../util/test/index";
 import Participant from "../../../../../../store/round/match/participant/Participant";
