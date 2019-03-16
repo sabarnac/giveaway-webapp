@@ -1,5 +1,5 @@
 import React from "react";
-import SpeedControl from "./SpeedControl";
+import SpeedControl from "./SpeedControl.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
 
 describe("SpeedControl Component.", () => {
