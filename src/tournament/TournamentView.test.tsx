@@ -1,5 +1,5 @@
 import React from "react";
-import TournamentView from "./TournamentView";
+import TournamentView from "./TournamentView.react";
 import Tournament from "../store/Tournament";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyTournament } from "../util/test";
