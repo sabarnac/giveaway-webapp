@@ -1,18 +1,12 @@
-import React from "react";
-import { Observer, inject } from "mobx-react";
+import { inject } from "mobx-react";
 import { withRouter } from "react-router";
 import { withTranslation } from "react-i18next";
-import MatchOverlayWinner, {
-  MatchOverlayWinnerProps,
-} from "./MatchOverlayWinner.react";
+import MatchOverlayWinner from "./MatchOverlayWinner.react";
+import { createObserver } from "../../../../../util";
 
 /**
  * React component for the match overlay winner.
  */
 export default inject("config")(
-  withTranslation()(
-    withRouter((props: MatchOverlayWinnerProps) => (
-      <Observer>{() => <MatchOverlayWinner {...props} />}</Observer>
-    )),
-  ),
+  withTranslation()(withRouter(createObserver(MatchOverlayWinner))),
 );

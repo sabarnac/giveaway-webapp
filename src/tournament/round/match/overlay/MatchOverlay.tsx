@@ -1,10 +1,7 @@
-import React from "react";
-import { Observer } from "mobx-react";
-import MatchOverlay, { MatchOverlayProps } from "./MatchOverlay.react";
+import MatchOverlay from "./MatchOverlay.react";
+import { createObserver } from "../../../../util";
 
 /**
  * React component for the match overlay.
  */
-export default (props: MatchOverlayProps): JSX.Element => (
-  <Observer>{() => <MatchOverlay {...props} />}</Observer>
-);
+export default createObserver(MatchOverlay);

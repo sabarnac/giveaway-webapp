@@ -1,7 +1,8 @@
-import React from "react";
+import React, { ComponentType } from "react";
 import { Dispatch, useState } from "react";
 import Config from "../store/config/Config";
 import { Redirect } from "react-router";
+import { Observer } from "mobx-react";
 
 /**
  * Returns if it is currently a dev environment.
@@ -100,4 +101,15 @@ export const runOnPredicate = (
  */
 export const getMatchRedirect = (roundId?: string, matchId?: string) => (
   <Redirect to={`/round/${roundId}/match/${matchId}`} />
+);
+
+/**
+ * Returns a HOC with the given component wrapped by a MobX Observer component.
+ * @param {ComponentType<T>} Component The component that should be under an observer.
+ * @returns {(props: T) => JSX.Element} A HOC that wraps the given component under an observer.
+ */
+export const createObserver = <T extends {}>(
+  Component: ComponentType<T>,
+): ((props: T) => JSX.Element) => (props: T): JSX.Element => (
+  <Observer>{() => <Component {...props} />}</Observer>
 );

@@ -1,13 +1,8 @@
-import React from "react";
-import { Observer } from "mobx-react";
-import MatchOverlayInterim, {
-  MatchOverlayInterimProps,
-} from "./MatchOverlayInterim.react";
+import MatchOverlayInterim from "./MatchOverlayInterim.react";
 import { withTranslation } from "react-i18next";
+import { createObserver } from "../../../../../util";
 
 /**
  * React component for the match overlay interim.
  */
-export default withTranslation()((props: MatchOverlayInterimProps) => (
-  <Observer>{() => <MatchOverlayInterim {...props} />}</Observer>
-));
+export default withTranslation()(createObserver(MatchOverlayInterim));
