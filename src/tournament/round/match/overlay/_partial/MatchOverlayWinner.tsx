@@ -1,6 +1,5 @@
 import React from "react";
 import { Observer, inject } from "mobx-react";
-import "./MatchOverlayWinner.scss";
 import { withRouter } from "react-router";
 import { withTranslation } from "react-i18next";
 import MatchOverlayWinner, {
