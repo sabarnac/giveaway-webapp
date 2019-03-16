@@ -2,7 +2,7 @@
 
 exports[`SpeedOption Component. Matches snapshot. 1`] = `
 <button
-  className="speed-control__option button-primary"
+  className="foobar__option button-primary"
   onClick={[Function]}
 >
   1x
