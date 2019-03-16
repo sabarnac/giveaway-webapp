@@ -1,5 +1,5 @@
 import React from "react";
-import WinnerOverlayView from "./WinnerOverlayView";
+import WinnerOverlayView from "./WinnerOverlayView.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import Participant from "../../../store/round/match/participant/Participant";
 import { createDummyParticipant } from "../../../util/test";
