@@ -1,5 +1,5 @@
 import React from "react";
-import LoserOverlayView from "./LoserOverlayView";
+import LoserOverlayView from "./LoserOverlayView.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyRound } from "../../util/test";
 import Round from "../../store/round/Round";
