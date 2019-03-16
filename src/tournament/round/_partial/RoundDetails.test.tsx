@@ -1,5 +1,5 @@
 import React from "react";
-import RoundDetails from "./RoundDetails";
+import RoundDetails from "./RoundDetails.react";
 import Round from "../../../store/round/Round";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyRound } from "../../../util/test";
