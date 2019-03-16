@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { pure } from "recompose";
 import { WithTranslation } from "react-i18next";
 import ServiceWorkerAlertsConfig from "../store/config/ServiceWorkerAlertsConfig";
 const SweetAlert = require("sweetalert2-react");
@@ -15,24 +14,22 @@ interface ServiceWorkerAddAlertProps extends WithTranslation {
 /**
  * React component for the service worker add alert.
  */
-export default pure(
-  (props: ServiceWorkerAddAlertProps): JSX.Element => {
-    const [show, setShow] = useState(true);
+export default (props: ServiceWorkerAddAlertProps): JSX.Element => {
+  const [show, setShow] = useState(true);
 
-    const title: string = props.t("serviceWorker.offlineMessage.title");
-    const message: string = props.t("serviceWorker.offlineMessage.message");
+  const title: string = props.t("serviceWorker.offlineMessage.title");
+  const message: string = props.t("serviceWorker.offlineMessage.message");
 
-    return (
-      <SweetAlert.default
-        show={show && props.serviceWorkerAlertsConfig!.added}
-        type="success"
-        title={title}
-        text={message}
-        onConfirm={() => {
-          setShow(false);
-          props.serviceWorkerAlertsConfig!.setIsAdded(false);
-        }}
-      />
-    );
-  },
-);
+  return (
+    <SweetAlert.default
+      show={show && props.serviceWorkerAlertsConfig!.added}
+      type="success"
+      title={title}
+      text={message}
+      onConfirm={() => {
+        setShow(false);
+        props.serviceWorkerAlertsConfig!.setIsAdded(false);
+      }}
+    />
+  );
+};
