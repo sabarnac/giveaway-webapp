@@ -2,7 +2,7 @@
 
 exports[`LanguageOption Component. Matches snapshot. 1`] = `
 <button
-  className="undefined__option button-primary"
+  className="foobar__option button-primary"
   onClick={[Function]}
 >
   en
