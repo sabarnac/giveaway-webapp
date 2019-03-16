@@ -1,5 +1,5 @@
 import React from "react";
-import LoserInfo from "./LoserInfo";
+import LoserInfo from "./LoserInfo.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyParticipant } from "../../../util/test";
 import Participant from "../../../store/round/match/participant/Participant";
