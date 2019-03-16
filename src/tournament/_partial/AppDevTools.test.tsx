@@ -1,5 +1,5 @@
 import React from "react";
-import AppDevTools from "./AppDevTools";
+import AppDevTools from "./AppDevTools.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
 
 describe("AppDevTools Component.", () => {
