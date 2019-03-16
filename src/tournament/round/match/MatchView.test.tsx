@@ -1,5 +1,5 @@
 import React from "react";
-import MatchView from "./MatchView";
+import MatchView from "./MatchView.react";
 import Match from "../../../store/round/match/Match";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyMatch } from "../../../util/test";
@@ -13,7 +13,7 @@ describe("MatchView Component.", () => {
           match={match}
           onMatchComplete={() => {}}
           isCurrentMatch={true}
-        />
+        />,
       );
 
       expect(component.toJSON()).toMatchSnapshot();
@@ -27,7 +27,7 @@ describe("MatchView Component.", () => {
           match={match}
           onMatchComplete={() => {}}
           isCurrentMatch={false}
-        />
+        />,
       );
 
       expect(component.toJSON()).toMatchSnapshot();
