@@ -1,5 +1,5 @@
 import React from "react";
-import MatchOverlay from "./MatchOverlay";
+import MatchOverlay from "./MatchOverlay.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyMatch } from "../../../../util/test";
 
