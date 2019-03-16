@@ -6,10 +6,8 @@ import { Observer } from "mobx-react";
 
 /**
  * Returns if it is currently a dev environment.
- * @return {boolean} Whether it is currently a dev environment.
  */
-export const isDevEnvironment = (): boolean =>
-  process.env.NODE_ENV === "development";
+export const isDevEnvironment: boolean = process.env.NODE_ENV === "development";
 
 /**
  * Returns a random avatar image URL.

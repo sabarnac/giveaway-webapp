@@ -16,7 +16,7 @@
     "Update the languages list you require (always keep `en` as fallback),",
     "run `npm run translations` to generate the translation files for those languages (if not present already),",
     "and modify those translation file values. Important comments are available in the `en` translation file.",
-    "Also update `src/i18n.ts` to include all language resource files. Use the `en` one as an example."
+    "Also update `src/store/config/i18n.ts` to include all language resource files. Use the `en` one as an example."
   ],
   "users": [
     { "name": "FOO", "weight": 2 },
