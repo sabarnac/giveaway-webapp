@@ -13,7 +13,7 @@ import { Trans, WithTranslation } from "react-i18next";
 /**
  * Properties of the loser overlay view React component.
  */
-interface LoserOverlayViewProps extends WithTranslation {
+export interface LoserOverlayViewProps extends WithTranslation {
   /** CSS class */
   className: string;
   /** The losers of a round. */

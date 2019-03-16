@@ -1,0 +1,5 @@
+Usage:
+
+```tsx
+<LanguageControl />
+```

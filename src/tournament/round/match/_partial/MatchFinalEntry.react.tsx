@@ -16,7 +16,7 @@ import MatchWinnerView from "./MatchWinnerView";
 /**
  * Properties of the match final entry React component.
  */
-interface MatchFinalEntryProps {
+export interface MatchFinalEntryProps {
   /** CSS class */
   className: string;
   /** Whether it is the currently ongoing match. */

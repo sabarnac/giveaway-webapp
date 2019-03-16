@@ -8,7 +8,7 @@ import { Trans, WithTranslation } from "react-i18next";
 /**
  * Properties of the winner info React component.
  */
-interface WinnerInfoProps extends WithTranslation {
+export interface WinnerInfoProps extends WithTranslation {
   /** CSS class */
   className: string;
   /** The tournament winner. */

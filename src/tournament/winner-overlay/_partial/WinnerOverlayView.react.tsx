@@ -7,7 +7,7 @@ import WinnerInfo from "./WinnerInfo";
 /**
  * Properties of the winner overlay main view React component.
  */
-interface WinnerOverlayViewProps {
+export interface WinnerOverlayViewProps {
   /** CSS class */
   className: string;
   /** The tournament winner. */

@@ -16,7 +16,7 @@ import { CSSTransition } from "react-transition-group";
 /**
  * Properties of the round view React component.
  */
-interface RoundViewProps {
+export interface RoundViewProps {
   /** Whether to show the round or not. */
   show: boolean;
   /** The ID of the current match. */

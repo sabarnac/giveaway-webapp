@@ -12,7 +12,7 @@ const isString = require("is-string");
 /**
  * Properties of the tournament title React component.
  */
-interface TournamentTitleProps extends WithTranslation {
+export interface TournamentTitleProps extends WithTranslation {
   /** @ignore The application config. */
   config?: Config;
 }

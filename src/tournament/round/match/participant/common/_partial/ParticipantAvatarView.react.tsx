@@ -5,7 +5,7 @@ import Participant from "../../../../../../store/round/match/participant/Partici
 /**
  * Properties of the participant avatar React component.
  */
-interface ParticipantAvatarViewProps {
+export interface ParticipantAvatarViewProps {
   /** CSS class */
   className: string;
   /** The participant details. */

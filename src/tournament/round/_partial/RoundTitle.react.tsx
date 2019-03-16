@@ -6,7 +6,7 @@ import { Trans, WithTranslation } from "react-i18next";
 /**
  * Properties of the round title React component.
  */
-interface RoundTitleProps extends WithTranslation {
+export interface RoundTitleProps extends WithTranslation {
   /** The details of the current round. */
   round: Round;
 }

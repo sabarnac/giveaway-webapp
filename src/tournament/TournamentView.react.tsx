@@ -23,7 +23,7 @@ import ServiceWorkerAddAlert from "../service-worker/ServiceWorkerAddAlert";
 /**
  * Properties of the tournament view React component.
  */
-interface TournamentViewProps {
+export interface TournamentViewProps {
   /** The ID of the current round. */
   roundId: string;
   /** The ID of the current match. */

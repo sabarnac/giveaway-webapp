@@ -9,7 +9,7 @@ import { getMatchRedirect } from "./util";
 /**
  * Route related properties of the application redirect React component.
  */
-interface AppRedirectProps {
+export interface AppRedirectProps {
   /** The ID of the current round. */
   roundId?: string;
   /** The ID of the current match. */
@@ -23,7 +23,7 @@ interface AppRedirectProps {
 /**
  * Properties of the application router React component.
  */
-interface AppRouterProps extends RouteComponentProps<AppRedirectProps> {
+export interface AppRouterProps extends RouteComponentProps<AppRedirectProps> {
   /** The details of the tournament. */
   tournament: Tournament;
 }

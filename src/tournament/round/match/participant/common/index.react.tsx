@@ -7,7 +7,7 @@ import ParticipantNameView from "./_partial/ParticipantNameView";
 /**
  * Properties of the participant view React component.
  */
-interface ParticipantViewProps {
+export interface ParticipantViewProps {
   /** The participant details. */
   participant: Participant;
   /** Whether to invert the color of the participant view or not. */

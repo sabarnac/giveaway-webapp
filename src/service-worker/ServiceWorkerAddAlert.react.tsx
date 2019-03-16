@@ -6,7 +6,7 @@ const SweetAlert = require("sweetalert2-react");
 /**
  * Properties of the service worker add alert React component.
  */
-interface ServiceWorkerAddAlertProps extends WithTranslation {
+export interface ServiceWorkerAddAlertProps extends WithTranslation {
   /** @ignore The service worker alerts config. */
   serviceWorkerAlertsConfig?: ServiceWorkerAlertsConfig;
 }

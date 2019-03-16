@@ -6,7 +6,7 @@ import Config from "../../../store/config/Config";
 /**
  * Properties of the language option React component.
  */
-interface LanguageOptionProps {
+export interface LanguageOptionProps {
   /** CSS class */
   className: string;
   /** @ignore The application config. */

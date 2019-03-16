@@ -5,7 +5,7 @@ import Participant from "../../../../../../store/round/match/participant/Partici
 /**
  * Properties of the participant name React component.
  */
-interface ParticipantNameViewProps {
+export interface ParticipantNameViewProps {
   /** CSS class */
   className: string;
   /** The participant details. */

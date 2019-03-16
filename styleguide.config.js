@@ -3,9 +3,12 @@ module.exports = {
   ignore: [
     "**/__tests__/**",
     "**/*.test.{js,jsx,ts,tsx}",
+    "**/*.react.{js,jsx,ts,tsx}",
     "**/*.spec.{js,jsx,ts,tsx}",
     "**/*.d.ts",
+    "src/**/_partial/*.{js,jsx,ts,tsx}",
     "src/store/config/RandomGenerator.ts",
+    "src/store/config/i18n.ts",
     "src/util/**/*",
     "src/index.tsx",
     "src/setupTests.tsx",

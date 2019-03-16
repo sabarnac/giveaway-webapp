@@ -5,7 +5,7 @@ import LoserOverlay from "../loser-overlay/LoserOverlay";
 /**
  * Properties of the tournament loser overlay view React component.
  */
-interface LoserOverlayViewProps {
+export interface LoserOverlayViewProps {
   /** The details of the current round. */
   round: Round;
   /** Whether to show the loser overlay or not. */

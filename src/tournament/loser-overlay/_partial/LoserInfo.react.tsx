@@ -15,7 +15,7 @@ import {
 /**
  * Properties of the loser info React component.
  */
-interface LoserInfoProps {
+export interface LoserInfoProps {
   /** CSS class */
   className: string;
   /** The loser details. */

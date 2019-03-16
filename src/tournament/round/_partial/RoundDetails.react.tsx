@@ -16,7 +16,7 @@ import RoundTitle from "./RoundTitle";
 /**
  * Properties of the round details React component.
  */
-interface RoundDetailsProps {
+export interface RoundDetailsProps {
   /** CSS class */
   className: string;
   /** The ID of the current match. */

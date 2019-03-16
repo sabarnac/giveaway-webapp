@@ -9,7 +9,7 @@ const allAnimationValues = AnimationSpeed.getValues();
 /**
  * React component for the animation speed controller.
  */
-export default (): JSX.Element => {
+export default (props: {}): JSX.Element => {
   const className: string = "speed-control";
 
   return (

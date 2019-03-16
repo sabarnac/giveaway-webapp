@@ -7,7 +7,7 @@ import Config from "../../store/config/Config";
 /**
  * Properties of the language controller React component.
  */
-interface LanguageControlProps {
+export interface LanguageControlProps {
   /** @ignore The application config. */
   config?: Config;
 }

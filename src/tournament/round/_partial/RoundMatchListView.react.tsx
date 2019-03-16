@@ -9,7 +9,7 @@ import MatchView from "../match/MatchView";
 /**
  * Properties of the round match list view React component.
  */
-interface RoundMatchListViewProps {
+export interface RoundMatchListViewProps {
   /** CSS class */
   className: string;
   /** The ID of the current match. */

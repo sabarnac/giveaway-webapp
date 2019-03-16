@@ -17,7 +17,7 @@ import MatchOverlay from "./overlay/MatchOverlay";
 /**
  * Properties of the match view React component.
  */
-interface MatchViewProps {
+export interface MatchViewProps {
   /** Whether it is the currently ongoing match. */
   isCurrentMatch: boolean;
   /** The details of the current match. */

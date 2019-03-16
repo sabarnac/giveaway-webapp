@@ -6,7 +6,7 @@ import Config from "../../../store/config/Config";
 /**
  * Properties of the animation speed option React component.
  */
-interface SpeedOptionProps {
+export interface SpeedOptionProps {
   /** CSS class */
   className: string;
   /** @ignore The application config. */

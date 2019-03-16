@@ -14,7 +14,7 @@ import WinnerOverlayView from "./_partial/WinnerOverlayView";
 /**
  * Properties of the winner overlay React component.
  */
-interface WinnerOverlayProps {
+export interface WinnerOverlayProps {
   /** Whether to show the overlay or not. */
   show: boolean;
   /** The tournament winner. */

@@ -8,7 +8,7 @@ import ParticipantEntry from "../participant/entry/ParticipantEntry";
 /**
  * Properties of the match participant list React component.
  */
-interface MatchParticipantListProps {
+export interface MatchParticipantListProps {
   /** CSS class */
   className: string;
   /** The details of the current match. */

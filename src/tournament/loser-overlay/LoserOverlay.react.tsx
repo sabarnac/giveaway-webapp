@@ -14,7 +14,7 @@ import LoserOverlayView from "./_partial/LoserOverlayView";
 /**
  * Properties of the loser overlay React component.
  */
-interface LoserOverlayProps {
+export interface LoserOverlayProps {
   /** The losers of a round. */
   losers: Participant[];
   /** Action to call when the overlay has finished showing the list of losers. */
