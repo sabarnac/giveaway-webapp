@@ -5,6 +5,7 @@ import Round from "../../store/round/Round";
 import Tournament from "../../store/Tournament";
 import { WithTranslation } from "react-i18next";
 import { RouteComponentProps } from "react-router";
+import ServiceWorkerAlertsConfig from "../../store/config/ServiceWorkerAlertsConfig";
 
 export const createDummyParticipant = function(id: number = 1): Participant {
   return new Participant(
@@ -34,6 +35,15 @@ export const createDummyConfig = (): Config => {
     getMessageIndex: () => 0,
     getFormattedMessage: () => "formatted foobar message",
     getRandomMessage: () => "foobar message",
+  };
+  mockConfig.getInstance = () => mockConfig;
+  return mockConfig;
+};
+
+export const createDummyServiceWorkerConfig = (): ServiceWorkerAlertsConfig => {
+  const mockConfig: any = {
+    added: true,
+    updated: true,
   };
   mockConfig.getInstance = () => mockConfig;
   return mockConfig;
