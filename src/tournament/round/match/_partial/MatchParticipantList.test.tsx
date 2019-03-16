@@ -1,5 +1,5 @@
 import React from "react";
-import MatchParticipantList from "./MatchParticipantList";
+import MatchParticipantList from "./MatchParticipantList.react";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyMatch } from "../../../../util/test";
 import Match from "../../../../store/round/match/Match";
