@@ -1,5 +1,5 @@
 import React from "react";
-import RoundView from "./RoundView";
+import RoundView from "./RoundView.react";
 import Round from "../../store/round/Round";
 import { create, ReactTestRenderer } from "react-test-renderer";
 import { createDummyRound } from "../../util/test";
