@@ -4,6 +4,7 @@ import Participant from "../../store/round/match/participant/Participant";
 import Round from "../../store/round/Round";
 import Tournament from "../../store/Tournament";
 import { WithTranslation } from "react-i18next";
+import { RouteComponentProps } from "react-router";
 
 export const createDummyParticipant = function(id: number = 1): Participant {
   return new Participant(
@@ -65,4 +66,20 @@ export const createDummyTranslationProps = (): WithTranslation => ({
   t: (key: any) => key,
   tReady: true,
   i18n: {} as any,
+});
+
+export const createDummyRouterProps = (): RouteComponentProps => ({
+  history: {} as any,
+  location: {
+    pathname: "foobar",
+    search: "?foobar",
+    state: null,
+    hash: "foobar",
+  },
+  match: {
+    params: {},
+    isExact: false,
+    path: "foobar",
+    url: "foobar",
+  },
 });
