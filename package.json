@@ -69,7 +69,7 @@
     "acorn-static-class-property-initializer": "^1.0.0",
     "gcd": "0.0.1",
     "gh-pages": "^2.0.1",
-    "i18next-parser": "^1.0.0-beta9",
+    "i18next-parser": "^1.0.0-beta34",
     "license-extractor": "^1.0.4",
     "mobx-react-devtools": "^6.1.1",
     "npm-audit-resolver": "^1.4.1",
