@@ -72,9 +72,9 @@ export default class Config {
     typeof user === "string"
       ? new Participant(user)
       : new Participant(
-          (<ParticipantJson>user).name,
-          (<ParticipantJson>user).avatar,
-          (<ParticipantJson>user).weight,
+          (user as ParticipantJson).name,
+          (user as ParticipantJson).avatar,
+          (user as ParticipantJson).weight,
         );
 
   /**

@@ -76,9 +76,17 @@ export default (props: MatchOverlayWinnerProps): JSX.Element => {
     (loser: Participant): string => loser.properName,
   );
 
+  useEffect(
+    runOnPredicate(currentState === 2 && shouldNotStopOnEnd, () =>
+      runOnDelay(() => {
+        props.onWinnerComplete();
+      }, getNormalizedSpeed(4000)),
+    ),
+  );
+
   return (
     <CSSTransition
-      in={currentState === 1 && props.show}
+      in={currentState > 0 && props.show}
       timeout={getNormalizedSpeed(500)}
       classNames={{
         enter: "",
@@ -90,11 +98,7 @@ export default (props: MatchOverlayWinnerProps): JSX.Element => {
       }}
       mountOnEnter={true}
       unmountOnExit={true}
-      onEntered={
-        shouldNotStopOnEnd
-          ? () => runOnDelay(props.onWinnerComplete, getNormalizedSpeed(4000))
-          : undefined
-      }
+      onEntered={updateState}
     >
       <div
         className={classNames(`${props.className}__winner`)}

@@ -67,17 +67,13 @@ export default (props: RoundViewProps): JSX.Element | null => {
     currentState < props.round.matches.length;
 
   useEffect(
-    runOnPredicate(currentState === props.round.matches.length, () => {
-      const delayId: number = runOnDelay(
-        props.onRoundComplete,
-        getNormalizedSpeed(500),
-      );
-      return () => clearTimeout(delayId);
-    }),
+    runOnPredicate(currentState === props.round.matches.length, () =>
+      runOnDelay(props.onRoundComplete, getNormalizedSpeed(500)),
+    ),
     [currentState],
   );
 
-  useEffect(() => setState(currentMatchIndex), [props.matchId]);
+  useEffect(() => setState(currentMatchIndex), [currentMatchIndex, props.matchId, setState]);
 
   return (
     <CSSTransition

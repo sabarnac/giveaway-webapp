@@ -46,11 +46,9 @@ export default (props: MatchViewProps): JSX.Element | null => {
 
   const onMatchComplete = () => {
     setState(3);
-    props.isCurrentMatch
-      ? runOnDelay(() => {
-          props.isCurrentMatch ? props.onMatchComplete() : undefined;
-        }, getNormalizedSpeed(1000))
-      : undefined;
+    runOnPredicate(props.isCurrentMatch, () =>
+      runOnDelay(() => props.onMatchComplete(), getNormalizedSpeed(1000)),
+    )();
   };
 
   useEffect(runOnPredicate(currentState === 0, updateState));

@@ -52,7 +52,7 @@ export default class Tournament {
    * @return {Round} The first round.
    */
   public get firstRound(): Round {
-    return <Round>this._rounds[0];
+    return this._rounds[0];
   }
 
   /**
@@ -60,7 +60,7 @@ export default class Tournament {
    * @return {Round} The last round.
    */
   public get lastRound(): Round {
-    return <Round>last(this._rounds);
+    return last(this._rounds) as Round;
   }
 
   /**
@@ -76,6 +76,6 @@ export default class Tournament {
    * @return {Participant} The final winner, or null if there is none.
    */
   public get winner(): Participant {
-    return <Participant>this.lastRound.winners[0];
+    return this.lastRound.winners[0];
   }
 }

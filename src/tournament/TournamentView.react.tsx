@@ -62,7 +62,9 @@ export default (props: TournamentViewProps): JSX.Element => {
   );
   const isLastRound: boolean = props.tournament.lastRound.id === props.roundId;
 
-  const [showOverlay, setShowOverlay]: ShowOverlayHook = useState(false);
+  const [showOverlay, setShowOverlay]: ShowOverlayHook = useState(
+    false as boolean,
+  );
 
   const [
     currentState,

@@ -1,5 +1,4 @@
-import React, { ComponentType } from "react";
-import { Dispatch, useState } from "react";
+import React, { ComponentType, Dispatch, useState } from "react";
 import Config from "../store/config/Config";
 import { Redirect } from "react-router";
 import { Observer } from "mobx-react";
@@ -34,14 +33,14 @@ export const isInRange = (num: number, start: number, end: number): boolean =>
 export type AnimationStateHook = [
   number,
   () => void,
-  (delay: number) => void,
-  (state: number) => void
+  Dispatch<number>,
+  Dispatch<number>
 ];
 
 /**
  * Type for show overlay state hook.
  */
-export type ShowOverlayHook = [boolean, (newValue: boolean) => void];
+export type ShowOverlayHook = [boolean, Dispatch<boolean>];
 
 /**
  * Type for void function.
@@ -53,8 +52,10 @@ export type VoidFunction = () => void;
  * @param {Function} action The action to run.
  * @param {number} delay The minimum delay to wait for.
  */
-export const runOnDelay = (action: Function, delay: number): number =>
-  setTimeout(action, delay);
+export const runOnDelay = (action: Function, delay: number): VoidFunction => {
+  const delayId: number = setTimeout(action, delay);
+  return () => clearTimeout(delayId);
+};
 
 /**
  * Create an animation state hook.
@@ -64,10 +65,8 @@ export const useAnimationState = (start: number = 0): AnimationStateHook => {
   const [currentState, setState]: [number, Dispatch<number>] = useState(start);
 
   const updateState = (): void => setState(currentState + 1);
-  const updateStateDelay = (delay: number): VoidFunction => {
-    const delayId: number = runOnDelay(updateState, delay);
-    return () => clearTimeout(delayId);
-  };
+  const updateStateDelay = (delay: number): VoidFunction =>
+    runOnDelay(updateState, delay);
 
   return [currentState, updateState, updateStateDelay, setState];
 };
@@ -81,7 +80,7 @@ export const getNormalizedSpeed = (time: number): number =>
   time / Config.getInstance().speed;
 
 /**
- * Runs the given action if the predicate is true.
+ * Returns function that runs the given action if the provided predicate is true.
  * @param {boolean} predicate The predicate to check.
  * @param {Function} action The action to run.
  */

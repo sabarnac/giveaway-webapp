@@ -105,7 +105,7 @@ export default class Round {
    * @return {Match} The last match.
    */
   public get lastMatch(): Match {
-    return <Match>last(this._matches);
+    return last(this._matches) as Match;
   }
 
   /**
