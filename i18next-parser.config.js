@@ -2,7 +2,7 @@ const injectAcornStaticClassPropertyInitializer = require("acorn-static-class-pr
 const injectAcornStage3 = require("acorn-stage3/inject");
 const injectAcornEs7 = require("acorn-es7");
 const injectAcornJsx = require("acorn-jsx/inject");
-const ConfigJson = require("./src/store/config/config.json");
+const ConfigJson = require("./src/config/config.json");
 
 module.exports = {
   contextSeparator: "_",

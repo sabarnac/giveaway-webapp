@@ -1,5 +1,5 @@
 import Random, { Engine } from "random-js";
-import configJson from "./config.json";
+import configJson from "../../config/config.json";
 
 // Create a mersenne twister engine.
 const randomEngine: Engine = Random.engines.mt19937().seed(configJson.seed);

@@ -1,5 +1,5 @@
 import Participant from "../round/match/participant/Participant";
-import ConfigJson from "./config.json";
+import ConfigJson from "../../config/config.json";
 import i18n from "../../i18n";
 import { observable, computed, action } from "mobx";
 import RandomGenerator from "./RandomGenerator";

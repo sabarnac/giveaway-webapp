@@ -1,4 +1,4 @@
-Assume the configuration in `config.json` is set as:
+Assume the configuration in `src/config/config.json` is set as:
 
 ```json
 {

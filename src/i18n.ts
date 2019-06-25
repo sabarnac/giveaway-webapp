@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import detector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-import ConfigJson from "./store/config/config.json";
+import ConfigJson from "./config/config.json";
 import i18nConfig from "./store/config/i18n";
 
 // No need to modify anything from this point.
