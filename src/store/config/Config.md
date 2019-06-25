@@ -11,7 +11,12 @@ Assume the configuration in `src/config/config.json` is set as:
     "#winner #loser 3",
     "#winner #loser 4"
   ],
-  "users": ["FOO", "BAR", "FAZ"]
+  "lang": ["en"],
+  "users": [
+    { "name": "FOO", "weight": 1 },
+    { "name": "BAR", "weight": 2 },
+    { "name": "BAZ", "weight": 3 },
+  ]
 }
 ```
 
