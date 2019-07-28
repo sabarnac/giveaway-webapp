@@ -24,7 +24,7 @@ export default (props: TournamentTitleProps): JSX.Element => {
   const { t }: UseTranslationResponse = useTranslation();
   const translatedTournamentName: string = t("tournamentView.name");
 
-  let tournamentName: string = isString(translatedTournamentName)
+  let tournamentName: string = isString(translatedTournamentName) && !!translatedTournamentName
     ? translatedTournamentName
     : props.config!.name;
 
