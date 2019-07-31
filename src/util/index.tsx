@@ -25,7 +25,7 @@ export const createAvatarImage = (identifier: string): string => {
  * @return {boolean} Whether the number is within the range.
  */
 export const isInRange = (num: number, start: number, end: number): boolean =>
-  num >= start && num <= end;
+  end >= start && num >= start && num <= end;
 
 /**
  * Type for custom animation state hook.
