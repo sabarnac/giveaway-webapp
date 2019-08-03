@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7e6c4bb63035fb07d3e022def894fcb2",
+    "revision": "8695a3818cc5d385591b09530c999a7c",
     "url": "/giveaway-webapp/index.html"
   },
   {
-    "revision": "8b13067fca26fa74e2a7",
+    "revision": "38084e4b1c17f6b530d7",
     "url": "/giveaway-webapp/static/css/2.9d1f3529.chunk.css"
   },
   {
-    "revision": "aab4d5bcae6cea3f576e",
+    "revision": "5c36e54b2cfb0c17bdba",
     "url": "/giveaway-webapp/static/css/main.1f248b58.chunk.css"
   },
   {
-    "revision": "8b13067fca26fa74e2a7",
-    "url": "/giveaway-webapp/static/js/2.8ff7d91a.chunk.js"
+    "revision": "38084e4b1c17f6b530d7",
+    "url": "/giveaway-webapp/static/js/2.9d166945.chunk.js"
   },
   {
-    "revision": "aab4d5bcae6cea3f576e",
-    "url": "/giveaway-webapp/static/js/main.3e312c1d.chunk.js"
+    "revision": "5c36e54b2cfb0c17bdba",
+    "url": "/giveaway-webapp/static/js/main.f0450090.chunk.js"
   },
   {
     "revision": "abbdb4032db2e231fc57",
