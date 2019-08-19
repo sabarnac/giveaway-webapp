@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/giveaway-webapp/static/css/main.1f248b58.chunk.css",
-    "main.js": "/giveaway-webapp/static/js/main.22988128.chunk.js",
-    "main.js.map": "/giveaway-webapp/static/js/main.22988128.chunk.js.map",
+    "main.js": "/giveaway-webapp/static/js/main.c561f3bb.chunk.js",
+    "main.js.map": "/giveaway-webapp/static/js/main.c561f3bb.chunk.js.map",
     "runtime~main.js": "/giveaway-webapp/static/js/runtime~main.0eed3681.js",
     "runtime~main.js.map": "/giveaway-webapp/static/js/runtime~main.0eed3681.js.map",
     "static/css/2.9d1f3529.chunk.css": "/giveaway-webapp/static/css/2.9d1f3529.chunk.css",
-    "static/js/2.9d166945.chunk.js": "/giveaway-webapp/static/js/2.9d166945.chunk.js",
-    "static/js/2.9d166945.chunk.js.map": "/giveaway-webapp/static/js/2.9d166945.chunk.js.map",
+    "static/js/2.8ff7d91a.chunk.js": "/giveaway-webapp/static/js/2.8ff7d91a.chunk.js",
+    "static/js/2.8ff7d91a.chunk.js.map": "/giveaway-webapp/static/js/2.8ff7d91a.chunk.js.map",
     "index.html": "/giveaway-webapp/index.html",
-    "precache-manifest.cee0b657714383b8a69db286f1caf5d3.js": "/giveaway-webapp/precache-manifest.cee0b657714383b8a69db286f1caf5d3.js",
+    "precache-manifest.992258102857ff542bef706bbe5f9980.js": "/giveaway-webapp/precache-manifest.992258102857ff542bef706bbe5f9980.js",
     "service-worker.js": "/giveaway-webapp/service-worker.js",
     "static/css/2.9d1f3529.chunk.css.map": "/giveaway-webapp/static/css/2.9d1f3529.chunk.css.map",
     "static/css/main.1f248b58.chunk.css.map": "/giveaway-webapp/static/css/main.1f248b58.chunk.css.map"
