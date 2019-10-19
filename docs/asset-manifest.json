@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/giveaway-webapp/static/css/main.28e17ad5.chunk.css",
-    "main.js": "/giveaway-webapp/build/main.4853a120.js",
+    "main.js": "/giveaway-webapp/build/main.13e4185a.js",
     "runtime~main.js": "/giveaway-webapp/build/bundle.feb19782.js",
     "build/2.ee99ea46.js": "/giveaway-webapp/build/2.ee99ea46.js",
     "index.html": "/giveaway-webapp/index.html",
-    "precache-manifest.af37d700326cc470703919e65f640a26.js": "/giveaway-webapp/precache-manifest.af37d700326cc470703919e65f640a26.js",
+    "precache-manifest.7a0cafc6b653e48bbbe2e4fab71e6cd3.js": "/giveaway-webapp/precache-manifest.7a0cafc6b653e48bbbe2e4fab71e6cd3.js",
     "service-worker.js": "/giveaway-webapp/service-worker.js",
     "static/css/main.28e17ad5.chunk.css.map": "/giveaway-webapp/static/css/main.28e17ad5.chunk.css.map"
   }
