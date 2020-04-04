@@ -1,12 +1,19 @@
 {
   "files": {
-    "main.css": "/giveaway-webapp/static/css/main.28e17ad5.chunk.css",
-    "main.js": "/giveaway-webapp/build/main.d10680e3.js",
-    "runtime~main.js": "/giveaway-webapp/build/bundle.feb19782.js",
-    "build/2.ee99ea46.js": "/giveaway-webapp/build/2.ee99ea46.js",
+    "main.css": "/giveaway-webapp/static/css/main.2dac24ee.chunk.css",
+    "main.js": "/giveaway-webapp/build/main.2631b9d3.js",
+    "runtime-main.js": "/giveaway-webapp/build/bundle.e2439c58.js",
+    "build/2.695579bd.js": "/giveaway-webapp/build/2.695579bd.js",
+    "build/2.695579bd.js.LICENSE.txt": "/giveaway-webapp/build/2.695579bd.js.LICENSE.txt",
     "index.html": "/giveaway-webapp/index.html",
-    "precache-manifest.318e787f7d92e4299c7597b82130004d.js": "/giveaway-webapp/precache-manifest.318e787f7d92e4299c7597b82130004d.js",
+    "precache-manifest.5c4e17674349484c5aa7f92b30e40638.js": "/giveaway-webapp/precache-manifest.5c4e17674349484c5aa7f92b30e40638.js",
     "service-worker.js": "/giveaway-webapp/service-worker.js",
-    "static/css/main.28e17ad5.chunk.css.map": "/giveaway-webapp/static/css/main.28e17ad5.chunk.css.map"
-  }
+    "static/css/main.2dac24ee.chunk.css.map": "/giveaway-webapp/static/css/main.2dac24ee.chunk.css.map"
+  },
+  "entrypoints": [
+    "build/bundle.e2439c58.js",
+    "build/2.695579bd.js",
+    "static/css/main.2dac24ee.chunk.css",
+    "build/main.2631b9d3.js"
+  ]
 }
