@@ -12,15 +12,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "build/bundle.e2439c58.js"
   },
   {
-    "revision": "65f8414a4ca9522eb6d2",
-    "url": "build/main.65f8414a.js"
+    "revision": "2dccb8ee6e65b6e26c9a",
+    "url": "build/main.2dccb8ee.js"
   },
   {
-    "revision": "80a7172cd35c47405abb924ae3897f98",
+    "revision": "0a855b43404367d4d1aef6f589603596",
     "url": "index.html"
   },
   {
-    "revision": "65f8414a4ca9522eb6d2",
+    "revision": "2dccb8ee6e65b6e26c9a",
     "url": "static/css/main.2dac24ee.chunk.css"
   }
 ]);
