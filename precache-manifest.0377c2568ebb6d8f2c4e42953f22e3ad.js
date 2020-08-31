@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "23a756061f0bb4ede86f9f4d95db9443",
+    "revision": "cbb1d93a6ee54e57150ed4190d7dc327",
     "url": "/giveaway-webapp/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/giveaway-webapp/static/css/2.9d1f3529.chunk.css"
   },
   {
-    "revision": "dcd2da6f91b416e36cd3",
+    "revision": "a036d0906296afdd321b",
     "url": "/giveaway-webapp/static/css/main.d0d27c66.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/giveaway-webapp/static/js/2.8dc561f7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dcd2da6f91b416e36cd3",
-    "url": "/giveaway-webapp/static/js/main.83aa42c9.chunk.js"
+    "revision": "a036d0906296afdd321b",
+    "url": "/giveaway-webapp/static/js/main.6da660fd.chunk.js"
   },
   {
     "revision": "c890ce9faf94ec8b9344",
