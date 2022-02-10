@@ -25,7 +25,7 @@
     "lodash.last": "^3.0.0",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.4",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "random-js": "^1.0.8",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
