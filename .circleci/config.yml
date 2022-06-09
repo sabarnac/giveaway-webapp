@@ -81,22 +81,3 @@ workflows:
             branches:
               ignore:
                 - gh-pages
-  schedule-workflow:
-    triggers:
-      - schedule:
-          cron: "0 0 * * 0"
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-    jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-      - test:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
