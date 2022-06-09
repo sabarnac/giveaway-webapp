@@ -4,37 +4,6 @@
 #
 version: 2
 jobs:
-  audit:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:11.10.1
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/giveaway-webapp
-
-    steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v2-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v2-dependencies-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v2-dependencies-{{ checksum "package.json" }}
-
-      # run build!
-      - run: npm run audit
   build:
     docker:
       # specify the version you desire here
@@ -102,11 +71,6 @@ workflows:
   version: 2
   commit-workflow:
     jobs:
-      - audit:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
       - build:
           filters:
             branches:
@@ -127,11 +91,6 @@ workflows:
                 - gh-pages
     jobs:
       - build:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-      - audit:
           filters:
             branches:
               ignore:
